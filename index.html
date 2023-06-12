@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      body {
+        margin: 0;
+        padding: 2rem;
+        font-family: system-ui, sans-serif;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #000000;
+        background-color: #fff;
+      }
+
+      main {
+        margin: 2rem auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 0.25rem;
+        padding: 1rem;
+      }
+
+      .card-title {
+        font-weight: bold;
+        height: 3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Make sure the chart container has a defined height */
+      .chart-container {
+        height: 180px;
+      }
+    </style>
+    <link rel="stylesheet" href="css/chart.css" />
+  </head>
+  <body>
+    <main>
+      <div class="card">
+        <div class="card-title">Bar 1</div>
+        <div class="card-body">
+          <div id="bar-1-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Bar 2</div>
+        <div class="card-body">
+          <div id="bar-2-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Scatter 1</div>
+        <div class="card-body">
+          <div id="scatter-1-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Scatter 2</div>
+        <div class="card-body">
+          <div id="scatter-2-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Scatter 3</div>
+        <div class="card-body">
+          <div id="scatter-3-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Line 1</div>
+        <div class="card-body">
+          <div id="line-1-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Line 2</div>
+        <div class="card-body">
+          <div id="line-2-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Line 3</div>
+        <div class="card-body">
+          <div id="line-3-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Line 4</div>
+        <div class="card-body">
+          <div id="line-4-chart" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/linearRegression.js"></script>
+    <script src="js/lineChart.js"></script>
+    <script src="js/scatterChart.js"></script>
+    <script src="js/barChart.js"></script>
+    <script>
+      // Bar charts
+      {
+        const bar1 = new BarChart({
+          elChart: document.getElementById("bar-1-chart"),
+          trendline: true,
+          onClick: (d) => {
+            console.log(d);
+          },
+          tooltipHtml: (d) => {
+            return `
+                <div>${d.dateLabel || d.date}</div>
+                <div>${d.value}</div>`;
+          },
+        });
+        bar1.values = [
+          {
+            date: "2022-07-27",
+            dateLabel: "Mon, 7/27",
+            value: 5,
+          },
+          {
+            date: "2022-07-28",
+            dateLabel: "Tue, 7/28",
+            value: null,
+          },
+          {
+            date: "2022-08-27",
+            dateLabel: "Mon, 8/27",
+            value: 7,
+          },
+        ];
+        bar1.redraw();
+
+        const bar2 = new BarChart({
+          elChart: document.getElementById("bar-2-chart"),
+          trendline: true,
+          paddingOuter: 0.2,
+          paddingInner: 0.4,
+          onClick: (d) => {
+            console.log(d);
+          },
+          tooltipHtml: (d) => {
+            return `
+                <div>${d.dateLabel || d.date}</div>
+                <div>${d.value}</div>`;
+          },
+        });
+        bar2.values = [
+          {
+            date: "2022-07-27",
+            dateLabel: "Mon, 7/27",
+            value: 5,
+          },
+          {
+            date: "2022-07-28",
+            dateLabel: "Tue, 7/28",
+            value: 6,
+          },
+          {
+            date: "2022-08-27",
+            dateLabel: "Mon, 8/27",
+            value: 8,
+          },
+        ];
+        bar2.redraw();
+      }
+      // Scatterplot charts
+      {
+        const scatter1 = new ScatterChart({
+          elChart: document.getElementById("scatter-1-chart"),
+          trendline: true,
+          tooltipHtml: (d) => {
+            return Array.from(Object.entries(d))
+              .map(([key, value]) => `<div>${key}: ${value}</div>`)
+              .join("");
+          },
+          onClick: (d) => {
+            console.log(d);
+          },
+        });
+
+        const scatter2 = new ScatterChart({
+          elChart: document.getElementById("scatter-2-chart"),
+          trendline: true,
+          tooltipHtml: (d) => {
+            return Array.from(Object.entries(d))
+              .map(([key, value]) => `<div>${key}: ${value}</div>`)
+              .join("");
+          },
+          onClick: (d) => {
+            console.log(d);
+          },
+        });
+
+        const scatter3 = new ScatterChart({
+          elChart: document.getElementById("scatter-3-chart"),
+          startDate: "2022-12-01",
+          endDate: "2023-06-01",
+          values: [
+            {
+              value: 77,
+              date: "2022-12-13",
+            },
+            {
+              value: 142,
+              date: "2023-03-04",
+            },
+          ],
+          trendline: true,
+          benchmarkValue: 90,
+        });
+
+        Promise.all([
+          d3.json("./data/dataset_1.json"),
+          d3.json("./data/dataset_2.json"),
+        ]).then(([dataset1, dataset2]) => {
+          scatter1.startDate = "2014-07-01";
+          scatter1.endDate = "2023-05-01";
+          scatter1.values = dataset1;
+          scatter1.redraw();
+
+          scatter2.values = dataset2;
+          scatter2.redraw();
+        });
+      }
+      // Line charts
+      {
+        const data1 = {
+          values: [
+            {
+              date: "2021-01-14",
+              value: 50,
+            },
+            {
+              date: "2021-03-21",
+              value: 75,
+            },
+            {
+              date: "2021-06-03",
+              value: 65,
+            },
+            {
+              date: "2021-09-05",
+              value: 82,
+            },
+          ],
+          comparisonValues: [
+            {
+              date: "2021-03-21",
+              value: 70,
+            },
+            {
+              date: "2021-06-03",
+              value: 68,
+            },
+            {
+              date: "2021-09-05",
+              value: 68,
+            },
+          ],
+        };
+
+        const data2 = {
+          values: [
+            {
+              date: "2021-03-21",
+              value: 83,
+            },
+            {
+              date: "2021-06-03",
+              value: 33,
+            },
+          ],
+          comparisonValues: [
+            {
+              date: "2021-06-03",
+              value: 30,
+            },
+          ],
+        };
+
+        const data3 = {
+          values: [
+            {
+              date: "2021-03-21",
+              value: 34,
+            },
+          ],
+          comparisonValues: [
+            {
+              date: "2021-03-21",
+              value: 38,
+            },
+          ],
+        };
+
+        const data4 = {
+          values: [
+            {
+              date: "2021-03-21",
+              dateLabel: "March 2021",
+              value: 34,
+            },
+            {
+              date: "2021-04-21",
+              dateLabel: "April 2021",
+              value: 3,
+            },
+            {
+              date: "2021-05-21",
+              dateLabel: "May 2021",
+              value: 10,
+            },
+          ],
+          comparisonValues: [
+            {
+              date: "2021-04-21",
+              dateLabel: "April 2021",
+              value: 2,
+            },
+            {
+              date: "2021-05-21",
+              dateLabel: "May 2021",
+              value: 12,
+            },
+          ],
+        };
+
+        const startDate = "2021-01-01";
+        const endDate = "2021-12-31";
+
+        const line1 = new LineChart({
+          elChart: document.getElementById("line-1-chart"),
+          showTicks: false,
+          tooltipHtml: (d, cd) => {
+            return `
+            <div>${d.dateLabel || d.date}</div>
+            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
+          },
+          onClick: (d, cd) => {
+            console.log(d, cd);
+          },
+        });
+        line1.startDate = startDate;
+        line1.endDate = endDate;
+        line1.values = data1.values;
+        line1.redraw();
+
+        const line2 = new LineChart({
+          elChart: document.getElementById("line-2-chart"),
+          tooltipHtml: (d, cd) => {
+            return `
+            <div>${d.dateLabel || d.date}</div>
+            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
+          },
+          onClick: (d, cd) => {
+            console.log(d, cd);
+          },
+        });
+        line2.startDate = startDate;
+        line2.endDate = endDate;
+        line2.values = data2.values;
+        line2.redraw();
+
+        const line3 = new LineChart({
+          elChart: document.getElementById("line-3-chart"),
+          tooltipHtml: (d, cd) => {
+            return `
+            <div>${d.dateLabel || d.date}</div>
+            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
+          },
+          onClick: (d, cd) => {
+            console.log(d, cd);
+          },
+        });
+        line3.startDate = startDate;
+        line3.endDate = endDate;
+        line3.values = data3.values;
+        line3.redraw();
+
+        const line4 = new LineChart({
+          elChart: document.getElementById("line-4-chart"),
+          tooltipHtml: (d, cd) => {
+            return `
+            <div>${d.dateLabel || d.date}</div>
+            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
+          },
+          onClick: (d, cd) => {
+            console.log(d, cd);
+          },
+        });
+        line4.values = data4.values;
+        line4.comparisonValues = data4.comparisonValues;
+        line4.redraw();
+      }
+    </script>
+  </body>
+</html>
