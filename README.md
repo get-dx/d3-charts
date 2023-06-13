@@ -93,7 +93,7 @@ const linechart = new LineChart({
     alert(d.date)
   },
 
-  // optional - show pointer cursor on chart bar hover if set
+  // optional - if set, show tooltips on hover
   tooltipHtml: function(d, cd) {
     return `
       <div>
@@ -160,7 +160,7 @@ const scatterchart = new ScatterChart({
     alert(d.date)
   },
 
-  // optional - show pointer cursor on chart bar hover if set
+  // optional - if set, show tooltips on hover
   tooltipHtml: function(d) {
     return `
       <div>
