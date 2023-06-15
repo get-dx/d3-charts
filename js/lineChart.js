@@ -3,8 +3,8 @@ window.LineChart = class LineChart {
     elChart,
     values = [],
     comparisonValues = [],
-    showXAxis = true,
-    showTicks = true,
+    showXAxisLine = true,
+    showXAxisTicks = true,
     startDate,
     endDate,
     tooltipHtml,
@@ -15,8 +15,8 @@ window.LineChart = class LineChart {
     this.startDate = startDate;
     this.endDate = endDate;
     this.comparisonValues = comparisonValues;
-    this.showXAxis = showXAxis;
-    this.showTicks = showTicks;
+    this.showXAxisLine = showXAxisLine;
+    this.showXAxisTicks = showXAxisTicks;
     this.tooltipHtml = tooltipHtml;
     this.onClick = onClick;
     this.resize = this.resize.bind(this);
@@ -231,7 +231,7 @@ window.LineChart = class LineChart {
   renderTicks() {
     this.g
       .selectAll(".axis")
-      .data(this.showTicks ? [0] : [])
+      .data(this.showXAxisTicks ? [0] : [])
       .join((enter) => enter.append("g").attr("class", "axis"))
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .call(
@@ -247,7 +247,7 @@ window.LineChart = class LineChart {
   renderZeroLine() {
     this.g
       .selectAll(".zero-line")
-      .data(this.showXAxis ? [0] : [])
+      .data(this.showXAxisLine ? [0] : [])
       .join((enter) =>
         enter
           .append("line")
@@ -369,7 +369,7 @@ window.LineChart = class LineChart {
     if (this.indexDate !== indexDate) {
       this.indexDate = indexDate;
       this.focusLine
-        .classed("has-ticks", this.showTicks)
+        .classed("has-ticks", this.showXAxisTicks)
         .attr(
           "transform",
           `translate(${this.x(this.dates[this.indexDate])},0)`

@@ -18,7 +18,7 @@
       main {
         margin: 2rem auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
         gap: 2rem;
         max-width: 1200px;
       }
@@ -37,13 +37,33 @@
 
       /* Make sure the chart container has a defined height */
       .chart-container {
-        height: 180px;
+        height: var(--height, 180px);
       }
     </style>
     <link rel="stylesheet" href="css/chart.css" />
   </head>
   <body>
     <main>
+      <div class="card">
+        <div class="card-title">Scatter 1</div>
+        <div class="card-body">
+          <div
+            id="scatter-1-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Scatter 2</div>
+        <div class="card-body">
+          <div
+            id="scatter-2-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-title">Bar 1</div>
         <div class="card-body">
@@ -57,21 +77,21 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Scatter 1</div>
+        <div class="card-title">Scatter Time 1</div>
         <div class="card-body">
-          <div id="scatter-1-chart" class="chart-container"></div>
+          <div id="scatter-time-1-chart" class="chart-container"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Scatter 2</div>
+        <div class="card-title">Scatter Time 2</div>
         <div class="card-body">
-          <div id="scatter-2-chart" class="chart-container"></div>
+          <div id="scatter-time-2-chart" class="chart-container"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Scatter 3</div>
+        <div class="card-title">Scatter Time 3</div>
         <div class="card-body">
-          <div id="scatter-3-chart" class="chart-container"></div>
+          <div id="scatter-time-3-chart" class="chart-container"></div>
         </div>
       </div>
       <div class="card">
@@ -99,17 +119,136 @@
         </div>
       </div>
     </main>
+    <!-- d3 is required for all charts -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- labeler is required for scatter chart -->
+    <script src="js/labeler.js"></script>
+    <!-- linear regression is required for scatter time chart and bar chart -->
     <script src="js/linearRegression.js"></script>
+
     <script src="js/lineChart.js"></script>
+    <script src="js/scatterTimeChart.js"></script>
     <script src="js/scatterChart.js"></script>
     <script src="js/barChart.js"></script>
     <script>
+      // Scatter charts
+      {
+        const scatter1 = new ScatterChart({
+          elChart: document.getElementById("scatter-1-chart"),
+          xAxisTickLabelFormat: function (d) {
+            return `${d}%`;
+          },
+          yAxisTickLabelFormat: function (d) {
+            return `${d}%`;
+          },
+          showTrendline: true,
+          axis: {
+            x: {
+              label: "Something",
+              min: 0,
+              max: 100,
+            },
+            y: {
+              label: "Something Else",
+              min: 0,
+              max: 200,
+            },
+          },
+          onClick: function (d) {
+            alert(d.team);
+          },
+          labelTextFormat: function (d) {
+            return `Team ${d.team}`;
+          },
+          tooltipHtml: function (d, axis) {
+            return `
+              <div>
+                <div class=''>${axis.x.label}: ${d.x}</div>
+                <div class=''>${axis.y.label}: ${d.y}</div>
+              </div>
+            `;
+          },
+        });
+
+        scatter1.values = [
+          {
+            x: 5,
+            y: 40,
+            team: "Team 1",
+          },
+          {
+            x: 9,
+            y: 50,
+            team: "Team 2",
+          },
+          {
+            x: 10,
+            y: 64,
+            team: "Team 3",
+          },
+          {
+            x: 10,
+            y: 65,
+            team: "Team 4",
+          },
+          {
+            x: 32,
+            y: 24,
+            team: "Team 5",
+          },
+        ];
+        scatter1.redraw();
+
+        const scatter2 = new ScatterChart({
+          elChart: document.getElementById("scatter-2-chart"),
+          showXAxisTicks: false,
+          showXAxisLabel: false,
+          showXAxisLine: false,
+          xAxisTickLabelSpread: 40,
+          showYAxisTicks: false,
+          showYAxisLabel: false,
+          showYAxisLine: false,
+          yAxisTickLabelSpread: 40,
+          matrix: [18, 50],
+          axis: {
+            x: {
+              label: "Something",
+            },
+            y: {
+              label: "Something Else",
+            },
+          },
+        });
+
+        scatter2.values = [
+          {
+            x: 5,
+            y: 40,
+          },
+          {
+            x: 9,
+            y: 50,
+          },
+          {
+            x: 10,
+            y: 64,
+          },
+          {
+            x: 10,
+            y: 65,
+          },
+          {
+            x: 32,
+            y: 24,
+          },
+        ];
+        scatter2.redraw();
+      }
       // Bar charts
       {
         const bar1 = new BarChart({
           elChart: document.getElementById("bar-1-chart"),
-          trendline: true,
+          showXAxisLine: false,
           onClick: (d) => {
             console.log(d);
           },
@@ -140,7 +279,7 @@
 
         const bar2 = new BarChart({
           elChart: document.getElementById("bar-2-chart"),
-          trendline: true,
+          showTrendline: true,
           paddingOuter: 0.2,
           paddingInner: 0.4,
           onClick: (d) => {
@@ -171,11 +310,11 @@
         ];
         bar2.redraw();
       }
-      // Scatterplot charts
+      // Scatter time charts
       {
-        const scatter1 = new ScatterChart({
-          elChart: document.getElementById("scatter-1-chart"),
-          trendline: true,
+        const scatter1 = new ScatterTimeChart({
+          elChart: document.getElementById("scatter-time-1-chart"),
+          showTrendline: true,
           tooltipHtml: (d) => {
             return Array.from(Object.entries(d))
               .map(([key, value]) => `<div>${key}: ${value}</div>`)
@@ -186,9 +325,9 @@
           },
         });
 
-        const scatter2 = new ScatterChart({
-          elChart: document.getElementById("scatter-2-chart"),
-          trendline: true,
+        const scatter2 = new ScatterTimeChart({
+          elChart: document.getElementById("scatter-time-2-chart"),
+          showTrendline: true,
           tooltipHtml: (d) => {
             return Array.from(Object.entries(d))
               .map(([key, value]) => `<div>${key}: ${value}</div>`)
@@ -199,8 +338,8 @@
           },
         });
 
-        const scatter3 = new ScatterChart({
-          elChart: document.getElementById("scatter-3-chart"),
+        const scatter3 = new ScatterTimeChart({
+          elChart: document.getElementById("scatter-time-3-chart"),
           startDate: "2022-12-01",
           endDate: "2023-06-01",
           values: [
@@ -213,7 +352,7 @@
               date: "2023-03-04",
             },
           ],
-          trendline: true,
+          showTrendline: true,
           benchmarkValue: 90,
         });
 
@@ -338,7 +477,7 @@
 
         const line1 = new LineChart({
           elChart: document.getElementById("line-1-chart"),
-          showTicks: false,
+          showXAxisTicks: false,
           tooltipHtml: (d, cd) => {
             return `
             <div>${d.dateLabel || d.date}</div>
