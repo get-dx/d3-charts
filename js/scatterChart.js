@@ -1,24 +1,49 @@
 window.ScatterChart = class ScatterChart {
   constructor({
     elChart,
-    values = [],
-    showXAxis = true,
-    startDate,
-    endDate,
-    trendline = false,
-    benchmarkValue,
-    tooltipHtml,
+    showXAxisTicks = true,
+    xAxisTickLabelFormat = (d) => d.toLocaleString(),
+    showXAxisLabel = true,
+    showXAxisLine = true,
+    xAxisTickLabelSpread = 100,
+    showYAxisTicks = true,
+    yAxisTickLabelFormat = (d) => d.toLocaleString(),
+    showYAxisLabel = true,
+    showYAxisLine = true,
+    yAxisTickLabelSpread = 50,
+    showTrendline = false,
+    matrix,
+    axis = {
+      x: {
+        label: "",
+      },
+      y: {
+        label: "",
+      },
+    },
+    labelText,
     onClick,
+    tooltipHtml,
+    values = [],
   }) {
     this.elChart = elChart;
-    this.values = values;
-    this.showXAxis = showXAxis;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.trendline = trendline;
-    this.benchmarkValue = benchmarkValue;
-    this.tooltipHtml = tooltipHtml;
+    this.showXAxisTicks = showXAxisTicks;
+    this.xAxisTickLabelFormat = xAxisTickLabelFormat;
+    this.showXAxisLabel = showXAxisLabel;
+    this.showXAxisLine = showXAxisLine;
+    this.showYAxisTicks = showYAxisTicks;
+    this.xAxisTickLabelSpread = xAxisTickLabelSpread;
+    this.yAxisTickLabelFormat = yAxisTickLabelFormat;
+    this.showYAxisLabel = showYAxisLabel;
+    this.showYAxisLine = showYAxisLine;
+    this.yAxisTickLabelSpread = yAxisTickLabelSpread;
+    this.showTrendline = showTrendline;
+    this.matrix = matrix;
+    this.axis = axis;
+    this.labelTextFormat = labelText;
     this.onClick = onClick;
+    this.tooltipHtml = tooltipHtml;
+    this.values = values;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.moved = this.moved.bind(this);
@@ -43,17 +68,13 @@ window.ScatterChart = class ScatterChart {
     this.dotRadius = 2.5;
 
     this.margin = {
-      top: 3,
-      right: 3,
-      bottom: 3,
-      left: 3,
+      top: 8,
+      right: 16,
     };
-
-    this.parseDate = d3.utcParse("%Y-%m-%d");
 
     this.indexData = null;
 
-    this.x = d3.scaleUtc();
+    this.x = d3.scaleLinear();
 
     this.y = d3.scaleLinear();
   }
@@ -61,7 +82,7 @@ window.ScatterChart = class ScatterChart {
   scaffold() {
     this.container = d3
       .select(this.elChart)
-      .classed("chart scatterplot-chart", true);
+      .classed("chart scatter-chart", true);
 
     this.svg = this.container
       .append("svg")
@@ -78,43 +99,36 @@ window.ScatterChart = class ScatterChart {
     if (this.values.length === 0) return;
 
     this.accessor = {
-      x: (d) => this.parseDate(d.date),
-      y: (d) => d.value,
-      tooltipData: (d) => d.tooltip_data,
+      x: (d) => d.x,
+      y: (d) => d.y,
     };
 
-    this.hasBenchmarkLine = this.benchmarkValue !== undefined;
-
-    const values = this.values.map(this.accessor.y);
-    if (this.hasBenchmarkLine) {
-      values.push(this.benchmarkValue);
-    }
-    const [minValue, maxValue] = d3.extent(values);
     const padding = 0.05;
-    const gap = maxValue - minValue;
-    const minY = Math.floor(Math.max(0, minValue - gap * padding));
-    const maxY = Math.ceil(maxValue + gap * padding);
-    this.y.domain([minY, maxY]).nice();
-
+    const [minX, maxX] = d3.extent(this.values, this.accessor.x);
+    const gapX = maxX - minX;
     this.x.domain([
-      this.startDate
-        ? this.parseDate(this.startDate)
-        : d3.min(this.values, this.accessor.x),
-      this.endDate
-        ? this.parseDate(this.endDate)
-        : d3.max(this.values, this.accessor.x),
+      this.axis.x.min === undefined ? minX - gapX * padding : this.axis.x.min,
+      this.axis.x.max === undefined ? maxX + gapX * padding : this.axis.x.max,
     ]);
+    if (this.axis.x.min === undefined && this.axis.x.max === undefined)
+      this.x.nice();
+    const [minY, maxY] = d3.extent(this.values, this.accessor.y);
+    const gapY = maxY - minY;
+    this.y.domain([
+      this.axis.y.min === undefined ? minY - gapY * padding : this.axis.y.min,
+      this.axis.y.max === undefined ? maxY + gapY * padding : this.axis.y.max,
+    ]);
+    if (this.axis.y.min === undefined && this.axis.y.max === undefined)
+      this.y.nice();
 
     this.lr = null;
-    if (this.trendline) {
+    if (this.showTrendline) {
       const nonNullIndexes = this.values.reduce((idx, d, i) => {
         if (this.accessor.y(d) !== null) idx.push(i);
         return idx;
       }, []);
       if (nonNullIndexes.length >= 2) {
-        const x = nonNullIndexes.map((i) =>
-          d3.utcDay.count(this.x.domain()[0], this.accessor.x(this.values[i]))
-        );
+        const x = nonNullIndexes.map((i) => this.accessor.x(this.values[i]));
         const y = nonNullIndexes.map((i) => this.accessor.y(this.values[i]));
         this.lr = linearRegression(x, y);
       }
@@ -128,9 +142,6 @@ window.ScatterChart = class ScatterChart {
     this.width = this.container.node().clientWidth;
     this.height = this.container.node().clientHeight;
 
-    this.x.range([this.margin.left, this.width - this.margin.right]);
-    this.y.range([this.height - this.margin.bottom, this.margin.top]);
-
     this.svg.attr("viewBox", [0, 0, this.width, this.height]);
 
     if (this.values.length === 0) return;
@@ -139,12 +150,30 @@ window.ScatterChart = class ScatterChart {
   }
 
   render() {
+    this.adjustMargin();
     this.renderDelaunay();
     this.renderClip();
-    this.renderZeroLine();
+    this.renderXAxis();
+    this.renderYAxis();
+    this.renderMatrix();
     this.renderDots();
-    this.renderBenchmarkLine();
+    this.renderLabels();
     this.renderTrendLine();
+  }
+
+  adjustMargin() {
+    this.margin.bottom = 24;
+    if (this.showXAxisLabel) {
+      this.margin.bottom += 20;
+    }
+    this.margin.left = 48;
+    if (this.showYAxisLabel) {
+      this.margin.left += 20;
+    }
+
+    this.x.range([this.margin.left, this.width - this.margin.right]);
+
+    this.y.range([this.height - this.margin.bottom, this.margin.top]);
   }
 
   renderDelaunay() {
@@ -175,18 +204,130 @@ window.ScatterChart = class ScatterChart {
       .attr("height", this.height - this.margin.top - this.margin.bottom);
   }
 
-  renderZeroLine() {
+  renderXAxis() {
     this.svg
-      .selectAll(".zero-line")
-      .data(this.showXAxis ? [0] : [])
-      .join((enter) =>
-        enter
-          .append("line")
-          .attr("class", "zero-line")
-          .attr("x1", this.margin.left)
-      )
+      .selectAll(".axis--x")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "axis axis--x"))
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
-      .attr("x2", this.width - this.margin.right);
+      .call(
+        d3
+          .axisBottom(this.x)
+          .ticks(
+            (this.width - this.margin.left - this.margin.right) /
+              this.xAxisTickLabelSpread
+          )
+          .tickSizeOuter(0)
+          .tickFormat(this.xAxisTickLabelFormat)
+      )
+      .call((g) => g.selectAll(".tick line").classed("tick-line", true))
+      .call((g) =>
+        g
+          .selectAll(".tick")
+          .selectAll(".grid-line")
+          .data(this.showXAxisTicks ? [0] : [])
+          .join((enter) => enter.append("line").attr("class", "grid-line"))
+          .attr("y2", -(this.height - this.margin.top - this.margin.bottom))
+      )
+      .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
+      .call((g) =>
+        g.select(".domain").style("display", this.showXAxisLine ? null : "none")
+      )
+      .call((g) =>
+        g
+          .selectAll(".axis-title-text")
+          .data(this.showXAxisLabel ? [this.axis.x.label] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "axis-title-text")
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "middle")
+          )
+          .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
+          .attr("y", this.margin.bottom - 4)
+          .text((d) => d)
+      );
+  }
+
+  renderYAxis() {
+    this.svg
+      .selectAll(".axis--y")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "axis axis--y"))
+      .attr("transform", `translate(${this.margin.left},0)`)
+      .call(
+        d3
+          .axisLeft(this.y)
+          .ticks(
+            (this.height - this.margin.top - this.margin.bottom) /
+              this.yAxisTickLabelSpread
+          )
+          .tickSizeOuter(0)
+          .tickFormat(this.yAxisTickLabelFormat)
+      )
+      .call((g) => g.selectAll(".tick line").classed("tick-line", true))
+      .call((g) =>
+        g
+          .selectAll(".tick")
+          .selectAll(".grid-line")
+          .data(this.showXAxisTicks ? [0] : [])
+          .join((enter) => enter.append("line").attr("class", "grid-line"))
+          .attr("x2", this.width - this.margin.left - this.margin.right)
+      )
+      .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
+      .call((g) =>
+        g.select(".domain").style("display", this.showYAxisLine ? null : "none")
+      )
+      .call((g) =>
+        g
+          .selectAll(".axis-title-text")
+          .data(this.showYAxisLabel ? [this.axis.y.label] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "axis-title-text")
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "middle")
+              .attr("dy", "0.71em")
+          )
+          .attr("x", -this.margin.left + 4)
+          .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
+          .attr(
+            "transform",
+            `rotate(-90,${-this.margin.left + 4},${
+              (this.margin.top + this.height - this.margin.bottom) / 2
+            })`
+          )
+          .text((d) => d)
+      );
+  }
+
+  renderMatrix() {
+    this.matrixG = this.svg
+      .selectAll(".matrix-g")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "matrix-g"));
+
+    this.matrixG
+      .selectAll(".matrix-line--x")
+      .data(this.matrix ? [this.matrix[0]] : [])
+      .join((enter) =>
+        enter.append("line").attr("class", "matrix-line matrix-line--x")
+      )
+      .attr("y1", this.margin.top)
+      .attr("y2", this.height - this.margin.bottom)
+      .attr("transform", (d) => `translate(${this.x(d)},0)`);
+
+    this.matrixG
+      .selectAll(".matrix-line--y")
+      .data(this.matrix ? [this.matrix[1]] : [])
+      .join((enter) =>
+        enter.append("line").attr("class", "matrix-line matrix-line--y")
+      )
+      .attr("x1", this.margin.left)
+      .attr("x2", this.width - this.margin.right)
+      .attr("transform", (d) => `translate(0,${this.y(d)})`);
   }
 
   renderDots() {
@@ -207,24 +348,57 @@ window.ScatterChart = class ScatterChart {
       .attr("cy", (d) => this.y(this.accessor.y(d)));
   }
 
-  renderBenchmarkLine() {
-    this.svg
-      .selectAll(".benchmark-line")
-      .data(this.hasBenchmarkLine ? [0] : [])
-      .join((enter) =>
-        enter
-          .append("line")
-          .attr("class", "benchmark-line")
-          .attr("clip-path", `url(#${this.id}-clip)`)
-      )
-      .attr("x1", this.x(this.parseDate(this.startDate)))
-      .attr("y1", this.y(this.benchmarkValue))
-      .attr("x2", this.x(this.parseDate(this.endDate)))
-      .attr("y2", this.y(this.benchmarkValue));
+  renderLabels() {
+    let anchors = [];
+    let labels = [];
+
+    if (this.labelTextFormat) {
+      anchors = this.values.map((d) => ({
+        x: this.x(this.accessor.x(d)) - this.margin.left,
+        y: this.y(this.accessor.y(d)) - this.margin.top,
+        r: this.dotRadius,
+      }));
+
+      labels = anchors.map((d, i) => ({
+        x: d.x,
+        y: d.y,
+        name: this.labelTextFormat(this.values[i]),
+      }));
+    }
+
+    this.labelText = this.svg
+      .selectAll(".dot-label-texts")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "dot-label-texts"))
+      .selectAll(".dot-label-text")
+      .data(labels)
+      .join((enter) => enter.append("text").attr("class", "dot-label-text"))
+      .text((d) => d.name)
+      .each(function (d) {
+        const { width, height } = this.getBBox();
+        d.width = Math.ceil(width);
+        d.height = Math.ceil(height);
+      });
+
+    if (this.labelTextFormat) {
+      d3.labeler()
+        .label(labels)
+        .anchor(anchors)
+        .width(this.width - this.margin.left - this.margin.right)
+        .height(this.height - this.margin.top - this.margin.bottom)
+        .start(1000);
+
+      labels.forEach((d) => {
+        d.x += this.margin.left;
+        d.y += this.margin.top;
+      });
+    }
+
+    this.labelText.attr("x", (d) => d.x).attr("y", (d) => d.y);
   }
 
   renderTrendLine() {
-    this.svg
+    const tl = this.svg
       .selectAll(".trend-line")
       .data(this.lr ? [0] : [])
       .join((enter) =>
@@ -232,18 +406,17 @@ window.ScatterChart = class ScatterChart {
           .append("line")
           .attr("class", "trend-line")
           .attr("clip-path", `url(#${this.id}-clip)`)
-      )
-      .attr("x1", this.x(this.x.domain()[0]))
-      .attr("y1", this.y(this.lr.intercept))
-      .attr("x2", this.x(this.x.domain()[1]))
-      .attr(
-        "y2",
-        this.y(
-          this.lr.slope *
-            d3.utcDay.count(this.x.domain()[0], this.x.domain()[1]) +
-            this.lr.intercept
-        )
       );
+
+    if (this.lr) {
+      tl.attr("x1", this.x(this.x.domain()[0]))
+        .attr("y1", this.y(this.lr.intercept))
+        .attr("x2", this.x(this.x.domain()[1]))
+        .attr(
+          "y2",
+          this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept)
+        );
+    }
   }
 
   entered(event) {
@@ -281,7 +454,7 @@ window.ScatterChart = class ScatterChart {
 
   clicked() {
     if (!this.onClick || this.indexData === null) return;
-    const d = this.accessor.tooltipData(this.values[this.indexData]);
+    const d = this.values[this.indexData];
     this.onClick(d);
   }
 
@@ -289,8 +462,10 @@ window.ScatterChart = class ScatterChart {
     if (this.indexData === null) {
       this.tooltip.classed("is-visible", false);
     } else {
-      const d = this.accessor.tooltipData(this.values[this.indexData]);
-      this.tooltip.html(this.tooltipHtml(d)).classed("is-visible", true);
+      const d = this.values[this.indexData];
+      this.tooltip
+        .html(this.tooltipHtml(d, this.axis))
+        .classed("is-visible", true);
     }
   }
 

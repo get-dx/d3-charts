@@ -28,7 +28,8 @@
 }
 
 .chart .zero-line,
-.chart .axis line {
+.chart .axis line,
+.chart .axis path {
   stroke: #e5e5e5;
 }
 
@@ -44,6 +45,35 @@
   stroke-linejoin: round;
 }
 
+/* Scatter */
+.scatter-chart .matrix-line {
+  stroke: #c0c9d3;
+  stroke-width: 1.25px;
+}
+
+.scatter-chart .tick-line {
+  stroke: #e5e5e5;
+}
+
+.scatter-chart .grid-line {
+  stroke: #e5e5e5;
+}
+
+.scatter-chart .dot-circle {
+  fill: #3b82f6;
+}
+
+.scatter-chart .dot-circle.is-active {
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.scatter-chart .dot-label-text {
+  pointer-events: none;
+  font-size: 12px;
+  fill: #666;
+}
+
 /* Bar */
 .bar-chart .bar-rect {
   fill: #3b82f6;
@@ -53,19 +83,19 @@
   fill: #60a5fa;
 }
 
-/* Scatter */
-.scatterplot-chart .benchmark-line {
+/* Scatter Time */
+.scatter-time-chart .benchmark-line {
   stroke: #c0c9d3;
   stroke-width: 1.75px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.scatterplot-chart .dot-circle {
+.scatter-time-chart .dot-circle {
   fill: #3b82f6;
 }
 
-.scatterplot-chart .dot-circle.is-active {
+.scatter-time-chart .dot-circle.is-active {
   stroke: #000;
   stroke-width: 1.5px;
 }

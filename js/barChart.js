@@ -2,8 +2,8 @@ window.BarChart = class BarChart {
   constructor({
     elChart,
     values = [],
-    showXAxis = true,
-    trendline = false,
+    showXAxisLine = true,
+    showTrendline = false,
     paddingInner = 0.4,
     paddingOuter = 0,
     onClick,
@@ -11,8 +11,8 @@ window.BarChart = class BarChart {
   }) {
     this.elChart = elChart;
     this.values = values;
-    this.showXAxis = showXAxis;
-    this.trendline = trendline;
+    this.showXAxisLine = showXAxisLine;
+    this.showTrendline = showTrendline;
     this.paddingInner = paddingInner;
     this.paddingOuter = paddingOuter;
     this.onClick = onClick;
@@ -82,7 +82,7 @@ window.BarChart = class BarChart {
     ]);
 
     this.lr = null;
-    if (this.trendline) {
+    if (this.showTrendline) {
       const nonNullIndexes = this.values.reduce((idx, d, i) => {
         if (this.accessor.y(d) !== null) idx.push(i);
         return idx;
@@ -120,7 +120,7 @@ window.BarChart = class BarChart {
   renderZeroLine() {
     this.svg
       .selectAll(".zero-line")
-      .data(this.showXAxis ? [0] : [])
+      .data(this.showXAxisLine ? [0] : [])
       .join((enter) =>
         enter
           .append("line")
@@ -147,21 +147,25 @@ window.BarChart = class BarChart {
   }
 
   renderTrendLine() {
-    this.svg
+    const tl = this.svg
       .selectAll(".trend-line")
       .data(this.lr ? [0] : [])
-      .join((enter) => enter.append("line").attr("class", "trend-line"))
-      .attr("x1", this.x(this.x.domain()[0]) + this.x.bandwidth() / 2)
-      .attr(
-        "x2",
-        this.x(this.x.domain()[this.x.domain().length - 1]) +
-          this.x.bandwidth() / 2
-      )
-      .attr("y1", this.y(this.lr.intercept))
-      .attr(
-        "y2",
-        this.y(this.lr.slope * (this.x.domain().length - 1) + this.lr.intercept)
-      );
+      .join((enter) => enter.append("line").attr("class", "trend-line"));
+    if (this.lr) {
+      tl.attr("x1", this.x(this.x.domain()[0]) + this.x.bandwidth() / 2)
+        .attr(
+          "x2",
+          this.x(this.x.domain()[this.x.domain().length - 1]) +
+            this.x.bandwidth() / 2
+        )
+        .attr("y1", this.y(this.lr.intercept))
+        .attr(
+          "y2",
+          this.y(
+            this.lr.slope * (this.x.domain().length - 1) + this.lr.intercept
+          )
+        );
+    }
   }
 
   entered(event) {
