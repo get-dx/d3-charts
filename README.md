@@ -205,10 +205,6 @@ const scattertimechart = new ScatterTimeChart({
       dateLabel: "Mon, 8/27",
     },
   ],
-
-  // optional — infer from the data unless set
-  yAxisMin,
-  yAxisMax,
 });
 
 // we can set values after instantiation and then call redraw() to re-render
