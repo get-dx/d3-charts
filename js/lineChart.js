@@ -117,54 +117,52 @@ window.LineChart = class LineChart {
     this.benchmarkDates = this.foregroundBenchmarks.map((d) => d.x);
 
     if (this.startDate && this.endDate) {
-      this.startDate = this.parseDate(this.startDate);
-      this.endDate = this.parseDate(this.endDate);
+      this.xMin = this.parseDate(this.startDate);
+      this.xMax = this.parseDate(this.endDate);
+    } else {
+      this.xMin = d3.min([this.dates[0], this.benchmarkDates[0]]);
+      this.xMax = d3.max([
+        this.dates[this.dates.length - 1],
+        this.benchmarkDates[this.benchmarkDates.length - 1],
+      ]);
+    }
 
-      this.backgroundData = [
+    this.backgroundData = [
+      {
+        x: this.xMin,
+        y: this.foregroundData[0].y,
+      },
+      ...this.foregroundData,
+      {
+        x: this.xMax,
+        y: this.foregroundData[this.foregroundData.length - 1].y,
+      },
+    ];
+
+    this.clipData = [this.dates[0], this.dates[this.dates.length - 1]];
+
+    if (this.hasBenchmarkLine) {
+      this.backgroundBenchmarks = [
         {
-          x: this.startDate,
-          y: this.foregroundData[0].y,
+          x: this.xMin,
+          y: this.foregroundBenchmarks[0].y,
         },
-        ...this.foregroundData,
+        ...this.foregroundBenchmarks,
         {
-          x: this.endDate,
-          y: this.foregroundData[this.foregroundData.length - 1].y,
+          x: this.xMax,
+          y: this.foregroundBenchmarks[this.foregroundBenchmarks.length - 1].y,
         },
       ];
-
-      this.clipData = [this.dates[0], this.dates[this.dates.length - 1]];
-
-      if (this.hasBenchmarkLine) {
-        this.backgroundBenchmarks = [
-          {
-            x: this.startDate,
-            y: this.foregroundBenchmarks[0].y,
-          },
-          ...this.foregroundBenchmarks,
-          {
-            x: this.endDate,
-            y: this.foregroundBenchmarks[this.foregroundBenchmarks.length - 1]
-              .y,
-          },
-        ];
-        this.benchmarkClipData = [
-          this.benchmarkDates[0],
-          this.benchmarkDates[this.benchmarkDates.length - 1],
-        ];
-      }
-
-      this.x.domain([this.startDate, this.endDate]);
+      this.benchmarkClipData = [
+        this.benchmarkDates[0],
+        this.benchmarkDates[this.benchmarkDates.length - 1],
+      ];
     } else {
-      this.clipData = null;
-      this.benchmarkClipData = null;
-
-      let dates = this.dates;
-      if (this.hasBenchmarkLine) {
-        dates = [...dates, this.benchmarkDates];
-      }
-
-      this.x.domain(d3.extent(dates));
+      this.backgroundBenchmarks = [];
+      this.benchmarkClipData = [];
     }
+
+    this.x.domain([this.xMin, this.xMax]);
 
     if (!this.width) return;
     this.render();
@@ -197,7 +195,7 @@ window.LineChart = class LineChart {
   }
 
   renderClip() {
-    this.defs
+    const clip = this.defs
       .selectAll(".clip")
       .data(this.clipData ? [this.clipData] : [])
       .join((enter) =>
@@ -206,13 +204,16 @@ window.LineChart = class LineChart {
           .attr("class", "clip")
           .attr("id", `${this.id}-clip`)
           .call((clipPath) => clipPath.append("rect"))
-      )
-      .select("rect")
-      .attr("x", ([start]) => this.x(start))
-      .attr("width", ([start, end]) => this.x(end) - this.x(start))
-      .attr("height", this.height);
+      );
 
-    this.defs
+    if (this.clipData.length > 0)
+      clip
+        .select("rect")
+        .attr("x", ([start]) => this.x(start))
+        .attr("width", ([start, end]) => this.x(end) - this.x(start))
+        .attr("height", this.height);
+
+    const benchmarkClip = this.defs
       .selectAll(".benchmark-clip")
       .data(this.benchmarkClipData ? [this.benchmarkClipData] : [])
       .join((enter) =>
@@ -221,11 +222,14 @@ window.LineChart = class LineChart {
           .attr("class", "benchmark-clip")
           .attr("id", `${this.id}-benchmark-clip`)
           .call((clipPath) => clipPath.append("rect"))
-      )
-      .select("rect")
-      .attr("x", ([start]) => this.x(start))
-      .attr("width", ([start, end]) => this.x(end) - this.x(start))
-      .attr("height", this.height);
+      );
+
+    if (this.benchmarkClipData.length > 0)
+      benchmarkClip
+        .select("rect")
+        .attr("x", ([start]) => this.x(start))
+        .attr("width", ([start, end]) => this.x(end) - this.x(start))
+        .attr("height", this.height);
   }
 
   renderTicks() {
@@ -261,14 +265,10 @@ window.LineChart = class LineChart {
   renderBenchmarkLine() {
     this.g
       .selectAll(".benchmark-background-line")
-      .data(
-        this.hasBenchmarkLine && this.startDate && this.endDate
-          ? [this.backgroundBenchmarks]
-          : []
-      )
+      .data(this.hasBenchmarkLine ? [this.backgroundBenchmarks] : [])
       .join((enter) =>
         enter
-          .append("line")
+          .append("path")
           .attr("class", "benchmark-background-line")
           .attr("fill", "none")
       )
@@ -276,13 +276,7 @@ window.LineChart = class LineChart {
 
     this.g
       .selectAll(".benchmark-foreground-line")
-      .data(
-        this.hasBenchmarkLine
-          ? this.startDate && this.endDate
-            ? [this.backgroundBenchmarks]
-            : [this.foregroundBenchmarks]
-          : []
-      )
+      .data(this.hasBenchmarkLine ? [this.foregroundBenchmarks] : [])
       .join((enter) =>
         enter
           .append("path")
@@ -313,7 +307,7 @@ window.LineChart = class LineChart {
   renderLine() {
     this.g
       .selectAll(".background-line")
-      .data(this.startDate && this.endDate ? [this.backgroundData] : [])
+      .data([this.backgroundData])
       .join((enter) =>
         enter
           .append("path")
@@ -324,11 +318,7 @@ window.LineChart = class LineChart {
 
     this.g
       .selectAll(".foreground-line")
-      .data(
-        this.startDate && this.endDate
-          ? [this.backgroundData]
-          : [this.foregroundData]
-      )
+      .data([this.foregroundData])
       .join((enter) =>
         enter
           .append("path")
