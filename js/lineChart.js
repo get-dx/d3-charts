@@ -7,6 +7,8 @@ window.LineChart = class LineChart {
     showXAxisTicks = true,
     startDate,
     endDate,
+    yAxisMin,
+    yAxisMax,
     tooltipHtml,
     onClick,
   }) {
@@ -14,6 +16,8 @@ window.LineChart = class LineChart {
     this.values = values;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.yAxisMin = yAxisMin;
+    this.yAxisMax = yAxisMax;
     this.comparisonValues = comparisonValues;
     this.showXAxisLine = showXAxisLine;
     this.showXAxisTicks = showXAxisTicks;
@@ -98,7 +102,10 @@ window.LineChart = class LineChart {
     let minY = 0,
       maxY = maxValue;
     if (minValue > 15) minY = minValue - 10;
-    this.y.domain([minY, maxY]);
+    this.y.domain([
+      this.yAxisMin === undefined ? minY : this.yAxisMin,
+      this.yAxisMax === undefined ? maxY : this.yAxisMax,
+    ]);
 
     this.foregroundData = this.values.map((d) => ({
       x: this.accessor.x(d),

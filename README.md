@@ -134,6 +134,10 @@ const linechart = new LineChart({
       dateLabel: "Mon, 6/27",
     },
   ],
+
+  // optional — infer from the data unless set
+  yAxisMin,
+  yAxisMax,
 });
 
 // we can set values after instantiation and then call redraw() to re-render
