@@ -84,6 +84,10 @@ const linechart = new LineChart({
   startDate: "2022-06-05",
   endDate: "2023-03-05",
 
+  // optional — infer from the data unless set
+  yAxisMin: 0,
+  yAxisMax: 100,
+
   // optional - defaults to true; don't show x axis line if set to false
   showXAxisLine: true,
 
@@ -134,10 +138,6 @@ const linechart = new LineChart({
       dateLabel: "Mon, 6/27",
     },
   ],
-
-  // optional — infer from the data unless set
-  yAxisMin,
-  yAxisMax,
 });
 
 // we can set values after instantiation and then call redraw() to re-render
@@ -156,6 +156,10 @@ const scattertimechart = new ScatterTimeChart({
   // optional — infer from the data unless set
   startDate: "2022-06-05",
   endDate: "2023-03-05",
+
+  // optional — infer from the data unless set
+  yAxisMin: 0,
+  yAxisMax: 100,
 
   // optional - defaults to true; don't show x axis line if set to false
   showXAxisLine: true,
