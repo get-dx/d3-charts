@@ -490,7 +490,14 @@
         line1.startDate = startDate;
         line1.endDate = endDate;
         line1.values = data1.values;
+        line1.yAxisMin = 0;
+        line1.yAxisMax = 100;
         line1.redraw();
+
+        // document.addEventListener("click", function () {
+        //   line1.comparisonValues = data1.comparisonValues;
+        //   line1.redraw();
+        // });
 
         const line2 = new LineChart({
           elChart: document.getElementById("line-2-chart"),
