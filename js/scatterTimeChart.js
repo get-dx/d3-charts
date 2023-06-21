@@ -5,6 +5,8 @@ window.ScatterTimeChart = class ScatterTimeChart {
     showXAxisLine = true,
     startDate,
     endDate,
+    yAxisMin,
+    yAxisMax,
     showTrendline = false,
     benchmarkValue,
     tooltipHtml,
@@ -15,6 +17,8 @@ window.ScatterTimeChart = class ScatterTimeChart {
     this.showXAxisLine = showXAxisLine;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.yAxisMin = yAxisMin;
+    this.yAxisMax = yAxisMax;
     this.showTrendline = showTrendline;
     this.benchmarkValue = benchmarkValue;
     this.tooltipHtml = tooltipHtml;
@@ -94,7 +98,10 @@ window.ScatterTimeChart = class ScatterTimeChart {
     const gap = maxValue - minValue;
     const minY = minValue - gap * padding;
     const maxY = maxValue + gap * padding;
-    this.y.domain([minY, maxY]).nice();
+    this.y.domain([
+      this.yAxisMin === undefined ? minY : this.yAxisMin,
+      this.yAxisMax === undefined ? maxY : this.yAxisMax,
+    ]);
 
     this.x.domain([
       this.startDate

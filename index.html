@@ -362,6 +362,8 @@
         ]).then(([dataset1, dataset2]) => {
           scatter1.startDate = "2014-07-01";
           scatter1.endDate = "2023-05-01";
+          scatter1.yAxisMin = -10;
+          scatter1.yAxisMax = 20;
           scatter1.values = dataset1;
           scatter1.redraw();
 
