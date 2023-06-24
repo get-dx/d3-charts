@@ -139,6 +139,12 @@
   fill: #c0c9d3;
 }
 
+.line-chart .dot-circle.is-visible.is-active,
+.line-chart .benchmark-dot-circle.is-visible.is-active {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
 .line-chart .focus-line {
   stroke: #bbb;
   stroke-dasharray: 1 2;

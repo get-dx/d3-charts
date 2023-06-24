@@ -5,6 +5,8 @@ window.LineChart = class LineChart {
     comparisonValues = [],
     showXAxisLine = true,
     showXAxisTicks = true,
+    showPoints = false,
+    showComparisonPoints = false,
     startDate,
     endDate,
     yAxisMin,
@@ -21,6 +23,8 @@ window.LineChart = class LineChart {
     this.comparisonValues = comparisonValues;
     this.showXAxisLine = showXAxisLine;
     this.showXAxisTicks = showXAxisTicks;
+    this.showPoints = showPoints;
+    this.showBenchmarkPoints = showComparisonPoints;
     this.tooltipHtml = tooltipHtml;
     this.onClick = onClick;
     this.resize = this.resize.bind(this);
@@ -44,11 +48,13 @@ window.LineChart = class LineChart {
       this.elChart.id ||
       "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
 
+    this.dotRadius = 2.5;
+
     this.margin = {
-      top: 1,
-      right: 1,
+      top: 3,
+      right: 3,
       bottom: 3,
-      left: 1,
+      left: 3,
     };
 
     this.parseDate = d3.utcParse("%Y-%m-%d");
@@ -295,17 +301,24 @@ window.LineChart = class LineChart {
   }
 
   renderBenchmarkDots() {
-    this.g
+    this.benchmarkDotCircle = this.g
       .selectAll(".benchmark-dot-circles")
       .data(this.hasBenchmarkLine ? [0] : [])
       .join((enter) => enter.append("g").attr("class", "benchmark-dot-circles"))
       .selectAll(".benchmark-dot-circle")
       .data(this.foregroundBenchmarks)
       .join((enter) =>
-        enter
-          .append("circle")
-          .attr("class", "benchmark-dot-circle")
-          .attr("r", this.foregroundBenchmarks.length === 1 ? 2.5 : 1)
+        enter.append("circle").attr("class", "benchmark-dot-circle")
+      )
+      .classed(
+        "is-visible",
+        this.foregroundBenchmarks.length === 1 || this.showBenchmarkPoints
+      )
+      .attr(
+        "r",
+        this.foregroundBenchmarks.length === 1 || this.showBenchmarkPoints
+          ? this.dotRadius
+          : 1
       )
       .attr("cx", (d) => this.x(d.x))
       .attr("cy", (d) => this.y(d.y));
@@ -337,17 +350,20 @@ window.LineChart = class LineChart {
   }
 
   renderDots() {
-    this.g
+    this.dotCircle = this.g
       .selectAll(".dot-circles")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "dot-circles"))
       .selectAll(".dot-circle")
       .data(this.foregroundData)
-      .join((enter) =>
-        enter
-          .append("circle")
-          .attr("class", "dot-circle")
-          .attr("r", this.foregroundData.length === 1 ? 2.5 : 1)
+      .join((enter) => enter.append("circle").attr("class", "dot-circle"))
+      .classed(
+        "is-visible",
+        this.foregroundData.length === 1 || this.showPoints
+      )
+      .attr(
+        "r",
+        this.foregroundData.length === 1 || this.showPoints ? this.dotRadius : 1
       )
       .attr("cx", (d) => this.x(d.x))
       .attr("cy", (d) => this.y(d.y));
@@ -371,6 +387,14 @@ window.LineChart = class LineChart {
           "transform",
           `translate(${this.x(this.dates[this.indexDate])},0)`
         );
+      this.dotCircle.classed(
+        "is-active",
+        (d) => d.x - this.dates[this.indexDate] === 0
+      );
+      this.benchmarkDotCircle.classed(
+        "is-active",
+        (d) => d.x - this.dates[this.indexDate] === 0
+      );
       this.updateTooltip();
     }
     if (this.tooltip.classed("is-visible")) this.positionTooltip();
@@ -380,6 +404,8 @@ window.LineChart = class LineChart {
     if (!this.tooltipHtml) return;
     this.indexDate = null;
     this.focusLine.classed("is-visible", false);
+    this.dotCircle.classed("is-active", false);
+    this.benchmarkDotCircle.classed("is-active", false);
     this.updateTooltip();
   }
 

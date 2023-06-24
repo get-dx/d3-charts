@@ -118,6 +118,12 @@
           <div id="line-4-chart" class="chart-container"></div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Line 5</div>
+        <div class="card-body">
+          <div id="line-5-chart" class="chart-container"></div>
+        </div>
+      </div>
     </main>
     <!-- d3 is required for all charts -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -547,6 +553,30 @@
         line4.values = data4.values;
         line4.comparisonValues = data4.comparisonValues;
         line4.redraw();
+
+        const line5 = new LineChart({
+          elChart: document.getElementById("line-5-chart"),
+          startDate: "2022-12-01",
+          endDate: "2023-06-01",
+          showXAxisTicks: false,
+          showPoints: true,
+          values: [
+            {
+              value: 77,
+              date: "2022-12-13",
+            },
+            {
+              value: 142,
+              date: "2023-03-04",
+            },
+          ],
+          tooltipHtml: (d) => {
+            return `
+            <div>${d.date}</div>
+            <div>${d.value}</div>
+            `;
+          },
+        });
       }
     </script>
   </body>

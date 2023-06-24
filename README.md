@@ -94,6 +94,12 @@ const linechart = new LineChart({
   // default to true
   showXAxisTicks: true,
 
+  // optional - defaults to false; show value point dots
+  showPoints: false,
+
+  // optional - defaults to false; show comparison value point dots
+  showComparisonPoints: false,
+
   // optional - show pointer cursor on chart bar hover if set
   onClick: function (d) {
     alert(d.date);
