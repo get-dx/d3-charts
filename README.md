@@ -34,12 +34,12 @@ const barchart = new BarChart({
   showTrendline: false,
 
   // optional - show pointer cursor on chart bar hover if set
-  onClick: function (d) {
+  onClick(d) {
     alert(d.dateLabel);
   },
 
   // optional - if set, show tooltips on hover
-  tooltipHtml: function (d) {
+  tooltipHtml(d) {
     return `
       <div>
         <div class=''>${d.dateLabel}</div>
@@ -91,12 +91,12 @@ const linechart = new LineChart({
   showXAxisTicks: true,
 
   // optional - show pointer cursor on chart bar hover if set
-  onClick: function (d) {
+  onClick(d) {
     alert(d.date);
   },
 
   // optional - if set, show tooltips on hover
-  tooltipHtml: function (d, cd) {
+  tooltipHtml(d, cd) {
     return `
       <div>
         <div class=''>${d.dateLabel}</div>
@@ -160,12 +160,12 @@ const scattertimechart = new ScatterTimeChart({
   showTrendline: false,
 
   // optional - show pointer cursor on chart bar hover if set
-  onClick: function (d) {
+  onClick(d) {
     alert(d.date);
   },
 
   // optional - if set, show tooltips on hover
-  tooltipHtml: function (d) {
+  tooltipHtml(d) {
     return `
       <div>
         <div class=''>${d.dateLabel}</div>
@@ -202,8 +202,8 @@ scattertimechart.redraw();
 ### Scatter chart
 
 ```javascript
-const scatterplot = new ScatterPlot({
-  element: document.getElementById("#myscatterplot"),
+const scatterplot = new ScatterChart({
+  element: document.getElementById("#myscatterchart"),
 
   // optional - defaults to true
   showXAxisTicks: false,
@@ -214,7 +214,7 @@ const scatterplot = new ScatterPlot({
   // optional - defaults to 100
   xAxisTickLabelSpread: 100,
   // optional - defaults to plain value
-  xAxisTickLabelFormat: function(d) {
+  xAxisTickLabelFormat(d) {
     return `${d}%`;
   },
 
@@ -227,7 +227,7 @@ const scatterplot = new ScatterPlot({
   // optional - defaults to 50
   yAxisTickLabelSpread: 50,
   // optional - defaults to just the plain value
-  yAxisTickLabelFormat: function(d) {
+  yAxisTickLabelFormat(d) {
     return `${d}%`;
   },
 
@@ -253,17 +253,17 @@ const scatterplot = new ScatterPlot({
   },
 
   // optional - show pointer cursor on chart bar hover if set
-  onClick: function (d) {
+  onClick(d) {
     alert(d.team)
   },
 
   // optional - if set, display labels beside plotted points
-  labelTextFormat: function(d) {
+  labelTextFormat(d) {
     return `Team ${d.team}`;
   }
 
   // optional - if set, show tooltips on hover
-  tooltipHtml: function(d, axis) {
+  tooltipHtml(d, axis) {
     return `
       <div>
         <div class=''>${axis.x.label}: ${d.x}</div>
