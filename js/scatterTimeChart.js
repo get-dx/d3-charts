@@ -149,9 +149,9 @@ window.ScatterTimeChart = class ScatterTimeChart {
     this.renderDelaunay();
     this.renderClip();
     this.renderZeroLine();
-    this.renderDots();
     this.renderBenchmarkLine();
     this.renderTrendLine();
+    this.renderDots();
   }
 
   renderDelaunay() {
@@ -196,24 +196,6 @@ window.ScatterTimeChart = class ScatterTimeChart {
       .attr("x2", this.width - this.margin.right);
   }
 
-  renderDots() {
-    this.dotCircle = this.svg
-      .selectAll(".dot-circles")
-      .data([0])
-      .join((enter) => enter.append("g").attr("class", "dot-circles"))
-      .classed("is-clickable", !!this.onClick)
-      .selectAll(".dot-circle")
-      .data(this.values)
-      .join((enter) =>
-        enter
-          .append("circle")
-          .attr("class", "dot-circle")
-          .attr("r", this.dotRadius)
-      )
-      .attr("cx", (d) => this.x(this.accessor.x(d)))
-      .attr("cy", (d) => this.y(this.accessor.y(d)));
-  }
-
   renderBenchmarkLine() {
     this.svg
       .selectAll(".benchmark-line")
@@ -241,18 +223,38 @@ window.ScatterTimeChart = class ScatterTimeChart {
           .attr("clip-path", `url(#${this.id}-clip)`)
       );
     if (this.lr) {
-      tl.attr("x1", this.x(this.x.domain()[0]))
-        .attr("y1", this.y(this.lr.intercept))
-        .attr("x2", this.x(this.x.domain()[1]))
+      const x0 = this.x.domain()[0];
+      const [x1, x2] = d3.extent(this.values, this.accessor.x);
+
+      tl.attr("x1", this.x(x1))
+        .attr(
+          "y1",
+          this.y(this.lr.slope * d3.utcDay.count(x0, x1) + this.lr.intercept)
+        )
+        .attr("x2", this.x(x2))
         .attr(
           "y2",
-          this.y(
-            this.lr.slope *
-              d3.utcDay.count(this.x.domain()[0], this.x.domain()[1]) +
-              this.lr.intercept
-          )
+          this.y(this.lr.slope * d3.utcDay.count(x0, x2) + this.lr.intercept)
         );
     }
+  }
+
+  renderDots() {
+    this.dotCircle = this.svg
+      .selectAll(".dot-circles")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "dot-circles"))
+      .classed("is-clickable", !!this.onClick)
+      .selectAll(".dot-circle")
+      .data(this.values)
+      .join((enter) =>
+        enter
+          .append("circle")
+          .attr("class", "dot-circle")
+          .attr("r", this.dotRadius)
+      )
+      .attr("cx", (d) => this.x(this.accessor.x(d)))
+      .attr("cy", (d) => this.y(this.accessor.y(d)));
   }
 
   entered(event) {
