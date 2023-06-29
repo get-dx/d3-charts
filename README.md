@@ -52,19 +52,20 @@ const barchart = new BarChart({
   values: [
     {
       date: "2022-07-27",
-      dateLabel: "Mon, 7/27",
       value: 5,
+      // optional - include additional attributes to use in onClick or tooltipHtml
+      dateLabel: "Mon, 7/27",
     },
     // if value is null, render a 0 bar but do not not affect the trend line
     {
       date: "2022-07-28",
-      dateLabel: "Tue, 7/28",
       value: null,
+      dateLabel: "Tue, 7/28",
     },
     {
       date: "2022-08-27",
-      dateLabel: "Mon, 8/27",
       value: 7,
+      dateLabel: "Mon, 8/27",
     },
   ],
 });

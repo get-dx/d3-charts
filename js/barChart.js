@@ -69,7 +69,7 @@ window.BarChart = class BarChart {
     if (this.values.length === 0) return;
 
     this.accessor = {
-      x: (d) => d.dateLabel,
+      x: (d) => d.date,
       y: (d) => d.value,
     };
 
