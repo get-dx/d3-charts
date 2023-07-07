@@ -63,6 +63,10 @@
   fill: #3b82f6;
 }
 
+.scatter-chart .dot-circle.transparent {
+  opacity: 0.2;
+}
+
 .scatter-chart .dot-circle.is-active {
   stroke: #000;
   stroke-width: 1px;
@@ -93,6 +97,10 @@
 
 .scatter-time-chart .dot-circle {
   fill: #3b82f6;
+}
+
+.scatter-time-chart .dot-circle.transparent {
+  opacity: 0.2;
 }
 
 .scatter-time-chart .dot-circle.is-active {
