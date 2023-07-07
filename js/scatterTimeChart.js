@@ -73,7 +73,13 @@ window.ScatterTimeChart = class ScatterTimeChart {
       this.elChart.id ||
       "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
 
-    this.dotRadius = 2.5;
+    this.highDensity = this.values.length > 2000;
+
+    if (this.highDensity) {
+      this.dotRadius = 1.5;
+    } else {
+      this.dotRadius = 2.5;
+    }
 
     this.margin = {
       top: 3,
@@ -269,6 +275,8 @@ window.ScatterTimeChart = class ScatterTimeChart {
   }
 
   renderDots() {
+    const cssClasses = this.highDensity ? "dot-circle transparent" : "dot-circle";
+
     this.dotCircle = this.svg
       .selectAll(".dot-circles")
       .data([0])
@@ -279,7 +287,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
       .join((enter) =>
         enter
           .append("circle")
-          .attr("class", "dot-circle")
+          .attr("class", cssClasses)
           .attr("r", this.dotRadius)
       )
       .attr("cx", (d) => this.x(this.accessor.x(d)))
