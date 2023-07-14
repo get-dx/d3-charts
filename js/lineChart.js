@@ -110,7 +110,7 @@ window.LineChart = class LineChart {
     if (minValue > 15) minY = minValue - 10;
     this.y.domain([
       this.yAxisMin === undefined ? minY : this.yAxisMin,
-      this.yAxisMax === undefined ? maxY : this.yAxisMax,
+      this.yAxisMax === undefined ? maxY : this.yAxisMax || 1,
     ]);
 
     this.foregroundData = this.values.map((d) => ({
