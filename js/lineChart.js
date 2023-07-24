@@ -7,6 +7,7 @@ window.LineChart = class LineChart {
     showXAxisTicks = true,
     showPoints = false,
     showComparisonPoints = false,
+    dotLastSegment = false,
     startDate,
     endDate,
     yAxisMin,
@@ -25,6 +26,7 @@ window.LineChart = class LineChart {
     this.showXAxisTicks = showXAxisTicks;
     this.showPoints = showPoints;
     this.showBenchmarkPoints = showComparisonPoints;
+    this.dotLastSegment = dotLastSegment;
     this.tooltipHtml = tooltipHtml;
     this.onClick = onClick;
     this.resize = this.resize.bind(this);
@@ -338,7 +340,11 @@ window.LineChart = class LineChart {
 
     this.g
       .selectAll(".foreground-line")
-      .data([this.foregroundData])
+      .data([
+        this.dotLastSegment
+          ? this.foregroundData.slice(0, -1)
+          : this.foregroundData,
+      ])
       .join((enter) =>
         enter
           .append("path")
