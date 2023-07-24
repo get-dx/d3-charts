@@ -101,6 +101,9 @@ const linechart = new LineChart({
   // optional - defaults to false; show comparison value point dots
   showComparisonPoints: false,
 
+  // optional - defaults to false; show the last segment as a dashed line
+  dotLastSegment: false,
+
   // optional - show pointer cursor on chart bar hover if set
   onClick(d) {
     alert(d.date);

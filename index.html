@@ -124,6 +124,12 @@
           <div id="line-5-chart" class="chart-container"></div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Line 6</div>
+        <div class="card-body">
+          <div id="line-6-chart" class="chart-container"></div>
+        </div>
+      </div>
     </main>
     <!-- d3 is required for all charts -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -568,6 +574,77 @@
             {
               value: 142,
               date: "2023-03-04",
+            },
+          ],
+          tooltipHtml: (d) => {
+            return `
+            <div>${d.date}</div>
+            <div>${d.value}</div>
+            `;
+          },
+        });
+
+        const line6 = new LineChart({
+          elChart: document.getElementById("line-6-chart"),
+          startDate: "2022-01-01",
+          endDate: "2023-01-01",
+          dotLastSegment: true,
+          values: [
+            {
+              value: 0,
+              date: "2022-01-01",
+            },
+            {
+              value: 0,
+              date: "2022-02-01",
+            },
+            {
+              value: 0,
+              date: "2022-03-01",
+            },
+            {
+              value: 0,
+              date: "2022-04-01",
+            },
+            {
+              value: 0,
+              date: "2022-05-01",
+            },
+            {
+              value: 0,
+              date: "2022-06-01",
+            },
+            {
+              value: 0,
+              date: "2022-07-01",
+            },
+            {
+              value: 0,
+              date: "2022-08-01",
+            },
+            {
+              value: 0,
+              date: "2022-01-01",
+            },
+            {
+              value: 0,
+              date: "2022-09-01",
+            },
+            {
+              value: 0,
+              date: "2022-10-01",
+            },
+            {
+              value: 250,
+              date: "2022-11-01",
+            },
+            {
+              value: 280,
+              date: "2022-12-01",
+            },
+            {
+              value: 0,
+              date: "2023-01-01",
             },
           ],
           tooltipHtml: (d) => {
