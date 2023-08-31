@@ -65,6 +65,16 @@
         </div>
       </div>
       <div class="card">
+        <div class="card-title">Scatter 3</div>
+        <div class="card-body">
+          <div
+            id="scatter-3-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
+      <div class="card">
         <div class="card-title">Bar 1</div>
         <div class="card-body">
           <div id="bar-1-chart" class="chart-container"></div>
@@ -170,7 +180,7 @@
             alert(d.team);
           },
           labelTextFormat: function (d) {
-            return `Team ${d.team}`;
+            return d.team;
           },
           tooltipHtml: function (d, axis) {
             return `
@@ -255,6 +265,71 @@
           },
         ];
         scatter2.redraw();
+
+        const scatter3 = new ScatterChart({
+          elChart: document.getElementById("scatter-3-chart"),
+          matrix: [50, 50],
+          highlightedQuadrant: 4,
+          axis: {
+            x: {
+              label: "Impact",
+              min: 0,
+              max: 100,
+            },
+            y: {
+              label: "Performance",
+              min: 0,
+              max: 100,
+            },
+          },
+          dotRadius: 5,
+          showXAxisTicks: false,
+          showXAxisLine: false,
+          showXAxisTickLabels: false,
+          showYAxisTicks: false,
+          showYAxisLine: false,
+          showYAxisTickLabels: false,
+          labelTextFormat: function (d) {
+            return d.team;
+          },
+          tooltipHtml: function (d, axis) {
+            return `
+              <div>
+                <div class=''>${axis.x.label}: ${d.x}</div>
+                <div class=''>${axis.y.label}: ${d.y}</div>
+              </div>
+            `;
+          },
+        });
+
+        scatter3.values = [
+          {
+            x: 95,
+            y: 40,
+            team: "Team 1",
+          },
+          {
+            x: 9,
+            y: 50,
+            team: "Team 2",
+          },
+          {
+            x: 80,
+            y: 64,
+            team: "Team 3",
+          },
+          {
+            x: 10,
+            y: 65,
+            team: "Team 4",
+          },
+          {
+            x: 72,
+            y: 24,
+            team: "Team 5",
+          },
+        ];
+        scatter3.redraw();
       }
       // Bar charts
       {

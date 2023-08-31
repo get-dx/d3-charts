@@ -5,14 +5,17 @@ window.ScatterChart = class ScatterChart {
     xAxisTickLabelFormat = (d) => d.toLocaleString(),
     showXAxisLabel = true,
     showXAxisLine = true,
+    showXAxisTickLabels = true,
     xAxisTickLabelSpread = 100,
     showYAxisTicks = true,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
     showYAxisLabel = true,
     showYAxisLine = true,
+    showYAxisTickLabels = true,
     yAxisTickLabelSpread = 50,
     showTrendline = false,
     matrix,
+    highlightedQuadrant,
     axis = {
       x: {
         label: "",
@@ -21,7 +24,8 @@ window.ScatterChart = class ScatterChart {
         label: "",
       },
     },
-    labelText,
+    dotRadius = 2.5,
+    labelTextFormat,
     onClick,
     tooltipHtml,
     values = [],
@@ -31,16 +35,20 @@ window.ScatterChart = class ScatterChart {
     this.xAxisTickLabelFormat = xAxisTickLabelFormat;
     this.showXAxisLabel = showXAxisLabel;
     this.showXAxisLine = showXAxisLine;
+    this.showXAxisTickLabels = showXAxisTickLabels;
     this.showYAxisTicks = showYAxisTicks;
     this.xAxisTickLabelSpread = xAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
     this.showYAxisLabel = showYAxisLabel;
     this.showYAxisLine = showYAxisLine;
+    this.showYAxisTickLabels = showYAxisTickLabels;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.showTrendline = showTrendline;
     this.matrix = matrix;
+    this.highlightedQuadrant = highlightedQuadrant;
     this.axis = axis;
-    this.labelTextFormat = labelText;
+    this.dotRadius = dotRadius;
+    this.labelTextFormat = labelTextFormat;
     this.onClick = onClick;
     this.tooltipHtml = tooltipHtml;
     this.values = values;
@@ -64,8 +72,6 @@ window.ScatterChart = class ScatterChart {
     this.id =
       this.elChart.id ||
       "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
-
-    this.dotRadius = 2.5;
 
     this.margin = {
       top: 8,
@@ -162,11 +168,17 @@ window.ScatterChart = class ScatterChart {
   }
 
   adjustMargin() {
-    this.margin.bottom = 24;
+    this.margin.bottom = 4;
+    if (this.showXAxisTickLabels) {
+      this.margin.bottom += 20;
+    }
     if (this.showXAxisLabel) {
       this.margin.bottom += 20;
     }
-    this.margin.left = 48;
+    this.margin.left = 4;
+    if (this.showYAxisTickLabels) {
+      this.margin.left += 48;
+    }
     if (this.showYAxisLabel) {
       this.margin.left += 20;
     }
@@ -218,7 +230,10 @@ window.ScatterChart = class ScatterChart {
               this.xAxisTickLabelSpread
           )
           .tickSizeOuter(0)
-          .tickFormat(this.xAxisTickLabelFormat)
+          .tickSizeInner(this.showXAxisTickLabels ? 6 : 0)
+          .tickFormat((d) =>
+            this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : ""
+          )
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -264,14 +279,17 @@ window.ScatterChart = class ScatterChart {
               this.yAxisTickLabelSpread
           )
           .tickSizeOuter(0)
-          .tickFormat(this.yAxisTickLabelFormat)
+          .tickSizeInner(this.showYAxisTickLabels ? 6 : 0)
+          .tickFormat((d) =>
+            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""
+          )
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
         g
           .selectAll(".tick")
           .selectAll(".grid-line")
-          .data(this.showXAxisTicks ? [0] : [])
+          .data(this.showYAxisTicks ? [0] : [])
           .join((enter) => enter.append("line").attr("class", "grid-line"))
           .attr("x2", this.width - this.margin.left - this.margin.right)
       )
@@ -308,6 +326,49 @@ window.ScatterChart = class ScatterChart {
       .selectAll(".matrix-g")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "matrix-g"));
+
+    const quadrantRects =
+      this.matrix && this.highlightedQuadrant
+        ? {
+            1: {
+              x: this.x(this.matrix[0]),
+              y: this.y.range()[1],
+              width: this.x.range()[1] - this.x(this.matrix[0]),
+              height: this.y(this.matrix[1]) - this.y.range()[1],
+            },
+            2: {
+              x: this.x.range()[0],
+              y: this.y.range()[1],
+              width: this.x(this.matrix[0]) - this.x.range()[0],
+              height: this.y(this.matrix[1]) - this.y.range()[1],
+            },
+            3: {
+              x: this.x.range()[0],
+              y: this.y(this.matrix[1]),
+              width: this.x(this.matrix[0]) - this.x.range()[0],
+              height: this.y.range()[0] - this.y(this.matrix[1]),
+            },
+            4: {
+              x: this.x(this.matrix[0]),
+              y: this.y(this.matrix[1]),
+              width: this.x.range()[1] - this.x(this.matrix[0]),
+              height: this.y.range()[0] - this.y(this.matrix[1]),
+            },
+          }
+        : {};
+
+    this.matrixG
+      .selectAll(".matrix-rect")
+      .data(
+        this.matrix && this.highlightedQuadrant
+          ? [quadrantRects[this.highlightedQuadrant]]
+          : []
+      )
+      .join((enter) => enter.append("rect").attr("class", "matrix-rect"))
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
+      .attr("width", (d) => d.width)
+      .attr("height", (d) => d.height);
 
     this.matrixG
       .selectAll(".matrix-line--x")
@@ -351,6 +412,7 @@ window.ScatterChart = class ScatterChart {
   renderLabels() {
     let anchors = [];
     let labels = [];
+    const maxLabelWidth = 120;
 
     if (this.labelTextFormat) {
       anchors = this.values.map((d) => ({
@@ -384,7 +446,9 @@ window.ScatterChart = class ScatterChart {
       d3.labeler()
         .label(labels)
         .anchor(anchors)
-        .width(this.width - this.margin.left - this.margin.right)
+        .width(
+          this.width - this.margin.left - this.margin.right - maxLabelWidth
+        )
         .height(this.height - this.margin.top - this.margin.bottom)
         .start(1000);
 
