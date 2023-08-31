@@ -229,6 +229,8 @@ const scatterplot = new ScatterChart({
   showXAxisLabel: false,
   // optional - defaults to true
   showXAxisLine: false,
+  // optional - defaults to true
+  showXAxisTickLabels: false,
   // optional - defaults to 100
   xAxisTickLabelSpread: 100,
   // optional - defaults to plain value
@@ -242,6 +244,8 @@ const scatterplot = new ScatterChart({
   showYAxisLabel: false,
   // optional - defaults to true
   showYAxisLine: false,
+  // optional - defaults to true
+  showYAxisTickLabels: false,
   // optional - defaults to 50
   yAxisTickLabelSpread: 50,
   // optional - defaults to just the plain value
@@ -254,6 +258,9 @@ const scatterplot = new ScatterChart({
 
   // optional - show matrix lines at specified coordinates if set
   matrix: [50, 100],
+
+  // optional - highlight one of the four quadrants (1, 2, 3, 4) when matrix is set
+  highlightedQuadrant: 4,
 
   axis: {
     x: {
@@ -269,6 +276,9 @@ const scatterplot = new ScatterChart({
       max: 200
     }
   },
+
+  // optional - dot radius
+  dotRadius: 2.5,
 
   // optional - show pointer cursor on chart bar hover if set
   onClick(d) {

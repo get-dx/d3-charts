@@ -74,6 +74,10 @@
   fill: #666;
 }
 
+.scatter-chart .matrix-rect {
+  fill: #e5e5e5;
+}
+
 /* Bar */
 .bar-chart .bar-rect {
   fill: #6366f1;
