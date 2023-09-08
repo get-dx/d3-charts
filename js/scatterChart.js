@@ -70,9 +70,7 @@ window.ScatterChart = class ScatterChart {
   }
 
   setup() {
-    this.id =
-      this.elChart.id ||
-      "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
+    this.id = this.elChart.id || "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
 
     this.margin = {
       top: 8,
@@ -87,13 +85,11 @@ window.ScatterChart = class ScatterChart {
   }
 
   scaffold() {
-    this.container = d3
-      .select(this.elChart)
-      .classed("chart scatter-chart", true);
+    this.container = d3.select(this.elChart).classed("chart scatter-chart", true);
 
     this.svg = this.container
       .append("svg")
-      .attr("class", "chart-svg")
+      .attr("class", "chart-scg")
       .on("mouseover", this.entered)
       .on("mousemove", this.moved)
       .on("mouseout", this.left)
@@ -117,16 +113,14 @@ window.ScatterChart = class ScatterChart {
       this.axis.x.min === undefined ? minX - gapX * padding : this.axis.x.min,
       this.axis.x.max === undefined ? maxX + gapX * padding : this.axis.x.max,
     ]);
-    if (this.axis.x.min === undefined && this.axis.x.max === undefined)
-      this.x.nice();
+    if (this.axis.x.min === undefined && this.axis.x.max === undefined) this.x.nice();
     const [minY, maxY] = d3.extent(this.values, this.accessor.y);
     const gapY = maxY - minY;
     this.y.domain([
       this.axis.y.min === undefined ? minY - gapY * padding : this.axis.y.min,
       this.axis.y.max === undefined ? maxY + gapY * padding : this.axis.y.max,
     ]);
-    if (this.axis.y.min === undefined && this.axis.y.max === undefined)
-      this.y.nice();
+    if (this.axis.y.min === undefined && this.axis.y.max === undefined) this.y.nice();
 
     this.lr = null;
     if (this.showTrendline) {
@@ -205,12 +199,7 @@ window.ScatterChart = class ScatterChart {
         enter
           .append("clipPath")
           .attr("id", `${this.id}-clip`)
-          .call((clipPath) =>
-            clipPath
-              .append("rect")
-              .attr("x", this.margin.left)
-              .attr("y", this.margin.top)
-          )
+          .call((clipPath) => clipPath.append("rect").attr("x", this.margin.left).attr("y", this.margin.top))
       )
       .select("rect")
       .attr("width", this.width - this.margin.left - this.margin.right)
@@ -226,15 +215,10 @@ window.ScatterChart = class ScatterChart {
       .call(
         d3
           .axisBottom(this.x)
-          .ticks(
-            (this.width - this.margin.left - this.margin.right) /
-              this.xAxisTickLabelSpread
-          )
+          .ticks((this.width - this.margin.left - this.margin.right) / this.xAxisTickLabelSpread)
           .tickSizeOuter(0)
           .tickSizeInner(this.showXAxisTickLabels ? 6 : 0)
-          .tickFormat((d) =>
-            this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : ""
-          )
+          .tickFormat((d) => (this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : ""))
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -246,9 +230,7 @@ window.ScatterChart = class ScatterChart {
           .attr("y2", -(this.height - this.margin.top - this.margin.bottom))
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
-      .call((g) =>
-        g.select(".domain").style("display", this.showXAxisLine ? null : "none")
-      )
+      .call((g) => g.select(".domain").style("display", this.showXAxisLine ? null : "none"))
       .call((g) =>
         g
           .selectAll(".axis-title-text")
@@ -275,15 +257,10 @@ window.ScatterChart = class ScatterChart {
       .call(
         d3
           .axisLeft(this.y)
-          .ticks(
-            (this.height - this.margin.top - this.margin.bottom) /
-              this.yAxisTickLabelSpread
-          )
+          .ticks((this.height - this.margin.top - this.margin.bottom) / this.yAxisTickLabelSpread)
           .tickSizeOuter(0)
           .tickSizeInner(this.showYAxisTickLabels ? 6 : 0)
-          .tickFormat((d) =>
-            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""
-          )
+          .tickFormat((d) => (this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""))
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -295,9 +272,7 @@ window.ScatterChart = class ScatterChart {
           .attr("x2", this.width - this.margin.left - this.margin.right)
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
-      .call((g) =>
-        g.select(".domain").style("display", this.showYAxisLine ? null : "none")
-      )
+      .call((g) => g.select(".domain").style("display", this.showYAxisLine ? null : "none"))
       .call((g) =>
         g
           .selectAll(".axis-title-text")
@@ -314,9 +289,7 @@ window.ScatterChart = class ScatterChart {
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
           .attr(
             "transform",
-            `rotate(-90,${-this.margin.left + 4},${
-              (this.margin.top + this.height - this.margin.bottom) / 2
-            })`
+            `rotate(-90,${-this.margin.left + 4},${(this.margin.top + this.height - this.margin.bottom) / 2})`
           )
           .text((d) => d)
       );
@@ -360,11 +333,7 @@ window.ScatterChart = class ScatterChart {
 
     this.matrixG
       .selectAll(".matrix-rect")
-      .data(
-        this.matrix && this.highlightedQuadrant
-          ? [quadrantRects[this.highlightedQuadrant]]
-          : []
-      )
+      .data(this.matrix && this.highlightedQuadrant ? [quadrantRects[this.highlightedQuadrant]] : [])
       .join((enter) => enter.append("rect").attr("class", "matrix-rect"))
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y)
@@ -374,9 +343,7 @@ window.ScatterChart = class ScatterChart {
     this.matrixG
       .selectAll(".matrix-line--x")
       .data(this.matrix ? [this.matrix[0]] : [])
-      .join((enter) =>
-        enter.append("line").attr("class", "matrix-line matrix-line--x")
-      )
+      .join((enter) => enter.append("line").attr("class", "matrix-line matrix-line--x"))
       .attr("y1", this.margin.top)
       .attr("y2", this.height - this.margin.bottom)
       .attr("transform", (d) => `translate(${this.x(d)},0)`);
@@ -384,9 +351,7 @@ window.ScatterChart = class ScatterChart {
     this.matrixG
       .selectAll(".matrix-line--y")
       .data(this.matrix ? [this.matrix[1]] : [])
-      .join((enter) =>
-        enter.append("line").attr("class", "matrix-line matrix-line--y")
-      )
+      .join((enter) => enter.append("line").attr("class", "matrix-line matrix-line--y"))
       .attr("x1", this.margin.left)
       .attr("x2", this.width - this.margin.right)
       .attr("transform", (d) => `translate(0,${this.y(d)})`);
@@ -400,12 +365,7 @@ window.ScatterChart = class ScatterChart {
       .classed("is-clickable", !!this.onClick)
       .selectAll(".dot-circle")
       .data(this.values)
-      .join((enter) =>
-        enter
-          .append("circle")
-          .attr("class", "dot-circle")
-          .attr("r", this.dotRadius)
-      )
+      .join((enter) => enter.append("circle").attr("class", "dot-circle").attr("r", this.dotRadius))
       .attr("cx", (d) => this.x(this.accessor.x(d)))
       .attr("cy", (d) => this.y(this.accessor.y(d)));
   }
@@ -447,9 +407,7 @@ window.ScatterChart = class ScatterChart {
       d3.labeler()
         .label(labels)
         .anchor(anchors)
-        .width(
-          this.width - this.margin.left - this.margin.right - maxLabelWidth
-        )
+        .width(this.width - this.margin.left - this.margin.right - maxLabelWidth)
         .height(this.height - this.margin.top - this.margin.bottom)
         .start(1000);
 
@@ -466,21 +424,13 @@ window.ScatterChart = class ScatterChart {
     const tl = this.svg
       .selectAll(".trend-line")
       .data(this.lr ? [0] : [])
-      .join((enter) =>
-        enter
-          .append("line")
-          .attr("class", "trend-line")
-          .attr("clip-path", `url(#${this.id}-clip)`)
-      );
+      .join((enter) => enter.append("line").attr("class", "trend-line").attr("clip-path", `url(#${this.id}-clip)`));
 
     if (this.lr) {
       tl.attr("x1", this.x(this.x.domain()[0]))
         .attr("y1", this.y(this.lr.intercept))
         .attr("x2", this.x(this.x.domain()[1]))
-        .attr(
-          "y2",
-          this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept)
-        );
+        .attr("y2", this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept));
     }
   }
 
@@ -491,10 +441,7 @@ window.ScatterChart = class ScatterChart {
 
   moved(event) {
     if (!this.tooltipHtml) return;
-    const indexData = this.delaunay.find(
-      ...d3.pointer(event),
-      this.indexData || 0
-    );
+    const indexData = this.delaunay.find(...d3.pointer(event), this.indexData || 0);
     if (this.indexData !== indexData) {
       this.indexData = indexData;
       this.dotCircle.classed("is-active", (d, i, n) => {
@@ -528,18 +475,14 @@ window.ScatterChart = class ScatterChart {
       this.tooltip.classed("is-visible", false);
     } else {
       const d = this.values[this.indexData];
-      this.tooltip
-        .html(this.tooltipHtml(d, this.axis))
-        .classed("is-visible", true);
+      this.tooltip.html(this.tooltipHtml(d, this.axis)).classed("is-visible", true);
     }
   }
 
   positionTooltip() {
     const tooltipRect = this.tooltip.node().getBoundingClientRect();
 
-    let x =
-      this.x(this.accessor.x(this.values[this.indexData])) -
-      tooltipRect.width / 2;
+    let x = this.x(this.accessor.x(this.values[this.indexData])) - tooltipRect.width / 2;
     if (x + tooltipRect.width > this.width) {
       x = this.width - tooltipRect.width;
     } else if (x < 0) {
@@ -547,10 +490,7 @@ window.ScatterChart = class ScatterChart {
     }
 
     const yOffset = this.dotRadius + 8;
-    let y =
-      this.y(this.accessor.y(this.values[this.indexData])) -
-      yOffset -
-      tooltipRect.height;
+    let y = this.y(this.accessor.y(this.values[this.indexData])) - yOffset - tooltipRect.height;
     if (y < 0) {
       y = this.y(this.accessor.y(this.values[this.indexData])) + yOffset;
     }
@@ -565,41 +505,40 @@ window.ScatterChart = class ScatterChart {
 
 function initLabeler() {
   d3.labeler = function () {
-    var lab = [],
-      anc = [],
-      w = 1, // box width
-      h = 1, // box width
-      labeler = {};
+    let lab = [];
+    let anc = [];
+    let w = 1; // box width
+    let h = 1; // box width
+    let labeler = {};
 
-    var max_move = 5.0,
-      max_angle = 0.5,
-      acc = 0;
-    rej = 0;
+    let max_move = 5.0;
+    let max_angle = 0.5;
+    let acc = 0;
+    let rej = 0;
 
     // weights
-    var w_len = 0.2, // leader line length
-      w_inter = 1.0, // leader line intersection
-      w_lab2 = 30.0, // label-label overlap
-      w_lab_anc = 30.0; // label-anchor overlap
-    w_orient = 3.0; // orientation bias
+    let w_len = 0.2; // leader line length
+    let w_inter = 1.0; // leader line intersection
+    let w_lab2 = 30.0; // label-label overlap
+    let w_lab_anc = 30.0; // label-anchor overlap
+    let w_orient = 3.0; // orientation bias
 
     // booleans for user defined functions
-    var user_energy = false,
-      user_schedule = false;
+    let user_energy = false;
+    let user_schedule = false;
 
-    var user_defined_energy, user_defined_schedule;
+    let user_defined_energy;
+    let user_defined_schedule;
 
-    energy = function (index) {
+    const energy = (index) => {
       // energy function, tailored for label placement
 
-      var m = lab.length,
-        ener = 0,
-        dx = lab[index].x - anc[index].x,
-        dy = anc[index].y - lab[index].y,
-        dist = Math.sqrt(dx * dx + dy * dy),
-        overlap = true,
-        amount = 0;
-      theta = 0;
+      let m = lab.length;
+      let ener = 0;
+      let dx = lab[index].x - anc[index].x;
+      let dy = anc[index].y - lab[index].y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      let overlap = true;
 
       // penalty for length of leader line
       if (dist > 0) ener += dist * w_len;
@@ -617,13 +556,19 @@ function initLabeler() {
         ener += 3 * w_orient;
       }
 
-      var x21 = lab[index].x,
-        y21 = lab[index].y - lab[index].height + 2.0,
-        x22 = lab[index].x + lab[index].width,
-        y22 = lab[index].y + 2.0;
-      var x11, x12, y11, y12, x_overlap, y_overlap, overlap_area;
+      let x21 = lab[index].x;
+      let y21 = lab[index].y - lab[index].height + 2.0;
+      let x22 = lab[index].x + lab[index].width;
+      let y22 = lab[index].y + 2.0;
+      let x11;
+      let x12;
+      let y11;
+      let y12;
+      let x_overlap;
+      let y_overlap;
+      let overlap_area;
 
-      for (var i = 0; i < m; i++) {
+      for (let i = 0; i < m; i++) {
         if (i != index) {
           // penalty for intersection of leader lines
           overlap = intersect(
@@ -662,18 +607,19 @@ function initLabeler() {
       return ener;
     };
 
-    mcmove = function (currT) {
+    const mcmove = (currT) => {
       // Monte Carlo translation move
 
       // select a random label
-      var i = Math.floor(Math.random() * lab.length);
+      let i = Math.floor(Math.random() * lab.length);
 
       // save old coordinates
-      var x_old = lab[i].x;
-      var y_old = lab[i].y;
+      let x_old = lab[i].x;
+      let y_old = lab[i].y;
 
       // old energy
-      var old_energy;
+      let old_energy;
+
       if (user_energy) {
         old_energy = user_defined_energy(i, lab, anc);
       } else {
@@ -691,7 +637,7 @@ function initLabeler() {
       if (lab[i].y < 0) lab[i].y = y_old;
 
       // new energy
-      var new_energy;
+      let new_energy;
       if (user_energy) {
         new_energy = user_defined_energy(i, lab, anc);
       } else {
@@ -699,7 +645,7 @@ function initLabeler() {
       }
 
       // delta E
-      var delta_energy = new_energy - old_energy;
+      let delta_energy = new_energy - old_energy;
 
       if (Math.random() < Math.exp(-delta_energy / currT)) {
         acc += 1;
@@ -711,18 +657,18 @@ function initLabeler() {
       }
     };
 
-    mcrotate = function (currT) {
+    const mcrotate = (currT) => {
       // Monte Carlo rotation move
 
       // select a random label
-      var i = Math.floor(Math.random() * lab.length);
+      let i = Math.floor(Math.random() * lab.length);
 
       // save old coordinates
-      var x_old = lab[i].x;
-      var y_old = lab[i].y;
+      let x_old = lab[i].x;
+      let y_old = lab[i].y;
 
       // old energy
-      var old_energy;
+      let old_energy;
       if (user_energy) {
         old_energy = user_defined_energy(i, lab, anc);
       } else {
@@ -730,18 +676,18 @@ function initLabeler() {
       }
 
       // random angle
-      var angle = (Math.random() - 0.5) * max_angle;
+      let angle = (Math.random() - 0.5) * max_angle;
 
-      var s = Math.sin(angle);
-      var c = Math.cos(angle);
+      let s = Math.sin(angle);
+      let c = Math.cos(angle);
 
       // translate label (relative to anchor at origin):
       lab[i].x -= anc[i].x;
       lab[i].y -= anc[i].y;
 
       // rotate label
-      var x_new = lab[i].x * c - lab[i].y * s,
-        y_new = lab[i].x * s + lab[i].y * c;
+      let x_new = lab[i].x * c - lab[i].y * s;
+      let y_new = lab[i].x * s + lab[i].y * c;
 
       // translate label back
       lab[i].x = x_new + anc[i].x;
@@ -754,7 +700,7 @@ function initLabeler() {
       if (lab[i].y < 0) lab[i].y = y_old;
 
       // new energy
-      var new_energy;
+      let new_energy;
       if (user_energy) {
         new_energy = user_defined_energy(i, lab, anc);
       } else {
@@ -762,7 +708,7 @@ function initLabeler() {
       }
 
       // delta E
-      var delta_energy = new_energy - old_energy;
+      let delta_energy = new_energy - old_energy;
 
       if (Math.random() < Math.exp(-delta_energy / currT)) {
         acc += 1;
@@ -774,12 +720,15 @@ function initLabeler() {
       }
     };
 
-    intersect = function (x1, x2, x3, x4, y1, y2, y3, y4) {
+    const intersect = (x1, x2, x3, x4, y1, y2, y3, y4) => {
       // returns true if two lines intersect, else false
       // from http://paulbourke.net/geometry/lineline2d/
 
-      var mua, mub;
-      var denom, numera, numerb;
+      let mua;
+      let mub;
+      let denom;
+      let numera;
+      let numerb;
 
       denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
       numera = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3);
@@ -794,19 +743,19 @@ function initLabeler() {
       return false;
     };
 
-    cooling_schedule = function (currT, initialT, nsweeps) {
+    const cooling_schedule = (currT, initialT, nsweeps) => {
       // linear cooling
       return currT - initialT / nsweeps;
     };
 
     labeler.start = function (nsweeps) {
       // main simulated annealing function
-      var m = lab.length,
-        currT = 1.0,
-        initialT = 1.0;
+      let m = lab.length;
+      let currT = 1.0;
+      let initialT = 1.0;
 
-      for (var i = 0; i < nsweeps; i++) {
-        for (var j = 0; j < m; j++) {
+      for (let i = 0; i < nsweeps; i++) {
+        for (let j = 0; j < m; j++) {
           if (Math.random() < 0.5) {
             mcmove(currT);
           } else {
