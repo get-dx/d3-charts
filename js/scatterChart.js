@@ -93,7 +93,7 @@ window.ScatterChart = class ScatterChart {
 
     this.svg = this.container
       .append("svg")
-      .attr("class", "chart-scg")
+      .attr("class", "chart-svg")
       .on("mouseover", this.entered)
       .on("mousemove", this.moved)
       .on("mouseout", this.left)
