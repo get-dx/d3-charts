@@ -280,6 +280,9 @@ const scatterplot = new ScatterChart({
   // optional - dot radius
   dotRadius: 2.5,
 
+  // optional - hover radius, the maximum radius from the center of a dot to trigger the tooltip
+  hoverRadius, 12.5,
+
   // optional - show pointer cursor on chart bar hover if set
   onClick(d) {
     alert(d.team)
