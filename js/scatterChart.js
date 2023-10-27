@@ -25,6 +25,7 @@ window.ScatterChart = class ScatterChart {
       },
     },
     dotRadius = 2.5,
+    hoverRadius = 12.5,
     labelTextFormat,
     onClick,
     tooltipHtml,
@@ -48,6 +49,7 @@ window.ScatterChart = class ScatterChart {
     this.highlightedQuadrant = highlightedQuadrant;
     this.axis = axis;
     this.dotRadius = dotRadius;
+    this.hoverRadius = hoverRadius;
     this.labelTextFormat = labelTextFormat;
     this.onClick = onClick;
     this.tooltipHtml = tooltipHtml;
@@ -70,7 +72,9 @@ window.ScatterChart = class ScatterChart {
   }
 
   setup() {
-    this.id = this.elChart.id || "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
+    this.id =
+      this.elChart.id ||
+      "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
 
     this.margin = {
       top: 8,
@@ -85,7 +89,9 @@ window.ScatterChart = class ScatterChart {
   }
 
   scaffold() {
-    this.container = d3.select(this.elChart).classed("chart scatter-chart", true);
+    this.container = d3
+      .select(this.elChart)
+      .classed("chart scatter-chart", true);
 
     this.svg = this.container
       .append("svg")
@@ -113,14 +119,16 @@ window.ScatterChart = class ScatterChart {
       this.axis.x.min === undefined ? minX - gapX * padding : this.axis.x.min,
       this.axis.x.max === undefined ? maxX + gapX * padding : this.axis.x.max,
     ]);
-    if (this.axis.x.min === undefined && this.axis.x.max === undefined) this.x.nice();
+    if (this.axis.x.min === undefined && this.axis.x.max === undefined)
+      this.x.nice();
     const [minY, maxY] = d3.extent(this.values, this.accessor.y);
     const gapY = maxY - minY;
     this.y.domain([
       this.axis.y.min === undefined ? minY - gapY * padding : this.axis.y.min,
       this.axis.y.max === undefined ? maxY + gapY * padding : this.axis.y.max,
     ]);
-    if (this.axis.y.min === undefined && this.axis.y.max === undefined) this.y.nice();
+    if (this.axis.y.min === undefined && this.axis.y.max === undefined)
+      this.y.nice();
 
     this.lr = null;
     if (this.showTrendline) {
@@ -199,7 +207,12 @@ window.ScatterChart = class ScatterChart {
         enter
           .append("clipPath")
           .attr("id", `${this.id}-clip`)
-          .call((clipPath) => clipPath.append("rect").attr("x", this.margin.left).attr("y", this.margin.top))
+          .call((clipPath) =>
+            clipPath
+              .append("rect")
+              .attr("x", this.margin.left)
+              .attr("y", this.margin.top)
+          )
       )
       .select("rect")
       .attr("width", this.width - this.margin.left - this.margin.right)
@@ -215,10 +228,15 @@ window.ScatterChart = class ScatterChart {
       .call(
         d3
           .axisBottom(this.x)
-          .ticks((this.width - this.margin.left - this.margin.right) / this.xAxisTickLabelSpread)
+          .ticks(
+            (this.width - this.margin.left - this.margin.right) /
+              this.xAxisTickLabelSpread
+          )
           .tickSizeOuter(0)
           .tickSizeInner(this.showXAxisTickLabels ? 6 : 0)
-          .tickFormat((d) => (this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : ""))
+          .tickFormat((d) =>
+            this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : ""
+          )
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -230,7 +248,9 @@ window.ScatterChart = class ScatterChart {
           .attr("y2", -(this.height - this.margin.top - this.margin.bottom))
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
-      .call((g) => g.select(".domain").style("display", this.showXAxisLine ? null : "none"))
+      .call((g) =>
+        g.select(".domain").style("display", this.showXAxisLine ? null : "none")
+      )
       .call((g) =>
         g
           .selectAll(".axis-title-text")
@@ -257,10 +277,15 @@ window.ScatterChart = class ScatterChart {
       .call(
         d3
           .axisLeft(this.y)
-          .ticks((this.height - this.margin.top - this.margin.bottom) / this.yAxisTickLabelSpread)
+          .ticks(
+            (this.height - this.margin.top - this.margin.bottom) /
+              this.yAxisTickLabelSpread
+          )
           .tickSizeOuter(0)
           .tickSizeInner(this.showYAxisTickLabels ? 6 : 0)
-          .tickFormat((d) => (this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""))
+          .tickFormat((d) =>
+            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""
+          )
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -272,7 +297,9 @@ window.ScatterChart = class ScatterChart {
           .attr("x2", this.width - this.margin.left - this.margin.right)
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
-      .call((g) => g.select(".domain").style("display", this.showYAxisLine ? null : "none"))
+      .call((g) =>
+        g.select(".domain").style("display", this.showYAxisLine ? null : "none")
+      )
       .call((g) =>
         g
           .selectAll(".axis-title-text")
@@ -289,7 +316,9 @@ window.ScatterChart = class ScatterChart {
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
           .attr(
             "transform",
-            `rotate(-90,${-this.margin.left + 4},${(this.margin.top + this.height - this.margin.bottom) / 2})`
+            `rotate(-90,${-this.margin.left + 4},${
+              (this.margin.top + this.height - this.margin.bottom) / 2
+            })`
           )
           .text((d) => d)
       );
@@ -333,7 +362,11 @@ window.ScatterChart = class ScatterChart {
 
     this.matrixG
       .selectAll(".matrix-rect")
-      .data(this.matrix && this.highlightedQuadrant ? [quadrantRects[this.highlightedQuadrant]] : [])
+      .data(
+        this.matrix && this.highlightedQuadrant
+          ? [quadrantRects[this.highlightedQuadrant]]
+          : []
+      )
       .join((enter) => enter.append("rect").attr("class", "matrix-rect"))
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y)
@@ -343,7 +376,9 @@ window.ScatterChart = class ScatterChart {
     this.matrixG
       .selectAll(".matrix-line--x")
       .data(this.matrix ? [this.matrix[0]] : [])
-      .join((enter) => enter.append("line").attr("class", "matrix-line matrix-line--x"))
+      .join((enter) =>
+        enter.append("line").attr("class", "matrix-line matrix-line--x")
+      )
       .attr("y1", this.margin.top)
       .attr("y2", this.height - this.margin.bottom)
       .attr("transform", (d) => `translate(${this.x(d)},0)`);
@@ -351,7 +386,9 @@ window.ScatterChart = class ScatterChart {
     this.matrixG
       .selectAll(".matrix-line--y")
       .data(this.matrix ? [this.matrix[1]] : [])
-      .join((enter) => enter.append("line").attr("class", "matrix-line matrix-line--y"))
+      .join((enter) =>
+        enter.append("line").attr("class", "matrix-line matrix-line--y")
+      )
       .attr("x1", this.margin.left)
       .attr("x2", this.width - this.margin.right)
       .attr("transform", (d) => `translate(0,${this.y(d)})`);
@@ -365,7 +402,12 @@ window.ScatterChart = class ScatterChart {
       .classed("is-clickable", !!this.onClick)
       .selectAll(".dot-circle")
       .data(this.values)
-      .join((enter) => enter.append("circle").attr("class", "dot-circle").attr("r", this.dotRadius))
+      .join((enter) =>
+        enter
+          .append("circle")
+          .attr("class", "dot-circle")
+          .attr("r", this.dotRadius)
+      )
       .attr("cx", (d) => this.x(this.accessor.x(d)))
       .attr("cy", (d) => this.y(this.accessor.y(d)));
   }
@@ -407,7 +449,9 @@ window.ScatterChart = class ScatterChart {
       d3.labeler()
         .label(labels)
         .anchor(anchors)
-        .width(this.width - this.margin.left - this.margin.right - maxLabelWidth)
+        .width(
+          this.width - this.margin.left - this.margin.right - maxLabelWidth
+        )
         .height(this.height - this.margin.top - this.margin.bottom)
         .start(1000);
 
@@ -424,13 +468,21 @@ window.ScatterChart = class ScatterChart {
     const tl = this.svg
       .selectAll(".trend-line")
       .data(this.lr ? [0] : [])
-      .join((enter) => enter.append("line").attr("class", "trend-line").attr("clip-path", `url(#${this.id}-clip)`));
+      .join((enter) =>
+        enter
+          .append("line")
+          .attr("class", "trend-line")
+          .attr("clip-path", `url(#${this.id}-clip)`)
+      );
 
     if (this.lr) {
       tl.attr("x1", this.x(this.x.domain()[0]))
         .attr("y1", this.y(this.lr.intercept))
         .attr("x2", this.x(this.x.domain()[1]))
-        .attr("y2", this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept));
+        .attr(
+          "y2",
+          this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept)
+        );
     }
   }
 
@@ -441,7 +493,11 @@ window.ScatterChart = class ScatterChart {
 
   moved(event) {
     if (!this.tooltipHtml) return;
-    const indexData = this.delaunay.find(...d3.pointer(event), this.indexData || 0);
+    const [px, py] = d3.pointer(event);
+    const indexData = this.delaunay.find(px, py, this.indexData || 0);
+    const d = this.values[indexData];
+    const distance = Math.hypot(px - this.x(d.x), py - this.y(d.y));
+    if (distance > this.hoverRadius) return this.left();
     if (this.indexData !== indexData) {
       this.indexData = indexData;
       this.dotCircle.classed("is-active", (d, i, n) => {
@@ -475,14 +531,18 @@ window.ScatterChart = class ScatterChart {
       this.tooltip.classed("is-visible", false);
     } else {
       const d = this.values[this.indexData];
-      this.tooltip.html(this.tooltipHtml(d, this.axis)).classed("is-visible", true);
+      this.tooltip
+        .html(this.tooltipHtml(d, this.axis))
+        .classed("is-visible", true);
     }
   }
 
   positionTooltip() {
     const tooltipRect = this.tooltip.node().getBoundingClientRect();
 
-    let x = this.x(this.accessor.x(this.values[this.indexData])) - tooltipRect.width / 2;
+    let x =
+      this.x(this.accessor.x(this.values[this.indexData])) -
+      tooltipRect.width / 2;
     if (x + tooltipRect.width > this.width) {
       x = this.width - tooltipRect.width;
     } else if (x < 0) {
@@ -490,7 +550,10 @@ window.ScatterChart = class ScatterChart {
     }
 
     const yOffset = this.dotRadius + 8;
-    let y = this.y(this.accessor.y(this.values[this.indexData])) - yOffset - tooltipRect.height;
+    let y =
+      this.y(this.accessor.y(this.values[this.indexData])) -
+      yOffset -
+      tooltipRect.height;
     if (y < 0) {
       y = this.y(this.accessor.y(this.values[this.indexData])) + yOffset;
     }
