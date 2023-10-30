@@ -25,7 +25,7 @@ window.ScatterChart = class ScatterChart {
       },
     },
     dotRadius = 2.5,
-    hoverRadius = 12.5,
+    hoverRadius = 24,
     labelTextFormat,
     onClick,
     tooltipHtml,
