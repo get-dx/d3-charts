@@ -6,6 +6,7 @@ This repository contains our [D3.js](https://d3js.org) chart classes:
 - [Line chart](#line-chart)
 - [Scatter time chart](#scatter-time-chart)
 - [Scatter chart](#scatter-chart)
+- [Pie chart](#pie-chart)
 
 This repository also contains examples which you can view by running [http-server](https://github.com/http-party/http-server):
 
@@ -19,7 +20,7 @@ http-server
 
 ```javascript
 const barchart = new BarChart({
-  element: document.getElementById("#mybarchart"),
+  elChart: document.getElementById("#mybarchart"),
 
   // optional - defaults to true; don't show x axis line if set to false
   showXAxisLine: true,
@@ -79,7 +80,7 @@ barchart.redraw();
 
 ```javascript
 const linechart = new LineChart({
-  element: document.getElementById("#mylinechart"),
+  elChart: document.getElementById("#mylinechart"),
 
   // optional — infer from the data unless set
   startDate: "2022-06-05",
@@ -161,7 +162,7 @@ linechart.redraw();
 
 ```javascript
 const scattertimechart = new ScatterTimeChart({
-  element: document.getElementById("#myscattertimechart"),
+  elChart: document.getElementById("#myscattertimechart"),
 
   // optional — infer from the data unless set
   startDate: "2022-06-05",
@@ -221,7 +222,7 @@ scattertimechart.redraw();
 
 ```javascript
 const scatterplot = new ScatterChart({
-  element: document.getElementById("#myscatterchart"),
+  elChart: document.getElementById("#myscatterchart"),
 
   // optional - defaults to true
   showXAxisTicks: false,
@@ -338,4 +339,42 @@ const scatterplot = new ScatterChart({
 scatterplot.axis = newAxis;
 scatterplot.values = newValues;
 scatterplot.redraw();
+```
+
+### Pie chart
+
+```javascript
+const piechart = new PieChart({
+  elChart: document.getElementById("#mypiechart"),
+
+  // optional - if set, show tooltips on hover
+  tooltipHtml(d) {
+    return `
+      <div>
+        <div class=''>${d.label}</div>
+        <div class=''>${d.value}</div>
+      </div>
+    `;
+  },
+
+  // optional - we can initialize chart without data then fetch remote data
+  values: [
+    {
+      label: "Storefront",
+      value: 10,
+      // optional - if not specified, a color will be generated
+      color: "#6366f1",
+    },
+  ],
+
+  // optional - set the minimum angle of a segment that hides the value label in degrees
+  minAngleForValueLabel: 15,
+
+  // optional - set the value label's position as a ratio of this distance over the pie radius
+  labelRadiusRatio: 0.7,
+});
+
+// we can set values after instantiation and then call redraw() to re-render
+piechart.values = newValues;
+piechart.redraw();
 ```

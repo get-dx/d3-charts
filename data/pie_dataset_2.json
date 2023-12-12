@@ -1,0 +1,72 @@
+[
+  {
+    "label": "Storefront",
+    "value": 14,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Team Activation",
+    "value": 55,
+    "color": "#6366f1"
+  },
+  {
+    "label": "Team Engagement",
+    "value": 58.5,
+    "color": "#6366f1"
+  },
+  {
+    "label": "Teams",
+    "value": 50,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Teams - WOOO",
+    "value": 32.5,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Video (Mitch Walker)",
+    "value": 63.5,
+    "color": "#6366f1"
+  },
+  {
+    "label": "Video Edit",
+    "value": 62,
+    "color": "#6366f1"
+  },
+  {
+    "label": "Video End-to-End",
+    "value": 50,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Video Review",
+    "value": 50,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Vulnerability Management",
+    "value": 0,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Web Activation",
+    "value": 50,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Web framework",
+    "value": 50,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Web Performance",
+    "value": 17,
+    "color": "#e5e5e5"
+  },
+  {
+    "label": "Web Sharing Experience",
+    "value": 43,
+    "color": "#e5e5e5"
+  }
+]

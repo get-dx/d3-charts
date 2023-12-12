@@ -6,6 +6,8 @@
 .chart .chart-svg {
   display: block;
   overflow: visible;
+  max-width: 100%;
+  height: auto;
 }
 
 .chart .is-clickable {
@@ -65,7 +67,7 @@
 
 .scatter-chart .dot-circle.is-active {
   stroke: #000;
-  stroke-width: 1px;
+  stroke-width: 1.5px;
 }
 
 .scatter-chart .dot-label-text {
@@ -164,4 +166,20 @@
 .line-chart .focus-line.is-visible {
   visibility: visible;
   opacity: 1;
+}
+
+/* Pie */
+.pie-chart .arc-path {
+  stroke: #fff;
+}
+
+.pie-chart .arc-path.is-active {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.pie-chart .arc-value-text {
+  pointer-events: none;
+  font-size: 12px;
+  fill: currentColor;
 }
