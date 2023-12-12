@@ -45,6 +45,26 @@
   <body>
     <main>
       <div class="card">
+        <div class="card-title">Pie 1</div>
+        <div class="card-body">
+          <div
+            id="pie-1-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Pie 2</div>
+        <div class="card-body">
+          <div
+            id="pie-2-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
+      <div class="card">
         <div class="card-title">Scatter 1</div>
         <div class="card-body">
           <div
@@ -150,7 +170,45 @@
     <script src="js/scatterTimeChart.js"></script>
     <script src="js/scatterChart.js"></script>
     <script src="js/barChart.js"></script>
+    <script src="js/pieChart.js"></script>
     <script>
+      // Pie charts
+      {
+        const pie1 = new PieChart({
+          elChart: document.getElementById("pie-1-chart"),
+          tooltipHtml: (d) => {
+            return `
+              <div>
+                <div class="">${d.label}</div>
+                <div class="">${d.value}</div>
+              </div>
+            `;
+          },
+        });
+
+        const pie2 = new PieChart({
+          elChart: document.getElementById("pie-2-chart"),
+          tooltipHtml: (d) => {
+            return `
+              <div>
+                <div class="">${d.label}</div>
+                <div class="">${d.value}</div>
+              </div>
+            `;
+          },
+        });
+
+        Promise.all([
+          d3.json("data/pie_dataset_1.json"),
+          d3.json("data/pie_dataset_2.json"),
+        ]).then(([dataset1, dataset2]) => {
+          pie1.values = dataset1;
+          pie1.redraw();
+
+          pie2.values = dataset2;
+          pie2.redraw();
+        });
+      }
       // Scatter charts
       {
         const scatter1 = new ScatterChart({
