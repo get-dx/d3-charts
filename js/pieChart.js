@@ -70,27 +70,26 @@ window.PieChart = class PieChart {
     this.sortedValues = this.values
       .slice()
       .sort((a, b) =>
-        d3.descending(this.accessor.value(a), this.accessor.value(b)),
+        d3.descending(this.accessor.value(a), this.accessor.value(b))
       );
 
     const nGeneratedColors = this.sortedValues.filter(
-      (d) => !this.accessor.color(d),
+      (d) => !this.accessor.color(d)
     ).length;
     const generatedColors = d3.quantize(
       (t) => d3.interpolateSpectral(t * 0.8 + 0.1),
-      Math.max(nGeneratedColors, 2),
+      Math.max(nGeneratedColors, 2)
     );
     let colors = [];
     this.sortedValues.forEach((d) => {
       colors.push(
         !!this.accessor.color(d)
           ? this.accessor.color(d)
-          : generatedColors.pop(),
+          : generatedColors.pop()
       );
     });
     this.color.domain(this.sortedValues.map(this.accessor.value)).range(colors);
 
-    console.log("tyler", this.sortedValues);
     this.arcs = this.pie(this.sortedValues);
 
     if (!this.width) return;
@@ -104,7 +103,7 @@ window.PieChart = class PieChart {
     this.radius =
       Math.min(
         this.width - this.margin.left - this.margin.right,
-        this.height - this.margin.top - this.margin.bottom,
+        this.height - this.margin.top - this.margin.bottom
       ) / 2;
 
     this.arc.outerRadius(this.radius);
@@ -112,9 +111,11 @@ window.PieChart = class PieChart {
     const labelRadius = this.radius * this.labelRadiusRatio;
     this.arcLabel.innerRadius(labelRadius).outerRadius(labelRadius);
 
+    const boundedWidth = this.width - this.margin.left - this.margin.right;
+    const boundedHeight = this.height - this.margin.top - this.margin.bottom;
     this.svg.attr("viewBox", [
-      -this.margin.left - this.radius,
-      -this.margin.top - this.radius,
+      -this.margin.left - boundedWidth / 2,
+      -this.margin.top - boundedHeight / 2,
       this.width,
       this.height,
     ]);
@@ -148,7 +149,7 @@ window.PieChart = class PieChart {
         enter
           .append("g")
           .attr("class", "arc-value-texts")
-          .attr("text-anchor", "middle"),
+          .attr("text-anchor", "middle")
       )
       .selectAll(".arc-value-text")
       .data(this.arcs, (d) => this.accessor.value(d.data))
@@ -156,13 +157,13 @@ window.PieChart = class PieChart {
         enter
           .append("text")
           .attr("class", "arc-value-text")
-          .attr("dy", "0.32em"),
+          .attr("dy", "0.32em")
       )
       .attr("transform", (d) => `translate(${this.arcLabel.centroid(d)})`)
       .text((d) =>
         d.endAngle - d.startAngle > (this.minAngleForValueLabel / 180) * Math.PI
           ? this.accessor.value(d.data)
-          : "",
+          : ""
       );
   }
 
