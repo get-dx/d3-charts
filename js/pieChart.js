@@ -88,7 +88,7 @@ window.PieChart = class PieChart {
           : generatedColors.pop()
       );
     });
-    this.color.domain(this.sortedValues.map(this.accessor.value)).range(colors);
+    this.color.domain(this.sortedValues.map(this.accessor.label)).range(colors);
 
     this.arcs = this.pie(this.sortedValues);
 
@@ -137,7 +137,7 @@ window.PieChart = class PieChart {
       .selectAll(".arc-path")
       .data(this.arcs, (d) => this.accessor.value(d.data))
       .join((enter) => enter.append("path").attr("class", "arc-path"))
-      .attr("fill", (d) => this.color(this.accessor.value(d.data)))
+      .attr("fill", (d) => this.color(this.accessor.label(d.data)))
       .attr("d", this.arc);
   }
 
