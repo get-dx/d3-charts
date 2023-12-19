@@ -1,0 +1,32 @@
+[
+  {
+    "label": 1,
+    "series": "additions",
+    "value": 131
+  },
+  {
+    "label": 15,
+    "series": "additions",
+    "value": 12
+  },
+  {
+    "label": 1875,
+    "series": "additions",
+    "value": 287
+  },
+  {
+    "label": 1,
+    "series": "deletions",
+    "value": 123
+  },
+  {
+    "label": 15,
+    "series": "deletions",
+    "value": 44
+  },
+  {
+    "label": 1875,
+    "series": "deletions",
+    "value": 323
+  }
+]

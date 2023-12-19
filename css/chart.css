@@ -89,6 +89,12 @@
   fill: #60a5fa;
 }
 
+/* Stacked Bar */
+.stacked-bar-chart .bar-rect.is-active {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
 /* Scatter Time */
 .scatter-time-chart .benchmark-line {
   stroke: #c0c9d3;
