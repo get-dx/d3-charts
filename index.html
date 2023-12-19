@@ -45,6 +45,26 @@
   <body>
     <main>
       <div class="card">
+        <div class="card-title">Stacked Bar 1</div>
+        <div class="card-body">
+          <div
+            id="stacked-bar-1-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Stacked Bar 2</div>
+        <div class="card-body">
+          <div
+            id="stacked-bar-2-chart"
+            class="chart-container"
+            style="--height: 400px"
+          ></div>
+        </div>
+      </div>
+      <div class="card">
         <div class="card-title">Pie 1</div>
         <div class="card-body">
           <div
@@ -171,7 +191,57 @@
     <script src="js/scatterChart.js"></script>
     <script src="js/barChart.js"></script>
     <script src="js/pieChart.js"></script>
+    <script src="js/stackedBarChart.js"></script>
     <script>
+      // Stacked bar charts
+      {
+        const stackedBar1 = new StackedBarChart({
+          elChart: document.getElementById("stacked-bar-1-chart"),
+          tooltipHtml(d) {
+            return `
+              <div>
+                <div class=''>${d.series}</div>
+                <div class=''>${d.label}</div>
+                <div class=''>${d.value}</div>
+              </div>
+            `;
+          },
+        });
+
+        const stackedBar2 = new StackedBarChart({
+          elChart: document.getElementById("stacked-bar-2-chart"),
+          tooltipHtml(d) {
+            return `
+              <div>
+                <div class=''>${d.series}</div>
+                <div class=''>${d.label}</div>
+                <div class=''>${d.value}</div>
+              </div>
+            `;
+          },
+          series: [
+            { key: "additions", color: "#6366f1" },
+            { key: "deletions", color: "#e5e5e5" },
+          ],
+          axis: {
+            x: {
+              label: "Something",
+            },
+            y: {
+              label: "Something Else",
+            },
+          },
+        });
+
+        d3.json("data/stacked_bar_dataset.json").then((dataset) => {
+          stackedBar1.values = dataset;
+          stackedBar1.redraw();
+
+          stackedBar2.values = dataset;
+          stackedBar2.redraw();
+        });
+      }
+
       // Pie charts
       {
         const pie1 = new PieChart({
