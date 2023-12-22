@@ -406,9 +406,9 @@ const stackedbarchart = new StackedChart({
   // optional - we can initialize chart without data then fetch remote data
   values: [
     {
-      label: 1,
+      xValue: 1,
       series: "additions"
-      value: 1313,
+      yValue: 1313,
     },
   ],
 
@@ -424,8 +424,10 @@ const stackedbarchart = new StackedChart({
   showXAxisTicks: false,
   // optional - defaults to false
   showXAxisLine: false,
-  // optional - defaults to 40. If there's not enough space, some labels will be hidden
-  xAxisTickLabelSpread: 40,
+  // optional - defaults to just the original value
+  xAxisTickLabelFormat(d) {
+    return d;
+  },
 
   // optional - defaults to true
   showYAxisTicks: false,
@@ -433,7 +435,7 @@ const stackedbarchart = new StackedChart({
   showYAxisLine: false,
   // optional - defaults to 50
   yAxisTickLabelSpread: 50,
-  // optional - defaults to just the plain value
+  // optional - defaults to just the original value
   yAxisTickLabelFormat(d) {
     return `${d}%`;
   },

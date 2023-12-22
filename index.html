@@ -201,8 +201,8 @@
             return `
               <div>
                 <div class=''>${d.series}</div>
-                <div class=''>${d.label}</div>
-                <div class=''>${d.value}</div>
+                <div class=''>${d.xValue}</div>
+                <div class=''>${d.yValue}</div>
               </div>
             `;
           },
@@ -214,8 +214,8 @@
             return `
               <div>
                 <div class=''>${d.series}</div>
-                <div class=''>${d.label}</div>
-                <div class=''>${d.value}</div>
+                <div class=''>${d.xValue}</div>
+                <div class=''>${d.yValue}</div>
               </div>
             `;
           },
@@ -231,6 +231,8 @@
               label: "Something Else",
             },
           },
+          xAxisTickLabelFormat: (d) => `A very long x label ${d}`,
+          yAxisTickLabelFormat: (d) => `${d}%`,
         });
 
         d3.json("data/stacked_bar_dataset.json").then((dataset) => {
