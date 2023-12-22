@@ -52,7 +52,7 @@ window.StackedBarChart = class StackedBarChart {
 
   setup() {
     this.margin = {
-      top: 1,
+      top: 8,
       right: 16,
     };
 
