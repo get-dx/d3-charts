@@ -8,7 +8,7 @@ window.StackedBarChart = class StackedBarChart {
     series = [],
     showXAxisTicks = false,
     showXAxisLine = true,
-    xAxisTickLabelSpread = 40,
+    xAxisTickLabelFormat = (d) => d.toLocaleString(),
     showYAxisTicks = true,
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
@@ -30,12 +30,12 @@ window.StackedBarChart = class StackedBarChart {
     this.series = series;
     this.showXAxisTicks = showXAxisTicks;
     this.showXAxisLine = showXAxisLine;
+    this.xAxisTickLabelFormat = xAxisTickLabelFormat;
     this.showYAxisTicks = showYAxisTicks;
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
     this.axis = axis;
-    this.xAxisTickLabelSpread = xAxisTickLabelSpread;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
@@ -86,8 +86,8 @@ window.StackedBarChart = class StackedBarChart {
     if (this.values.length === 0) return;
 
     this.accessor = {
-      x: (d) => d.label,
-      y: (d) => d.value,
+      x: (d) => d.xValue,
+      y: (d) => d.yValue,
       z: (d) => d.series,
     };
 
@@ -140,18 +140,14 @@ window.StackedBarChart = class StackedBarChart {
   }
 
   render() {
-    this.adjustMargin();
+    this.adjustXMargin();
     this.renderXAxis();
+    this.adjustYMargin();
     this.renderYAxis();
     this.renderBars();
   }
 
-  adjustMargin() {
-    this.margin.bottom = 4 + 20;
-    this.showXAxisLabel = this.axis.x.label !== "";
-    if (this.showXAxisLabel) {
-      this.margin.bottom += 20;
-    }
+  adjustXMargin() {
     this.margin.left = 4 + 48;
     this.showYAxisLabel = this.axis.y.label !== "";
     if (this.showYAxisLabel) {
@@ -159,26 +155,19 @@ window.StackedBarChart = class StackedBarChart {
     }
 
     this.x.range([this.margin.left, this.width - this.margin.right]);
-
-    this.y.range([this.height - this.margin.bottom, this.margin.top]);
   }
 
   renderXAxis() {
-    const tickLabelHidingFactor = Math.ceil(
-      this.xAxisTickLabelSpread / this.x.step()
-    );
-
     this.svg
       .selectAll(".axis--x")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "axis axis--x"))
-      .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .call(
         d3
           .axisBottom(this.x)
           .tickSizeOuter(0)
           .tickSizeInner(6)
-          .tickFormat((d, i) => (i % tickLabelHidingFactor === 0 ? d : ""))
+          .tickFormat((d) => this.xAxisTickLabelFormat(d))
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -196,7 +185,7 @@ window.StackedBarChart = class StackedBarChart {
       .call((g) =>
         g
           .selectAll(".axis-title-text")
-          .data(this.showXAxisLabel ? [this.axis.x.label] : [])
+          .data(this.axis.x.label !== "" ? [this.axis.x.label] : [])
           .join((enter) =>
             enter
               .append("text")
@@ -205,9 +194,54 @@ window.StackedBarChart = class StackedBarChart {
               .attr("text-anchor", "middle")
           )
           .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
-          .attr("y", this.margin.bottom - 4)
-          .text((d) => d)
+          .text("")
       );
+
+    // Rotate x tick labels if necessary
+    const availableXTickWidth =
+      this.x.bandwidth() +
+      Math.min(
+        this.x.step() * this.paddingOuter + this.margin.right,
+        (this.x.step() * this.paddingInner) / 2
+      );
+    let maxXTickWidth = availableXTickWidth;
+    this.svg
+      .select(".axis--x")
+      .selectAll(".tick text")
+      .each(function () {
+        maxXTickWidth = Math.max(
+          maxXTickWidth,
+          this.getBoundingClientRect().width
+        );
+      });
+    if (maxXTickWidth > availableXTickWidth) {
+      this.svg
+        .select(".axis--x")
+        .selectAll(".tick text")
+        .attr("text-anchor", "end")
+        .attr("dy", "0.32em")
+        .attr("transform", `rotate(-45,0,9)`);
+    }
+  }
+
+  adjustYMargin() {
+    this.margin.bottom =
+      4 +
+      Math.ceil(
+        this.svg.select(".axis--x").node().getBoundingClientRect().height
+      );
+    this.showXAxisLabel = this.axis.x.label !== "";
+    if (this.showXAxisLabel) {
+      this.margin.bottom += 20;
+    }
+    this.svg
+      .select(".axis--x")
+      .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
+      .selectAll(".axis-title-text")
+      .attr("y", this.margin.bottom - 4)
+      .text((d) => d);
+
+    this.y.range([this.height - this.margin.bottom, this.margin.top]);
   }
 
   renderYAxis() {
@@ -243,7 +277,7 @@ window.StackedBarChart = class StackedBarChart {
       .call((g) =>
         g
           .selectAll(".axis-title-text")
-          .data(this.showYAxisLabel ? [this.axis.y.label] : [])
+          .data(this.axis.y.label !== "" ? [this.axis.y.label] : [])
           .join((enter) =>
             enter
               .append("text")
