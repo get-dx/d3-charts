@@ -184,8 +184,14 @@
   stroke-width: 1.5px;
 }
 
+.pie-chart .arc-label-text,
 .pie-chart .arc-value-text {
   pointer-events: none;
   font-size: 12px;
   fill: currentColor;
+}
+
+.pie-chart .arc-label-polyline {
+  stroke-width: 1px;
+  stroke: #aaa;
 }
