@@ -4,13 +4,17 @@ window.PieChart = class PieChart {
     tooltipHtml,
     values = [],
     minAngleForValueLabel = 15,
-    labelRadiusRatio = 0.7,
+    labelRadiusRatio = 0.95,
+    pieRadiusRatio = 0.9,
+    valueRadiusRatio = 0.7,
   }) {
     this.elChart = elChart;
     this.tooltipHtml = tooltipHtml;
     this.values = values;
     this.minAngleForValueLabel = minAngleForValueLabel;
     this.labelRadiusRatio = labelRadiusRatio;
+    this.pieRadiusRatio = pieRadiusRatio;
+    this.valueRadiusRatio = valueRadiusRatio;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
@@ -27,10 +31,10 @@ window.PieChart = class PieChart {
 
   setup() {
     this.margin = {
-      top: 3,
-      right: 3,
-      bottom: 3,
-      left: 3,
+      top: 8,
+      right: 8,
+      bottom: 8,
+      left: 8,
     };
 
     this.color = d3.scaleOrdinal();
@@ -38,8 +42,9 @@ window.PieChart = class PieChart {
     this.pie = d3.pie();
 
     this.arc = d3.arc().innerRadius(0);
-
+    this.arcValue = d3.arc();
     this.arcLabel = d3.arc();
+    this.arcLinkStart = d3.arc();
 
     this.tooltipData = null;
   }
@@ -91,6 +96,7 @@ window.PieChart = class PieChart {
     this.color.domain(this.sortedValues.map(this.accessor.value)).range(colors);
 
     this.arcs = this.pie(this.sortedValues);
+    this.arcs.forEach((d) => (d.midAngle = (d.startAngle + d.endAngle) / 2));
 
     if (!this.width) return;
     this.render();
@@ -106,13 +112,20 @@ window.PieChart = class PieChart {
         this.height - this.margin.top - this.margin.bottom
       ) / 2;
 
-    this.arc.outerRadius(this.radius);
-
-    const labelRadius = this.radius * this.labelRadiusRatio;
-    this.arcLabel.innerRadius(labelRadius).outerRadius(labelRadius);
+    this.arc.outerRadius(this.radius * this.pieRadiusRatio);
+    this.arcLabel
+      .innerRadius(this.radius * this.labelRadiusRatio)
+      .outerRadius(this.radius * this.labelRadiusRatio);
+    this.arcValue
+      .innerRadius(this.radius * this.valueRadiusRatio)
+      .outerRadius(this.radius * this.valueRadiusRatio);
+    this.arcLinkStart
+      .innerRadius(this.radius * this.pieRadiusRatio)
+      .outerRadius(this.radius * this.pieRadiusRatio);
 
     this.boundedWidth = this.width - this.margin.left - this.margin.right;
     this.boundedHeight = this.height - this.margin.top - this.margin.bottom;
+
     this.svg.attr("viewBox", [
       -this.margin.left - this.boundedWidth / 2,
       -this.margin.top - this.boundedHeight / 2,
@@ -126,6 +139,7 @@ window.PieChart = class PieChart {
 
   render() {
     this.renderArcs();
+    this.renderValues();
     this.renderLabels();
   }
 
@@ -141,7 +155,7 @@ window.PieChart = class PieChart {
       .attr("d", this.arc);
   }
 
-  renderLabels() {
+  renderValues() {
     this.svg
       .selectAll(".arc-value-texts")
       .data([0])
@@ -152,19 +166,100 @@ window.PieChart = class PieChart {
           .attr("text-anchor", "middle")
       )
       .selectAll(".arc-value-text")
-      .data(this.arcs, (d) => this.accessor.value(d.data))
+      .data(this.arcs, (d) => this.accessor.label(d.data))
       .join((enter) =>
         enter
           .append("text")
           .attr("class", "arc-value-text")
           .attr("dy", "0.32em")
       )
-      .attr("transform", (d) => `translate(${this.arcLabel.centroid(d)})`)
+      .attr("transform", (d) => `translate(${this.arcValue.centroid(d)})`)
       .text((d) =>
         d.endAngle - d.startAngle > (this.minAngleForValueLabel / 180) * Math.PI
           ? this.accessor.value(d.data)
           : ""
       );
+  }
+
+  renderLabels() {
+    const gArcLabels = this.svg
+      .selectAll(".arc-labels")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "arc-labels"))
+      .style("display", null);
+
+    const gArcLabel = gArcLabels
+      .selectAll(".arc-label")
+      .data(this.arcs, (d) => this.accessor.label(d.data))
+      .join((enter) =>
+        enter
+          .append("g")
+          .attr("class", "arc-label")
+          .call((g) =>
+            g
+              .append("polyline")
+              .attr("class", "arc-label-polyline")
+              .attr("fill", "none")
+          )
+          .call((g) =>
+            g
+              .append("text")
+              .attr("class", "arc-label-text")
+              .attr("dy", "0.32em")
+          )
+      )
+      .style("display", null)
+      .call((g) =>
+        g.select(".arc-label-polyline").attr("points", (d) => {
+          const pos = this.arcLabel.centroid(d);
+          pos[0] = this.radius * (d.midAngle < Math.PI ? 1 : -1);
+          return [
+            this.arcLinkStart.centroid(d),
+            this.arcLabel.centroid(d),
+            pos,
+          ];
+        })
+      )
+      .call((g) =>
+        g
+          .select(".arc-label-text")
+          .attr("transform", (d) => {
+            const pos = this.arcLabel.centroid(d);
+            pos[0] = this.radius * (d.midAngle < Math.PI ? 1 : -1);
+            return `translate(${pos})`;
+          })
+          .attr("text-anchor", (d) => (d.midAngle < Math.PI ? "start" : "end"))
+          .text((d) => this.accessor.label(d.data))
+      );
+
+    // Hide all labels when the group is beyond the svg container
+    const gArcLabelsBBox = gArcLabels.node().getBBox();
+    gArcLabels.style(
+      "display",
+      gArcLabelsBBox.width > this.width || gArcLabelsBBox.height > this.height
+        ? "none"
+        : null
+    );
+
+    // Hide individual labels when it's overlapping with previous labels
+    const collide = (box1, box2) => {
+      if (box1.x > box2.x + box2.width || box2.x > box1.x + box1.width)
+        return false;
+      if (box1.y > box2.y + box2.height || box2.y > box1.y + box1.height)
+        return false;
+      return true;
+    };
+
+    const gArcLabelBBoxes = [];
+    gArcLabel.each((d, i, ns) => {
+      const n = ns[i];
+      const gArcLabelBBox = n.getBBox();
+      const overlap =
+        gArcLabelBBoxes.length > 0 &&
+        collide(gArcLabelBBoxes[gArcLabelBBoxes.length - 1], gArcLabelBBox);
+      if (!overlap) gArcLabelBBoxes.push(gArcLabelBBox);
+      d3.select(n).style("display", overlap ? "none" : null);
+    });
   }
 
   entered(event) {
@@ -206,7 +301,7 @@ window.PieChart = class PieChart {
   positionTooltip() {
     const tooltipRect = this.tooltip.node().getBoundingClientRect();
 
-    const centroid = this.arcLabel.centroid(this.tooltipData);
+    const centroid = this.arcValue.centroid(this.tooltipData);
     centroid[0] += this.margin.left + this.boundedWidth / 2;
     centroid[1] += this.margin.top + this.boundedHeight / 2;
 

@@ -371,8 +371,14 @@ const piechart = new PieChart({
   // optional - set the minimum angle of a segment that hides the value label in degrees
   minAngleForValueLabel: 15,
 
-  // optional - set the value label's position as a ratio of this distance over the pie radius
-  labelRadiusRatio: 0.7,
+  // optional - set the label's position as a ratio of the max radius
+  labelRadiusRatio: 0.95,
+
+  // optional - set the pie radius as a ratio of the max radius
+  pieRadiusRatio: 0.9,
+
+  // optional - set the value label's position as a ratio of the max radius
+  valueRadiusRatio: 0.7,
 });
 
 // we can set values after instantiation and then call redraw() to re-render
