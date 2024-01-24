@@ -225,7 +225,7 @@ window.PieChart = class PieChart {
           .select(".arc-label-text")
           .attr("transform", (d) => {
             const pos = this.arcLabel.centroid(d);
-            pos[0] = this.radius * (d.midAngle < Math.PI ? 1 : -1);
+            pos[0] = this.radius * (d.midAngle < Math.PI ? 1.03 : -1.03);
             return `translate(${pos})`;
           })
           .attr("text-anchor", (d) => (d.midAngle < Math.PI ? "start" : "end"))
