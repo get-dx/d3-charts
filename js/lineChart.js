@@ -15,6 +15,7 @@ window.LineChart = class LineChart {
     tooltipHtml,
     onClick,
   }) {
+    this.finishedRendering = false;
     this.elChart = elChart;
     this.values = values;
     this.startDate = startDate;
@@ -207,6 +208,7 @@ window.LineChart = class LineChart {
     this.renderBenchmarkDots();
     this.renderLine();
     this.renderDots();
+    this.finishedRendering = true;
   }
 
   renderClip() {
@@ -376,11 +378,13 @@ window.LineChart = class LineChart {
   }
 
   entered() {
+    if (!this.finishedRendering) return;
     if (!this.tooltipHtml) return;
     this.focusLine.classed("is-visible", true);
   }
 
   moved(event) {
+    if (!this.finishedRendering) return;
     if (!this.tooltipHtml) return;
     this.pointer = d3.pointer(event, this.svg.node());
     const xDate = this.x.invert(this.pointer[0]);
@@ -407,6 +411,7 @@ window.LineChart = class LineChart {
   }
 
   left() {
+    if (!this.finishedRendering) return;
     if (!this.tooltipHtml) return;
     this.indexDate = null;
     this.focusLine.classed("is-visible", false);
