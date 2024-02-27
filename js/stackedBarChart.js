@@ -103,26 +103,21 @@ window.StackedBarChart = class StackedBarChart {
           ? this.series.map((d) => d.color)
           : d3.quantize(
               (t) => d3.interpolateSpectral(t * 0.8 + 0.1),
-              Math.max(this.seriesKeys.size, 2),
-            ),
+              Math.max(this.seriesKeys.size, 2)
+            )
       );
 
     this.stacked = d3
       .stack()
       .keys(this.seriesKeys)
       .value(([, D], key) => this.accessor.y(D.get(key)))(
-      d3.index(this.values, this.accessor.x, this.accessor.z),
+      d3.index(this.values, this.accessor.x, this.accessor.z)
     );
 
     this.x.domain(d3.union(this.values.map(this.accessor.x)));
 
-    const padding = 0.05;
     const maxY = d3.max(this.stacked, (d) => d3.max(d, (d) => d[1]));
-    this.y.domain([
-      0,
-      this.axis.y.max === undefined ? maxY + maxY * padding : this.axis.y.max,
-    ]);
-    if (this.axis.y.max === undefined) this.y.nice();
+    this.y.domain([0, this.axis.y.max === undefined ? maxY : this.axis.y.max]);
 
     if (!this.width) return;
     this.render();
@@ -167,7 +162,7 @@ window.StackedBarChart = class StackedBarChart {
           .axisBottom(this.x)
           .tickSizeOuter(0)
           .tickSizeInner(6)
-          .tickFormat((d, i) => this.xAxisTickLabelFormat(d, i)),
+          .tickFormat((d, i) => this.xAxisTickLabelFormat(d, i))
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -176,13 +171,11 @@ window.StackedBarChart = class StackedBarChart {
           .selectAll(".grid-line")
           .data(this.showXAxisTicks ? [0] : [])
           .join((enter) => enter.append("line").attr("class", "grid-line"))
-          .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
+          .attr("y2", -(this.height - this.margin.top - this.margin.bottom))
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
       .call((g) =>
-        g
-          .select(".domain")
-          .style("display", this.showXAxisLine ? null : "none"),
+        g.select(".domain").style("display", this.showXAxisLine ? null : "none")
       )
       .call((g) =>
         g
@@ -193,10 +186,10 @@ window.StackedBarChart = class StackedBarChart {
               .append("text")
               .attr("class", "axis-title-text")
               .attr("fill", "currentColor")
-              .attr("text-anchor", "middle"),
+              .attr("text-anchor", "middle")
           )
           .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
-          .text(""),
+          .text("")
       );
 
     // Rotate x tick labels if necessary
@@ -204,7 +197,7 @@ window.StackedBarChart = class StackedBarChart {
       this.x.bandwidth() +
       Math.min(
         this.x.step() * this.paddingOuter + this.margin.right,
-        (this.x.step() * this.paddingInner) / 2,
+        (this.x.step() * this.paddingInner) / 2
       );
     let maxXTickWidth = availableXTickWidth;
     this.svg
@@ -213,7 +206,7 @@ window.StackedBarChart = class StackedBarChart {
       .each(function () {
         maxXTickWidth = Math.max(
           maxXTickWidth,
-          this.getBoundingClientRect().width,
+          this.getBoundingClientRect().width
         );
       });
     if (maxXTickWidth > availableXTickWidth) {
@@ -230,7 +223,7 @@ window.StackedBarChart = class StackedBarChart {
     this.margin.bottom =
       4 +
       Math.ceil(
-        this.svg.select(".axis--x").node().getBoundingClientRect().height,
+        this.svg.select(".axis--x").node().getBoundingClientRect().height
       );
     this.showXAxisLabel = this.axis.x.label !== "";
     if (this.showXAxisLabel) {
@@ -257,11 +250,11 @@ window.StackedBarChart = class StackedBarChart {
           .axisLeft(this.y)
           .ticks(
             (this.height - this.margin.top - this.margin.bottom) /
-              this.yAxisTickLabelSpread,
+              this.yAxisTickLabelSpread
           )
           .tickSizeOuter(0)
           .tickSizeInner(6)
-          .tickFormat((d) => this.yAxisTickLabelFormat(d)),
+          .tickFormat((d) => this.yAxisTickLabelFormat(d))
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -270,13 +263,11 @@ window.StackedBarChart = class StackedBarChart {
           .selectAll(".grid-line")
           .data(this.showYAxisTicks ? [0] : [])
           .join((enter) => enter.append("line").attr("class", "grid-line"))
-          .attr("x2", this.width - this.margin.left - this.margin.right),
+          .attr("x2", this.width - this.margin.left - this.margin.right)
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
       .call((g) =>
-        g
-          .select(".domain")
-          .style("display", this.showYAxisLine ? null : "none"),
+        g.select(".domain").style("display", this.showYAxisLine ? null : "none")
       )
       .call((g) =>
         g
@@ -288,7 +279,7 @@ window.StackedBarChart = class StackedBarChart {
               .attr("class", "axis-title-text")
               .attr("fill", "currentColor")
               .attr("text-anchor", "middle")
-              .attr("dy", "0.71em"),
+              .attr("dy", "0.71em")
           )
           .attr("x", -this.margin.left + 4)
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
@@ -296,9 +287,9 @@ window.StackedBarChart = class StackedBarChart {
             "transform",
             `rotate(-90,${-this.margin.left + 4},${
               (this.margin.top + this.height - this.margin.bottom) / 2
-            })`,
+            })`
           )
-          .text((d) => d),
+          .text((d) => d)
       );
   }
 

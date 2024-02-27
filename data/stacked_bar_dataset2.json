@@ -1,0 +1,242 @@
+[
+  {
+    "xValue": "2023-03-01 00:00:00 -0700",
+    "yValue": 89.069374333943989575,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-03-01 00:00:00 -0700",
+    "yValue": 6.199130244888652282,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-03-01 00:00:00 -0700",
+    "yValue": 4.129337441045045895,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-03-01 00:00:00 -0700",
+    "yValue": 0.602157980122312248,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-04-01 00:00:00 -0600",
+    "yValue": 88.433150645142838597,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-04-01 00:00:00 -0600",
+    "yValue": 8.053970608716219003,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-04-01 00:00:00 -0600",
+    "yValue": 3.165115705889089561,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-04-01 00:00:00 -0600",
+    "yValue": 0.347763040251852838,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-05-01 00:00:00 -0600",
+    "yValue": 79.01713344417781396,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-05-01 00:00:00 -0600",
+    "yValue": 13.232942585896602477,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-05-01 00:00:00 -0600",
+    "yValue": 6.494190193456778949,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-05-01 00:00:00 -0600",
+    "yValue": 1.255733776468804614,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-06-01 00:00:00 -0600",
+    "yValue": 89.251777837458775059,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-06-01 00:00:00 -0600",
+    "yValue": 5.973453649715389841,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-06-01 00:00:00 -0600",
+    "yValue": 4.189111996913204806,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-06-01 00:00:00 -0600",
+    "yValue": 0.585656515912630293,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-07-01 00:00:00 -0600",
+    "yValue": 88.423712930287335043,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-07-01 00:00:00 -0600",
+    "yValue": 7.347327073329805495,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-07-01 00:00:00 -0600",
+    "yValue": 3.39281615923411249,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-07-01 00:00:00 -0600",
+    "yValue": 0.836143837148746972,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-08-01 00:00:00 -0600",
+    "yValue": 88.144641270509129596,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-08-01 00:00:00 -0600",
+    "yValue": 6.502191386303524402,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-08-01 00:00:00 -0600",
+    "yValue": 4.513561305495339029,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-08-01 00:00:00 -0600",
+    "yValue": 0.839606037692006972,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-09-01 00:00:00 -0600",
+    "yValue": 88.246111808531084224,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-09-01 00:00:00 -0600",
+    "yValue": 6.725890068832371737,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-09-01 00:00:00 -0600",
+    "yValue": 4.403319460072474127,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-09-01 00:00:00 -0600",
+    "yValue": 0.624678662564069911,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-10-01 00:00:00 -0600",
+    "yValue": 79.405204018605110078,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-10-01 00:00:00 -0600",
+    "yValue": 12.386033020121441858,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-10-01 00:00:00 -0600",
+    "yValue": 6.769185684374440499,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-10-01 00:00:00 -0600",
+    "yValue": 1.439577276899007564,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-11-01 00:00:00 -0600",
+    "yValue": 79.730631165523679516,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-11-01 00:00:00 -0600",
+    "yValue": 13.170344082254158599,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-11-01 00:00:00 -0600",
+    "yValue": 5.814470008839196986,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-11-01 00:00:00 -0600",
+    "yValue": 1.284554743382964899,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2023-12-01 00:00:00 -0700",
+    "yValue": 78.768639939582435902,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2023-12-01 00:00:00 -0700",
+    "yValue": 11.562909368893869495,
+    "series": "Features"
+  },
+  {
+    "xValue": "2023-12-01 00:00:00 -0700",
+    "yValue": 8.215126240055003844,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2023-12-01 00:00:00 -0700",
+    "yValue": 1.453324451468690759,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2024-01-01 00:00:00 -0700",
+    "yValue": 75.947800305652463607,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2024-01-01 00:00:00 -0700",
+    "yValue": 9.685277463040262702,
+    "series": "Features"
+  },
+  {
+    "xValue": "2024-01-01 00:00:00 -0700",
+    "yValue": 11.853995275185578319,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2024-01-01 00:00:00 -0700",
+    "yValue": 2.512926956121695372,
+    "series": "Customer & Production Support"
+  },
+  {
+    "xValue": "2024-02-01 00:00:00 -0700",
+    "yValue": 60.373395321869166889,
+    "series": "Uncategorized"
+  },
+  {
+    "xValue": "2024-02-01 00:00:00 -0700",
+    "yValue": 9.238513909880344251,
+    "series": "Features"
+  },
+  {
+    "xValue": "2024-02-01 00:00:00 -0700",
+    "yValue": 25.282615965714636673,
+    "series": "Sustaining Engineering"
+  },
+  {
+    "xValue": "2024-02-01 00:00:00 -0700",
+    "yValue": 5.105474802535852187,
+    "series": "Customer & Production Support"
+  }
+]

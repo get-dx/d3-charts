@@ -1,0 +1,1202 @@
+[
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "0.335678795620972985",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "0.103405672510323146",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "0.712524396533727165",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "3.30576305253312973",
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "3.251022256589553968",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "9.886088372080690839",
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "1.274727994823454743",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "9.508938728678157581",
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "0.01268158485747003",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": "1.042895322454755136",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-03-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "1.965139906193047161",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "0.045961414625402268",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "4.060413062026841606",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "9.187757176768473923",
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "1.288384473265458952",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "6.512618229571422094",
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "0.417707532054381653",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "8.532103086850886538",
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "2.098280913485495323",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": "2.781231165024516767",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-04-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "1.999588796200242305",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "0.255350337224863808",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "5.075031361007077228",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "11.119092085763160181",
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "0.577477429790006203",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "5.835555132061728272",
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "1.381873136491233958",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "5.76173957995416934",
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "0.882776600062237997",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "2.485707052656379368",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-05-01 00:00:00 -0600",
+        "yValue": "0.382629417599011416",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "5.293574895089044137",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "0.417537768905296801",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "0.076829473724596768",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "6.717241096524822794",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "4.582077203058109965",
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "0.576874256948981073",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "2.825793277274606595",
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "5.495358069582250669",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "1.651118079448147483",
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": "5.574192446845976235",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-06-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "2.32406253981202725",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "13.914365136139111413",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "3.861189042170440057",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "0.656076267152316471",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "3.525953986773166121",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "3.236436483033871945",
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "1.066785060419789886",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "3.254680738809344713",
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "3.725934865208296998",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "1.322791086244027675",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "9.111182749285767416",
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "1.696755093081944553",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": "0.857442287722762025",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-07-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "11.374307755253788846",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "10.488298499233236144",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "1.710443565300809549",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "1.907381907702003351",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "0.558945630541087326",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "1.488446787754245656",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "2.558953784556557515",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "5.407646694191972277",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "2.157614490885006851",
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "1.23018351016147006",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-08-01 00:00:00 -0600",
+        "yValue": "2.690651916569326703",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "6.322423998684916446",
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "7.233516302663713936",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "7.54096513585648383",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "4.499764311892821344",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "5.863725174544508298",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "3.296831352132080301",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "0.925952470445332093",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "4.093812170327278406",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "7.204761101231104862",
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "3.649884350293348248",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-09-01 00:00:00 -0600",
+        "yValue": "1.779656204096698717",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "3.750633860025373845",
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "6.060445429534302635",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "5.66393453323770277",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "19.480992667346722798",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "9.977529410140503703",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "3.141653781391934882",
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "1.1654879168019806",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "0.59456402573130689",
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "3.116827511044931413",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "0.51719795022841032",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "0.39053967905015095",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "2.269385362729789485",
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "0.399985222851360435",
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "1.962125171082243188",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "4.294007122264336629",
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-10-01 00:00:00 -0600",
+        "yValue": "4.560955967107436439",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "6.853396675217237859",
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "3.242983377704854159",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "2.060807059918856486",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "8.09490172941655762",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "5.415072868673431851",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "1.234537013250647367",
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "1.687492359493294708",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "3.0292993826264358",
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "7.350395269788125408",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "1.090055610242995292",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "9.200962666685613346",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "0.481664079617393074",
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "3.291330095593755337",
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "6.352316399299936786",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": 0,
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-11-01 00:00:00 -0600",
+        "yValue": "3.066789372876859362",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "9.0256384241404113",
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "0.496132718694626368",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "0.832867979764953168",
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "4.132915119616434199",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "6.581160005189354012",
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "9.148562320375221629",
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "8.086546159765358787",
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "3.441918723942569861",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "2.986665849704675752",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "0.102983621020918483",
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "12.289334064020704192",
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "6.54714645084562541",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2023-12-01 00:00:00 -0700",
+        "yValue": "3.399985932086207231",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "2.372626598121660263",
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "3.478541350669891653",
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "12.532016014701979776",
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "0.420817820745842935",
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "5.561889032549009912",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "6.604288915002460651",
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "19.036054927982614933",
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "4.695144710227289895",
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "4.142199567171605398",
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "4.425793706809169634",
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "0.098306143313108113",
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2024-01-01 00:00:00 -0700",
+        "yValue": "3.134167688578762665",
+        "series": "SMS Support & Improved Consumer Authentication"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": "17.565449654321845983",
+        "series": "Enhance SP offering with charitable donations. "
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "OBC + WD Roadmap Merge"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": "31.023725646833143301",
+        "series": "[FY24Q2] Purchase Experience Platform Improvements"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Magento - UAT fixes and Optimization"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Updates/Improvements in cypress framework"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": "3.862912987365778421",
+        "series": "FY24Q1 IAM Platform Feature Enhancement"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": "16.4730433789149325",
+        "series": "Manage Bundled SKUs & Components on Orders, Contracts, & Claims"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "R3: Tenancy Authorization Framework (Service Upgrades + Multi-Tenant Support)"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "R1: OKTA Platform Authentication"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Technical Discovery"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "2023 Embedded DE Work"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Support PP+SP Sales in Canada"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "AMP Improvements 2023"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "AMP - Claim Validation"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Load and Performance Testing"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Consumer Profile Service"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Fulfillment Optionality - Replacements"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "R4: Integration & API Credential Management"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "Category Based Offers v2"
+    },
+    {
+        "xValue": "2024-02-01 00:00:00 -0700",
+        "yValue": 0,
+        "series": "SMS Support & Improved Consumer Authentication"
+    }
+]

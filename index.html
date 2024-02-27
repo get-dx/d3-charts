@@ -219,10 +219,10 @@
               </div>
             `;
           },
-          series: [
-            { key: "additions", color: "#6366f1" },
-            { key: "deletions", color: "#e5e5e5" },
-          ],
+          // series: [
+          //   { key: "additions", color: "#6366f1" },
+          //   { key: "deletions", color: "#e5e5e5" },
+          // ],
           axis: {
             x: {
               label: "Something",
@@ -235,13 +235,24 @@
           yAxisTickLabelFormat: (d) => `${d}%`,
         });
 
-        d3.json("data/stacked_bar_dataset.json").then((dataset) => {
-          stackedBar1.values = dataset;
+        Promise.all([
+          d3.json("data/stacked_bar_dataset1.json"),
+          d3.json("data/stacked_bar_dataset2.json"),
+        ]).then(([dataset1, dataset2]) => {
+          stackedBar1.values = dataset1;
           stackedBar1.redraw();
 
-          stackedBar2.values = dataset;
+          stackedBar2.values = dataset2;
           stackedBar2.redraw();
         });
+
+        // d3.json("data/stacked_bar_dataset.json").then((dataset) => {
+        //   stackedBar1.values = dataset;
+        //   stackedBar1.redraw();
+
+        //   stackedBar2.values = dataset;
+        //   stackedBar2.redraw();
+        // });
       }
 
       // Pie charts
