@@ -65,7 +65,7 @@ window.PieChart = class PieChart {
     if (this.values.length === 0) return;
 
     this.accessor = {
-      value: (d) => d.value,
+      value: (d) => +d.value || 0,
       label: (d) => d.label,
       color: (d) => d.color,
     };
