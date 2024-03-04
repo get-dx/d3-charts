@@ -84,6 +84,16 @@
           ></div>
         </div>
       </div>
+      <div class="card" style="grid-column: span 2">
+        <div class="card-title">Pie 3</div>
+        <div class="card-body">
+          <div
+            id="pie-3-chart"
+            class="chart-container"
+            style="--height: 314px"
+          ></div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-title">Scatter 1</div>
         <div class="card-body">
@@ -270,15 +280,31 @@
           },
         });
 
+        const pie3 = new PieChart({
+          elChart: document.getElementById("pie-3-chart"),
+          tooltipHtml: (d) => {
+            return `
+              <div>
+                <div class="">${d.label}</div>
+                <div class="">${d.value}</div>
+              </div>
+            `;
+          },
+        });
+
         Promise.all([
           d3.json("data/pie_dataset_1.json"),
           d3.json("data/pie_dataset_2.json"),
-        ]).then(([dataset1, dataset2]) => {
+          d3.json("data/pie_dataset_3.json"),
+        ]).then(([dataset1, dataset2, dataset3]) => {
           pie1.values = dataset1;
           pie1.redraw();
 
           pie2.values = dataset2;
           pie2.redraw();
+
+          pie3.values = dataset3;
+          pie3.redraw();
         });
       }
       // Scatter charts
