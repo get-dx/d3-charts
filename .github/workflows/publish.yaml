@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          corepack-enable: true
       - run: yarn
       - run: yarn build
 
@@ -24,6 +25,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          corepack-enable: true
           registry-url: https://npm.pkg.github.com/
       - run: yarn publish
         env:
