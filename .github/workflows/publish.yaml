@@ -11,6 +11,7 @@ jobs:
         with:
           node-version: 20
           corepack-enable: true
+          cache: "yarn"
       - run: yarn
       - run: yarn build
 
@@ -27,6 +28,7 @@ jobs:
           node-version: 20
           corepack-enable: true
           registry-url: https://npm.pkg.github.com/
+          cache: "yarn"
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

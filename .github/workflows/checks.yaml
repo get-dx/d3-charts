@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           corepack-enable: true
+          cache: "yarn"
       - run: yarn
       - run: yarn lint
       - run: yarn format:check
