@@ -1,0 +1,28 @@
+{
+  "name": "@get-dx/d3-charts",
+  "version": "1.0.0",
+  "description": "DX d3 charts",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/get-dx/d3-charts.git"
+  },
+  "author": "DX <developers@getdx.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/get-dx/d3-charts/issues"
+  },
+  "homepage": "https://github.com/get-dx/d3-charts#readme",
+  "peerDependencies": {
+    "d3": "7.x"
+  },
+  "devDependencies": {
+    "d3": "^7.8.5",
+    "prettier": "^3.2.5",
+    "rollup": "^4.12.0"
+  }
+}

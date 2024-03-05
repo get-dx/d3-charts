@@ -1,4 +1,6 @@
-window.LineChart = class LineChart {
+import * as d3 from "d3";
+
+export class LineChart {
   constructor({
     elChart,
     values = [],
@@ -220,7 +222,7 @@ window.LineChart = class LineChart {
           .append("clipPath")
           .attr("class", "clip")
           .attr("id", `${this.id}-clip`)
-          .call((clipPath) => clipPath.append("rect"))
+          .call((clipPath) => clipPath.append("rect")),
       );
 
     if (this.clipData.length > 0)
@@ -238,7 +240,7 @@ window.LineChart = class LineChart {
           .append("clipPath")
           .attr("class", "benchmark-clip")
           .attr("id", `${this.id}-benchmark-clip`)
-          .call((clipPath) => clipPath.append("rect"))
+          .call((clipPath) => clipPath.append("rect")),
       );
 
     if (this.benchmarkClipData.length > 0)
@@ -259,7 +261,7 @@ window.LineChart = class LineChart {
         d3
           .axisBottom(this.x)
           .tickValues(this.dates)
-          .tickSize(-this.height + this.margin.top + this.margin.bottom)
+          .tickSize(-this.height + this.margin.top + this.margin.bottom),
       )
       .call((g) => g.select(".domain").remove())
       .call((g) => g.selectAll(".tick text").remove());
@@ -273,7 +275,7 @@ window.LineChart = class LineChart {
         enter
           .append("line")
           .attr("class", "zero-line")
-          .attr("x1", this.margin.left)
+          .attr("x1", this.margin.left),
       )
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .attr("x2", this.width - this.margin.right);
@@ -287,7 +289,7 @@ window.LineChart = class LineChart {
         enter
           .append("path")
           .attr("class", "benchmark-background-line")
-          .attr("fill", "none")
+          .attr("fill", "none"),
       )
       .attr("d", this.line);
 
@@ -299,7 +301,7 @@ window.LineChart = class LineChart {
           .append("path")
           .attr("class", "benchmark-foreground-line")
           .attr("clip-path", `url(#${this.id}-benchmark-clip)`)
-          .attr("fill", "none")
+          .attr("fill", "none"),
       )
       .attr("d", this.line);
   }
@@ -312,17 +314,17 @@ window.LineChart = class LineChart {
       .selectAll(".benchmark-dot-circle")
       .data(this.foregroundBenchmarks)
       .join((enter) =>
-        enter.append("circle").attr("class", "benchmark-dot-circle")
+        enter.append("circle").attr("class", "benchmark-dot-circle"),
       )
       .classed(
         "is-visible",
-        this.foregroundBenchmarks.length === 1 || this.showBenchmarkPoints
+        this.foregroundBenchmarks.length === 1 || this.showBenchmarkPoints,
       )
       .attr(
         "r",
         this.foregroundBenchmarks.length === 1 || this.showBenchmarkPoints
           ? this.dotRadius
-          : 1
+          : 1,
       )
       .attr("cx", (d) => this.x(d.x))
       .attr("cy", (d) => this.y(d.y));
@@ -336,7 +338,7 @@ window.LineChart = class LineChart {
         enter
           .append("path")
           .attr("class", "background-line")
-          .attr("fill", "none")
+          .attr("fill", "none"),
       )
       .attr("d", this.line);
 
@@ -352,7 +354,7 @@ window.LineChart = class LineChart {
           .append("path")
           .attr("class", "foreground-line")
           .attr("fill", "none")
-          .attr("clip-path", `url(#${this.id}-clip)`)
+          .attr("clip-path", `url(#${this.id}-clip)`),
       )
       .attr("d", this.line);
   }
@@ -367,11 +369,13 @@ window.LineChart = class LineChart {
       .join((enter) => enter.append("circle").attr("class", "dot-circle"))
       .classed(
         "is-visible",
-        this.foregroundData.length === 1 || this.showPoints
+        this.foregroundData.length === 1 || this.showPoints,
       )
       .attr(
         "r",
-        this.foregroundData.length === 1 || this.showPoints ? this.dotRadius : 1
+        this.foregroundData.length === 1 || this.showPoints
+          ? this.dotRadius
+          : 1,
       )
       .attr("cx", (d) => this.x(d.x))
       .attr("cy", (d) => this.y(d.y));
@@ -395,15 +399,15 @@ window.LineChart = class LineChart {
         .classed("has-ticks", this.showXAxisTicks)
         .attr(
           "transform",
-          `translate(${this.x(this.dates[this.indexDate])},0)`
+          `translate(${this.x(this.dates[this.indexDate])},0)`,
         );
       this.dotCircle.classed(
         "is-active",
-        (d) => d.x - this.dates[this.indexDate] === 0
+        (d) => d.x - this.dates[this.indexDate] === 0,
       );
       this.benchmarkDotCircle.classed(
         "is-active",
-        (d) => d.x - this.dates[this.indexDate] === 0
+        (d) => d.x - this.dates[this.indexDate] === 0,
       );
       this.updateTooltip();
     }
@@ -425,7 +429,7 @@ window.LineChart = class LineChart {
     const date = this.dates[this.indexDate];
     const d = this.values.find((e) => this.accessor.x(e) - date === 0);
     const cd = this.comparisonValues.find(
-      (e) => this.accessor.x(e) - date === 0
+      (e) => this.accessor.x(e) - date === 0,
     );
     this.onClick(d, cd);
   }
@@ -437,7 +441,7 @@ window.LineChart = class LineChart {
       const date = this.dates[this.indexDate];
       const d = this.values.find((e) => this.accessor.x(e) - date === 0);
       const cd = this.comparisonValues.find(
-        (e) => this.accessor.x(e) - date === 0
+        (e) => this.accessor.x(e) - date === 0,
       );
       this.tooltip.html(this.tooltipHtml(d, cd)).classed("is-visible", true);
     }
@@ -464,4 +468,4 @@ window.LineChart = class LineChart {
   redraw() {
     this.wrangle();
   }
-};
+}

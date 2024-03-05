@@ -1,4 +1,6 @@
-window.PieChart = class PieChart {
+import * as d3 from "d3";
+
+export class PieChart {
   constructor({
     elChart,
     tooltipHtml,
@@ -330,4 +332,4 @@ window.PieChart = class PieChart {
   redraw() {
     this.wrangle();
   }
-};
+}

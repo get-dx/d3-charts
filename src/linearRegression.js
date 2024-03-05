@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/31566791
-function linearRegression(x, y) {
+export function linearRegression(x, y) {
   var lr = {};
   var n = y.length;
   var sum_x = 0;
@@ -21,7 +21,7 @@ function linearRegression(x, y) {
   lr["r2"] = Math.pow(
     (n * sum_xy - sum_x * sum_y) /
       Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)),
-    2
+    2,
   );
 
   return lr;

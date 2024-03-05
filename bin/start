@@ -1,0 +1,8 @@
+#!/bin/bash
+
+npm run build
+
+open http://localhost:9000/example/index.html
+
+python3 -m http.server 9000
+

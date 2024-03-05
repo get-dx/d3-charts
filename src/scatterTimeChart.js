@@ -1,33 +1,7 @@
-// https://stackoverflow.com/a/31566791
-function linearRegression(x, y) {
-  var lr = {};
-  var n = y.length;
-  var sum_x = 0;
-  var sum_y = 0;
-  var sum_xy = 0;
-  var sum_xx = 0;
-  var sum_yy = 0;
+import * as d3 from "d3";
+import { linearRegression } from "./linearRegression";
 
-  for (var i = 0; i < y.length; i++) {
-    sum_x += x[i];
-    sum_y += y[i];
-    sum_xy += x[i] * y[i];
-    sum_xx += x[i] * x[i];
-    sum_yy += y[i] * y[i];
-  }
-
-  lr["slope"] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
-  lr["intercept"] = (sum_y - lr.slope * sum_x) / n;
-  lr["r2"] = Math.pow(
-    (n * sum_xy - sum_x * sum_y) /
-      Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)),
-    2
-  );
-
-  return lr;
-}
-
-window.ScatterTimeChart = class ScatterTimeChart {
+export class ScatterTimeChart {
   constructor({
     elChart,
     values = [],
@@ -149,7 +123,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
       }, []);
       if (nonNullIndexes.length >= 2) {
         const x = nonNullIndexes.map((i) =>
-          d3.utcDay.count(this.x.domain()[0], this.accessor.x(this.values[i]))
+          d3.utcDay.count(this.x.domain()[0], this.accessor.x(this.values[i])),
         );
         const y = nonNullIndexes.map((i) => this.accessor.y(this.values[i]));
         this.lr = linearRegression(x, y);
@@ -187,7 +161,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
     this.delaunay = d3.Delaunay.from(
       this.values,
       (d) => this.x(this.accessor.x(d)),
-      (d) => this.y(this.accessor.y(d))
+      (d) => this.y(this.accessor.y(d)),
     );
   }
 
@@ -203,8 +177,8 @@ window.ScatterTimeChart = class ScatterTimeChart {
             clipPath
               .append("rect")
               .attr("x", this.margin.left)
-              .attr("y", this.margin.top)
-          )
+              .attr("y", this.margin.top),
+          ),
       )
       .select("rect")
       .attr("width", this.width - this.margin.left - this.margin.right)
@@ -219,7 +193,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
         enter
           .append("line")
           .attr("class", "zero-line")
-          .attr("x1", this.margin.left)
+          .attr("x1", this.margin.left),
       )
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .attr("x2", this.width - this.margin.right);
@@ -233,7 +207,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
         enter
           .append("line")
           .attr("class", "benchmark-line")
-          .attr("clip-path", `url(#${this.id}-clip)`)
+          .attr("clip-path", `url(#${this.id}-clip)`),
       )
       .attr("x1", this.x(this.parseDate(this.startDate)))
       .attr("y1", this.y(this.benchmarkValue))
@@ -249,7 +223,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
         enter
           .append("line")
           .attr("class", "trend-line")
-          .attr("clip-path", `url(#${this.id}-clip)`)
+          .attr("clip-path", `url(#${this.id}-clip)`),
       );
     if (this.lr) {
       const x0 = this.x.domain()[0];
@@ -258,12 +232,12 @@ window.ScatterTimeChart = class ScatterTimeChart {
       tl.attr("x1", this.x(x1))
         .attr(
           "y1",
-          this.y(this.lr.slope * d3.utcDay.count(x0, x1) + this.lr.intercept)
+          this.y(this.lr.slope * d3.utcDay.count(x0, x1) + this.lr.intercept),
         )
         .attr("x2", this.x(x2))
         .attr(
           "y2",
-          this.y(this.lr.slope * d3.utcDay.count(x0, x2) + this.lr.intercept)
+          this.y(this.lr.slope * d3.utcDay.count(x0, x2) + this.lr.intercept),
         );
     }
   }
@@ -280,7 +254,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
         enter
           .append("circle")
           .attr("class", "dot-circle")
-          .attr("r", this.dotRadius)
+          .attr("r", this.dotRadius),
       )
       .attr("cx", (d) => this.x(this.accessor.x(d)))
       .attr("cy", (d) => this.y(this.accessor.y(d)));
@@ -295,7 +269,7 @@ window.ScatterTimeChart = class ScatterTimeChart {
     if (!this.tooltipHtml) return;
     const indexData = this.delaunay.find(
       ...d3.pointer(event),
-      this.indexData || 0
+      this.indexData || 0,
     );
     if (this.indexData !== indexData) {
       this.indexData = indexData;
@@ -361,4 +335,4 @@ window.ScatterTimeChart = class ScatterTimeChart {
   redraw() {
     this.wrangle();
   }
-};
+}
