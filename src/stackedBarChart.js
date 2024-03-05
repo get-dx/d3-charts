@@ -1,4 +1,6 @@
-window.StackedBarChart = class StackedBarChart {
+import * as d3 from "d3";
+
+export class StackedBarChart {
   constructor({
     elChart,
     paddingInner = 0.4,
@@ -382,4 +384,4 @@ window.StackedBarChart = class StackedBarChart {
   redraw() {
     this.wrangle();
   }
-};
+}

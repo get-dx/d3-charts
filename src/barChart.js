@@ -1,4 +1,7 @@
-window.BarChart = class BarChart {
+import * as d3 from "d3";
+import { linearRegression } from "./linearRegression";
+
+export class BarChart {
   constructor({
     elChart,
     values = [],
@@ -125,7 +128,7 @@ window.BarChart = class BarChart {
         enter
           .append("line")
           .attr("class", "zero-line")
-          .attr("x1", this.margin.left)
+          .attr("x1", this.margin.left),
       )
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .attr("x2", this.width - this.margin.right);
@@ -156,14 +159,14 @@ window.BarChart = class BarChart {
         .attr(
           "x2",
           this.x(this.x.domain()[this.x.domain().length - 1]) +
-            this.x.bandwidth() / 2
+            this.x.bandwidth() / 2,
         )
         .attr("y1", this.y(this.lr.intercept))
         .attr(
           "y2",
           this.y(
-            this.lr.slope * (this.x.domain().length - 1) + this.lr.intercept
-          )
+            this.lr.slope * (this.x.domain().length - 1) + this.lr.intercept,
+          ),
         );
     }
   }
@@ -231,4 +234,4 @@ window.BarChart = class BarChart {
   redraw() {
     this.wrangle();
   }
-};
+}

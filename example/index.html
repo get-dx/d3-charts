@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -191,18 +191,26 @@
         </div>
       </div>
     </main>
-    <!-- d3 is required for all charts -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <!-- linear regression is required for scatter time chart and bar chart -->
-    <script src="js/linearRegression.js"></script>
+    <!-- D3 Peer dependency-->
+    <script type="importmap">
+      {
+        "imports": {
+          "d3": "https://cdn.jsdelivr.net/npm/d3@7/+esm"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as d3 from "d3";
+      import {
+        BarChart,
+        LineChart,
+        linearRegression,
+        PieChart,
+        ScatterChart,
+        ScatterTimeChart,
+        StackedBarChart,
+      } from "../dist/main.js";
 
-    <script src="js/lineChart.js"></script>
-    <script src="js/scatterTimeChart.js"></script>
-    <script src="js/scatterChart.js"></script>
-    <script src="js/barChart.js"></script>
-    <script src="js/pieChart.js"></script>
-    <script src="js/stackedBarChart.js"></script>
-    <script>
       // Stacked bar charts
       {
         const stackedBar1 = new StackedBarChart({

@@ -1,4 +1,7 @@
-window.ScatterChart = class ScatterChart {
+import * as d3 from "d3";
+import { linearRegression } from "./linearRegression";
+
+export class ScatterChart {
   constructor({
     elChart,
     showXAxisTicks = true,
@@ -63,7 +66,7 @@ window.ScatterChart = class ScatterChart {
   }
 
   init() {
-    initLabeler();
+    this.labeler = initLabeler();
     this.setup();
     this.scaffold();
     this.wrangle();
@@ -195,7 +198,7 @@ window.ScatterChart = class ScatterChart {
     this.delaunay = d3.Delaunay.from(
       this.values,
       (d) => this.x(this.accessor.x(d)),
-      (d) => this.y(this.accessor.y(d))
+      (d) => this.y(this.accessor.y(d)),
     );
   }
 
@@ -211,8 +214,8 @@ window.ScatterChart = class ScatterChart {
             clipPath
               .append("rect")
               .attr("x", this.margin.left)
-              .attr("y", this.margin.top)
-          )
+              .attr("y", this.margin.top),
+          ),
       )
       .select("rect")
       .attr("width", this.width - this.margin.left - this.margin.right)
@@ -230,13 +233,13 @@ window.ScatterChart = class ScatterChart {
           .axisBottom(this.x)
           .ticks(
             (this.width - this.margin.left - this.margin.right) /
-              this.xAxisTickLabelSpread
+              this.xAxisTickLabelSpread,
           )
           .tickSizeOuter(0)
           .tickSizeInner(this.showXAxisTickLabels ? 6 : 0)
           .tickFormat((d) =>
-            this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : ""
-          )
+            this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d) : "",
+          ),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -245,11 +248,13 @@ window.ScatterChart = class ScatterChart {
           .selectAll(".grid-line")
           .data(this.showXAxisTicks ? [0] : [])
           .join((enter) => enter.append("line").attr("class", "grid-line"))
-          .attr("y2", -(this.height - this.margin.top - this.margin.bottom))
+          .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
       .call((g) =>
-        g.select(".domain").style("display", this.showXAxisLine ? null : "none")
+        g
+          .select(".domain")
+          .style("display", this.showXAxisLine ? null : "none"),
       )
       .call((g) =>
         g
@@ -260,11 +265,11 @@ window.ScatterChart = class ScatterChart {
               .append("text")
               .attr("class", "axis-title-text")
               .attr("fill", "currentColor")
-              .attr("text-anchor", "middle")
+              .attr("text-anchor", "middle"),
           )
           .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
           .attr("y", this.margin.bottom - 4)
-          .text((d) => d)
+          .text((d) => d),
       );
   }
 
@@ -279,13 +284,13 @@ window.ScatterChart = class ScatterChart {
           .axisLeft(this.y)
           .ticks(
             (this.height - this.margin.top - this.margin.bottom) /
-              this.yAxisTickLabelSpread
+              this.yAxisTickLabelSpread,
           )
           .tickSizeOuter(0)
           .tickSizeInner(this.showYAxisTickLabels ? 6 : 0)
           .tickFormat((d) =>
-            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""
-          )
+            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : "",
+          ),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -294,11 +299,13 @@ window.ScatterChart = class ScatterChart {
           .selectAll(".grid-line")
           .data(this.showYAxisTicks ? [0] : [])
           .join((enter) => enter.append("line").attr("class", "grid-line"))
-          .attr("x2", this.width - this.margin.left - this.margin.right)
+          .attr("x2", this.width - this.margin.left - this.margin.right),
       )
       .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
       .call((g) =>
-        g.select(".domain").style("display", this.showYAxisLine ? null : "none")
+        g
+          .select(".domain")
+          .style("display", this.showYAxisLine ? null : "none"),
       )
       .call((g) =>
         g
@@ -310,7 +317,7 @@ window.ScatterChart = class ScatterChart {
               .attr("class", "axis-title-text")
               .attr("fill", "currentColor")
               .attr("text-anchor", "middle")
-              .attr("dy", "0.71em")
+              .attr("dy", "0.71em"),
           )
           .attr("x", -this.margin.left + 4)
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
@@ -318,9 +325,9 @@ window.ScatterChart = class ScatterChart {
             "transform",
             `rotate(-90,${-this.margin.left + 4},${
               (this.margin.top + this.height - this.margin.bottom) / 2
-            })`
+            })`,
           )
-          .text((d) => d)
+          .text((d) => d),
       );
   }
 
@@ -365,7 +372,7 @@ window.ScatterChart = class ScatterChart {
       .data(
         this.matrix && this.highlightedQuadrant
           ? [quadrantRects[this.highlightedQuadrant]]
-          : []
+          : [],
       )
       .join((enter) => enter.append("rect").attr("class", "matrix-rect"))
       .attr("x", (d) => d.x)
@@ -377,7 +384,7 @@ window.ScatterChart = class ScatterChart {
       .selectAll(".matrix-line--x")
       .data(this.matrix ? [this.matrix[0]] : [])
       .join((enter) =>
-        enter.append("line").attr("class", "matrix-line matrix-line--x")
+        enter.append("line").attr("class", "matrix-line matrix-line--x"),
       )
       .attr("y1", this.margin.top)
       .attr("y2", this.height - this.margin.bottom)
@@ -387,7 +394,7 @@ window.ScatterChart = class ScatterChart {
       .selectAll(".matrix-line--y")
       .data(this.matrix ? [this.matrix[1]] : [])
       .join((enter) =>
-        enter.append("line").attr("class", "matrix-line matrix-line--y")
+        enter.append("line").attr("class", "matrix-line matrix-line--y"),
       )
       .attr("x1", this.margin.left)
       .attr("x2", this.width - this.margin.right)
@@ -406,7 +413,7 @@ window.ScatterChart = class ScatterChart {
         enter
           .append("circle")
           .attr("class", "dot-circle")
-          .attr("r", this.dotRadius)
+          .attr("r", this.dotRadius),
       )
       .attr("cx", (d) => this.x(this.accessor.x(d)))
       .attr("cy", (d) => this.y(this.accessor.y(d)));
@@ -446,11 +453,11 @@ window.ScatterChart = class ScatterChart {
       });
 
     if (this.labelTextFormat) {
-      d3.labeler()
+      this.labeler()
         .label(labels)
         .anchor(anchors)
         .width(
-          this.width - this.margin.left - this.margin.right - maxLabelWidth
+          this.width - this.margin.left - this.margin.right - maxLabelWidth,
         )
         .height(this.height - this.margin.top - this.margin.bottom)
         .start(1000);
@@ -472,7 +479,7 @@ window.ScatterChart = class ScatterChart {
         enter
           .append("line")
           .attr("class", "trend-line")
-          .attr("clip-path", `url(#${this.id}-clip)`)
+          .attr("clip-path", `url(#${this.id}-clip)`),
       );
 
     if (this.lr) {
@@ -481,7 +488,7 @@ window.ScatterChart = class ScatterChart {
         .attr("x2", this.x(this.x.domain()[1]))
         .attr(
           "y2",
-          this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept)
+          this.y(this.lr.slope * this.x.domain()[1] + this.lr.intercept),
         );
     }
   }
@@ -564,10 +571,10 @@ window.ScatterChart = class ScatterChart {
   redraw() {
     this.wrangle();
   }
-};
+}
 
 function initLabeler() {
-  d3.labeler = function () {
+  return function () {
     let lab = [];
     let anc = [];
     let w = 1; // box width
@@ -642,7 +649,7 @@ function initLabeler() {
             anc[index].y,
             lab[index].y,
             anc[i].y,
-            lab[i].y
+            lab[i].y,
           );
           if (overlap) ener += w_inter;
 
