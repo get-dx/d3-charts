@@ -26,6 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@rollup/plugin-terser", "virtual:e00cc867af541dffa1ac91309ab2922c5b63aafad418a578ceeb5ea78baaabfd4178a0cea3c72bce6b3573d46a220e8b70d9646ff5bfd1721e5ceab520e44747#npm:0.4.4"],\
           ["d3", "npm:7.8.5"],\
           ["eslint", "npm:8.57.0"],\
           ["prettier", "npm:3.2.5"],\
@@ -107,6 +108,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@get-dx/d3-charts", "workspace:."],\
+          ["@rollup/plugin-terser", "virtual:e00cc867af541dffa1ac91309ab2922c5b63aafad418a578ceeb5ea78baaabfd4178a0cea3c72bce6b3573d46a220e8b70d9646ff5bfd1721e5ceab520e44747#npm:0.4.4"],\
           ["d3", "npm:7.8.5"],\
           ["eslint", "npm:8.57.0"],\
           ["prettier", "npm:3.2.5"],\
@@ -165,6 +167,67 @@ const RAW_RUNTIME_STATE =
             "wrap-ansi",\
             "npm:7.0.0"\
           ]]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@jridgewell/gen-mapping", [\
+      ["npm:0.3.5", {\
+        "packageLocation": "../../.yarn/berry/cache/@jridgewell-gen-mapping-npm-0.3.5-d8b85ebeaf-10c0.zip/node_modules/@jridgewell/gen-mapping/",\
+        "packageDependencies": [\
+          ["@jridgewell/gen-mapping", "npm:0.3.5"],\
+          ["@jridgewell/set-array", "npm:1.2.1"],\
+          ["@jridgewell/sourcemap-codec", "npm:1.4.15"],\
+          ["@jridgewell/trace-mapping", "npm:0.3.25"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@jridgewell/resolve-uri", [\
+      ["npm:3.1.2", {\
+        "packageLocation": "../../.yarn/berry/cache/@jridgewell-resolve-uri-npm-3.1.2-5bc4245992-10c0.zip/node_modules/@jridgewell/resolve-uri/",\
+        "packageDependencies": [\
+          ["@jridgewell/resolve-uri", "npm:3.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@jridgewell/set-array", [\
+      ["npm:1.2.1", {\
+        "packageLocation": "../../.yarn/berry/cache/@jridgewell-set-array-npm-1.2.1-2312928209-10c0.zip/node_modules/@jridgewell/set-array/",\
+        "packageDependencies": [\
+          ["@jridgewell/set-array", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@jridgewell/source-map", [\
+      ["npm:0.3.5", {\
+        "packageLocation": "../../.yarn/berry/cache/@jridgewell-source-map-npm-0.3.5-9f964eaf44-10c0.zip/node_modules/@jridgewell/source-map/",\
+        "packageDependencies": [\
+          ["@jridgewell/source-map", "npm:0.3.5"],\
+          ["@jridgewell/gen-mapping", "npm:0.3.5"],\
+          ["@jridgewell/trace-mapping", "npm:0.3.25"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@jridgewell/sourcemap-codec", [\
+      ["npm:1.4.15", {\
+        "packageLocation": "../../.yarn/berry/cache/@jridgewell-sourcemap-codec-npm-1.4.15-a055fb62cf-10c0.zip/node_modules/@jridgewell/sourcemap-codec/",\
+        "packageDependencies": [\
+          ["@jridgewell/sourcemap-codec", "npm:1.4.15"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@jridgewell/trace-mapping", [\
+      ["npm:0.3.25", {\
+        "packageLocation": "../../.yarn/berry/cache/@jridgewell-trace-mapping-npm-0.3.25-c076fd2279-10c0.zip/node_modules/@jridgewell/trace-mapping/",\
+        "packageDependencies": [\
+          ["@jridgewell/trace-mapping", "npm:0.3.25"],\
+          ["@jridgewell/resolve-uri", "npm:3.1.2"],\
+          ["@jridgewell/sourcemap-codec", "npm:1.4.15"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -229,6 +292,31 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/@pkgjs-parseargs-npm-0.11.0-cd2a3fe948-10c0.zip/node_modules/@pkgjs/parseargs/",\
         "packageDependencies": [\
           ["@pkgjs/parseargs", "npm:0.11.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@rollup/plugin-terser", [\
+      ["npm:0.4.4", {\
+        "packageLocation": "../../.yarn/berry/cache/@rollup-plugin-terser-npm-0.4.4-c6896dd264-10c0.zip/node_modules/@rollup/plugin-terser/",\
+        "packageDependencies": [\
+          ["@rollup/plugin-terser", "npm:0.4.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:e00cc867af541dffa1ac91309ab2922c5b63aafad418a578ceeb5ea78baaabfd4178a0cea3c72bce6b3573d46a220e8b70d9646ff5bfd1721e5ceab520e44747#npm:0.4.4", {\
+        "packageLocation": "./.yarn/__virtual__/@rollup-plugin-terser-virtual-2cc3bca818/3/.yarn/berry/cache/@rollup-plugin-terser-npm-0.4.4-c6896dd264-10c0.zip/node_modules/@rollup/plugin-terser/",\
+        "packageDependencies": [\
+          ["@rollup/plugin-terser", "virtual:e00cc867af541dffa1ac91309ab2922c5b63aafad418a578ceeb5ea78baaabfd4178a0cea3c72bce6b3573d46a220e8b70d9646ff5bfd1721e5ceab520e44747#npm:0.4.4"],\
+          ["@types/rollup", null],\
+          ["rollup", "npm:4.12.0"],\
+          ["serialize-javascript", "npm:6.0.2"],\
+          ["smob", "npm:1.4.1"],\
+          ["terser", "npm:5.28.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/rollup",\
+          "rollup"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -512,6 +600,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["buffer-from", [\
+      ["npm:1.1.2", {\
+        "packageLocation": "../../.yarn/berry/cache/buffer-from-npm-1.1.2-03d2f20d7e-10c0.zip/node_modules/buffer-from/",\
+        "packageDependencies": [\
+          ["buffer-from", "npm:1.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["cacache", [\
       ["npm:18.0.2", {\
         "packageLocation": "../../.yarn/berry/cache/cacache-npm-18.0.2-d6329a1b9d-10c0.zip/node_modules/cacache/",\
@@ -591,6 +688,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["commander", [\
+      ["npm:2.20.3", {\
+        "packageLocation": "../../.yarn/berry/cache/commander-npm-2.20.3-d8dcbaa39b-10c0.zip/node_modules/commander/",\
+        "packageDependencies": [\
+          ["commander", "npm:2.20.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:7.2.0", {\
         "packageLocation": "../../.yarn/berry/cache/commander-npm-7.2.0-19178180f8-10c0.zip/node_modules/commander/",\
         "packageDependencies": [\
@@ -2068,6 +2172,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["randombytes", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../.yarn/berry/cache/randombytes-npm-2.1.0-e3da76bccf-10c0.zip/node_modules/randombytes/",\
+        "packageDependencies": [\
+          ["randombytes", "npm:2.1.0"],\
+          ["safe-buffer", "npm:5.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["resolve-from", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../.yarn/berry/cache/resolve-from-npm-4.0.0-f758ec21bf-10c0.zip/node_modules/resolve-from/",\
@@ -2157,6 +2271,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["safe-buffer", [\
+      ["npm:5.2.1", {\
+        "packageLocation": "../../.yarn/berry/cache/safe-buffer-npm-5.2.1-3481c8aa9b-10c0.zip/node_modules/safe-buffer/",\
+        "packageDependencies": [\
+          ["safe-buffer", "npm:5.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["safer-buffer", [\
       ["npm:2.1.2", {\
         "packageLocation": "../../.yarn/berry/cache/safer-buffer-npm-2.1.2-8d5c0b705e-10c0.zip/node_modules/safer-buffer/",\
@@ -2172,6 +2295,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["semver", "npm:7.6.0"],\
           ["lru-cache", "npm:6.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["serialize-javascript", [\
+      ["npm:6.0.2", {\
+        "packageLocation": "../../.yarn/berry/cache/serialize-javascript-npm-6.0.2-cc09461d45-10c0.zip/node_modules/serialize-javascript/",\
+        "packageDependencies": [\
+          ["serialize-javascript", "npm:6.0.2"],\
+          ["randombytes", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2213,6 +2346,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["smob", [\
+      ["npm:1.4.1", {\
+        "packageLocation": "../../.yarn/berry/cache/smob-npm-1.4.1-fb67ffe15b-10c0.zip/node_modules/smob/",\
+        "packageDependencies": [\
+          ["smob", "npm:1.4.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["socks", [\
       ["npm:2.8.1", {\
         "packageLocation": "../../.yarn/berry/cache/socks-npm-2.8.1-3b253d7256-10c0.zip/node_modules/socks/",\
@@ -2232,6 +2374,26 @@ const RAW_RUNTIME_STATE =
           ["agent-base", "npm:7.1.0"],\
           ["debug", "virtual:1ff4b5f90832ba0a9c93ba1223af226e44ba70c1126a3740d93562b97bc36544e896a5e95908196f7458713e6a6089a34bfc67362fc6df7fa093bd06c878be47#npm:4.3.4"],\
           ["socks", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["source-map", [\
+      ["npm:0.6.1", {\
+        "packageLocation": "../../.yarn/berry/cache/source-map-npm-0.6.1-1a3621db16-10c0.zip/node_modules/source-map/",\
+        "packageDependencies": [\
+          ["source-map", "npm:0.6.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["source-map-support", [\
+      ["npm:0.5.21", {\
+        "packageLocation": "../../.yarn/berry/cache/source-map-support-npm-0.5.21-09ca99e250-10c0.zip/node_modules/source-map-support/",\
+        "packageDependencies": [\
+          ["source-map-support", "npm:0.5.21"],\
+          ["buffer-from", "npm:1.1.2"],\
+          ["source-map", "npm:0.6.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2325,6 +2487,19 @@ const RAW_RUNTIME_STATE =
           ["minizlib", "npm:2.1.2"],\
           ["mkdirp", "npm:1.0.4"],\
           ["yallist", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["terser", [\
+      ["npm:5.28.1", {\
+        "packageLocation": "../../.yarn/berry/cache/terser-npm-5.28.1-72da2587ce-10c0.zip/node_modules/terser/",\
+        "packageDependencies": [\
+          ["terser", "npm:5.28.1"],\
+          ["@jridgewell/source-map", "npm:0.3.5"],\
+          ["acorn", "npm:8.11.3"],\
+          ["commander", "npm:2.20.3"],\
+          ["source-map-support", "npm:0.5.21"]\
         ],\
         "linkType": "HARD"\
       }]\

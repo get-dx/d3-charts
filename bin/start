@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npm run build
+yarn build
 
 open http://localhost:9000/example/index.html
 
