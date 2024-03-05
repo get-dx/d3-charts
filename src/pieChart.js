@@ -92,9 +92,7 @@ export class PieChart {
     let colors = [];
     this.sortedValues.forEach((d) => {
       colors.push(
-        !!this.accessor.color(d)
-          ? this.accessor.color(d)
-          : generatedColors.pop(),
+        this.accessor.color(d) ? this.accessor.color(d) : generatedColors.pop(),
       );
     });
     this.color.domain(this.sortedValues.map(this.accessor.value)).range(colors);

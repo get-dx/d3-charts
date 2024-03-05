@@ -4,8 +4,10 @@
   "description": "DX d3 charts",
   "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "format": "prettier --write \"**/*.{ts,js,json,md,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,yaml}\"",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,12 @@
     "d3": "^7.8.5",
     "prettier": "^3.2.5",
     "rollup": "^4.12.0"
+  },
+  "packageManager": "yarn@4.1.1",
+  "dependencies": {
+    "eslint": "^8.57.0"
+  },
+  "publishConfig": {
+    "@get-dx:registry": "https://npm.pkg.github.com"
   }
 }
