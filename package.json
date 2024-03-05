@@ -32,6 +32,6 @@
     "eslint": "^8.57.0"
   },
   "publishConfig": {
-    "@get-dx:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   }
 }
