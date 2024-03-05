@@ -12,7 +12,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          corepack-enable: true
           cache: "yarn"
       - run: yarn
       - run: yarn build
@@ -30,7 +29,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          corepack-enable: true
           registry-url: https://npm.pkg.github.com/
           cache: "yarn"
       - run: yarn publish
