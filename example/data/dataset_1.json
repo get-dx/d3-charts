@@ -1,1801 +1,1801 @@
 [
   {
-      "value": 11,
-      "date": "2014-07-15",
-      "tooltip_data": {
-          "user_id": 301644
-      }
+    "value": 11,
+    "date": "2014-07-15",
+    "tooltip_data": {
+      "user_id": 301644
+    }
   },
   {
-      "value": 4,
-      "date": "2015-09-01",
-      "tooltip_data": {
-          "user_id": 118004
-      }
+    "value": 4,
+    "date": "2015-09-01",
+    "tooltip_data": {
+      "user_id": 118004
+    }
   },
   {
-      "value": 12,
-      "date": "2016-07-25",
-      "tooltip_data": {
-          "user_id": 118315
-      }
+    "value": 12,
+    "date": "2016-07-25",
+    "tooltip_data": {
+      "user_id": 118315
+    }
   },
   {
-      "value": 5,
-      "date": "2017-09-11",
-      "tooltip_data": {
-          "user_id": 119444
-      }
+    "value": 5,
+    "date": "2017-09-11",
+    "tooltip_data": {
+      "user_id": 119444
+    }
   },
   {
-      "value": 11,
-      "date": "2017-12-11",
-      "tooltip_data": {
-          "user_id": 118875
-      }
+    "value": 11,
+    "date": "2017-12-11",
+    "tooltip_data": {
+      "user_id": 118875
+    }
   },
   {
-      "value": 4,
-      "date": "2018-03-20",
-      "tooltip_data": {
-          "user_id": 149026
-      }
+    "value": 4,
+    "date": "2018-03-20",
+    "tooltip_data": {
+      "user_id": 149026
+    }
   },
   {
-      "value": 14,
-      "date": "2018-04-30",
-      "tooltip_data": {
-          "user_id": 330639
-      }
+    "value": 14,
+    "date": "2018-04-30",
+    "tooltip_data": {
+      "user_id": 330639
+    }
   },
   {
-      "value": 2,
-      "date": "2018-05-14",
-      "tooltip_data": {
-          "user_id": 118274
-      }
+    "value": 2,
+    "date": "2018-05-14",
+    "tooltip_data": {
+      "user_id": 118274
+    }
   },
   {
-      "value": 9,
-      "date": "2018-06-27",
-      "tooltip_data": {
-          "user_id": 118696
-      }
+    "value": 9,
+    "date": "2018-06-27",
+    "tooltip_data": {
+      "user_id": 118696
+    }
   },
   {
-      "value": 3,
-      "date": "2018-07-09",
-      "tooltip_data": {
-          "user_id": 117858
-      }
+    "value": 3,
+    "date": "2018-07-09",
+    "tooltip_data": {
+      "user_id": 117858
+    }
   },
   {
-      "value": 0,
-      "date": "2018-08-28",
-      "tooltip_data": {
-          "user_id": 117859
-      }
+    "value": 0,
+    "date": "2018-08-28",
+    "tooltip_data": {
+      "user_id": 117859
+    }
   },
   {
-      "value": 1,
-      "date": "2018-11-19",
-      "tooltip_data": {
-          "user_id": 118266
-      }
+    "value": 1,
+    "date": "2018-11-19",
+    "tooltip_data": {
+      "user_id": 118266
+    }
   },
   {
-      "value": 7,
-      "date": "2018-12-05",
-      "tooltip_data": {
-          "user_id": 118143
-      }
+    "value": 7,
+    "date": "2018-12-05",
+    "tooltip_data": {
+      "user_id": 118143
+    }
   },
   {
-      "value": 7,
-      "date": "2018-12-12",
-      "tooltip_data": {
-          "user_id": 118518
-      }
+    "value": 7,
+    "date": "2018-12-12",
+    "tooltip_data": {
+      "user_id": 118518
+    }
   },
   {
-      "value": 13,
-      "date": "2019-02-06",
-      "tooltip_data": {
-          "user_id": 118144
-      }
+    "value": 13,
+    "date": "2019-02-06",
+    "tooltip_data": {
+      "user_id": 118144
+    }
   },
   {
-      "value": 9,
-      "date": "2019-02-19",
-      "tooltip_data": {
-          "user_id": 117838
-      }
+    "value": 9,
+    "date": "2019-02-19",
+    "tooltip_data": {
+      "user_id": 117838
+    }
   },
   {
-      "value": 3,
-      "date": "2019-04-03",
-      "tooltip_data": {
-          "user_id": 118148
-      }
+    "value": 3,
+    "date": "2019-04-03",
+    "tooltip_data": {
+      "user_id": 118148
+    }
   },
   {
-      "value": 2,
-      "date": "2019-05-29",
-      "tooltip_data": {
-          "user_id": 117837
-      }
+    "value": 2,
+    "date": "2019-05-29",
+    "tooltip_data": {
+      "user_id": 117837
+    }
   },
   {
-      "value": 1,
-      "date": "2019-06-05",
-      "tooltip_data": {
-          "user_id": 118301
-      }
+    "value": 1,
+    "date": "2019-06-05",
+    "tooltip_data": {
+      "user_id": 118301
+    }
   },
   {
-      "value": 7,
-      "date": "2019-06-19",
-      "tooltip_data": {
-          "user_id": 118146
-      }
+    "value": 7,
+    "date": "2019-06-19",
+    "tooltip_data": {
+      "user_id": 118146
+    }
   },
   {
-      "value": 8,
-      "date": "2019-06-26",
-      "tooltip_data": {
-          "user_id": 117849
-      }
+    "value": 8,
+    "date": "2019-06-26",
+    "tooltip_data": {
+      "user_id": 117849
+    }
   },
   {
-      "value": 0,
-      "date": "2019-08-07",
-      "tooltip_data": {
-          "user_id": 122619
-      }
+    "value": 0,
+    "date": "2019-08-07",
+    "tooltip_data": {
+      "user_id": 122619
+    }
   },
   {
-      "value": 9,
-      "date": "2019-08-21",
-      "tooltip_data": {
-          "user_id": 118256
-      }
+    "value": 9,
+    "date": "2019-08-21",
+    "tooltip_data": {
+      "user_id": 118256
+    }
   },
   {
-      "value": 7,
-      "date": "2019-08-28",
-      "tooltip_data": {
-          "user_id": 118828
-      }
+    "value": 7,
+    "date": "2019-08-28",
+    "tooltip_data": {
+      "user_id": 118828
+    }
   },
   {
-      "value": 0,
-      "date": "2019-09-04",
-      "tooltip_data": {
-          "user_id": 118826
-      }
+    "value": 0,
+    "date": "2019-09-04",
+    "tooltip_data": {
+      "user_id": 118826
+    }
   },
   {
-      "value": 0,
-      "date": "2019-09-09",
-      "tooltip_data": {
-          "user_id": 118688
-      }
+    "value": 0,
+    "date": "2019-09-09",
+    "tooltip_data": {
+      "user_id": 118688
+    }
   },
   {
-      "value": 8,
-      "date": "2019-09-11",
-      "tooltip_data": {
-          "user_id": 120173
-      }
+    "value": 8,
+    "date": "2019-09-11",
+    "tooltip_data": {
+      "user_id": 120173
+    }
   },
   {
-      "value": 4,
-      "date": "2019-10-09",
-      "tooltip_data": {
-          "user_id": 118300
-      }
+    "value": 4,
+    "date": "2019-10-09",
+    "tooltip_data": {
+      "user_id": 118300
+    }
   },
   {
-      "value": 4,
-      "date": "2019-10-16",
-      "tooltip_data": {
-          "user_id": 118119
-      }
+    "value": 4,
+    "date": "2019-10-16",
+    "tooltip_data": {
+      "user_id": 118119
+    }
   },
   {
-      "value": 6,
-      "date": "2019-10-23",
-      "tooltip_data": {
-          "user_id": 120234
-      }
+    "value": 6,
+    "date": "2019-10-23",
+    "tooltip_data": {
+      "user_id": 120234
+    }
   },
   {
-      "value": 4,
-      "date": "2019-10-23",
-      "tooltip_data": {
-          "user_id": 118114
-      }
+    "value": 4,
+    "date": "2019-10-23",
+    "tooltip_data": {
+      "user_id": 118114
+    }
   },
   {
-      "value": 14,
-      "date": "2019-11-20",
-      "tooltip_data": {
-          "user_id": 118309
-      }
+    "value": 14,
+    "date": "2019-11-20",
+    "tooltip_data": {
+      "user_id": 118309
+    }
   },
   {
-      "value": 10,
-      "date": "2020-01-08",
-      "tooltip_data": {
-          "user_id": 118000
-      }
+    "value": 10,
+    "date": "2020-01-08",
+    "tooltip_data": {
+      "user_id": 118000
+    }
   },
   {
-      "value": 2,
-      "date": "2020-03-10",
-      "tooltip_data": {
-          "user_id": 118131
-      }
+    "value": 2,
+    "date": "2020-03-10",
+    "tooltip_data": {
+      "user_id": 118131
+    }
   },
   {
-      "value": 12,
-      "date": "2020-04-14",
-      "tooltip_data": {
-          "user_id": 118530
-      }
+    "value": 12,
+    "date": "2020-04-14",
+    "tooltip_data": {
+      "user_id": 118530
+    }
   },
   {
-      "value": 12,
-      "date": "2020-04-21",
-      "tooltip_data": {
-          "user_id": 117999
-      }
+    "value": 12,
+    "date": "2020-04-21",
+    "tooltip_data": {
+      "user_id": 117999
+    }
   },
   {
-      "value": 4,
-      "date": "2020-05-12",
-      "tooltip_data": {
-          "user_id": 118536
-      }
+    "value": 4,
+    "date": "2020-05-12",
+    "tooltip_data": {
+      "user_id": 118536
+    }
   },
   {
-      "value": 2,
-      "date": "2020-05-12",
-      "tooltip_data": {
-          "user_id": 118145
-      }
+    "value": 2,
+    "date": "2020-05-12",
+    "tooltip_data": {
+      "user_id": 118145
+    }
   },
   {
-      "value": 14,
-      "date": "2020-05-12",
-      "tooltip_data": {
-          "user_id": 118019
-      }
+    "value": 14,
+    "date": "2020-05-12",
+    "tooltip_data": {
+      "user_id": 118019
+    }
   },
   {
-      "value": 2,
-      "date": "2020-05-19",
-      "tooltip_data": {
-          "user_id": 118317
-      }
+    "value": 2,
+    "date": "2020-05-19",
+    "tooltip_data": {
+      "user_id": 118317
+    }
   },
   {
-      "value": 13,
-      "date": "2020-05-26",
-      "tooltip_data": {
-          "user_id": 118509
-      }
+    "value": 13,
+    "date": "2020-05-26",
+    "tooltip_data": {
+      "user_id": 118509
+    }
   },
   {
-      "value": 8,
-      "date": "2020-05-26",
-      "tooltip_data": {
-          "user_id": 282153
-      }
+    "value": 8,
+    "date": "2020-05-26",
+    "tooltip_data": {
+      "user_id": 282153
+    }
   },
   {
-      "value": 14,
-      "date": "2020-05-26",
-      "tooltip_data": {
-          "user_id": 118105
-      }
+    "value": 14,
+    "date": "2020-05-26",
+    "tooltip_data": {
+      "user_id": 118105
+    }
   },
   {
-      "value": 14,
-      "date": "2020-06-02",
-      "tooltip_data": {
-          "user_id": 132477
-      }
+    "value": 14,
+    "date": "2020-06-02",
+    "tooltip_data": {
+      "user_id": 132477
+    }
   },
   {
-      "value": 6,
-      "date": "2020-06-09",
-      "tooltip_data": {
-          "user_id": 119194
-      }
+    "value": 6,
+    "date": "2020-06-09",
+    "tooltip_data": {
+      "user_id": 119194
+    }
   },
   {
-      "value": 7,
-      "date": "2020-06-09",
-      "tooltip_data": {
-          "user_id": 118129
-      }
+    "value": 7,
+    "date": "2020-06-09",
+    "tooltip_data": {
+      "user_id": 118129
+    }
   },
   {
-      "value": 13,
-      "date": "2020-06-09",
-      "tooltip_data": {
-          "user_id": 119248
-      }
+    "value": 13,
+    "date": "2020-06-09",
+    "tooltip_data": {
+      "user_id": 119248
+    }
   },
   {
-      "value": 11,
-      "date": "2020-06-16",
-      "tooltip_data": {
-          "user_id": 119649
-      }
+    "value": 11,
+    "date": "2020-06-16",
+    "tooltip_data": {
+      "user_id": 119649
+    }
   },
   {
-      "value": 4,
-      "date": "2020-06-23",
-      "tooltip_data": {
-          "user_id": 119015
-      }
+    "value": 4,
+    "date": "2020-06-23",
+    "tooltip_data": {
+      "user_id": 119015
+    }
   },
   {
-      "value": 2,
-      "date": "2020-06-23",
-      "tooltip_data": {
-          "user_id": 118283
-      }
+    "value": 2,
+    "date": "2020-06-23",
+    "tooltip_data": {
+      "user_id": 118283
+    }
   },
   {
-      "value": 5,
-      "date": "2020-06-30",
-      "tooltip_data": {
-          "user_id": 118717
-      }
+    "value": 5,
+    "date": "2020-06-30",
+    "tooltip_data": {
+      "user_id": 118717
+    }
   },
   {
-      "value": 12,
-      "date": "2020-06-30",
-      "tooltip_data": {
-          "user_id": 118546
-      }
+    "value": 12,
+    "date": "2020-06-30",
+    "tooltip_data": {
+      "user_id": 118546
+    }
   },
   {
-      "value": 1,
-      "date": "2020-06-30",
-      "tooltip_data": {
-          "user_id": 118982
-      }
+    "value": 1,
+    "date": "2020-06-30",
+    "tooltip_data": {
+      "user_id": 118982
+    }
   },
   {
-      "value": 8,
-      "date": "2020-07-07",
-      "tooltip_data": {
-          "user_id": 118506
-      }
+    "value": 8,
+    "date": "2020-07-07",
+    "tooltip_data": {
+      "user_id": 118506
+    }
   },
   {
-      "value": 10,
-      "date": "2020-07-14",
-      "tooltip_data": {
-          "user_id": 119326
-      }
+    "value": 10,
+    "date": "2020-07-14",
+    "tooltip_data": {
+      "user_id": 119326
+    }
   },
   {
-      "value": 3,
-      "date": "2020-07-14",
-      "tooltip_data": {
-          "user_id": 119668
-      }
+    "value": 3,
+    "date": "2020-07-14",
+    "tooltip_data": {
+      "user_id": 119668
+    }
   },
   {
-      "value": 10,
-      "date": "2020-07-21",
-      "tooltip_data": {
-          "user_id": 119065
-      }
+    "value": 10,
+    "date": "2020-07-21",
+    "tooltip_data": {
+      "user_id": 119065
+    }
   },
   {
-      "value": 14,
-      "date": "2020-08-04",
-      "tooltip_data": {
-          "user_id": 118988
-      }
+    "value": 14,
+    "date": "2020-08-04",
+    "tooltip_data": {
+      "user_id": 118988
+    }
   },
   {
-      "value": 0,
-      "date": "2020-08-04",
-      "tooltip_data": {
-          "user_id": 118979
-      }
+    "value": 0,
+    "date": "2020-08-04",
+    "tooltip_data": {
+      "user_id": 118979
+    }
   },
   {
-      "value": 1,
-      "date": "2020-08-18",
-      "tooltip_data": {
-          "user_id": 119210
-      }
+    "value": 1,
+    "date": "2020-08-18",
+    "tooltip_data": {
+      "user_id": 119210
+    }
   },
   {
-      "value": 10,
-      "date": "2020-08-18",
-      "tooltip_data": {
-          "user_id": 119231
-      }
+    "value": 10,
+    "date": "2020-08-18",
+    "tooltip_data": {
+      "user_id": 119231
+    }
   },
   {
-      "value": 5,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 119336
-      }
+    "value": 5,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 119336
+    }
   },
   {
-      "value": 9,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 118819
-      }
+    "value": 9,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 118819
+    }
   },
   {
-      "value": 14,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 118671
-      }
+    "value": 14,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 118671
+    }
   },
   {
-      "value": 4,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 118680
-      }
+    "value": 4,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 118680
+    }
   },
   {
-      "value": 0,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 118242
-      }
+    "value": 0,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 118242
+    }
   },
   {
-      "value": 1,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 119675
-      }
+    "value": 1,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 119675
+    }
   },
   {
-      "value": 4,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 119783
-      }
+    "value": 4,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 119783
+    }
   },
   {
-      "value": 8,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 119519
-      }
+    "value": 8,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 119519
+    }
   },
   {
-      "value": 14,
-      "date": "2020-09-01",
-      "tooltip_data": {
-          "user_id": 119417
-      }
+    "value": 14,
+    "date": "2020-09-01",
+    "tooltip_data": {
+      "user_id": 119417
+    }
   },
   {
-      "value": 3,
-      "date": "2020-09-15",
-      "tooltip_data": {
-          "user_id": 118709
-      }
+    "value": 3,
+    "date": "2020-09-15",
+    "tooltip_data": {
+      "user_id": 118709
+    }
   },
   {
-      "value": 2,
-      "date": "2020-09-15",
-      "tooltip_data": {
-          "user_id": 119238
-      }
+    "value": 2,
+    "date": "2020-09-15",
+    "tooltip_data": {
+      "user_id": 119238
+    }
   },
   {
-      "value": 6,
-      "date": "2020-09-22",
-      "tooltip_data": {
-          "user_id": 119352
-      }
+    "value": 6,
+    "date": "2020-09-22",
+    "tooltip_data": {
+      "user_id": 119352
+    }
   },
   {
-      "value": 11,
-      "date": "2020-09-22",
-      "tooltip_data": {
-          "user_id": 119182
-      }
+    "value": 11,
+    "date": "2020-09-22",
+    "tooltip_data": {
+      "user_id": 119182
+    }
   },
   {
-      "value": 1,
-      "date": "2020-09-29",
-      "tooltip_data": {
-          "user_id": 119301
-      }
+    "value": 1,
+    "date": "2020-09-29",
+    "tooltip_data": {
+      "user_id": 119301
+    }
   },
   {
-      "value": 1,
-      "date": "2020-11-02",
-      "tooltip_data": {
-          "user_id": 119328
-      }
+    "value": 1,
+    "date": "2020-11-02",
+    "tooltip_data": {
+      "user_id": 119328
+    }
   },
   {
-      "value": 3,
-      "date": "2020-11-10",
-      "tooltip_data": {
-          "user_id": 120704
-      }
+    "value": 3,
+    "date": "2020-11-10",
+    "tooltip_data": {
+      "user_id": 120704
+    }
   },
   {
-      "value": 14,
-      "date": "2020-11-17",
-      "tooltip_data": {
-          "user_id": 120244
-      }
+    "value": 14,
+    "date": "2020-11-17",
+    "tooltip_data": {
+      "user_id": 120244
+    }
   },
   {
-      "value": 14,
-      "date": "2020-12-01",
-      "tooltip_data": {
-          "user_id": 119391
-      }
+    "value": 14,
+    "date": "2020-12-01",
+    "tooltip_data": {
+      "user_id": 119391
+    }
   },
   {
-      "value": 1,
-      "date": "2020-12-01",
-      "tooltip_data": {
-          "user_id": 119529
-      }
+    "value": 1,
+    "date": "2020-12-01",
+    "tooltip_data": {
+      "user_id": 119529
+    }
   },
   {
-      "value": 4,
-      "date": "2020-12-01",
-      "tooltip_data": {
-          "user_id": 119358
-      }
+    "value": 4,
+    "date": "2020-12-01",
+    "tooltip_data": {
+      "user_id": 119358
+    }
   },
   {
-      "value": 5,
-      "date": "2020-12-01",
-      "tooltip_data": {
-          "user_id": 118312
-      }
+    "value": 5,
+    "date": "2020-12-01",
+    "tooltip_data": {
+      "user_id": 118312
+    }
   },
   {
-      "value": 0,
-      "date": "2020-12-01",
-      "tooltip_data": {
-          "user_id": 119494
-      }
+    "value": 0,
+    "date": "2020-12-01",
+    "tooltip_data": {
+      "user_id": 119494
+    }
   },
   {
-      "value": 9,
-      "date": "2020-12-08",
-      "tooltip_data": {
-          "user_id": 120835
-      }
+    "value": 9,
+    "date": "2020-12-08",
+    "tooltip_data": {
+      "user_id": 120835
+    }
   },
   {
-      "value": 10,
-      "date": "2020-12-08",
-      "tooltip_data": {
-          "user_id": 119489
-      }
+    "value": 10,
+    "date": "2020-12-08",
+    "tooltip_data": {
+      "user_id": 119489
+    }
   },
   {
-      "value": 4,
-      "date": "2020-12-08",
-      "tooltip_data": {
-          "user_id": 120240
-      }
+    "value": 4,
+    "date": "2020-12-08",
+    "tooltip_data": {
+      "user_id": 120240
+    }
   },
   {
-      "value": 7,
-      "date": "2020-12-08",
-      "tooltip_data": {
-          "user_id": 119517
-      }
+    "value": 7,
+    "date": "2020-12-08",
+    "tooltip_data": {
+      "user_id": 119517
+    }
   },
   {
-      "value": 12,
-      "date": "2020-12-08",
-      "tooltip_data": {
-          "user_id": 118718
-      }
+    "value": 12,
+    "date": "2020-12-08",
+    "tooltip_data": {
+      "user_id": 118718
+    }
   },
   {
-      "value": 7,
-      "date": "2020-12-15",
-      "tooltip_data": {
-          "user_id": 119565
-      }
+    "value": 7,
+    "date": "2020-12-15",
+    "tooltip_data": {
+      "user_id": 119565
+    }
   },
   {
-      "value": 7,
-      "date": "2020-12-15",
-      "tooltip_data": {
-          "user_id": 119535
-      }
+    "value": 7,
+    "date": "2020-12-15",
+    "tooltip_data": {
+      "user_id": 119535
+    }
   },
   {
-      "value": 6,
-      "date": "2020-12-15",
-      "tooltip_data": {
-          "user_id": 120464
-      }
+    "value": 6,
+    "date": "2020-12-15",
+    "tooltip_data": {
+      "user_id": 120464
+    }
   },
   {
-      "value": 7,
-      "date": "2020-12-15",
-      "tooltip_data": {
-          "user_id": 119598
-      }
+    "value": 7,
+    "date": "2020-12-15",
+    "tooltip_data": {
+      "user_id": 119598
+    }
   },
   {
-      "value": 2,
-      "date": "2021-01-05",
-      "tooltip_data": {
-          "user_id": 120963
-      }
+    "value": 2,
+    "date": "2021-01-05",
+    "tooltip_data": {
+      "user_id": 120963
+    }
   },
   {
-      "value": 13,
-      "date": "2021-01-05",
-      "tooltip_data": {
-          "user_id": 120095
-      }
+    "value": 13,
+    "date": "2021-01-05",
+    "tooltip_data": {
+      "user_id": 120095
+    }
   },
   {
-      "value": 9,
-      "date": "2021-01-12",
-      "tooltip_data": {
-          "user_id": 119677
-      }
+    "value": 9,
+    "date": "2021-01-12",
+    "tooltip_data": {
+      "user_id": 119677
+    }
   },
   {
-      "value": 10,
-      "date": "2021-01-12",
-      "tooltip_data": {
-          "user_id": 119597
-      }
+    "value": 10,
+    "date": "2021-01-12",
+    "tooltip_data": {
+      "user_id": 119597
+    }
   },
   {
-      "value": 13,
-      "date": "2021-01-12",
-      "tooltip_data": {
-          "user_id": 117978
-      }
+    "value": 13,
+    "date": "2021-01-12",
+    "tooltip_data": {
+      "user_id": 117978
+    }
   },
   {
-      "value": 14,
-      "date": "2021-01-12",
-      "tooltip_data": {
-          "user_id": 120045
-      }
+    "value": 14,
+    "date": "2021-01-12",
+    "tooltip_data": {
+      "user_id": 120045
+    }
   },
   {
-      "value": 0,
-      "date": "2021-01-12",
-      "tooltip_data": {
-          "user_id": 119599
-      }
+    "value": 0,
+    "date": "2021-01-12",
+    "tooltip_data": {
+      "user_id": 119599
+    }
   },
   {
-      "value": 8,
-      "date": "2021-01-19",
-      "tooltip_data": {
-          "user_id": 119654
-      }
+    "value": 8,
+    "date": "2021-01-19",
+    "tooltip_data": {
+      "user_id": 119654
+    }
   },
   {
-      "value": 2,
-      "date": "2021-01-26",
-      "tooltip_data": {
-          "user_id": 120933
-      }
+    "value": 2,
+    "date": "2021-01-26",
+    "tooltip_data": {
+      "user_id": 120933
+    }
   },
   {
-      "value": 2,
-      "date": "2021-01-26",
-      "tooltip_data": {
-          "user_id": 120717
-      }
+    "value": 2,
+    "date": "2021-01-26",
+    "tooltip_data": {
+      "user_id": 120717
+    }
   },
   {
-      "value": 8,
-      "date": "2021-01-26",
-      "tooltip_data": {
-          "user_id": 119662
-      }
+    "value": 8,
+    "date": "2021-01-26",
+    "tooltip_data": {
+      "user_id": 119662
+    }
   },
   {
-      "value": 10,
-      "date": "2021-02-02",
-      "tooltip_data": {
-          "user_id": 333978
-      }
+    "value": 10,
+    "date": "2021-02-02",
+    "tooltip_data": {
+      "user_id": 333978
+    }
   },
   {
-      "value": 8,
-      "date": "2021-02-02",
-      "tooltip_data": {
-          "user_id": 119882
-      }
+    "value": 8,
+    "date": "2021-02-02",
+    "tooltip_data": {
+      "user_id": 119882
+    }
   },
   {
-      "value": 4,
-      "date": "2021-02-23",
-      "tooltip_data": {
-          "user_id": 119816
-      }
+    "value": 4,
+    "date": "2021-02-23",
+    "tooltip_data": {
+      "user_id": 119816
+    }
   },
   {
-      "value": 3,
-      "date": "2021-03-02",
-      "tooltip_data": {
-          "user_id": 119965
-      }
+    "value": 3,
+    "date": "2021-03-02",
+    "tooltip_data": {
+      "user_id": 119965
+    }
   },
   {
-      "value": 13,
-      "date": "2021-03-02",
-      "tooltip_data": {
-          "user_id": 120769
-      }
+    "value": 13,
+    "date": "2021-03-02",
+    "tooltip_data": {
+      "user_id": 120769
+    }
   },
   {
-      "value": 6,
-      "date": "2021-03-09",
-      "tooltip_data": {
-          "user_id": 120484
-      }
+    "value": 6,
+    "date": "2021-03-09",
+    "tooltip_data": {
+      "user_id": 120484
+    }
   },
   {
-      "value": 11,
-      "date": "2021-03-09",
-      "tooltip_data": {
-          "user_id": 119919
-      }
+    "value": 11,
+    "date": "2021-03-09",
+    "tooltip_data": {
+      "user_id": 119919
+    }
   },
   {
-      "value": 2,
-      "date": "2021-03-09",
-      "tooltip_data": {
-          "user_id": 119913
-      }
+    "value": 2,
+    "date": "2021-03-09",
+    "tooltip_data": {
+      "user_id": 119913
+    }
   },
   {
-      "value": 5,
-      "date": "2021-03-09",
-      "tooltip_data": {
-          "user_id": 119893
-      }
+    "value": 5,
+    "date": "2021-03-09",
+    "tooltip_data": {
+      "user_id": 119893
+    }
   },
   {
-      "value": 0,
-      "date": "2021-03-16",
-      "tooltip_data": {
-          "user_id": 119975
-      }
+    "value": 0,
+    "date": "2021-03-16",
+    "tooltip_data": {
+      "user_id": 119975
+    }
   },
   {
-      "value": 7,
-      "date": "2021-03-16",
-      "tooltip_data": {
-          "user_id": 119929
-      }
+    "value": 7,
+    "date": "2021-03-16",
+    "tooltip_data": {
+      "user_id": 119929
+    }
   },
   {
-      "value": 10,
-      "date": "2021-03-23",
-      "tooltip_data": {
-          "user_id": 120135
-      }
+    "value": 10,
+    "date": "2021-03-23",
+    "tooltip_data": {
+      "user_id": 120135
+    }
   },
   {
-      "value": 2,
-      "date": "2021-03-23",
-      "tooltip_data": {
-          "user_id": 120100
-      }
+    "value": 2,
+    "date": "2021-03-23",
+    "tooltip_data": {
+      "user_id": 120100
+    }
   },
   {
-      "value": 7,
-      "date": "2021-03-23",
-      "tooltip_data": {
-          "user_id": 121126
-      }
+    "value": 7,
+    "date": "2021-03-23",
+    "tooltip_data": {
+      "user_id": 121126
+    }
   },
   {
-      "value": 11,
-      "date": "2021-03-23",
-      "tooltip_data": {
-          "user_id": 120866
-      }
+    "value": 11,
+    "date": "2021-03-23",
+    "tooltip_data": {
+      "user_id": 120866
+    }
   },
   {
-      "value": 4,
-      "date": "2021-03-30",
-      "tooltip_data": {
-          "user_id": 120123
-      }
+    "value": 4,
+    "date": "2021-03-30",
+    "tooltip_data": {
+      "user_id": 120123
+    }
   },
   {
-      "value": 0,
-      "date": "2021-03-30",
-      "tooltip_data": {
-          "user_id": 118707
-      }
+    "value": 0,
+    "date": "2021-03-30",
+    "tooltip_data": {
+      "user_id": 118707
+    }
   },
   {
-      "value": 1,
-      "date": "2021-04-01",
-      "tooltip_data": {
-          "user_id": 120242
-      }
+    "value": 1,
+    "date": "2021-04-01",
+    "tooltip_data": {
+      "user_id": 120242
+    }
   },
   {
-      "value": 1,
-      "date": "2021-04-06",
-      "tooltip_data": {
-          "user_id": 120223
-      }
+    "value": 1,
+    "date": "2021-04-06",
+    "tooltip_data": {
+      "user_id": 120223
+    }
   },
   {
-      "value": 14,
-      "date": "2021-04-06",
-      "tooltip_data": {
-          "user_id": 120772
-      }
+    "value": 14,
+    "date": "2021-04-06",
+    "tooltip_data": {
+      "user_id": 120772
+    }
   },
   {
-      "value": 6,
-      "date": "2021-04-06",
-      "tooltip_data": {
-          "user_id": 119990
-      }
+    "value": 6,
+    "date": "2021-04-06",
+    "tooltip_data": {
+      "user_id": 119990
+    }
   },
   {
-      "value": 11,
-      "date": "2021-04-13",
-      "tooltip_data": {
-          "user_id": 118817
-      }
+    "value": 11,
+    "date": "2021-04-13",
+    "tooltip_data": {
+      "user_id": 118817
+    }
   },
   {
-      "value": 3,
-      "date": "2021-04-20",
-      "tooltip_data": {
-          "user_id": 118140
-      }
+    "value": 3,
+    "date": "2021-04-20",
+    "tooltip_data": {
+      "user_id": 118140
+    }
   },
   {
-      "value": 6,
-      "date": "2021-04-27",
-      "tooltip_data": {
-          "user_id": 120482
-      }
+    "value": 6,
+    "date": "2021-04-27",
+    "tooltip_data": {
+      "user_id": 120482
+    }
   },
   {
-      "value": 0,
-      "date": "2021-04-27",
-      "tooltip_data": {
-          "user_id": 120224
-      }
+    "value": 0,
+    "date": "2021-04-27",
+    "tooltip_data": {
+      "user_id": 120224
+    }
   },
   {
-      "value": 4,
-      "date": "2021-04-27",
-      "tooltip_data": {
-          "user_id": 120515
-      }
+    "value": 4,
+    "date": "2021-04-27",
+    "tooltip_data": {
+      "user_id": 120515
+    }
   },
   {
-      "value": 7,
-      "date": "2021-05-04",
-      "tooltip_data": {
-          "user_id": 155836
-      }
+    "value": 7,
+    "date": "2021-05-04",
+    "tooltip_data": {
+      "user_id": 155836
+    }
   },
   {
-      "value": 2,
-      "date": "2021-05-04",
-      "tooltip_data": {
-          "user_id": 188770
-      }
+    "value": 2,
+    "date": "2021-05-04",
+    "tooltip_data": {
+      "user_id": 188770
+    }
   },
   {
-      "value": 13,
-      "date": "2021-05-11",
-      "tooltip_data": {
-          "user_id": 120905
-      }
+    "value": 13,
+    "date": "2021-05-11",
+    "tooltip_data": {
+      "user_id": 120905
+    }
   },
   {
-      "value": 1,
-      "date": "2021-05-18",
-      "tooltip_data": {
-          "user_id": 120446
-      }
+    "value": 1,
+    "date": "2021-05-18",
+    "tooltip_data": {
+      "user_id": 120446
+    }
   },
   {
-      "value": 5,
-      "date": "2021-05-25",
-      "tooltip_data": {
-          "user_id": 120566
-      }
+    "value": 5,
+    "date": "2021-05-25",
+    "tooltip_data": {
+      "user_id": 120566
+    }
   },
   {
-      "value": 6,
-      "date": "2021-06-01",
-      "tooltip_data": {
-          "user_id": 120659
-      }
+    "value": 6,
+    "date": "2021-06-01",
+    "tooltip_data": {
+      "user_id": 120659
+    }
   },
   {
-      "value": 3,
-      "date": "2021-06-01",
-      "tooltip_data": {
-          "user_id": 120485
-      }
+    "value": 3,
+    "date": "2021-06-01",
+    "tooltip_data": {
+      "user_id": 120485
+    }
   },
   {
-      "value": 1,
-      "date": "2021-06-01",
-      "tooltip_data": {
-          "user_id": 121025
-      }
+    "value": 1,
+    "date": "2021-06-01",
+    "tooltip_data": {
+      "user_id": 121025
+    }
   },
   {
-      "value": 7,
-      "date": "2021-06-08",
-      "tooltip_data": {
-          "user_id": 120658
-      }
+    "value": 7,
+    "date": "2021-06-08",
+    "tooltip_data": {
+      "user_id": 120658
+    }
   },
   {
-      "value": 0,
-      "date": "2021-06-08",
-      "tooltip_data": {
-          "user_id": 120687
-      }
+    "value": 0,
+    "date": "2021-06-08",
+    "tooltip_data": {
+      "user_id": 120687
+    }
   },
   {
-      "value": 11,
-      "date": "2021-06-08",
-      "tooltip_data": {
-          "user_id": 120699
-      }
+    "value": 11,
+    "date": "2021-06-08",
+    "tooltip_data": {
+      "user_id": 120699
+    }
   },
   {
-      "value": 8,
-      "date": "2021-06-08",
-      "tooltip_data": {
-          "user_id": 118290
-      }
+    "value": 8,
+    "date": "2021-06-08",
+    "tooltip_data": {
+      "user_id": 118290
+    }
   },
   {
-      "value": 2,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 120697
-      }
+    "value": 2,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 120697
+    }
   },
   {
-      "value": 9,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 123928
-      }
+    "value": 9,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 123928
+    }
   },
   {
-      "value": 2,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 120707
-      }
+    "value": 2,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 120707
+    }
   },
   {
-      "value": 2,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 120722
-      }
+    "value": 2,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 120722
+    }
   },
   {
-      "value": 3,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 121013
-      }
+    "value": 3,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 121013
+    }
   },
   {
-      "value": 4,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 121061
-      }
+    "value": 4,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 121061
+    }
   },
   {
-      "value": 5,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 120736
-      }
+    "value": 5,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 120736
+    }
   },
   {
-      "value": 2,
-      "date": "2021-06-22",
-      "tooltip_data": {
-          "user_id": 120719
-      }
+    "value": 2,
+    "date": "2021-06-22",
+    "tooltip_data": {
+      "user_id": 120719
+    }
   },
   {
-      "value": 5,
-      "date": "2021-06-29",
-      "tooltip_data": {
-          "user_id": 120708
-      }
+    "value": 5,
+    "date": "2021-06-29",
+    "tooltip_data": {
+      "user_id": 120708
+    }
   },
   {
-      "value": 1,
-      "date": "2021-07-06",
-      "tooltip_data": {
-          "user_id": 120734
-      }
+    "value": 1,
+    "date": "2021-07-06",
+    "tooltip_data": {
+      "user_id": 120734
+    }
   },
   {
-      "value": 5,
-      "date": "2021-07-06",
-      "tooltip_data": {
-          "user_id": 120744
-      }
+    "value": 5,
+    "date": "2021-07-06",
+    "tooltip_data": {
+      "user_id": 120744
+    }
   },
   {
-      "value": 5,
-      "date": "2021-07-06",
-      "tooltip_data": {
-          "user_id": 120735
-      }
+    "value": 5,
+    "date": "2021-07-06",
+    "tooltip_data": {
+      "user_id": 120735
+    }
   },
   {
-      "value": 12,
-      "date": "2021-07-06",
-      "tooltip_data": {
-          "user_id": 120726
-      }
+    "value": 12,
+    "date": "2021-07-06",
+    "tooltip_data": {
+      "user_id": 120726
+    }
   },
   {
-      "value": 6,
-      "date": "2021-07-13",
-      "tooltip_data": {
-          "user_id": 120901
-      }
+    "value": 6,
+    "date": "2021-07-13",
+    "tooltip_data": {
+      "user_id": 120901
+    }
   },
   {
-      "value": 7,
-      "date": "2021-07-13",
-      "tooltip_data": {
-          "user_id": 120894
-      }
+    "value": 7,
+    "date": "2021-07-13",
+    "tooltip_data": {
+      "user_id": 120894
+    }
   },
   {
-      "value": 5,
-      "date": "2021-07-20",
-      "tooltip_data": {
-          "user_id": 120794
-      }
+    "value": 5,
+    "date": "2021-07-20",
+    "tooltip_data": {
+      "user_id": 120794
+    }
   },
   {
-      "value": 11,
-      "date": "2021-07-28",
-      "tooltip_data": {
-          "user_id": 245446
-      }
+    "value": 11,
+    "date": "2021-07-28",
+    "tooltip_data": {
+      "user_id": 245446
+    }
   },
   {
-      "value": 9,
-      "date": "2021-08-03",
-      "tooltip_data": {
-          "user_id": 121040
-      }
+    "value": 9,
+    "date": "2021-08-03",
+    "tooltip_data": {
+      "user_id": 121040
+    }
   },
   {
-      "value": 6,
-      "date": "2021-08-03",
-      "tooltip_data": {
-          "user_id": 120850
-      }
+    "value": 6,
+    "date": "2021-08-03",
+    "tooltip_data": {
+      "user_id": 120850
+    }
   },
   {
-      "value": 2,
-      "date": "2021-08-03",
-      "tooltip_data": {
-          "user_id": 134994
-      }
+    "value": 2,
+    "date": "2021-08-03",
+    "tooltip_data": {
+      "user_id": 134994
+    }
   },
   {
-      "value": 11,
-      "date": "2021-08-10",
-      "tooltip_data": {
-          "user_id": 118820
-      }
+    "value": 11,
+    "date": "2021-08-10",
+    "tooltip_data": {
+      "user_id": 118820
+    }
   },
   {
-      "value": 14,
-      "date": "2021-08-17",
-      "tooltip_data": {
-          "user_id": 120880
-      }
+    "value": 14,
+    "date": "2021-08-17",
+    "tooltip_data": {
+      "user_id": 120880
+    }
   },
   {
-      "value": 12,
-      "date": "2021-08-17",
-      "tooltip_data": {
-          "user_id": 121024
-      }
+    "value": 12,
+    "date": "2021-08-17",
+    "tooltip_data": {
+      "user_id": 121024
+    }
   },
   {
-      "value": 3,
-      "date": "2021-08-17",
-      "tooltip_data": {
-          "user_id": 120898
-      }
+    "value": 3,
+    "date": "2021-08-17",
+    "tooltip_data": {
+      "user_id": 120898
+    }
   },
   {
-      "value": 7,
-      "date": "2021-08-24",
-      "tooltip_data": {
-          "user_id": 166149
-      }
+    "value": 7,
+    "date": "2021-08-24",
+    "tooltip_data": {
+      "user_id": 166149
+    }
   },
   {
-      "value": 5,
-      "date": "2021-08-31",
-      "tooltip_data": {
-          "user_id": 143017
-      }
+    "value": 5,
+    "date": "2021-08-31",
+    "tooltip_data": {
+      "user_id": 143017
+    }
   },
   {
-      "value": 9,
-      "date": "2021-08-31",
-      "tooltip_data": {
-          "user_id": 132493
-      }
+    "value": 9,
+    "date": "2021-08-31",
+    "tooltip_data": {
+      "user_id": 132493
+    }
   },
   {
-      "value": 1,
-      "date": "2021-08-31",
-      "tooltip_data": {
-          "user_id": 121194
-      }
+    "value": 1,
+    "date": "2021-08-31",
+    "tooltip_data": {
+      "user_id": 121194
+    }
   },
   {
-      "value": 13,
-      "date": "2021-08-31",
-      "tooltip_data": {
-          "user_id": 121100
-      }
+    "value": 13,
+    "date": "2021-08-31",
+    "tooltip_data": {
+      "user_id": 121100
+    }
   },
   {
-      "value": 0,
-      "date": "2021-08-31",
-      "tooltip_data": {
-          "user_id": 120975
-      }
+    "value": 0,
+    "date": "2021-08-31",
+    "tooltip_data": {
+      "user_id": 120975
+    }
   },
   {
-      "value": 11,
-      "date": "2021-08-31",
-      "tooltip_data": {
-          "user_id": 225649
-      }
+    "value": 11,
+    "date": "2021-08-31",
+    "tooltip_data": {
+      "user_id": 225649
+    }
   },
   {
-      "value": 11,
-      "date": "2021-09-07",
-      "tooltip_data": {
-          "user_id": 121092
-      }
+    "value": 11,
+    "date": "2021-09-07",
+    "tooltip_data": {
+      "user_id": 121092
+    }
   },
   {
-      "value": 6,
-      "date": "2021-09-14",
-      "tooltip_data": {
-          "user_id": 121035
-      }
+    "value": 6,
+    "date": "2021-09-14",
+    "tooltip_data": {
+      "user_id": 121035
+    }
   },
   {
-      "value": 4,
-      "date": "2021-09-14",
-      "tooltip_data": {
-          "user_id": 121187
-      }
+    "value": 4,
+    "date": "2021-09-14",
+    "tooltip_data": {
+      "user_id": 121187
+    }
   },
   {
-      "value": 11,
-      "date": "2021-09-14",
-      "tooltip_data": {
-          "user_id": 121054
-      }
+    "value": 11,
+    "date": "2021-09-14",
+    "tooltip_data": {
+      "user_id": 121054
+    }
   },
   {
-      "value": 6,
-      "date": "2021-09-21",
-      "tooltip_data": {
-          "user_id": 121096
-      }
+    "value": 6,
+    "date": "2021-09-21",
+    "tooltip_data": {
+      "user_id": 121096
+    }
   },
   {
-      "value": 13,
-      "date": "2021-09-28",
-      "tooltip_data": {
-          "user_id": 121111
-      }
+    "value": 13,
+    "date": "2021-09-28",
+    "tooltip_data": {
+      "user_id": 121111
+    }
   },
   {
-      "value": 9,
-      "date": "2021-09-28",
-      "tooltip_data": {
-          "user_id": 121156
-      }
+    "value": 9,
+    "date": "2021-09-28",
+    "tooltip_data": {
+      "user_id": 121156
+    }
   },
   {
-      "value": 2,
-      "date": "2021-09-30",
-      "tooltip_data": {
-          "user_id": 420939
-      }
+    "value": 2,
+    "date": "2021-09-30",
+    "tooltip_data": {
+      "user_id": 420939
+    }
   },
   {
-      "value": 5,
-      "date": "2021-10-11",
-      "tooltip_data": {
-          "user_id": 484380
-      }
+    "value": 5,
+    "date": "2021-10-11",
+    "tooltip_data": {
+      "user_id": 484380
+    }
   },
   {
-      "value": 4,
-      "date": "2021-10-12",
-      "tooltip_data": {
-          "user_id": 118839
-      }
+    "value": 4,
+    "date": "2021-10-12",
+    "tooltip_data": {
+      "user_id": 118839
+    }
   },
   {
-      "value": 0,
-      "date": "2021-10-12",
-      "tooltip_data": {
-          "user_id": 132487
-      }
+    "value": 0,
+    "date": "2021-10-12",
+    "tooltip_data": {
+      "user_id": 132487
+    }
   },
   {
-      "value": 6,
-      "date": "2021-10-15",
-      "tooltip_data": {
-          "user_id": 123946
-      }
+    "value": 6,
+    "date": "2021-10-15",
+    "tooltip_data": {
+      "user_id": 123946
+    }
   },
   {
-      "value": 7,
-      "date": "2021-11-02",
-      "tooltip_data": {
-          "user_id": 119643
-      }
+    "value": 7,
+    "date": "2021-11-02",
+    "tooltip_data": {
+      "user_id": 119643
+    }
   },
   {
-      "value": 1,
-      "date": "2021-11-09",
-      "tooltip_data": {
-          "user_id": 123941
-      }
+    "value": 1,
+    "date": "2021-11-09",
+    "tooltip_data": {
+      "user_id": 123941
+    }
   },
   {
-      "value": 13,
-      "date": "2021-11-09",
-      "tooltip_data": {
-          "user_id": 123923
-      }
+    "value": 13,
+    "date": "2021-11-09",
+    "tooltip_data": {
+      "user_id": 123923
+    }
   },
   {
-      "value": 4,
-      "date": "2021-11-09",
-      "tooltip_data": {
-          "user_id": 123920
-      }
+    "value": 4,
+    "date": "2021-11-09",
+    "tooltip_data": {
+      "user_id": 123920
+    }
   },
   {
-      "value": 9,
-      "date": "2021-11-09",
-      "tooltip_data": {
-          "user_id": 120168
-      }
+    "value": 9,
+    "date": "2021-11-09",
+    "tooltip_data": {
+      "user_id": 120168
+    }
   },
   {
-      "value": 6,
-      "date": "2021-11-10",
-      "tooltip_data": {
-          "user_id": 420942
-      }
+    "value": 6,
+    "date": "2021-11-10",
+    "tooltip_data": {
+      "user_id": 420942
+    }
   },
   {
-      "value": 11,
-      "date": "2021-11-16",
-      "tooltip_data": {
-          "user_id": 125119
-      }
+    "value": 11,
+    "date": "2021-11-16",
+    "tooltip_data": {
+      "user_id": 125119
+    }
   },
   {
-      "value": 4,
-      "date": "2021-11-17",
-      "tooltip_data": {
-          "user_id": 293491
-      }
+    "value": 4,
+    "date": "2021-11-17",
+    "tooltip_data": {
+      "user_id": 293491
+    }
   },
   {
-      "value": 0,
-      "date": "2021-11-21",
-      "tooltip_data": {
-          "user_id": 118109
-      }
+    "value": 0,
+    "date": "2021-11-21",
+    "tooltip_data": {
+      "user_id": 118109
+    }
   },
   {
-      "value": 2,
-      "date": "2021-11-30",
-      "tooltip_data": {
-          "user_id": 143009
-      }
+    "value": 2,
+    "date": "2021-11-30",
+    "tooltip_data": {
+      "user_id": 143009
+    }
   },
   {
-      "value": 5,
-      "date": "2021-11-30",
-      "tooltip_data": {
-          "user_id": 132475
-      }
+    "value": 5,
+    "date": "2021-11-30",
+    "tooltip_data": {
+      "user_id": 132475
+    }
   },
   {
-      "value": 5,
-      "date": "2021-11-30",
-      "tooltip_data": {
-          "user_id": 119580
-      }
+    "value": 5,
+    "date": "2021-11-30",
+    "tooltip_data": {
+      "user_id": 119580
+    }
   },
   {
-      "value": 3,
-      "date": "2021-11-30",
-      "tooltip_data": {
-          "user_id": 118286
-      }
+    "value": 3,
+    "date": "2021-11-30",
+    "tooltip_data": {
+      "user_id": 118286
+    }
   },
   {
-      "value": 10,
-      "date": "2021-11-30",
-      "tooltip_data": {
-          "user_id": 132506
-      }
+    "value": 10,
+    "date": "2021-11-30",
+    "tooltip_data": {
+      "user_id": 132506
+    }
   },
   {
-      "value": 14,
-      "date": "2021-11-30",
-      "tooltip_data": {
-          "user_id": 132503
-      }
+    "value": 14,
+    "date": "2021-11-30",
+    "tooltip_data": {
+      "user_id": 132503
+    }
   },
   {
-      "value": 5,
-      "date": "2021-12-02",
-      "tooltip_data": {
-          "user_id": 466146
-      }
+    "value": 5,
+    "date": "2021-12-02",
+    "tooltip_data": {
+      "user_id": 466146
+    }
   },
   {
-      "value": 9,
-      "date": "2021-12-14",
-      "tooltip_data": {
-          "user_id": 155844
-      }
+    "value": 9,
+    "date": "2021-12-14",
+    "tooltip_data": {
+      "user_id": 155844
+    }
   },
   {
-      "value": 12,
-      "date": "2021-12-14",
-      "tooltip_data": {
-          "user_id": 134982
-      }
+    "value": 12,
+    "date": "2021-12-14",
+    "tooltip_data": {
+      "user_id": 134982
+    }
   },
   {
-      "value": 11,
-      "date": "2021-12-14",
-      "tooltip_data": {
-          "user_id": 134988
-      }
+    "value": 11,
+    "date": "2021-12-14",
+    "tooltip_data": {
+      "user_id": 134988
+    }
   },
   {
-      "value": 7,
-      "date": "2021-12-20",
-      "tooltip_data": {
-          "user_id": 420944
-      }
+    "value": 7,
+    "date": "2021-12-20",
+    "tooltip_data": {
+      "user_id": 420944
+    }
   },
   {
-      "value": 9,
-      "date": "2021-12-21",
-      "tooltip_data": {
-          "user_id": 122677
-      }
+    "value": 9,
+    "date": "2021-12-21",
+    "tooltip_data": {
+      "user_id": 122677
+    }
   },
   {
-      "value": 2,
-      "date": "2022-01-04",
-      "tooltip_data": {
-          "user_id": 211590
-      }
+    "value": 2,
+    "date": "2022-01-04",
+    "tooltip_data": {
+      "user_id": 211590
+    }
   },
   {
-      "value": 14,
-      "date": "2022-01-11",
-      "tooltip_data": {
-          "user_id": 118016
-      }
+    "value": 14,
+    "date": "2022-01-11",
+    "tooltip_data": {
+      "user_id": 118016
+    }
   },
   {
-      "value": 6,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 143014
-      }
+    "value": 6,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 143014
+    }
   },
   {
-      "value": 12,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 168951
-      }
+    "value": 12,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 168951
+    }
   },
   {
-      "value": 12,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 181851
-      }
+    "value": 12,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 181851
+    }
   },
   {
-      "value": 10,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 118025
-      }
+    "value": 10,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 118025
+    }
   },
   {
-      "value": 1,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 143019
-      }
+    "value": 1,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 143019
+    }
   },
   {
-      "value": 5,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 166139
-      }
+    "value": 5,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 166139
+    }
   },
   {
-      "value": 13,
-      "date": "2022-01-18",
-      "tooltip_data": {
-          "user_id": 233596
-      }
+    "value": 13,
+    "date": "2022-01-18",
+    "tooltip_data": {
+      "user_id": 233596
+    }
   },
   {
-      "value": 8,
-      "date": "2022-01-22",
-      "tooltip_data": {
-          "user_id": 282147
-      }
+    "value": 8,
+    "date": "2022-01-22",
+    "tooltip_data": {
+      "user_id": 282147
+    }
   },
   {
-      "value": 4,
-      "date": "2022-02-01",
-      "tooltip_data": {
-          "user_id": 147353
-      }
+    "value": 4,
+    "date": "2022-02-01",
+    "tooltip_data": {
+      "user_id": 147353
+    }
   },
   {
-      "value": 6,
-      "date": "2022-02-01",
-      "tooltip_data": {
-          "user_id": 118515
-      }
+    "value": 6,
+    "date": "2022-02-01",
+    "tooltip_data": {
+      "user_id": 118515
+    }
   },
   {
-      "value": 9,
-      "date": "2022-02-08",
-      "tooltip_data": {
-          "user_id": 168952
-      }
+    "value": 9,
+    "date": "2022-02-08",
+    "tooltip_data": {
+      "user_id": 168952
+    }
   },
   {
-      "value": 4,
-      "date": "2022-02-15",
-      "tooltip_data": {
-          "user_id": 151015
-      }
+    "value": 4,
+    "date": "2022-02-15",
+    "tooltip_data": {
+      "user_id": 151015
+    }
   },
   {
-      "value": 12,
-      "date": "2022-03-01",
-      "tooltip_data": {
-          "user_id": 120197
-      }
+    "value": 12,
+    "date": "2022-03-01",
+    "tooltip_data": {
+      "user_id": 120197
+    }
   },
   {
-      "value": 9,
-      "date": "2022-03-08",
-      "tooltip_data": {
-          "user_id": 121043
-      }
+    "value": 9,
+    "date": "2022-03-08",
+    "tooltip_data": {
+      "user_id": 121043
+    }
   },
   {
-      "value": 8,
-      "date": "2022-03-22",
-      "tooltip_data": {
-          "user_id": 282154
-      }
+    "value": 8,
+    "date": "2022-03-22",
+    "tooltip_data": {
+      "user_id": 282154
+    }
   },
   {
-      "value": 6,
-      "date": "2022-04-05",
-      "tooltip_data": {
-          "user_id": 168945
-      }
+    "value": 6,
+    "date": "2022-04-05",
+    "tooltip_data": {
+      "user_id": 168945
+    }
   },
   {
-      "value": 7,
-      "date": "2022-04-05",
-      "tooltip_data": {
-          "user_id": 118243
-      }
+    "value": 7,
+    "date": "2022-04-05",
+    "tooltip_data": {
+      "user_id": 118243
+    }
   },
   {
-      "value": 9,
-      "date": "2022-04-16",
-      "tooltip_data": {
-          "user_id": 372797
-      }
+    "value": 9,
+    "date": "2022-04-16",
+    "tooltip_data": {
+      "user_id": 372797
+    }
   },
   {
-      "value": 9,
-      "date": "2022-05-02",
-      "tooltip_data": {
-          "user_id": 390684
-      }
+    "value": 9,
+    "date": "2022-05-02",
+    "tooltip_data": {
+      "user_id": 390684
+    }
   },
   {
-      "value": 7,
-      "date": "2022-05-12",
-      "tooltip_data": {
-          "user_id": 304610
-      }
+    "value": 7,
+    "date": "2022-05-12",
+    "tooltip_data": {
+      "user_id": 304610
+    }
   },
   {
-      "value": 1,
-      "date": "2022-05-17",
-      "tooltip_data": {
-          "user_id": 118519
-      }
+    "value": 1,
+    "date": "2022-05-17",
+    "tooltip_data": {
+      "user_id": 118519
+    }
   },
   {
-      "value": 7,
-      "date": "2022-05-17",
-      "tooltip_data": {
-          "user_id": 262571
-      }
+    "value": 7,
+    "date": "2022-05-17",
+    "tooltip_data": {
+      "user_id": 262571
+    }
   },
   {
-      "value": 5,
-      "date": "2022-06-05",
-      "tooltip_data": {
-          "user_id": 181853
-      }
+    "value": 5,
+    "date": "2022-06-05",
+    "tooltip_data": {
+      "user_id": 181853
+    }
   },
   {
-      "value": 14,
-      "date": "2022-06-05",
-      "tooltip_data": {
-          "user_id": 484375
-      }
+    "value": 14,
+    "date": "2022-06-05",
+    "tooltip_data": {
+      "user_id": 484375
+    }
   },
   {
-      "value": 3,
-      "date": "2022-06-21",
-      "tooltip_data": {
-          "user_id": 420943
-      }
+    "value": 3,
+    "date": "2022-06-21",
+    "tooltip_data": {
+      "user_id": 420943
+    }
   },
   {
-      "value": 5,
-      "date": "2022-06-21",
-      "tooltip_data": {
-          "user_id": 301642
-      }
+    "value": 5,
+    "date": "2022-06-21",
+    "tooltip_data": {
+      "user_id": 301642
+    }
   },
   {
-      "value": 0,
-      "date": "2022-06-25",
-      "tooltip_data": {
-          "user_id": 475859
-      }
+    "value": 0,
+    "date": "2022-06-25",
+    "tooltip_data": {
+      "user_id": 475859
+    }
   },
   {
-      "value": 0,
-      "date": "2022-06-26",
-      "tooltip_data": {
-          "user_id": 420948
-      }
+    "value": 0,
+    "date": "2022-06-26",
+    "tooltip_data": {
+      "user_id": 420948
+    }
   },
   {
-      "value": 14,
-      "date": "2022-07-05",
-      "tooltip_data": {
-          "user_id": 118027
-      }
+    "value": 14,
+    "date": "2022-07-05",
+    "tooltip_data": {
+      "user_id": 118027
+    }
   },
   {
-      "value": 6,
-      "date": "2022-07-05",
-      "tooltip_data": {
-          "user_id": 118527
-      }
+    "value": 6,
+    "date": "2022-07-05",
+    "tooltip_data": {
+      "user_id": 118527
+    }
   },
   {
-      "value": 13,
-      "date": "2022-07-19",
-      "tooltip_data": {
-          "user_id": 202388
-      }
+    "value": 13,
+    "date": "2022-07-19",
+    "tooltip_data": {
+      "user_id": 202388
+    }
   },
   {
-      "value": 10,
-      "date": "2022-07-26",
-      "tooltip_data": {
-          "user_id": 314262
-      }
+    "value": 10,
+    "date": "2022-07-26",
+    "tooltip_data": {
+      "user_id": 314262
+    }
   },
   {
-      "value": 4,
-      "date": "2022-07-26",
-      "tooltip_data": {
-          "user_id": 125118
-      }
+    "value": 4,
+    "date": "2022-07-26",
+    "tooltip_data": {
+      "user_id": 125118
+    }
   },
   {
-      "value": 9,
-      "date": "2022-08-02",
-      "tooltip_data": {
-          "user_id": 333979
-      }
+    "value": 9,
+    "date": "2022-08-02",
+    "tooltip_data": {
+      "user_id": 333979
+    }
   },
   {
-      "value": 12,
-      "date": "2022-08-23",
-      "tooltip_data": {
-          "user_id": 121138
-      }
+    "value": 12,
+    "date": "2022-08-23",
+    "tooltip_data": {
+      "user_id": 121138
+    }
   },
   {
-      "value": 9,
-      "date": "2022-08-23",
-      "tooltip_data": {
-          "user_id": 117982
-      }
+    "value": 9,
+    "date": "2022-08-23",
+    "tooltip_data": {
+      "user_id": 117982
+    }
   },
   {
-      "value": 1,
-      "date": "2022-09-13",
-      "tooltip_data": {
-          "user_id": 298938
-      }
+    "value": 1,
+    "date": "2022-09-13",
+    "tooltip_data": {
+      "user_id": 298938
+    }
   },
   {
-      "value": 8,
-      "date": "2022-09-20",
-      "tooltip_data": {
-          "user_id": 333982
-      }
+    "value": 8,
+    "date": "2022-09-20",
+    "tooltip_data": {
+      "user_id": 333982
+    }
   },
   {
-      "value": 3,
-      "date": "2022-10-11",
-      "tooltip_data": {
-          "user_id": 119493
-      }
+    "value": 3,
+    "date": "2022-10-11",
+    "tooltip_data": {
+      "user_id": 119493
+    }
   },
   {
-      "value": 4,
-      "date": "2022-10-11",
-      "tooltip_data": {
-          "user_id": 117985
-      }
+    "value": 4,
+    "date": "2022-10-11",
+    "tooltip_data": {
+      "user_id": 117985
+    }
   },
   {
-      "value": 4,
-      "date": "2022-10-11",
-      "tooltip_data": {
-          "user_id": 118685
-      }
+    "value": 4,
+    "date": "2022-10-11",
+    "tooltip_data": {
+      "user_id": 118685
+    }
   },
   {
-      "value": 7,
-      "date": "2022-10-18",
-      "tooltip_data": {
-          "user_id": 118516
-      }
+    "value": 7,
+    "date": "2022-10-18",
+    "tooltip_data": {
+      "user_id": 118516
+    }
   },
   {
-      "value": 0,
-      "date": "2022-10-25",
-      "tooltip_data": {
-          "user_id": 121137
-      }
+    "value": 0,
+    "date": "2022-10-25",
+    "tooltip_data": {
+      "user_id": 121137
+    }
   },
   {
-      "value": 1,
-      "date": "2022-10-25",
-      "tooltip_data": {
-          "user_id": 330637
-      }
+    "value": 1,
+    "date": "2022-10-25",
+    "tooltip_data": {
+      "user_id": 330637
+    }
   },
   {
-      "value": 9,
-      "date": "2022-11-01",
-      "tooltip_data": {
-          "user_id": 332331
-      }
+    "value": 9,
+    "date": "2022-11-01",
+    "tooltip_data": {
+      "user_id": 332331
+    }
   },
   {
-      "value": 5,
-      "date": "2022-11-08",
-      "tooltip_data": {
-          "user_id": 118708
-      }
+    "value": 5,
+    "date": "2022-11-08",
+    "tooltip_data": {
+      "user_id": 118708
+    }
   },
   {
-      "value": 10,
-      "date": "2022-12-13",
-      "tooltip_data": {
-          "user_id": 225653
-      }
+    "value": 10,
+    "date": "2022-12-13",
+    "tooltip_data": {
+      "user_id": 225653
+    }
   },
   {
-      "value": 13,
-      "date": "2023-01-08",
-      "tooltip_data": {
-          "user_id": 270700
-      }
+    "value": 13,
+    "date": "2023-01-08",
+    "tooltip_data": {
+      "user_id": 270700
+    }
   },
   {
-      "value": 6,
-      "date": "2023-03-03",
-      "tooltip_data": {
-          "user_id": 282145
-      }
+    "value": 6,
+    "date": "2023-03-03",
+    "tooltip_data": {
+      "user_id": 282145
+    }
   },
   {
-      "value": 12,
-      "date": "2023-04-09",
-      "tooltip_data": {
-          "user_id": 119684
-      }
+    "value": 12,
+    "date": "2023-04-09",
+    "tooltip_data": {
+      "user_id": 119684
+    }
   }
 ]
