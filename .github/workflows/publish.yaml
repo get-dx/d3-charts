@@ -35,4 +35,4 @@ jobs:
           cache: "yarn"
       - run: yarn npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
