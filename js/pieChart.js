@@ -4,6 +4,7 @@ window.PieChart = class PieChart {
     tooltipHtml,
     values = [],
     minAngleForValueLabel = 15,
+    minAngleForLabel = 5,
     labelRadiusRatio = 0.95,
     pieRadiusRatio = 0.9,
     valueRadiusRatio = 0.7,
@@ -12,6 +13,7 @@ window.PieChart = class PieChart {
     this.tooltipHtml = tooltipHtml;
     this.values = values;
     this.minAngleForValueLabel = minAngleForValueLabel;
+    this.minAngleForLabel = minAngleForLabel;
     this.labelRadiusRatio = labelRadiusRatio;
     this.pieRadiusRatio = pieRadiusRatio;
     this.valueRadiusRatio = valueRadiusRatio;
@@ -75,22 +77,22 @@ window.PieChart = class PieChart {
     this.sortedValues = this.values
       .slice()
       .sort((a, b) =>
-        d3.descending(this.accessor.value(a), this.accessor.value(b))
+        d3.descending(this.accessor.value(a), this.accessor.value(b)),
       );
 
     const nGeneratedColors = this.sortedValues.filter(
-      (d) => !this.accessor.color(d)
+      (d) => !this.accessor.color(d),
     ).length;
     const generatedColors = d3.quantize(
       (t) => d3.interpolateSpectral(t * 0.8 + 0.1),
-      Math.max(nGeneratedColors, 2)
+      Math.max(nGeneratedColors, 2),
     );
     let colors = [];
     this.sortedValues.forEach((d) => {
       colors.push(
         !!this.accessor.color(d)
           ? this.accessor.color(d)
-          : generatedColors.pop()
+          : generatedColors.pop(),
       );
     });
     this.color.domain(this.sortedValues.map(this.accessor.value)).range(colors);
@@ -109,7 +111,7 @@ window.PieChart = class PieChart {
     this.radius =
       Math.min(
         this.width - this.margin.left - this.margin.right,
-        this.height - this.margin.top - this.margin.bottom
+        this.height - this.margin.top - this.margin.bottom,
       ) / 2;
 
     this.arc.outerRadius(this.radius * this.pieRadiusRatio);
@@ -163,7 +165,7 @@ window.PieChart = class PieChart {
         enter
           .append("g")
           .attr("class", "arc-value-texts")
-          .attr("text-anchor", "middle")
+          .attr("text-anchor", "middle"),
       )
       .selectAll(".arc-value-text")
       .data(this.arcs, (d) => this.accessor.label(d.data))
@@ -171,13 +173,13 @@ window.PieChart = class PieChart {
         enter
           .append("text")
           .attr("class", "arc-value-text")
-          .attr("dy", "0.32em")
+          .attr("dy", "0.32em"),
       )
       .attr("transform", (d) => `translate(${this.arcValue.centroid(d)})`)
       .text((d) =>
         d.endAngle - d.startAngle > (this.minAngleForValueLabel / 180) * Math.PI
           ? this.accessor.value(d.data)
-          : ""
+          : "",
       );
   }
 
@@ -199,16 +201,20 @@ window.PieChart = class PieChart {
             g
               .append("polyline")
               .attr("class", "arc-label-polyline")
-              .attr("fill", "none")
+              .attr("fill", "none"),
           )
           .call((g) =>
             g
               .append("text")
               .attr("class", "arc-label-text")
-              .attr("dy", "0.32em")
-          )
+              .attr("dy", "0.32em"),
+          ),
       )
-      .style("display", null)
+      .style("display", (d) =>
+        d.endAngle - d.startAngle > (this.minAngleForLabel / 180) * Math.PI
+          ? null
+          : "none",
+      )
       .call((g) =>
         g.select(".arc-label-polyline").attr("points", (d) => {
           const pos = this.arcLabel.centroid(d);
@@ -218,7 +224,7 @@ window.PieChart = class PieChart {
             this.arcLabel.centroid(d),
             pos,
           ];
-        })
+        }),
       )
       .call((g) =>
         g
@@ -229,7 +235,7 @@ window.PieChart = class PieChart {
             return `translate(${pos})`;
           })
           .attr("text-anchor", (d) => (d.midAngle < Math.PI ? "start" : "end"))
-          .text((d) => this.accessor.label(d.data))
+          .text((d) => this.accessor.label(d.data)),
       );
 
     // Hide all labels when the group is beyond the svg container
@@ -238,7 +244,7 @@ window.PieChart = class PieChart {
       "display",
       gArcLabelsBBox.width > this.width || gArcLabelsBBox.height > this.height
         ? "none"
-        : null
+        : null,
     );
 
     // Hide individual labels when it's overlapping with previous labels
