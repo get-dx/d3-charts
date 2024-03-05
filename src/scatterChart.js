@@ -583,8 +583,6 @@ function initLabeler() {
 
     let max_move = 5.0;
     let max_angle = 0.5;
-    let acc = 0;
-    let rej = 0;
 
     // weights
     let w_len = 0.2; // leader line length
@@ -595,10 +593,8 @@ function initLabeler() {
 
     // booleans for user defined functions
     let user_energy = false;
-    let user_schedule = false;
 
     let user_defined_energy;
-    let user_defined_schedule;
 
     const energy = (index) => {
       // energy function, tailored for label placement
@@ -718,12 +714,11 @@ function initLabeler() {
       let delta_energy = new_energy - old_energy;
 
       if (Math.random() < Math.exp(-delta_energy / currT)) {
-        acc += 1;
+        // do nothing
       } else {
         // move back to old coordinates
         lab[i].x = x_old;
         lab[i].y = y_old;
-        rej += 1;
       }
     };
 
@@ -781,12 +776,11 @@ function initLabeler() {
       let delta_energy = new_energy - old_energy;
 
       if (Math.random() < Math.exp(-delta_energy / currT)) {
-        acc += 1;
+        // do nothing
       } else {
         // move back to old coordinates
         lab[i].x = x_old;
         lab[i].y = y_old;
-        rej += 1;
       }
     };
 
@@ -872,11 +866,9 @@ function initLabeler() {
       return labeler;
     };
 
-    labeler.alt_schedule = function (x) {
+    labeler.alt_schedule = function () {
       // user defined cooling_schedule
       if (!arguments.length) return cooling_schedule;
-      user_defined_schedule = x;
-      user_schedule = true;
       return labeler;
     };
 

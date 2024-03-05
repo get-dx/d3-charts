@@ -425,7 +425,7 @@ export class LineChart {
   }
 
   clicked() {
-    if (!this.onClick || this.indexData === null) return;
+    if (!this.onClick || this.indexDate === null) return;
     const date = this.dates[this.indexDate];
     const d = this.values.find((e) => this.accessor.x(e) - date === 0);
     const cd = this.comparisonValues.find(

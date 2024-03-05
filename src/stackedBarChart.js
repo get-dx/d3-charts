@@ -373,7 +373,7 @@ export class StackedBarChart {
       x = 0;
     }
     const yOffset = 8;
-    const [mx, my] = d3.pointer(event);
+    const my = d3.pointer(event)[1];
     let y = my - yOffset - tooltipRect.height;
     if (y < 0) {
       y = my + yOffset;

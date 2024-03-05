@@ -7,18 +7,19 @@ This repository contains our [D3.js](https://d3js.org) chart classes:
 - [Scatter time chart](#scatter-time-chart)
 - [Scatter chart](#scatter-chart)
 - [Pie chart](#pie-chart)
+- [Stacked bar chart](#stacked-bar-chart)
 
-This repository also contains examples which you can view by running [http-server](https://github.com/http-party/http-server):
+This repository also contains examples which you can view by running —
 
-```
-brew install http-server
-
-http-server
+```bash
+bin/start
 ```
 
 ### Bar chart
 
 ```javascript
+import { BarChart } from "@get-dx/d3-charts";
+
 const barchart = new BarChart({
   elChart: document.getElementById("#mybarchart"),
 
@@ -79,6 +80,8 @@ barchart.redraw();
 ### Line chart
 
 ```javascript
+import { LineChart } from "@get-dx/d3-charts";
+
 const linechart = new LineChart({
   elChart: document.getElementById("#mylinechart"),
 
@@ -161,6 +164,8 @@ linechart.redraw();
 ### Scatter time chart
 
 ```javascript
+import { ScatterTimeChart } from "@get-dx/d3-charts";
+
 const scattertimechart = new ScatterTimeChart({
   elChart: document.getElementById("#myscattertimechart"),
 
@@ -221,6 +226,8 @@ scattertimechart.redraw();
 ### Scatter chart
 
 ```javascript
+import { ScatterChart } from '@get-dx/d3-charts'
+
 const scatterplot = new ScatterChart({
   elChart: document.getElementById("#myscatterchart"),
 
@@ -345,6 +352,8 @@ scatterplot.redraw();
 ### Pie chart
 
 ```javascript
+import { PieChart } from "@get-dx/d3-charts";
+
 const piechart = new PieChart({
   elChart: document.getElementById("#mypiechart"),
 
@@ -389,7 +398,9 @@ piechart.redraw();
 ### Stacked bar chart
 
 ```javascript
-const stackedbarchart = new StackedChart({
+import { StackedBarChart } from "@get-dx/d3-charts";
+
+const stackedbarchart = new StackedBarChart({
   elChart: document.getElementById("#mystackedbarchart"),
 
     // optional - defaults to 0.4
