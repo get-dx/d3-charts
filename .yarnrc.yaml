@@ -1,1 +1,2 @@
-npmAuthToken: ${NPM_AUTH_TOKEN}
+npmAuthToken: ${NODE_AUTH_TOKEN}
+npmPublishAccess: "public"
