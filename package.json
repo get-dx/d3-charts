@@ -33,6 +33,9 @@
   "dependencies": {
     "eslint": "^8.57.0"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "files": [
     "dist"
   ]
