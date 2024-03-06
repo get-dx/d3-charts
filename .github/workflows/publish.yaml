@@ -5,23 +5,7 @@ on:
     types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
-      - run: yarn
-      - run: yarn build
-
   publish-gpr:
-    needs: build
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -35,6 +19,8 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
           cache: "yarn"
+      - run: yarn
+      - run: yarn build
       - run: yarn npm publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
