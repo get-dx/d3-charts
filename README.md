@@ -27,13 +27,19 @@ yarn global add yalc
 
 ### YALC Steps —
 
+1. Setup yarn -
+
+```bash
+yarn
+```
+
 1. Build this package and publish —
 
 ```bash
 yarn build && yalc publish
 ```
 
-2. In the app where you want to test this package, add the package with yalv —
+2. In the app where you want to test this package, add the package with yalc —
 
 ```bash
 yalc add @get-dx/d3-charts
