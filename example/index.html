@@ -190,6 +190,12 @@
           <div id="line-6-chart" class="chart-container"></div>
         </div>
       </div>
+      <div class="card" style="grid-column: span 2">
+        <div class="card-title">Bump Chart</div>
+        <div class="card-body">
+          <div id="bump-chart" class="chart-container"></div>
+        </div>
+      </div>
     </main>
     <!-- D3 Peer dependency-->
     <script type="importmap">
@@ -203,8 +209,8 @@
       import * as d3 from "d3";
       import {
         BarChart,
+        BumpChart,
         LineChart,
-        linearRegression,
         PieChart,
         ScatterChart,
         ScatterTimeChart,
@@ -890,6 +896,16 @@
             <div>${d.value}</div>
             `;
           },
+        });
+      }
+
+      // Bump Chart
+      {
+        d3.json("data/bump_dataset.json").then((data) => {
+          const bumpChart = new BumpChart({
+            elChart: document.getElementById("bump-chart"),
+            data,
+          });
         });
       }
     </script>
