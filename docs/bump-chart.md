@@ -1,61 +1,89 @@
-# Bar chart
+# Bump chart
 
 ```javascript
-import { BarChart } from "@get-dx/d3-charts";
+import { BumpChart } from "@get-dx/d3-charts";
 
-const barchart = new BarChart({
+new BumpChart({
   elChart: document.getElementById("#mybarchart"),
-
-  // optional - defaults to true; don't show x axis line if set to false
-  showXAxisLine: true,
-
-  // optional - defaults to 0.4
-  paddingOuter: 0.4,
-
-  // optional - defaults to 0
-  paddingInner: 0,
-
-  // optional - defaults to false; draw best fit line if set to true
-  showTrendline: false,
-
-  // optional - show pointer cursor on chart bar hover if set
-  onClick(d) {
-    alert(d.dateLabel);
+  data: {
+    series: [
+      {
+        id: 140,
+        name: "Realistic timelines",
+        ranks: [null, null, null, null],
+      },
+      {
+        id: 146,
+        name: "Ease of release",
+        ranks: [7, 7, 9, 9],
+      },
+      {
+        id: 152,
+        name: "Deep work",
+        ranks: [4, 3, 6, 1],
+      },
+      {
+        id: 162,
+        name: "Code review",
+        ranks: [2, 1, 12, 12],
+      },
+      {
+        id: 195,
+        name: "Cross-team collaboration",
+        ranks: [4, 4, 6, 3],
+      },
+      {
+        id: 214,
+        name: "Managing tech debt",
+        ranks: [10, null, 12, 16],
+      },
+      {
+        id: 223,
+        name: "Local environment setup",
+        ranks: [2, null, null, null],
+      },
+      {
+        id: 226,
+        name: "Requirements quality",
+        ranks: [10, 5, 2, 6],
+      },
+      {
+        id: 232,
+        name: "Test efficiency",
+        ranks: [4, null, 4, 6],
+      },
+      {
+        id: 234,
+        name: "Local development",
+        ranks: [null, 10, 8, 3],
+      },
+      {
+        id: 236,
+        name: "Codebase experience",
+        ranks: [12, 7, 9, 9],
+      },
+      {
+        id: 242,
+        name: "Test coverage",
+        ranks: [null, 9, 9, 2],
+      },
+      {
+        id: 335,
+        name: "Incident response",
+        ranks: [null, null, 1, 5],
+      },
+      {
+        id: 338,
+        name: "Production debugging",
+        ranks: [null, null, null, null],
+      },
+      {
+        id: 341,
+        name: "Batch size",
+        ranks: [null, null, 12, 12],
+      },
+    ],
+    dates: ["2022-03-13", "2022-07-10", "2022-09-18", "2023-08-27"],
   },
-
-  // optional - if set, show tooltips on hover
-  tooltipHtml(d) {
-    return `
-      <div>
-        <div class=''>${d.dateLabel}</div>
-        <div class=''>${d.value}</div>
-      </div>
-    `;
-  },
-
-  // optional - we can initialize chart without data then fetch remote data
-  values: [
-    {
-      date: "2022-07-27",
-      value: 5,
-      // optional - include additional attributes to use in onClick or tooltipHtml
-      dateLabel: "Mon, 7/27",
-    },
-    // if value is null, render a 0 bar but do not not affect the trend line
-    {
-      date: "2022-07-28",
-      value: null,
-      dateLabel: "Tue, 7/28",
-    },
-    {
-      date: "2022-08-27",
-      value: 7,
-      dateLabel: "Mon, 8/27",
-    },
-  ],
 });
-
-// we can set values after instantiation and then call redraw() to re-render
-barchart.values = newValues;
-barchart.redraw();
 ```
