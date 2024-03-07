@@ -19,9 +19,23 @@ bun add @get-dx/d3-charts     # bun
 pnpm add @get-dx/d3-charts    # pnpm
 ```
 
-## Testing
+## Development
 
-This repository also contains examples which you can view by running —
+To get started —
+
+1. Enable corepack -
+
+```bash
+corepack enable
+```
+
+1. Setup yarn -
+
+```bash
+yarn
+```
+
+1. View chart examples -
 
 ```bash
 bin/start
