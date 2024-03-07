@@ -21,7 +21,9 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s, visibility 0.15s;
+  transition:
+    opacity 0.15s,
+    visibility 0.15s;
 }
 
 .chart .chart-tooltip.is-visible {
@@ -194,4 +196,68 @@
 .pie-chart .arc-label-polyline {
   stroke-width: 1px;
   stroke: #aaa;
+}
+
+/* Bump Chart */
+.bump-chart .chart-svg {
+  display: block;
+  overflow: visible;
+}
+
+.bump-chart .axis {
+  color: #666;
+}
+
+.bump-chart .axis--right--names {
+  color: #000;
+}
+
+.bump-chart .axis text {
+  font-size: 14px;
+}
+
+.bump-chart .axis--right--names text {
+  cursor: default;
+}
+
+.bump-chart .link {
+  fill: none;
+}
+
+.bump-chart .link__bg {
+  stroke: #fff;
+  stroke-width: 6px;
+}
+
+.bump-chart .link__fg {
+  stroke-width: 2px;
+}
+
+.bump-chart .link__fg.is-flat,
+.bump-chart .node__circle.is-flat {
+  stroke: #bdbdbd;
+}
+
+.bump-chart .link__fg.is-up,
+.bump-chart .node__circle.is-up {
+  stroke: #00a8e8;
+}
+
+.bump-chart .link__fg.is-down,
+.bump-chart .node__circle.is-down {
+  stroke: #ed3b9c;
+}
+
+.bump-chart .node__circle {
+  fill: #fff;
+  stroke-width: 2px;
+}
+
+.bump-chart .link,
+.bump-chart .node {
+  transition: stroke-opacity 0.15s;
+}
+
+.bump-chart .is-highlighting .is-muted {
+  stroke-opacity: 0.1;
 }

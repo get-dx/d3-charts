@@ -3,6 +3,7 @@
 This repository contains our [D3.js](https://d3js.org) chart classes:
 
 - [BarChart](./docs/bar-chart.md)
+- [BumpChart](./docs/bump-chart.md)
 - [LineChart](./docs/line-chart.md)
 - [PieChart](./docs/pie-chart.md)
 - [ScatterChart](./docs/scatter-chart.md)
