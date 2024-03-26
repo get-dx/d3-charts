@@ -85,5 +85,7 @@ new BumpChart({
     ],
     dates: ["2022-03-13", "2022-07-10", "2022-09-18", "2023-08-27"],
   },
+  // optional - highlight a series that matches the name
+  focusedOn: "Ease of release",
 });
 ```
