@@ -1,10 +1,11 @@
 import * as d3 from "d3";
 
 export class BumpChart {
-  constructor({ elChart, data, colorByChange = false }) {
+  constructor({ elChart, data, colorByChange = false, focusedOn }) {
     this.elChart = elChart;
     this.data = data;
     this.colorByChange = colorByChange;
+    this.focusedOn = focusedOn;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
@@ -17,6 +18,9 @@ export class BumpChart {
     this.wrangle();
     this.resize();
     window.addEventListener("resize", this.resize);
+    if (this.focusedOn) {
+      this.entered(undefined, this.focusedOn)
+    }
   }
 
   setup() {
@@ -308,5 +312,8 @@ export class BumpChart {
         .selectAll(".tick")
         .select("text")
         .attr("fill", (d) => this.colorLabel(d));
+    if (this.focusedOn) {
+      this.entered(undefined, this.focusedOn)
+    }
   }
 }
