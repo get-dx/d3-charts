@@ -1,8 +1,9 @@
-export { BarChart } from "./barChart";
-export { BumpChart } from "./bumpChart";
-export { LineChart } from "./lineChart";
-export { linearRegression } from "./linearRegression";
-export { PieChart } from "./pieChart";
-export { ScatterChart } from "./scatterChart";
-export { ScatterTimeChart } from "./scatterTimeChart";
-export { StackedBarChart } from "./stackedBarChart";
+export { BarChart } from "./barChart.js";
+export { BumpChart } from "./bumpChart.js";
+export { LineChart } from "./lineChart.js";
+export { linearRegression } from "./linearRegression.js";
+export { PieChart } from "./pieChart.js";
+export { ScatterChart } from "./scatterChart.js";
+export { ScatterTimeChart } from "./scatterTimeChart.js";
+export { StackedBarChart } from "./stackedBarChart.js";
+export { StackedAreaChart } from "./stackedAreaChart.js";
