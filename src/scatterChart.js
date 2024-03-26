@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { linearRegression } from "./linearRegression";
+import { linearRegression } from "./linearRegression.js";
 
 export class ScatterChart {
   constructor({
