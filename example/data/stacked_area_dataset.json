@@ -1,0 +1,30 @@
+{
+  "series": [
+    {
+      "name": "Less than once per week",
+      "color": "#3730a3",
+      "counts": [0, 20, 10, 40, 5]
+    },
+    {
+      "name": "At least once per week",
+      "color": "#4338ca",
+      "counts": [0, 0, 20, 13, 20]
+    },
+    {
+      "name": "At least once every two days",
+      "color": "#4f46e5",
+      "counts": [20, 0, 20, 13, 0]
+    },
+    {
+      "name": "At least once per day",
+      "color": "#6366f1",
+      "counts": [20, 14, 30, 40, 10]
+    },
+    {
+      "name": "At least once every couple of hours",
+      "color": "#818cf8",
+      "counts": [0, 0, 20, 5, 10]
+    }
+  ],
+  "dates": ["2022-01-01", "2022-04-01", "2022-07-01", "2022-10-01", "2023-01-01"]
+}

@@ -261,3 +261,22 @@
 .bump-chart .is-highlighting .is-muted {
   stroke-opacity: 0.1;
 }
+
+/* Stacked Area Chart */
+.stacked-area-chart .stacked-area {
+  stroke: #fff;
+}
+
+.stacked-area-chart .focus-line {
+  stroke: #bbb;
+  stroke-dasharray: 1 2;
+  stroke-width: 1px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.1s visibility 0.1s;
+}
+
+.stacked-area-chart .focus-line.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
