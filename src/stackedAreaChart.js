@@ -1,10 +1,14 @@
 import * as d3 from "d3";
 
 export class StackedAreaChart {
-  constructor({elChart, tooltipHtml, values = {
-    series: [],
-    dates: []
-  }}) {
+  constructor({
+    elChart,
+    tooltipHtml,
+    values = {
+      series: [],
+      dates: [],
+    },
+  }) {
     this.elChart = elChart;
     this.tooltipHtml = tooltipHtml;
     this.values = values;
@@ -37,8 +41,9 @@ export class StackedAreaChart {
 
     this.y = d3.scaleLinear().domain([0, 1]);
 
-    this.area = d3.area()
-      .x((_, i) => this.x((this.dates[i])))
+    this.area = d3
+      .area()
+      .x((_, i) => this.x(this.dates[i]))
       .y0((d) => this.y(d[0]))
       .y1((d) => this.y(d[1]));
 
@@ -46,7 +51,9 @@ export class StackedAreaChart {
   }
 
   scaffold() {
-    this.container = d3.select(this.elChart).classed("chart stacked-area-chart", true);
+    this.container = d3
+      .select(this.elChart)
+      .classed("chart stacked-area-chart", true);
 
     this.svg = this.container
       .append("svg")
@@ -69,16 +76,21 @@ export class StackedAreaChart {
 
     this.x.domain(d3.extent(this.dates));
 
-    this.series = this.values.series.map((d) => Object.assign({
-      percentages: Array(d.counts.length),
-      stacked: Array(d.counts.length)
-    }, d));
+    this.series = this.values.series.map((d) =>
+      Object.assign(
+        {
+          percentages: Array(d.counts.length),
+          stacked: Array(d.counts.length),
+        },
+        d,
+      ),
+    );
     for (let i = 0; i < this.dates.length; i++) {
       const total = d3.sum(this.series, (d) => d.counts[i]) | Infinity;
       let stacked = 0;
       this.series.forEach((d) => {
         d.percentages[i] = d.counts[i] / total;
-        d.stacked[i] = [stacked, Math.min(1, stacked += d.percentages[i])];
+        d.stacked[i] = [stacked, Math.min(1, (stacked += d.percentages[i]))];
       });
     }
 
@@ -122,20 +134,15 @@ export class StackedAreaChart {
   }
 
   renderStackedAreas() {
-    this.g.selectAll(".stacked-areas")
+    this.g
+      .selectAll(".stacked-areas")
       .data([0])
-      .join(
-        enter => enter.append("g")
-          .attr("class", "stacked-areas")
-      )
+      .join((enter) => enter.append("g").attr("class", "stacked-areas"))
       .selectAll(".stacked-area")
-      .data(this.series, d => d.name)
-      .join(
-        enter => enter.append("path")
-          .attr("class", "stacked-area")
-      )
-      .attr("fill", d => d.color)
-      .attr("d", d => this.area(d.stacked));
+      .data(this.series, (d) => d.name)
+      .join((enter) => enter.append("path").attr("class", "stacked-area"))
+      .attr("fill", (d) => d.color)
+      .attr("d", (d) => this.area(d.stacked));
   }
 
   entered() {
@@ -150,11 +157,10 @@ export class StackedAreaChart {
     const indexDate = d3.bisectCenter(this.dates, xDate);
     if (this.indexDate !== indexDate) {
       this.indexDate = indexDate;
-      this.focusLine
-        .attr(
-          "transform",
-          `translate(${this.x(this.dates[this.indexDate])},0)`,
-        );
+      this.focusLine.attr(
+        "transform",
+        `translate(${this.x(this.dates[this.indexDate])},0)`,
+      );
       this.updateTooltip();
     }
     if (this.tooltip.classed("is-visible")) this.positionTooltip();
@@ -172,12 +178,14 @@ export class StackedAreaChart {
       this.tooltip.classed("is-visible", false);
     } else {
       const date = this.dates[this.indexDate];
-      const series = this.series.map(d => ({
+      const series = this.series.map((d) => ({
         name: d.name,
         count: d.counts[this.indexDate],
-        percentage: d.percentages[this.indexDate]
-      }))
-      this.tooltip.html(this.tooltipHtml(date, series)).classed("is-visible", true);
+        percentage: d.percentages[this.indexDate],
+      }));
+      this.tooltip
+        .html(this.tooltipHtml(date, series))
+        .classed("is-visible", true);
     }
   }
 
