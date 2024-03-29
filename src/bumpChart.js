@@ -19,7 +19,7 @@ export class BumpChart {
     this.resize();
     window.addEventListener("resize", this.resize);
     if (this.focusedOn) {
-      this.entered(undefined, this.focusedOn)
+      this.entered(undefined, this.focusedOn);
     }
   }
 
@@ -313,7 +313,7 @@ export class BumpChart {
         .select("text")
         .attr("fill", (d) => this.colorLabel(d));
     if (this.focusedOn) {
-      this.entered(undefined, this.focusedOn)
+      this.entered(undefined, this.focusedOn);
     }
   }
 }
