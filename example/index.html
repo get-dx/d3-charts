@@ -143,6 +143,12 @@
         </div>
       </div>
       <div class="card">
+        <div class="card-title">Bar 3</div>
+        <div class="card-body">
+          <div id="bar-3-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <div class="card">
         <div class="card-title">Scatter Time 1</div>
         <div class="card-body">
           <div id="scatter-time-1-chart" class="chart-container"></div>
@@ -592,6 +598,45 @@
           },
         ];
         bar2.redraw();
+
+        const bar3 = new BarChart({
+          elChart: document.getElementById("bar-3-chart"),
+          paddingOuter: 0.2,
+          paddingInner: 0.4,
+          showXAxisTickLabels: true,
+          showYAxisTickLabels: true,
+          values: [
+            {
+                "id": 22,
+                "name": "Bugs",
+                "value": 25.241758241758241758,
+                "color": "rgb(129, 140, 248)"
+            },
+            {
+                "id": 23,
+                "name": "Tech debt",
+                "value": 24.084915084915084915,
+                "color": "rgb(52, 211, 153)"
+            },
+            {
+                "id": 24,
+                "name": "KTLO",
+                "value": 25.265734265734265734,
+                "color": "rgb(251, 146, 60)"
+            },
+            {
+                "id": 21,
+                "name": "Other",
+                "value": 25.407592407592407592,
+                "color": "rgb(192, 132, 252)"
+            }
+          ],
+          tooltipHtml: (d) => {
+            return `
+                <div>${d.name}</div>
+                <div>${d.value}</div>`;
+          },
+        })
       }
       // Scatter time charts
       {
