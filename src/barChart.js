@@ -5,7 +5,24 @@ export class BarChart {
   constructor({
     elChart,
     values = [],
+    showXAxisTickLabels = false,
+    showXAxisTicks = false,
     showXAxisLine = true,
+    xAxisTickLabelFormat = (d) => d.toLocaleString(),
+    showYAxisTickLabels = false,
+    showYAxisTicks = false,
+    showYAxisLine = false,
+    yAxisTickLabelSpread = 50,
+    yAxisTickLabelFormat = (d) => d.toLocaleString(),
+    axis = {
+      x: {
+        label: "",
+      },
+      y: {
+        label: "",
+        max: undefined
+      },
+    },
     showTrendline = false,
     paddingInner = 0.4,
     paddingOuter = 0,
@@ -14,7 +31,24 @@ export class BarChart {
   }) {
     this.elChart = elChart;
     this.values = values;
+    this.showXAxisTickLabels = showXAxisTickLabels;
+    this.showXAxisTicks = showXAxisTicks;
     this.showXAxisLine = showXAxisLine;
+    this.xAxisTickLabelFormat = xAxisTickLabelFormat;
+    this.showYAxisTickLabels = showYAxisTickLabels;
+    this.showYAxisTicks = showYAxisTicks;
+    this.showYAxisLine = showYAxisLine;
+    this.yAxisTickLabelSpread = yAxisTickLabelSpread;
+    this.yAxisTickLabelFormat = yAxisTickLabelFormat;
+    this.axis = Object.assign({
+      x: {
+        label: "",
+      },
+      y: {
+        label: "",
+        max: undefined
+      },
+    }, axis);
     this.showTrendline = showTrendline;
     this.paddingInner = paddingInner;
     this.paddingOuter = paddingOuter;
@@ -36,12 +70,7 @@ export class BarChart {
   }
 
   setup() {
-    this.margin = {
-      top: 1,
-      right: 1,
-      bottom: 3,
-      left: 1,
-    };
+    this.margin = {};
 
     this.parseDate = d3.utcParse("%Y-%m-%d");
 
@@ -72,8 +101,9 @@ export class BarChart {
     if (this.values.length === 0) return;
 
     this.accessor = {
-      x: (d) => d.date,
+      x: (d) => d.date || d.name,
       y: (d) => d.value,
+      color: d => d.color
     };
 
     this.x.domain(this.values.map(this.accessor.x));
@@ -81,7 +111,7 @@ export class BarChart {
     const padding = 0.05;
     this.y.domain([
       0,
-      d3.max(this.values, this.accessor.y) * (1 + padding) || 1,
+      this.axis.y.max === undefined ? (d3.max(this.values, this.accessor.y) * (1 + padding) || 1) : this.axis.y.max,
     ]);
 
     this.lr = null;
@@ -105,7 +135,6 @@ export class BarChart {
     this.width = this.container.node().clientWidth;
     this.height = this.container.node().clientHeight;
 
-    this.x.range([this.margin.left, this.width - this.margin.right]);
     this.y.range([this.height - this.margin.bottom, this.margin.top]);
 
     this.svg.attr("viewBox", [0, 0, this.width, this.height]);
@@ -115,23 +144,183 @@ export class BarChart {
   }
 
   render() {
-    this.renderZeroLine();
+    this.adjustXMargin();
+    this.renderXAxis();
+    this.adjustYMargin();
+    this.renderYAxis();
     this.renderBars();
     this.renderTrendLine();
   }
 
-  renderZeroLine() {
+  adjustXMargin() {
+    this.margin.left = 1;
+    this.margin.right = 1;
+
+    if (this.showYAxisTickLabels) {
+      this.margin.left = 4 + 48;
+    }
+
+    this.showYAxisLabel = this.axis.y.label !== "";
+    if (this.showYAxisLabel) {
+      this.margin.left += 20;
+    }
+
+    if (this.showXAxisTickLabels) {
+      this.margin.right = 16;
+    }
+
+    this.x.range([this.margin.left, this.width - this.margin.right]);
+  }
+
+  renderXAxis() {
     this.svg
-      .selectAll(".zero-line")
-      .data(this.showXAxisLine ? [0] : [])
-      .join((enter) =>
-        enter
-          .append("line")
-          .attr("class", "zero-line")
-          .attr("x1", this.margin.left),
+      .selectAll(".axis--x")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "axis axis--x"))
+      .call(
+        d3
+          .axisBottom(this.x)
+          .tickSizeOuter(0)
+          .tickSizeInner(6)
+          .tickFormat((d, i) => this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d, i) : ""),
       )
+      .call((g) => g.selectAll(".tick line").classed("tick-line", true))
+      .call((g) =>
+        g
+          .selectAll(".tick")
+          .selectAll(".grid-line")
+          .data(this.showXAxisTicks ? [0] : [])
+          .join((enter) => enter.append("line").attr("class", "grid-line"))
+          .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
+      )
+      .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
+      .call((g) =>
+        g
+          .select(".domain")
+          .style("display", this.showXAxisLine ? null : "none"),
+      )
+      .call((g) =>
+        g
+          .selectAll(".axis-title-text")
+          .data(this.axis.x.label !== "" ? [this.axis.x.label] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "axis-title-text")
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "middle"),
+          )
+          .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
+          .text(""),
+      );
+
+    if (this.showXAxisTickLabels) {
+      // Rotate x tick labels if necessary
+      const availableXTickWidth =
+        this.x.bandwidth() +
+        Math.min(
+          this.x.step() * this.paddingOuter + this.margin.right,
+          (this.x.step() * this.paddingInner) / 2,
+        );
+      let maxXTickWidth = availableXTickWidth;
+      this.svg
+        .select(".axis--x")
+        .selectAll(".tick text")
+        .each(function () {
+          maxXTickWidth = Math.max(
+            maxXTickWidth,
+            this.getBoundingClientRect().width,
+          );
+        });
+      if (maxXTickWidth > availableXTickWidth) {
+        this.svg
+          .select(".axis--x")
+          .selectAll(".tick text")
+          .attr("text-anchor", "end")
+          .attr("dy", "0.32em")
+          .attr("transform", `rotate(-45,0,9)`);
+      }
+    }
+  }
+
+  adjustYMargin() {
+    this.margin.top = 1;
+    this.margin.bottom = 4;
+    if (this.showXAxisTickLabels) {
+      this.margin.top = 8;
+      this.margin.bottom += Math.ceil(
+        this.svg.select(".axis--x").node().getBoundingClientRect().height,
+      )
+    }
+    this.showXAxisLabel = this.axis.x.label !== "";
+    if (this.showXAxisLabel) {
+      this.margin.bottom += 20;
+    }
+
+    this.svg
+      .select(".axis--x")
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
-      .attr("x2", this.width - this.margin.right);
+      .selectAll(".axis-title-text")
+      .attr("y", this.margin.bottom - 4)
+      .text((d) => d);
+
+    this.y.range([this.height - this.margin.bottom, this.margin.top]);
+  }
+
+  renderYAxis() {
+    this.svg
+      .selectAll(".axis--y")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "axis axis--y"))
+      .attr("transform", `translate(${this.margin.left},0)`)
+      .call(
+        d3
+          .axisLeft(this.y)
+          .ticks(
+            (this.height - this.margin.top - this.margin.bottom) /
+              this.yAxisTickLabelSpread,
+          )
+          .tickSizeOuter(0)
+          .tickSizeInner(6)
+          .tickFormat((d) => this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""),
+      )
+      .call((g) => g.selectAll(".tick line").classed("tick-line", true))
+      .call((g) =>
+        g
+          .selectAll(".tick")
+          .selectAll(".grid-line")
+          .data(this.showYAxisTicks ? [0] : [])
+          .join((enter) => enter.append("line").attr("class", "grid-line"))
+          .attr("x2", this.width - this.margin.left - this.margin.right),
+      )
+      .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
+      .call((g) =>
+        g
+          .select(".domain")
+          .style("display", this.showYAxisLine ? null : "none"),
+      )
+      .call((g) =>
+        g
+          .selectAll(".axis-title-text")
+          .data(this.axis.y.label !== "" ? [this.axis.y.label] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "axis-title-text")
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "middle")
+              .attr("dy", "0.71em"),
+          )
+          .attr("x", -this.margin.left + 4)
+          .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
+          .attr(
+            "transform",
+            `rotate(-90,${-this.margin.left + 4},${
+              (this.margin.top + this.height - this.margin.bottom) / 2
+            })`,
+          )
+          .text((d) => d),
+      );
   }
 
   renderBars() {
@@ -146,7 +335,8 @@ export class BarChart {
       .attr("x", (d) => this.x(this.accessor.x(d)))
       .attr("y", (d) => this.y(this.accessor.y(d) || 0))
       .attr("width", this.x.bandwidth())
-      .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0);
+      .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0)
+      .style("fill", d => this.accessor.color(d));
   }
 
   renderTrendLine() {
