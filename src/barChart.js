@@ -20,7 +20,7 @@ export class BarChart {
       },
       y: {
         label: "",
-        max: undefined
+        max: undefined,
       },
     },
     showTrendline = false,
@@ -40,15 +40,18 @@ export class BarChart {
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
-    this.axis = Object.assign({
-      x: {
-        label: "",
+    this.axis = Object.assign(
+      {
+        x: {
+          label: "",
+        },
+        y: {
+          label: "",
+          max: undefined,
+        },
       },
-      y: {
-        label: "",
-        max: undefined
-      },
-    }, axis);
+      axis,
+    );
     this.showTrendline = showTrendline;
     this.paddingInner = paddingInner;
     this.paddingOuter = paddingOuter;
@@ -103,7 +106,7 @@ export class BarChart {
     this.accessor = {
       x: (d) => d.date || d.name,
       y: (d) => d.value,
-      color: d => d.color
+      color: (d) => d.color,
     };
 
     this.x.domain(this.values.map(this.accessor.x));
@@ -111,7 +114,9 @@ export class BarChart {
     const padding = 0.05;
     this.y.domain([
       0,
-      this.axis.y.max === undefined ? (d3.max(this.values, this.accessor.y) * (1 + padding) || 1) : this.axis.y.max,
+      this.axis.y.max === undefined
+        ? d3.max(this.values, this.accessor.y) * (1 + padding) || 1
+        : this.axis.y.max,
     ]);
 
     this.lr = null;
@@ -182,7 +187,9 @@ export class BarChart {
           .axisBottom(this.x)
           .tickSizeOuter(0)
           .tickSizeInner(6)
-          .tickFormat((d, i) => this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d, i) : ""),
+          .tickFormat((d, i) =>
+            this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d, i) : "",
+          ),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -250,7 +257,7 @@ export class BarChart {
       this.margin.top = 8;
       this.margin.bottom += Math.ceil(
         this.svg.select(".axis--x").node().getBoundingClientRect().height,
-      )
+      );
     }
     this.showXAxisLabel = this.axis.x.label !== "";
     if (this.showXAxisLabel) {
@@ -282,7 +289,9 @@ export class BarChart {
           )
           .tickSizeOuter(0)
           .tickSizeInner(6)
-          .tickFormat((d) => this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : ""),
+          .tickFormat((d) =>
+            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : "",
+          ),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
@@ -336,7 +345,7 @@ export class BarChart {
       .attr("y", (d) => this.y(this.accessor.y(d) || 0))
       .attr("width", this.x.bandwidth())
       .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0)
-      .style("fill", d => this.accessor.color(d));
+      .style("fill", (d) => this.accessor.color(d));
   }
 
   renderTrendLine() {
