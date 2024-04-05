@@ -335,7 +335,7 @@ export class BarChart {
   }
 
   renderBars() {
-    const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth())
+    const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth());
     this.barRect = this.svg
       .selectAll(".bar-rects")
       .data([0])
@@ -344,7 +344,11 @@ export class BarChart {
       .selectAll(".bar-rect")
       .data(this.values)
       .join((enter) => enter.append("rect").attr("class", "bar-rect"))
-      .attr("x", (d) => this.x(this.accessor.x(d)) + this.x.bandwidth() / 2 - barWidth / 2)
+      .attr(
+        "x",
+        (d) =>
+          this.x(this.accessor.x(d)) + this.x.bandwidth() / 2 - barWidth / 2,
+      )
       .attr("y", (d) => this.y(this.accessor.y(d) || 0))
       .attr("width", barWidth)
       .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0)
