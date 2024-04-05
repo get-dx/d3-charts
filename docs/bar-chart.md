@@ -6,6 +6,9 @@ import { BarChart } from "@get-dx/d3-charts";
 const barchart = new BarChart({
   elChart: document.getElementById("#mybarchart"),
 
+  // optional - defaults to Infinity
+  maxBarWidth: 40,
+
   // optional - defaults to 0.4
   paddingOuter: 0.4,
 
