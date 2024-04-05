@@ -5,6 +5,7 @@ export class BarChart {
   constructor({
     elChart,
     values = [],
+    maxBarWidth = Infinity,
     showXAxisTickLabels = false,
     showXAxisTicks = false,
     showXAxisLine = true,
@@ -31,6 +32,7 @@ export class BarChart {
   }) {
     this.elChart = elChart;
     this.values = values;
+    this.maxBarWidth = maxBarWidth;
     this.showXAxisTickLabels = showXAxisTickLabels;
     this.showXAxisTicks = showXAxisTicks;
     this.showXAxisLine = showXAxisLine;
@@ -333,6 +335,7 @@ export class BarChart {
   }
 
   renderBars() {
+    const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth())
     this.barRect = this.svg
       .selectAll(".bar-rects")
       .data([0])
@@ -341,9 +344,9 @@ export class BarChart {
       .selectAll(".bar-rect")
       .data(this.values)
       .join((enter) => enter.append("rect").attr("class", "bar-rect"))
-      .attr("x", (d) => this.x(this.accessor.x(d)))
+      .attr("x", (d) => this.x(this.accessor.x(d)) + this.x.bandwidth() / 2 - barWidth / 2)
       .attr("y", (d) => this.y(this.accessor.y(d) || 0))
-      .attr("width", this.x.bandwidth())
+      .attr("width", barWidth)
       .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0)
       .style("fill", (d) => this.accessor.color(d));
   }
