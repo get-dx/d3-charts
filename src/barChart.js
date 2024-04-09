@@ -29,6 +29,7 @@ export class BarChart {
     paddingOuter = 0,
     onClick,
     tooltipHtml,
+    enableRoundedCorners = false,
   }) {
     this.elChart = elChart;
     this.values = values;
@@ -63,6 +64,7 @@ export class BarChart {
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
     this.clicked = this.clicked.bind(this);
+    this.enableRoundedCorners = enableRoundedCorners;
     this.init();
   }
 
@@ -336,7 +338,7 @@ export class BarChart {
 
   renderBars() {
     const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth());
-    const cornerRadius = 3;
+    const cornerRadius = this.enableRoundedCorners ? 5 : 0;
 
     this.barRect = this.svg
       .selectAll(".bar-rects")
