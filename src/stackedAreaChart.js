@@ -182,6 +182,7 @@ export class StackedAreaChart {
         name: d.name,
         count: d.counts[this.indexDate],
         percentage: d.percentages[this.indexDate],
+        color: d.color,
       }));
       this.tooltip
         .html(this.tooltipHtml(date, series))
