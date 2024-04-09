@@ -336,6 +336,8 @@ export class BarChart {
 
   renderBars() {
     const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth());
+    const cornerRadius = 3;
+
     this.barRect = this.svg
       .selectAll(".bar-rects")
       .data([0])
@@ -352,7 +354,9 @@ export class BarChart {
       .attr("y", (d) => this.y(this.accessor.y(d) || 0))
       .attr("width", barWidth)
       .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0)
-      .style("fill", (d) => this.accessor.color(d));
+      .style("fill", (d) => this.accessor.color(d))
+      .attr("rx", cornerRadius)
+      .attr("ry", cornerRadius);
   }
 
   renderTrendLine() {
