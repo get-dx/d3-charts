@@ -205,7 +205,8 @@ export class StackedAreaChart {
     }
 
     // position the tooltip at the top
-    let y = 0;
+    const yOffset = 4;
+    let y = (-tooltipRect.height - yOffset) / 2;
 
     this.tooltip.style("transform", `translate(${x}px,${y}px)`);
   }
