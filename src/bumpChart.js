@@ -223,12 +223,14 @@ export class BumpChart {
     this.gNamesRight
       .attr("transform", `translate(${this.width - this.margin.right + 20},0)`)
       .call(d3.axisRight(this.yNames).tickSize(0))
-      .call((g) => g.select(".domain").remove())
+      .call((g) => g.select(".domain").remove());
+
+    this.yTick = this.gNamesRight
+      .selectAll(".tick")
+      .on("mouseenter", this.entered)
+      .on("mouseleave", this.left)
       .call((g) =>
         g
-          .selectAll(".tick")
-          .on("mouseenter", this.entered)
-          .on("mouseleave", this.left)
           .select("text")
           .attr("fill", (d) =>
             this.colorByChange ? "currentColor" : this.colorLabel(d),
@@ -294,6 +296,8 @@ export class BumpChart {
     this.svg.classed("is-highlighting", true);
     this.link.classed("is-muted", (d) => d.name !== name);
     this.node.classed("is-muted", (d) => d.name !== name);
+    this.yTick.classed("is-muted", (d) => d !== name);
+
     if (!this.colorByChange)
       this.gNamesRight
         .selectAll(".tick")
@@ -307,6 +311,7 @@ export class BumpChart {
     this.svg.classed("is-highlighting", false);
     this.link.classed("is-muted", false);
     this.node.classed("is-muted", false);
+    this.yTick.classed("is-muted", false);
     if (!this.colorByChange)
       this.gNamesRight
         .selectAll(".tick")
