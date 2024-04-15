@@ -254,12 +254,13 @@
 }
 
 .bump-chart .link,
-.bump-chart .node {
-  transition: stroke-opacity 0.15s;
+.bump-chart .node,
+.bump-chart .tick {
+  transition: opacity 0.15s;
 }
 
 .bump-chart .is-highlighting .is-muted {
-  stroke-opacity: 0.1;
+  opacity: 0.1;
 }
 
 /* Stacked Area Chart */
