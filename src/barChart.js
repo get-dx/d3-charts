@@ -8,10 +8,12 @@ export class BarChart {
     maxBarWidth = Infinity,
     showXAxisTickLabels = false,
     showXAxisTicks = false,
+    showXAxisInnerTicks = true,
     showXAxisLine = true,
     xAxisTickLabelFormat = (d) => d.toLocaleString(),
     showYAxisTickLabels = false,
     showYAxisTicks = false,
+    showYAxisInnerTicks = true,
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
@@ -36,10 +38,12 @@ export class BarChart {
     this.maxBarWidth = maxBarWidth;
     this.showXAxisTickLabels = showXAxisTickLabels;
     this.showXAxisTicks = showXAxisTicks;
+    this.showXAxisInnerTicks = showXAxisInnerTicks;
     this.showXAxisLine = showXAxisLine;
     this.xAxisTickLabelFormat = xAxisTickLabelFormat;
     this.showYAxisTickLabels = showYAxisTickLabels;
     this.showYAxisTicks = showYAxisTicks;
+    this.showYAxisInnerTicks = showYAxisInnerTicks;
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
@@ -190,7 +194,7 @@ export class BarChart {
         d3
           .axisBottom(this.x)
           .tickSizeOuter(0)
-          .tickSizeInner(6)
+          .tickSizeInner(this.showXAxisInnerTicks ? 6 : 0)
           .tickFormat((d, i) =>
             this.showXAxisTickLabels ? this.xAxisTickLabelFormat(d, i) : "",
           ),
@@ -292,7 +296,7 @@ export class BarChart {
               this.yAxisTickLabelSpread,
           )
           .tickSizeOuter(0)
-          .tickSizeInner(6)
+          .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
           .tickFormat((d) =>
             this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : "",
           ),
