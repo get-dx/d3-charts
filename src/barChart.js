@@ -32,6 +32,7 @@ export class BarChart {
     onClick,
     tooltipHtml,
     enableRoundedCorners = false,
+    minimalBarHeightForZero = false,
   }) {
     this.elChart = elChart;
     this.values = values;
@@ -69,6 +70,7 @@ export class BarChart {
     this.left = this.left.bind(this);
     this.clicked = this.clicked.bind(this);
     this.enableRoundedCorners = enableRoundedCorners;
+    this.minimalBarHeightForZero = minimalBarHeightForZero;
     this.init();
   }
 
@@ -352,14 +354,13 @@ export class BarChart {
       .selectAll(".bar-rect")
       .data(this.values)
       .join((enter) => enter.append("rect").attr("class", "bar-rect"))
-      .attr(
-        "x",
-        (d) =>
-          this.x(this.accessor.x(d)) + this.x.bandwidth() / 2 - barWidth / 2,
-      )
-      .attr("y", (d) => this.y(this.accessor.y(d) || 0))
+      .attr("x", (d) => this.x(this.accessor.x(d)) + this.x.bandwidth() / 2 - barWidth / 2)
+      .attr("y", (d) => this.y(Math.max(this.accessor.y(d), 0)))
       .attr("width", barWidth)
-      .attr("height", (d) => this.y(0) - this.y(this.accessor.y(d)) || 0)
+      .attr("height", (d) => {
+        const height = this.y(0) - this.y(this.accessor.y(d));
+        return this.minimalBarHeightForZero && this.accessor.y(d) === 0 ? 1 : Math.max(height, 0);
+      })
       .style("fill", (d) => this.accessor.color(d))
       .attr("rx", cornerRadius)
       .attr("ry", cornerRadius);
