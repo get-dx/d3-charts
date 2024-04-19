@@ -380,11 +380,11 @@ export class BarChart {
     if (this.lr) {
       const xScaleDomain = this.x.domain();
       const yScaleRange = this.y.range();
-  
+
       const x1 = this.x(xScaleDomain[0]) + this.x.bandwidth() / 2;
       const x2 =
         this.x(xScaleDomain[xScaleDomain.length - 1]) + this.x.bandwidth() / 2;
-  
+
       const y1 = Math.max(
         yScaleRange[1],
         Math.min(yScaleRange[0], this.y(this.lr.intercept)),
@@ -396,7 +396,7 @@ export class BarChart {
           this.y(this.lr.slope * (xScaleDomain.length - 1) + this.lr.intercept),
         ),
       );
-  
+
       tl.attr("x1", x1).attr("x2", x2).attr("y1", y1).attr("y2", y2);
     }
   }
