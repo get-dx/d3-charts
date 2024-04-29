@@ -6,6 +6,8 @@ export class BarChart {
     elChart,
     values = [],
     maxBarWidth = Infinity,
+    enableHoverPointer = false,
+    hoverColor = null,
     showXAxisTickLabels = false,
     showXAxisTicks = false,
     showXAxisInnerTicks = true,
@@ -37,6 +39,8 @@ export class BarChart {
     this.elChart = elChart;
     this.values = values;
     this.maxBarWidth = maxBarWidth;
+    this.enableHoverPointer = enableHoverPointer;
+    this.hoverColor = hoverColor;
     this.showXAxisTickLabels = showXAxisTickLabels;
     this.showXAxisTicks = showXAxisTicks;
     this.showXAxisInnerTicks = showXAxisInnerTicks;
@@ -370,6 +374,20 @@ export class BarChart {
       .style("fill", (d) => this.accessor.color(d))
       .attr("rx", cornerRadius)
       .attr("ry", cornerRadius);
+
+    if (this.enableHoverPointer) {
+      this.barRect.style("cursor", "pointer");
+    }
+
+    if (this.hoverColor) {
+      this.barRect
+        .on("mouseover", (event, d) => {
+            d3.select(event.currentTarget).style("fill", this.hoverColor);
+        })
+        .on("mouseout", (event, d) => {
+            d3.select(event.currentTarget).style("fill", this.accessor.color(d));
+        });
+    }
   }
 
   renderTrendLine() {
