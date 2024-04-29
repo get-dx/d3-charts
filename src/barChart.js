@@ -381,7 +381,7 @@ export class BarChart {
 
     if (this.hoverColor) {
       this.barRect
-        .on("mouseover", (event, d) => {
+        .on("mouseover", (event) => {
             d3.select(event.currentTarget).style("fill", this.hoverColor);
         })
         .on("mouseout", (event, d) => {
