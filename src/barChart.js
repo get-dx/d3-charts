@@ -441,9 +441,13 @@ export class BarChart {
   }
 
   clicked(event) {
-    if (!this.onClick) return;
     const barRectEl = event.target.closest(".bar-rect");
     if (!barRectEl) return;
+
+    const data = d3.select(barRectEl).datum();
+    if (this.onClick) {
+      this.onClick(data, event);
+    }
   }
 
   updateTooltip() {
