@@ -35,6 +35,7 @@ export class BarChart {
     tooltipHtml,
     enableRoundedCorners = false,
     minimalBarHeightForZero = false,
+    startEndLabels = null,
   }) {
     this.elChart = elChart;
     this.values = values;
@@ -75,6 +76,7 @@ export class BarChart {
     this.clicked = this.clicked.bind(this);
     this.enableRoundedCorners = enableRoundedCorners;
     this.minimalBarHeightForZero = minimalBarHeightForZero;
+    this.startEndLabels = startEndLabels;
     this.init();
   }
 
@@ -261,6 +263,23 @@ export class BarChart {
           .attr("dy", "0.32em")
           .attr("transform", `rotate(-45,0,9)`);
       }
+    }
+
+    if (this.startEndLabels) {
+      xAxisGroup.append("text")
+        .attr("class", "axis-label")
+        .attr("x", this.margin.left)
+        .attr("y", 0)
+        .attr("dy", "1em")
+        .text(this.startEndLabels.startLabel);
+
+      xAxisGroup.append("text")
+        .attr("class", "axis-label")
+        .attr("x", this.width - this.margin.right)
+        .attr("y", 0)
+        .attr("dy", "1em")
+        .attr("text-anchor", "end")
+        .text(this.startEndLabels.endLabel);
     }
   }
 
