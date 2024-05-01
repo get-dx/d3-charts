@@ -19,7 +19,7 @@ export class BarChart {
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
-    yAxisTickLabelClass = "tick-label-text",
+    axisTickLabelClass = "tick-label-text",
     axis = {
       x: {
         label: "",
@@ -53,7 +53,7 @@ export class BarChart {
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
-    this.yAxisTickLabelClass = yAxisTickLabelClass;
+    this.axisTickLabelClass = axisTickLabelClass;
     this.axis = Object.assign(
       {
         x: {
@@ -216,7 +216,7 @@ export class BarChart {
           .join((enter) => enter.append("line").attr("class", "grid-line"))
           .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
       )
-      .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
+      .call((g) => g.selectAll(".tick text").classed(this.axisTickLabelClass, true))
       .call((g) =>
         g
           .select(".domain")
@@ -319,7 +319,7 @@ export class BarChart {
           .attr("x2", this.width - this.margin.left - this.margin.right),
       )
       .call((g) =>
-        g.selectAll(".tick text").classed(this.yAxisTickLabelClass, true),
+        g.selectAll(".tick text").classed(this.axisTickLabelClass, true),
       )
       .call((g) =>
         g
