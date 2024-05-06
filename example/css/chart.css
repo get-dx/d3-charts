@@ -92,6 +92,11 @@
 }
 
 /* Stacked Bar */
+.stacked-bar-chart .bar-rect {
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
 .stacked-bar-chart .bar-rect.is-active {
   stroke: #000;
   stroke-width: 1.5px;
