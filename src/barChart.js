@@ -480,9 +480,6 @@ export class BarChart {
     const yOffset = 8;
     let y =
       this.y(this.accessor.y(this.tooltipData)) - yOffset - tooltipRect.height;
-    if (y < 0) {
-      y = this.y(this.accessor.y(this.tooltipData)) + yOffset;
-    }
 
     this.tooltip.style("transform", `translate(${x}px,${y}px)`);
   }
