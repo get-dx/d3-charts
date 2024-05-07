@@ -473,9 +473,7 @@ export class BarChart {
       this.x(this.accessor.x(this.tooltipData)) +
       this.x.bandwidth() / 2 -
       tooltipRect.width / 2;
-    if (x + tooltipRect.width > this.width) {
-      x = this.width - tooltipRect.width;
-    } else if (x < 0) {
+    if (x < 0) {
       x = 0;
     }
 
