@@ -188,7 +188,7 @@ export class BarChart {
       this.margin.left += 20;
     }
 
-    if (this.leftMargin) {
+    if (this.leftMargin !== null) {
       this.margin.left = this.leftMargin;
     }
 
