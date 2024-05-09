@@ -36,6 +36,7 @@ export class BarChart {
     tooltipHtml,
     enableRoundedCorners = false,
     minimalBarHeightForZero = false,
+    leftMargin,
   }) {
     this.elChart = elChart;
     this.values = values;
@@ -77,6 +78,7 @@ export class BarChart {
     this.clicked = this.clicked.bind(this);
     this.enableRoundedCorners = enableRoundedCorners;
     this.minimalBarHeightForZero = minimalBarHeightForZero;
+    this.leftMargin = leftMargin;
     this.init();
   }
 
@@ -184,6 +186,10 @@ export class BarChart {
     this.showYAxisLabel = this.axis.y.label !== "";
     if (this.showYAxisLabel) {
       this.margin.left += 20;
+    }
+
+    if (this.leftMargin) {
+      this.margin.left = this.leftMargin;
     }
 
     if (this.showXAxisTickLabels) {
