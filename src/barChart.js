@@ -479,9 +479,6 @@ export class BarChart {
       this.x(this.accessor.x(this.tooltipData)) +
       this.x.bandwidth() / 2 -
       tooltipRect.width / 2;
-    if (x < 0) {
-      x = 0;
-    }
 
     const yOffset = 8;
     let y =
