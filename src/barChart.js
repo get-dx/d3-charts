@@ -429,10 +429,7 @@ export class BarChart {
         ),
       );
 
-      tl.attr("x1", x1)
-        .attr("x2", x2)
-        .attr("y1", y1)
-        .attr("y2", y2);
+      tl.attr("x1", x1).attr("x2", x2).attr("y1", y1).attr("y2", y2);
     }
   }
 
