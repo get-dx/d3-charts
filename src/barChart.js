@@ -36,7 +36,7 @@ export class BarChart {
     tooltipHtml,
     enableRoundedCorners = false,
     minimalBarHeightForZero = false,
-    leftMargin,
+    leftMargin = null,
   }) {
     this.elChart = elChart;
     this.values = values;
