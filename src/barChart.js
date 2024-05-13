@@ -30,8 +30,7 @@ export class BarChart {
       },
     },
     showTrendline = false,
-    trendlineColor = "blue",
-    trendlineWidth = 2,
+    trendlineClass = "trend-line",
     paddingInner = 0.4,
     paddingOuter = 0,
     onClick,
@@ -70,8 +69,7 @@ export class BarChart {
       axis,
     );
     this.showTrendline = showTrendline;
-    this.trendlineColor = trendlineColor;
-    this.trendlineWidth = trendlineWidth;
+    this.trendlineClass = trendlineClass;
     this.paddingInner = paddingInner;
     this.paddingOuter = paddingOuter;
     this.onClick = onClick;
@@ -410,7 +408,7 @@ export class BarChart {
     const tl = this.svg
       .selectAll(".trend-line")
       .data(this.lr ? [0] : [])
-      .join((enter) => enter.append("line").attr("class", "trend-line"));
+      .join((enter) => enter.append("line").attr("class", this.trendlineClass));
     if (this.lr) {
       const xScaleDomain = this.x.domain();
       const yScaleRange = this.y.range();
@@ -434,9 +432,7 @@ export class BarChart {
       tl.attr("x1", x1)
         .attr("x2", x2)
         .attr("y1", y1)
-        .attr("y2", y2)
-        .attr("stroke", this.trendlineColor)
-        .attr("stroke-width", this.trendlineWidth);
+        .attr("y2", y2);
     }
   }
 
