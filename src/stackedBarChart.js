@@ -15,6 +15,7 @@ export class StackedBarChart {
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
+    spaceBetweenSeries = false,
     axis = {
       x: {
         label: "",
@@ -30,6 +31,7 @@ export class StackedBarChart {
     this.tooltipHtml = tooltipHtml;
     this.values = values;
     this.series = series;
+    this.spaceBetweenSeries = spaceBetweenSeries;
     this.showXAxisTicks = showXAxisTicks;
     this.showXAxisLine = showXAxisLine;
     this.xAxisTickLabelFormat = xAxisTickLabelFormat;
@@ -73,7 +75,10 @@ export class StackedBarChart {
   scaffold() {
     this.container = d3
       .select(this.elChart)
-      .classed("chart stacked-bar-chart", true);
+      .classed(
+        `chart stacked-bar-chart ${this.spaceBetweenSeries ? "stacked-bar-chart-spaced" : ""}`,
+        true,
+      );
 
     this.svg = this.container
       .append("svg")
