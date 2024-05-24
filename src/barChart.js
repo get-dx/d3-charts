@@ -380,7 +380,7 @@ export class BarChart {
       .attr("y", (d) => this.y(Math.max(this.accessor.y(d), 0)))
       .attr("width", barWidth)
       .attr("height", (d) => {
-        const height = this.y(0) - this.y(this.accessor.y(d));
+        const height = this.y(0) - this.y(this.accessor.y(d)) || 0;
         return this.minimalBarHeightForZero && this.accessor.y(d) === 0
           ? 1
           : Math.max(height, 0);
