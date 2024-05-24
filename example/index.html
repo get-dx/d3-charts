@@ -817,12 +817,21 @@
           onClick: (d, cd) => {
             console.log(d, cd);
           },
+          showYAxisTickLabels: true,
+          showYAxisTicks: true,
+          axis: {
+            x: {
+              min: startDate,
+              max: endDate
+            },
+            y: {
+              label: "Y Axis",
+              min: 0,
+              max: 100
+            }
+          }
         });
-        line1.startDate = startDate;
-        line1.endDate = endDate;
         line1.values = data1.values;
-        line1.yAxisMin = 0;
-        line1.yAxisMax = 100;
         line1.redraw();
 
         // document.addEventListener("click", function () {

@@ -20,6 +20,33 @@ const linechart = new LineChart({
   // default to true
   showXAxisTicks: true,
 
+  // optional - defaults to false
+  showYAxisTickLabels: false,
+  // optional - defaults to false
+  showYAxisTicks: false,
+  // optional - defaults to false
+  showYAxisLine: false,
+  // optional - defaults to 50
+  yAxisTickLabelSpread: 50,
+  // optional - defaults to just the original value
+  yAxisTickLabelFormat(d) {
+    return `${d}%`;
+  },
+
+  // optional
+  axis: {
+    x: {
+      min: "2022-06-05",
+      max: "2023-03-05",
+    },
+    y: {
+      label: "Something Else",
+      // optional - defaults to based on values
+      min: 0,
+      max: 100,
+    },
+  },
+
   // optional - defaults to false; show value point dots
   showPoints: false,
 
