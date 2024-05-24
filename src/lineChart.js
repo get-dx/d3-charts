@@ -14,16 +14,30 @@ export class LineChart {
     endDate,
     yAxisMin,
     yAxisMax,
+    showYAxisTickLabels = false,
+    showYAxisTicks = false,
+    showYAxisInnerTicks = true,
+    showYAxisLine = false,
+    yAxisTickLabelSpread = 50,
+    yAxisTickLabelFormat = (d) => d.toLocaleString(),
+    axis = {
+      x: {
+        label: "",
+        min: startDate ?? undefined,
+        max: endDate ?? undefined,
+      },
+      y: {
+        label: "",
+        min: yAxisMin ?? undefined,
+        max: yAxisMax ?? undefined,
+      },
+    },
     tooltipHtml,
     onClick,
   }) {
     this.finishedRendering = false;
     this.elChart = elChart;
     this.values = values;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.yAxisMin = yAxisMin;
-    this.yAxisMax = yAxisMax;
     this.comparisonValues = comparisonValues;
     this.showXAxisLine = showXAxisLine;
     this.showXAxisTicks = showXAxisTicks;
@@ -31,6 +45,13 @@ export class LineChart {
     this.showBenchmarkPoints = showComparisonPoints;
     this.dotLastSegment = dotLastSegment;
     this.tooltipHtml = tooltipHtml;
+    this.showYAxisTickLabels = showYAxisTickLabels;
+    this.showYAxisTicks = showYAxisTicks;
+    this.showYAxisInnerTicks = showYAxisInnerTicks;
+    this.showYAxisLine = showYAxisLine;
+    this.yAxisTickLabelSpread = yAxisTickLabelSpread;
+    this.yAxisTickLabelFormat = yAxisTickLabelFormat;
+    this.axis = axis;
     this.onClick = onClick;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
@@ -114,8 +135,8 @@ export class LineChart {
       maxY = maxValue;
     if (minValue > 15) minY = minValue - 10;
     this.y.domain([
-      this.yAxisMin === undefined ? minY : this.yAxisMin,
-      this.yAxisMax === undefined ? maxY : this.yAxisMax || 1,
+      this.axis.y.min === undefined ? minY : this.axis.y.min,
+      this.axis.y.max === undefined ? maxY : this.axis.y.max || 1,
     ]);
 
     this.foregroundData = this.values.map((d) => ({
@@ -134,9 +155,9 @@ export class LineChart {
 
     this.benchmarkDates = this.foregroundBenchmarks.map((d) => d.x);
 
-    if (this.startDate && this.endDate) {
-      this.xMin = this.parseDate(this.startDate);
-      this.xMax = this.parseDate(this.endDate);
+    if (this.axis.x.min && this.axis.x.max) {
+      this.xMin = this.parseDate(this.axis.x.min);
+      this.xMax = this.parseDate(this.axis.x.max);
     } else {
       this.xMin = d3.min([this.dates[0], this.benchmarkDates[0]]);
       this.xMax = d3.max([
@@ -190,7 +211,6 @@ export class LineChart {
     this.width = this.container.node().clientWidth;
     this.height = this.container.node().clientHeight;
 
-    this.x.range([this.margin.left, this.width - this.margin.right]);
     this.y.range([this.height - this.margin.bottom, this.margin.top]);
 
     this.svg.attr("viewBox", [0, 0, this.width, this.height]);
@@ -203,14 +223,36 @@ export class LineChart {
   }
 
   render() {
+    this.adjustXMargin();
     this.renderClip();
-    this.renderTicks();
+    this.renderXAxis();
+    this.renderYAxis();
     this.renderZeroLine();
     this.renderBenchmarkLine();
     this.renderBenchmarkDots();
     this.renderLine();
     this.renderDots();
     this.finishedRendering = true;
+  }
+
+  adjustXMargin() {
+    this.margin.left = 1;
+    this.margin.right = 1;
+
+    if (this.showYAxisTickLabels) {
+      this.margin.left = 4 + 48;
+    }
+
+    this.showYAxisLabel = this.axis.y.label !== "";
+    if (this.showYAxisLabel) {
+      this.margin.left += 20;
+    }
+
+    if (this.showXAxisTickLabels) {
+      this.margin.right = 16;
+    }
+
+    this.x.range([this.margin.left, this.width - this.margin.right]);
   }
 
   renderClip() {
@@ -251,11 +293,11 @@ export class LineChart {
         .attr("height", this.height);
   }
 
-  renderTicks() {
+  renderXAxis() {
     this.g
-      .selectAll(".axis")
+      .selectAll(".axis--x")
       .data(this.showXAxisTicks ? [0] : [])
-      .join((enter) => enter.append("g").attr("class", "axis"))
+      .join((enter) => enter.append("g").attr("class", "axis axis--x"))
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .call(
         d3
@@ -265,6 +307,64 @@ export class LineChart {
       )
       .call((g) => g.select(".domain").remove())
       .call((g) => g.selectAll(".tick text").remove());
+  }
+
+  renderYAxis() {
+    this.svg
+      .selectAll(".axis--y")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "axis axis--y"))
+      .attr("transform", `translate(${this.margin.left},0)`)
+      .call(
+        d3
+          .axisLeft(this.y)
+          .ticks(
+            (this.height - this.margin.top - this.margin.bottom) /
+              this.yAxisTickLabelSpread,
+          )
+          .tickSizeOuter(0)
+          .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
+          .tickFormat((d) =>
+            this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : "",
+          ),
+      )
+      .call((g) => g.selectAll(".tick line").classed("tick-line", true))
+      .call((g) =>
+        g
+          .selectAll(".tick")
+          .selectAll(".grid-line")
+          .data(this.showYAxisTicks ? [0] : [])
+          .join((enter) => enter.append("line").attr("class", "grid-line"))
+          .attr("x2", this.width - this.margin.left - this.margin.right),
+      )
+      .call((g) => g.selectAll(".tick text"))
+      .call((g) =>
+        g
+          .select(".domain")
+          .style("display", this.showYAxisLine ? null : "none"),
+      )
+      .call((g) =>
+        g
+          .selectAll(".axis-title-text")
+          .data(this.axis.y.label !== "" ? [this.axis.y.label] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "axis-title-text")
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "middle")
+              .attr("dy", "0.71em"),
+          )
+          .attr("x", -this.margin.left + 4)
+          .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
+          .attr(
+            "transform",
+            `rotate(-90,${-this.margin.left + 4},${
+              (this.margin.top + this.height - this.margin.bottom) / 2
+            })`,
+          )
+          .text((d) => d),
+      );
   }
 
   renderZeroLine() {
