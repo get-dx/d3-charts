@@ -9,6 +9,12 @@ const barchart = new BarChart({
   // optional - defaults to Infinity
   maxBarWidth: 40,
 
+  // optional - defaults to false
+  enableHoverPointer: false,
+
+  // optional - defaults to null
+  hoverColor: null,
+
   // optional - defaults to 0.4
   paddingOuter: 0.4,
 
@@ -20,10 +26,16 @@ const barchart = new BarChart({
 
   // optional - defaults to false
   showXAxisTickLabels: false,
+
   // optional - defaults to false
   showXAxisTicks: false,
+
+  // optional - defaults to true
+  showXAxisInnerTicks: true,
+
   // optional - defaults to true
   showXAxisLine: true,
+
   // optional - defaults to just the original value
   xAxisTickLabelFormat(d) {
     return d;
@@ -31,16 +43,26 @@ const barchart = new BarChart({
 
   // optional - defaults to false
   showYAxisTickLabels: false,
+
   // optional - defaults to false
   showYAxisTicks: false,
+
+  // optional - defaults to true
+  showYAxisInnerTicks: true,
+
   // optional - defaults to false
   showYAxisLine: false,
+
   // optional - defaults to 50
   yAxisTickLabelSpread: 50,
+
   // optional - defaults to just the original value
   yAxisTickLabelFormat(d) {
     return `${d}%`;
   },
+
+  // optional - CSS class for axis tick labels
+  axisTickLabelClass: "tick-label-text",
 
   // optional
   axis: {
@@ -49,7 +71,7 @@ const barchart = new BarChart({
     },
     y: {
       label: "Something Else",
-       // optional - defaults to max based on values
+      // optional - defaults to max based on values
       max: 100
     }
   }
@@ -68,6 +90,15 @@ const barchart = new BarChart({
       </div>
     `;
   },
+
+  // optional - defaults to false
+  enableRoundedCorners: false,
+
+  // optional - defaults to false
+  minimalBarHeightForZero: false,
+
+  // optional - defaults to null
+  leftMargin: null,
 
   // optional - we can initialize chart without data then fetch remote data
   // values contain dates
