@@ -20,18 +20,7 @@ export class LineChart {
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
-    axis = {
-      x: {
-        label: "",
-        min: startDate ?? undefined,
-        max: endDate ?? undefined,
-      },
-      y: {
-        label: "",
-        min: yAxisMin ?? undefined,
-        max: yAxisMax ?? undefined,
-      },
-    },
+    yAxisLabel = "",
     tooltipHtml,
     onClick,
   }) {
@@ -44,6 +33,10 @@ export class LineChart {
     this.showPoints = showPoints;
     this.showBenchmarkPoints = showComparisonPoints;
     this.dotLastSegment = dotLastSegment;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.yAxisMin = yAxisMin;
+    this.yAxisMax = yAxisMax;
     this.tooltipHtml = tooltipHtml;
     this.showYAxisTickLabels = showYAxisTickLabels;
     this.showYAxisTicks = showYAxisTicks;
@@ -51,7 +44,7 @@ export class LineChart {
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
-    this.axis = axis;
+    this.yAxisLabel = yAxisLabel;
     this.onClick = onClick;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
@@ -135,8 +128,8 @@ export class LineChart {
       maxY = maxValue;
     if (minValue > 15) minY = minValue - 10;
     this.y.domain([
-      this.axis.y.min === undefined ? minY : this.axis.y.min,
-      this.axis.y.max === undefined ? maxY : this.axis.y.max || 1,
+      this.yAxisMin === undefined ? minY : this.yAxisMin,
+      this.yAxisMax === undefined ? maxY : this.yAxisMax || 1,
     ]);
 
     this.foregroundData = this.values.map((d) => ({
@@ -155,9 +148,9 @@ export class LineChart {
 
     this.benchmarkDates = this.foregroundBenchmarks.map((d) => d.x);
 
-    if (this.axis.x.min && this.axis.x.max) {
-      this.xMin = this.parseDate(this.axis.x.min);
-      this.xMax = this.parseDate(this.axis.x.max);
+    if (this.startDate && this.endDate) {
+      this.xMin = this.parseDate(this.startDate);
+      this.xMax = this.parseDate(this.endDate);
     } else {
       this.xMin = d3.min([this.dates[0], this.benchmarkDates[0]]);
       this.xMax = d3.max([
@@ -243,7 +236,7 @@ export class LineChart {
       this.margin.left = 4 + 48;
     }
 
-    this.showYAxisLabel = this.axis.y.label !== "";
+    this.showYAxisLabel = this.yAxisLabel !== "";
     if (this.showYAxisLabel) {
       this.margin.left += 20;
     }
@@ -346,7 +339,7 @@ export class LineChart {
       .call((g) =>
         g
           .selectAll(".axis-title-text")
-          .data(this.axis.y.label !== "" ? [this.axis.y.label] : [])
+          .data(this.yAxisLabel !== "" ? [this.yAxisLabel] : [])
           .join((enter) =>
             enter
               .append("text")

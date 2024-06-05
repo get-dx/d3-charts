@@ -228,8 +228,8 @@
         ScatterTimeChart,
         StackedBarChart,
         StackedAreaChart
-      } from "../dist/main.js";
-      // } from "/src/main.js";
+      // } from "../dist/main.js";
+      } from "/src/main.js";
 
       // Stacked area chart 
       {
@@ -819,18 +819,12 @@
           },
           showYAxisTickLabels: true,
           showYAxisTicks: true,
-          axis: {
-            x: {
-              min: startDate,
-              max: endDate
-            },
-            y: {
-              label: "Y Axis",
-              min: 0,
-              max: 100
-            }
-          }
+          startDate,
+          endDate,
+          yAxisLabel: "Y Axis",
         });
+        line1.yAxisMin = 0;
+        line1.yAxisMax = 100;
         line1.values = data1.values;
         line1.redraw();
 
