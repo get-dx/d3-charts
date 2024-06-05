@@ -32,20 +32,8 @@ const linechart = new LineChart({
   yAxisTickLabelFormat(d) {
     return `${d}%`;
   },
-
   // optional
-  axis: {
-    x: {
-      min: "2022-06-05",
-      max: "2023-03-05",
-    },
-    y: {
-      label: "Something Else",
-      // optional - defaults to based on values
-      min: 0,
-      max: 100,
-    },
-  },
+  yAxisLabel: "Something",
 
   // optional - defaults to false; show value point dots
   showPoints: false,
