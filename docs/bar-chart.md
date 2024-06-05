@@ -1,3 +1,6 @@
+# Bar chart
+
+```javascript
 import { BarChart } from "@get-dx/d3-charts";
 
 const barchart = new BarChart({
@@ -69,9 +72,9 @@ const barchart = new BarChart({
     y: {
       label: "Something Else",
       // optional - defaults to max based on values
-      max: 100,
-    },
-  },
+      max: 100
+    }
+  }
 
   // optional - show pointer cursor on chart bar hover if set
   onClick(d) {
@@ -121,13 +124,14 @@ const barchart = new BarChart({
   // values don't contain date
   values: [
     {
-      name: "Bugs",
-      value: 25.241758241758241758,
-      color: "rgb(129, 140, 248)",
-    },
-  ],
+      "name": "Bugs",
+      "value": 25.241758241758241758,
+      "color": "rgb(129, 140, 248)"
+    }
+  ]
 });
 
 // we can set values after instantiation and then call redraw() to re-render
 barchart.values = newValues;
 barchart.redraw();
+```
