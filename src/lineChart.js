@@ -16,7 +16,7 @@ export class LineChart {
     yAxisMax,
     showYAxisTickLabels = false,
     showYAxisTicks = false,
-    showYAxisInnerTicks = true,
+    showYAxisInnerTicks = false,
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
