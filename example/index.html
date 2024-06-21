@@ -281,6 +281,8 @@
             { key: "additions", color: "#6366f1" },
             { key: "deletions", color: "#e5e5e5" },
           ],
+          maxBarWidth: 48,
+          enableRoundedCorners: true,
           axis: {
             x: {
               label: "Something",
@@ -289,7 +291,10 @@
               label: "Something Else",
             },
           },
+          showXAxisInnerTicks: false,
           xAxisTickLabelFormat: (d) => `A very long x label ${d}`,
+          showYAxisTicks: false,
+          showYAxisInnerTicks: false,
           yAxisTickLabelFormat: (d) => `${d}%`,
         });
 

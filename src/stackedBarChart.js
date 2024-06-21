@@ -3,15 +3,14 @@ import * as d3 from "d3";
 export class StackedBarChart {
   constructor({
     elChart,
-    paddingInner = 0.4,
-    paddingOuter = 0,
-    tooltipHtml,
     values = [],
     series = [],
     showXAxisTicks = false,
+    showXAxisInnerTicks = true,
     showXAxisLine = true,
     xAxisTickLabelFormat = (d) => d.toLocaleString(),
     showYAxisTicks = true,
+    showYAxisInnerTicks = true,
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
@@ -24,22 +23,32 @@ export class StackedBarChart {
         label: "",
       },
     },
+    paddingInner = 0.4,
+    paddingOuter = 0,
+    maxBarWidth = Infinity,
+    tooltipHtml,
+    enableRoundedCorners = false,
   }) {
     this.elChart = elChart;
     this.paddingInner = paddingInner;
     this.paddingOuter = paddingOuter;
+    this.maxBarWidth = maxBarWidth;
     this.tooltipHtml = tooltipHtml;
     this.values = values;
     this.series = series;
     this.spaceBetweenSeries = spaceBetweenSeries;
     this.showXAxisTicks = showXAxisTicks;
+    this.showXAxisInnerTicks = showXAxisInnerTicks;
     this.showXAxisLine = showXAxisLine;
     this.xAxisTickLabelFormat = xAxisTickLabelFormat;
     this.showYAxisTicks = showYAxisTicks;
+    this.showYAxisInnerTicks = showYAxisInnerTicks;
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
     this.axis = axis;
+    this.maxBarWidth = maxBarWidth;
+    this.enableRoundedCorners = enableRoundedCorners;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
@@ -55,6 +64,10 @@ export class StackedBarChart {
   }
 
   setup() {
+    this.id =
+      this.elChart.id ||
+      "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
+
     this.margin = {
       top: 8,
       right: 16,
@@ -85,6 +98,8 @@ export class StackedBarChart {
       .attr("class", "chart-scg")
       .on("mouseover", this.entered)
       .on("mouseout", this.left);
+
+    this.defs = this.svg.append("defs");
 
     this.tooltip = this.container.append("div").attr("class", "chart-tooltip");
   }
@@ -173,7 +188,7 @@ export class StackedBarChart {
         d3
           .axisBottom(this.x)
           .tickSizeOuter(0)
-          .tickSizeInner(6)
+          .tickSizeInner(this.showXAxisInnerTicks ? 6 : 0)
           .tickFormat((d, i) => this.xAxisTickLabelFormat(d, i)),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
@@ -267,7 +282,7 @@ export class StackedBarChart {
               this.yAxisTickLabelSpread,
           )
           .tickSizeOuter(0)
-          .tickSizeInner(6)
+          .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
           .tickFormat((d) => this.yAxisTickLabelFormat(d)),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
@@ -310,10 +325,45 @@ export class StackedBarChart {
   }
 
   renderBars() {
-    this.barSeries = this.svg
+    const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth());
+    const cornerRadius = 3;
+
+    this.defs
+      .selectAll("clipPath")
+      .data(this.enableRoundedCorners ? [0] : [])
+      .join((enter) => enter.append("clipPath").attr("id", `${this.id}-clip`))
+      .selectAll("rect")
+      .data(
+        this.x.domain().map((x, i) => ({
+          x,
+          yMin: d3.min(
+            this.stacked.map((s) => s[i]),
+            (d) => d[0],
+          ),
+          yMax: d3.max(
+            this.stacked.map((s) => s[i]),
+            (d) => d[1],
+          ),
+        })),
+      )
+      .join((enter) =>
+        enter.append("rect").attr("class", "bar-clip").attr("rx", cornerRadius),
+      )
+      .attr("x", (d) => this.x(d.x) + this.x.bandwidth() / 2 - barWidth / 2)
+      .attr("y", (d) => this.y(d.yMax))
+      .attr("width", barWidth)
+      .attr("height", (d) => this.y(d.yMin) - this.y(d.yMax));
+
+    this.bars = this.svg
       .selectAll(".bars")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "bars"))
+      .attr(
+        "clip-path",
+        this.enableRoundedCorners ? `url(#${this.id}-clip)` : undefined,
+      );
+
+    this.barSeries = this.bars
       .selectAll(".bar-series")
       .data(this.stacked, (d) => d.key)
       .join((enter) => enter.append("g").attr("class", "bar-series"))
@@ -322,10 +372,13 @@ export class StackedBarChart {
       .selectAll(".bar-rect")
       .data((D) => D.map((d) => ((d.key = D.key), d)))
       .join((enter) => enter.append("rect").attr("class", "bar-rect"))
-      .attr("x", (d) => this.x(d.data[0]))
+      .attr(
+        "x",
+        (d) => this.x(d.data[0]) + this.x.bandwidth() / 2 - barWidth / 2,
+      )
       .attr("y", (d) => this.y(d[1]))
       .attr("height", (d) => this.y(d[0]) - this.y(d[1]))
-      .attr("width", this.x.bandwidth());
+      .attr("width", barWidth);
   }
 
   entered(event) {
