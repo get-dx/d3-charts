@@ -81,6 +81,9 @@ const stackedbarchart = new StackedBarChart({
 
   // optional - defaults to false
   enableRoundedCorners: false,
+
+  // optional - defaults to null
+  leftMargin: null,
 });
 
 // we can set values after instantiation and then call redraw() to re-render
