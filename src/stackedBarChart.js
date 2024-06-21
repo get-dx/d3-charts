@@ -28,6 +28,7 @@ export class StackedBarChart {
     maxBarWidth = Infinity,
     tooltipHtml,
     enableRoundedCorners = false,
+    leftMargin = null,
   }) {
     this.elChart = elChart;
     this.paddingInner = paddingInner;
@@ -48,6 +49,7 @@ export class StackedBarChart {
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
     this.axis = axis;
     this.maxBarWidth = maxBarWidth;
+    this.leftMargin = leftMargin;
     this.enableRoundedCorners = enableRoundedCorners;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
@@ -174,6 +176,10 @@ export class StackedBarChart {
     this.showYAxisLabel = this.axis.y.label !== "";
     if (this.showYAxisLabel) {
       this.margin.left += 20;
+    }
+
+    if (this.leftMargin !== null) {
+      this.margin.left = this.leftMargin;
     }
 
     this.x.range([this.margin.left, this.width - this.margin.right]);
