@@ -6,7 +6,10 @@ import { StackedBarChart } from "@get-dx/d3-charts";
 const stackedbarchart = new StackedBarChart({
   elChart: document.getElementById("#mystackedbarchart"),
 
-    // optional - defaults to 0.4
+  // optional - defaults to Infinity
+  maxBarWidth: 40,
+
+  // optional - defaults to 0.4
   paddingOuter: 0.4,
 
   // optional - defaults to 0
@@ -42,6 +45,8 @@ const stackedbarchart = new StackedBarChart({
 
   // optional - defaults to true
   showXAxisTicks: false,
+  // optional - defaults to true
+  showXAxisInnerTicks: true,
   // optional - defaults to false
   showXAxisLine: false,
   // optional - defaults to just the original value
@@ -51,6 +56,8 @@ const stackedbarchart = new StackedBarChart({
 
   // optional - defaults to true
   showYAxisTicks: false,
+  // optional - defaults to true
+  showYAxisInnerTicks: true,
   // optional - defaults to false
   showYAxisLine: false,
   // optional - defaults to 50
@@ -71,6 +78,9 @@ const stackedbarchart = new StackedBarChart({
       max: 100
     }
   }
+
+  // optional - defaults to false
+  enableRoundedCorners: false,
 });
 
 // we can set values after instantiation and then call redraw() to re-render
