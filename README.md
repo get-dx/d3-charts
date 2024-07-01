@@ -10,6 +10,7 @@ This repository contains our [D3.js](https://d3js.org) chart classes:
 - [ScatterTimeChart](./docs/scatter-time-chart.md)
 - [StackedBarChart](./docs/stacked-bar-chart.md)
 - [StackedAreaChart](./docs/stacked-area-chart.md)
+- [MultiLineChart](./docs/multi-line-chart.md)
 
 ## Install
 
