@@ -180,6 +180,28 @@
   opacity: 1;
 }
 
+/* Multi-line Chart */
+.multi-line-chart .line {
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.multi-line-chart .focus-line {
+  stroke: #aaa;
+  stroke-dasharray: 2 3;
+  stroke-width: 1px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.1s visibility 0.1s;
+}
+
+.multi-line-chart .focus-line.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 /* Pie */
 .pie-chart .arc-path {
   stroke: #fff;

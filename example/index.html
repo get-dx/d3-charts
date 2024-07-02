@@ -202,6 +202,12 @@
           <div id="line-6-chart" class="chart-container"></div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Multi-Line 1</div>
+        <div class="card-body">
+          <div id="multi-line-1-chart" class="chart-container"></div>
+        </div>
+      </div>
       <div class="card" style="grid-column: span 2">
         <div class="card-title">Bump Chart</div>
         <div class="card-body">
@@ -223,6 +229,7 @@
         BarChart,
         BumpChart,
         LineChart,
+        MultiLineChart,
         PieChart,
         ScatterChart,
         ScatterTimeChart,
@@ -979,6 +986,39 @@
             `;
           },
         });
+      }
+
+      // Multi-Line Chart
+      {
+        const multiLine1 = new MultiLineChart({
+          elChart: document.getElementById("multi-line-1-chart"),
+          showYAxisTickLabels: true,
+          yAxisLabel: "Something",
+          showPoints: true,
+          tooltipHtml(ds) {
+            const date = ds[0].xValue;
+            return `
+            <div>
+              <div>${date}</div>
+              <table>
+                <tbody>
+                  ${ds.map(d => `
+                    <tr>
+                      <td>${d.series}</td>
+                      <td>${d.yValue}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+            `
+          }
+        });
+        d3.json("data/multi_line_chart_dataset.json").then((data) => {
+          multiLine1.series = data.series;
+          multiLine1.values = data.values;
+          multiLine1.redraw();
+        })
       }
 
       // Bump Chart

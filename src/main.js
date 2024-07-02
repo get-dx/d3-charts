@@ -2,6 +2,7 @@ export { BarChart } from "./barChart.js";
 export { BumpChart } from "./bumpChart.js";
 export { LineChart } from "./lineChart.js";
 export { linearRegression } from "./linearRegression.js";
+export { MultiLineChart } from "./multiLineChart.js";
 export { PieChart } from "./pieChart.js";
 export { ScatterChart } from "./scatterChart.js";
 export { ScatterTimeChart } from "./scatterTimeChart.js";

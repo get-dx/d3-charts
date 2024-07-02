@@ -6,8 +6,34 @@ import { MultiLineChart } from "@get-dx/d3-charts";
 const multiLineChart = new MultiLineChart({
   elChart: document.getElementById("#multi-line-chart"),
 
+  // optional — infer from the data unless set
+  startDate: "2022-06-05",
+  endDate: "2023-03-05",
+  // optional - defaults to true; don't show x axis line if set to false
+  showXAxisLine: true,
+  // default to true
+  showXAxisTicks: true,
+
+  // optional — infer from the data unless set
+  yAxisMin: 0,
+  yAxisMax: 100,
+  // optional - defaults to false
+  showYAxisTickLabels: false,
+  // optional - defaults to false
+  showYAxisTicks: false,
+  // optional - defaults to false
+  showYAxisLine: false,
+  // optional - defaults to 50
+  yAxisTickLabelSpread: 50,
+  // optional - defaults to just the original value
+  yAxisTickLabelFormat(d) {
+    return `${d}%`;
+  },
   // optional
   yAxisLabel: "Something",
+
+  // optional - defaults to false; show value point dots
+  showPoints: false,
 
   // optional - if set, show tooltips on hover
   tooltipHtml(d, cd) {
