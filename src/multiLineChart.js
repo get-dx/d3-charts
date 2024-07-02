@@ -324,7 +324,12 @@ export class MultiLineChart {
           })
           .filter((d) => d.isVisible),
       )
-      .join((enter) => enter.append("circle").attr("class", "dot-circle").attr("r", this.dotRadius))
+      .join((enter) =>
+        enter
+          .append("circle")
+          .attr("class", "dot-circle")
+          .attr("r", this.dotRadius),
+      )
       .attr("cx", (d) => this.x(d.date))
       .attr("cy", (d) => this.y(d.value));
   }
