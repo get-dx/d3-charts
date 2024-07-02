@@ -29,15 +29,79 @@ const multiLineChart = new MultiLineChart({
   // optional - we can initialize chart without data then fetch remote data
   values: [
     {
-      date: "2022-07-27",
-      value: 5,
-      // optional - include additional attributes to use in onClick or tooltipHtml
-      dateLabel: "Mon, 7/27",
+      xValue: "2024-10-21",
+      series: "deletions",
+      yValue: 1,
     },
     {
-      date: "2022-08-27",
-      value: 7,
-      dateLabel: "Mon, 8/27",
+      xValue: "2024-10-28",
+      series: "deletions",
+      yValue: 52,
+    },
+    {
+      xValue: "2024-11-05",
+      series: "deletions",
+      yValue: 6,
+    },
+    {
+      xValue: "2024-11-12",
+      series: "deletions",
+      yValue: 12,
+    },
+    {
+      xValue: "2024-11-19",
+      series: "deletions",
+      yValue: 104,
+    },
+    {
+      xValue: "2024-10-21",
+      series: "additions",
+      yValue: 10,
+    },
+    {
+      xValue: "2024-10-28",
+      series: "additions",
+      yValue: 2,
+    },
+    {
+      xValue: "2024-11-05",
+      series: "additions",
+      yValue: 64,
+    },
+    {
+      xValue: "2024-11-12",
+      series: "additions",
+      yValue: 412,
+    },
+    {
+      xValue: "2024-11-19",
+      series: "additions",
+      yValue: 94,
+    },
+    {
+      xValue: "2024-10-21",
+      series: "files_changed",
+      yValue: 88,
+    },
+    {
+      xValue: "2024-10-28",
+      series: "files_changed",
+      yValue: 24,
+    },
+    {
+      xValue: "2024-11-05",
+      series: "files_changed",
+      yValue: 4,
+    },
+    {
+      xValue: "2024-11-12",
+      series: "files_changed",
+      yValue: 42,
+    },
+    {
+      xValue: "2024-11-19",
+      series: "files_changed",
+      yValue: 9,
     },
   ],
 });
