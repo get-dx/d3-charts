@@ -100,6 +100,16 @@
           ></div>
         </div>
       </div>
+      <div class="card" style="grid-column: span 2">
+        <div class="card-title">Pie 4</div>
+        <div class="card-body">
+          <div
+            id="pie-4-chart"
+            class="chart-container"
+            style="--height: 314px"
+          ></div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-title">Scatter 1</div>
         <div class="card-body">
@@ -350,6 +360,33 @@
               </div>
             `;
           },
+        });
+
+        const pie4 = new PieChart({
+          elChart: document.getElementById("pie-4-chart"),
+          values: [
+            {
+              label: "A",
+              value: 25,
+              color: "red",
+            },
+            {
+              label: "B",
+              value: 25,
+              color: "green",
+            },
+            {
+              label: "C",
+              value: 25,
+              color: "blue",
+            },
+            {
+              label: "D",
+              value: 25,
+              color: "purple",
+            },
+          ],
+          minAngleForValueLabel: 360,
         });
 
         Promise.all([
