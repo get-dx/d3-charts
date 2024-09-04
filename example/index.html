@@ -1064,7 +1064,7 @@
         })
       }
       {
-        const multiLine1 = new MultiLineChart({
+        const multiLine2 = new MultiLineChart({
           elChart: document.getElementById("multi-line-2-chart"),
           showYAxisTickLabels: true,
           yAxisLabel: "Something",
@@ -1090,9 +1090,9 @@
           }
         });
         d3.json("data/multi_line_chart_dataset.json").then((data) => {
-          multiLine1.series = data.series;
-          multiLine1.values = data.values;
-          multiLine1.redraw();
+          multiLine2.series = data.series;
+          multiLine2.values = data.values;
+          multiLine2.redraw();
         })
       }
 
