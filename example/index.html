@@ -218,6 +218,12 @@
           <div id="multi-line-1-chart" class="chart-container"></div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Multi-Line 2</div>
+        <div class="card-body">
+          <div id="multi-line-2-chart" class="chart-container"></div>
+        </div>
+      </div>
       <div class="card" style="grid-column: span 2">
         <div class="card-title">Bump Chart</div>
         <div class="card-body">
@@ -248,7 +254,7 @@
       // } from "../dist/main.js";
       } from "/src/main.js";
 
-      // Stacked area chart 
+      // Stacked area chart
       {
         const stackedAreaChart = new StackedAreaChart({
           elChart: document.getElementById("stacked-area-chart"),
@@ -256,7 +262,7 @@
             return `
               <div>${date.toLocaleDateString()}</div>
               ${series.map(d => `
-                <div>${d.name}: ${(d.percentage * 100).toFixed(1)}% (${d.count})</div>  
+                <div>${d.name}: ${(d.percentage * 100).toFixed(1)}% (${d.count})</div>
               `).join("")}
             `
           }
@@ -1031,6 +1037,38 @@
           elChart: document.getElementById("multi-line-1-chart"),
           showYAxisTickLabels: true,
           yAxisLabel: "Something",
+          showPoints: true,
+          tooltipHtml(ds) {
+            const date = ds[0].xValue;
+            return `
+            <div>
+              <div>${date}</div>
+              <table>
+                <tbody>
+                  ${ds.map(d => `
+                    <tr>
+                      <td>${d.series}</td>
+                      <td>${d.yValue}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+            `
+          }
+        });
+        d3.json("data/multi_line_chart_dataset.json").then((data) => {
+          multiLine1.series = data.series;
+          multiLine1.values = data.values;
+          multiLine1.redraw();
+        })
+      }
+      {
+        const multiLine1 = new MultiLineChart({
+          elChart: document.getElementById("multi-line-2-chart"),
+          showYAxisTickLabels: true,
+          yAxisLabel: "Something",
+          xAxisLabel: "Something",
           showPoints: true,
           tooltipHtml(ds) {
             const date = ds[0].xValue;
