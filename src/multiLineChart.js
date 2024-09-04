@@ -19,6 +19,7 @@ export class MultiLineChart {
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
     yAxisLabel = "",
+    xAxisLabel = "",
     tooltipHtml,
   }) {
     this.elChart = elChart;
@@ -38,6 +39,7 @@ export class MultiLineChart {
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
     this.yAxisLabel = yAxisLabel;
+    this.xAxisLabel = xAxisLabel;
     this.tooltipHtml = tooltipHtml;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
@@ -55,10 +57,7 @@ export class MultiLineChart {
   }
 
   setup() {
-    this.margin = {
-      top: 3,
-      bottom: 3,
-    };
+    this.margin = {};
 
     this.dotRadius = 2.5;
 
@@ -157,11 +156,7 @@ export class MultiLineChart {
     this.width = this.container.node().clientWidth;
     this.height = this.container.node().clientHeight;
 
-    this.y.range([this.height - this.margin.bottom, this.margin.top]);
-
     this.svg.attr("viewBox", [0, 0, this.width, this.height]);
-
-    this.focusLine.attr("y2", this.height - this.margin.bottom);
 
     if (this.values.length === 0 || this.series.length === 0) return;
 
@@ -170,8 +165,10 @@ export class MultiLineChart {
 
   render() {
     this.adjustXMargin();
+    this.adjustYMargin();
     this.renderXAxis();
     this.renderYAxis();
+    this.renderFocusLine();
     this.renderZeroLine();
     this.renderSeries();
   }
@@ -192,6 +189,18 @@ export class MultiLineChart {
     this.x.range([this.margin.left, this.width - this.margin.right]);
   }
 
+  adjustYMargin() {
+    this.margin.top = 3;
+    this.margin.bottom = 3;
+
+    this.showXAxisLabel = this.xAxisLabel !== "";
+    if (this.showXAxisLabel) {
+      this.margin.bottom += 20;
+    }
+
+    this.y.range([this.height - this.margin.bottom, this.margin.top]);
+  }
+
   renderXAxis() {
     this.g
       .selectAll(".axis--x")
@@ -205,7 +214,22 @@ export class MultiLineChart {
           .tickSize(-this.height + this.margin.top + this.margin.bottom),
       )
       .call((g) => g.select(".domain").remove())
-      .call((g) => g.selectAll(".tick text").remove());
+      .call((g) => g.selectAll(".tick text").remove())
+      .call((g) =>
+        g
+          .selectAll(".axis-title-text")
+          .data(this.showXAxisLabel ? [this.xAxisLabel] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "axis-title-text")
+              .attr("fill", "currentColor")
+              .attr("text-anchor", "middle"),
+          )
+          .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
+          .attr("y", this.margin.bottom - 4)
+          .text(d => d),
+      );
   }
 
   renderYAxis() {
@@ -264,6 +288,10 @@ export class MultiLineChart {
           )
           .text((d) => d),
       );
+  }
+
+  renderFocusLine() {
+    this.focusLine.attr("y2", this.height - this.margin.bottom);
   }
 
   renderZeroLine() {
