@@ -228,7 +228,7 @@ export class MultiLineChart {
           )
           .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
           .attr("y", this.margin.bottom - 4)
-          .text(d => d),
+          .text((d) => d),
       );
   }
 
