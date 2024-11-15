@@ -247,6 +247,7 @@ export class MultiLineChart {
           )
           .tickSizeOuter(0)
           .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
+          .tickPadding(10)
           .tickFormat((d) =>
             this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : "",
           ),
