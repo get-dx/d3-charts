@@ -201,6 +201,10 @@
   opacity: 1;
 }
 
+.multi-line-chart .axis--y line {
+  stroke-dasharray: 2 3;
+}
+
 
 /* Pie */
 .pie-chart .arc-path {
