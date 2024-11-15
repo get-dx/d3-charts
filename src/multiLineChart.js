@@ -233,7 +233,7 @@ export class MultiLineChart {
   }
 
   renderYAxis() {
-    this.svg
+    this.g
       .selectAll(".axis--y")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "axis axis--y"))
