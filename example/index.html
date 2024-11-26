@@ -17,16 +17,42 @@
 
       main {
         margin: 2rem auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
-        gap: 2rem;
         max-width: 1200px;
+        padding: 0 1rem;
+      }
+
+      .section {
+        border: 1px solid #e5e5e5;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
       }
 
       .card {
+        flex: 1 1 400px; /* Base width of 400px, but can grow and shrink */
+        min-width: 300px; /* Minimum width to prevent too narrow cards */
         background-color: #fff;
         border-radius: 0.25rem;
         padding: 1rem;
+      }
+
+      /* For cards that should span full width */
+      .card.full-width {
+        flex: 1 1 100%;
       }
 
       .card-title {
@@ -39,207 +65,271 @@
       .chart-container {
         min-height: var(--height, 180px);
       }
+
+      /* New styles for sections and navigation */
+      .section {
+        border: 1px solid #e5e5e5;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #e5e5e5;
+        z-index: 100;
+      }
+
+      .nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        color: #6366f1;
+        text-decoration: none;
+      }
+
+      .nav a:hover {
+        text-decoration: underline;
+      }
     </style>
     <link rel="stylesheet" href="css/chart.css" />
   </head>
   <body>
+    <nav class="nav">
+      <ul>
+        <li><a href="#stacked">Stacked Charts</a></li>
+        <li><a href="#pie">Pie Charts</a></li>
+        <li><a href="#scatter">Scatter Charts</a></li>
+        <li><a href="#bar">Bar Charts</a></li>
+        <li><a href="#scatter-time">Scatter Time Charts</a></li>
+        <li><a href="#line">Line Charts</a></li>
+        <li><a href="#multi-line">Multi-Line Charts</a></li>
+        <li><a href="#bump">Bump Charts</a></li>
+      </ul>
+    </nav>
+
     <main>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Stacked Area Chart</div>
-        <div class="card-body">
-          <div id="stacked-area-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Stacked Bar 1</div>
-        <div class="card-body">
-          <div
-            id="stacked-bar-1-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Stacked Bar 2</div>
-        <div class="card-body">
-          <div
-            id="stacked-bar-2-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Pie 1</div>
-        <div class="card-body">
-          <div
-            id="pie-1-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Pie 2</div>
-        <div class="card-body">
-          <div
-            id="pie-2-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Pie 3</div>
-        <div class="card-body">
-          <div
-            id="pie-3-chart"
-            class="chart-container"
-            style="--height: 314px"
-          ></div>
-        </div>
-      </div>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Pie 4</div>
-        <div class="card-body">
-          <div
-            id="pie-4-chart"
-            class="chart-container"
-            style="--height: 314px"
-          ></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Scatter 1</div>
-        <div class="card-body">
-          <div
-            id="scatter-1-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Scatter 2</div>
-        <div class="card-body">
-          <div
-            id="scatter-2-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Scatter 3</div>
-        <div class="card-body">
-          <div
-            id="scatter-3-chart"
-            class="chart-container"
-            style="--height: 400px"
-          ></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Bar 1</div>
-        <div class="card-body">
-          <div id="bar-1-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Bar 2</div>
-        <div class="card-body">
-          <div id="bar-2-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Bar 3</div>
-        <div class="card-body">
-          <div id="bar-3-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Scatter Time 1</div>
-        <div class="card-body">
-          <div id="scatter-time-1-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Scatter Time 2</div>
-        <div class="card-body">
-          <div id="scatter-time-2-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Scatter Time 3</div>
-        <div class="card-body">
-          <div id="scatter-time-3-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Line 1</div>
-        <div class="card-body">
-          <div id="line-1-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Line 2</div>
-        <div class="card-body">
-          <div id="line-2-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Line 3</div>
-        <div class="card-body">
-          <div id="line-3-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Line 4</div>
-        <div class="card-body">
-          <div id="line-4-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Line 5</div>
-        <div class="card-body">
-          <div id="line-5-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Line 6</div>
-        <div class="card-body">
-          <div id="line-6-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Multi-Line 1</div>
-        <div class="card-body">
-          <div id="multi-line-1-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">Multi-Line 2</div>
-        <div class="card-body">
-          <div id="multi-line-2-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Bump Chart</div>
-        <div class="card-body">
-          <div id="bump-chart" class="chart-container"></div>
-        </div>
-      </div>
-      <div class="card" style="grid-column: span 2">
-        <div class="card-title">Dense Multi-Line Chart with Limited Ticks</div>
-        <div class="card-body">
-          <div 
-            id="dense-multi-line-chart" 
-            class="chart-container" 
-            style="--height: 400px">
+      <!-- Stacked Charts Section -->
+      <section id="stacked" class="section">
+        <h2 class="section-title">Stacked Charts</h2>
+        <div class="section-content">
+          <div class="card full-width">
+            <div class="card-title">Stacked Area Chart</div>
+            <div class="card-body">
+              <div id="stacked-area-chart" class="chart-container"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Stacked Bar 1</div>
+            <div class="card-body">
+              <div id="stacked-bar-1-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Stacked Bar 2</div>
+            <div class="card-body">
+              <div id="stacked-bar-2-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Pie Charts Section -->
+      <section id="pie" class="section">
+        <h2 class="section-title">Pie Charts</h2>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Pie 1</div>
+            <div class="card-body">
+              <div id="pie-1-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Pie 2</div>
+            <div class="card-body">
+              <div id="pie-2-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Pie 3</div>
+            <div class="card-body">
+              <div id="pie-3-chart" class="chart-container" style="--height: 314px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Pie 4</div>
+            <div class="card-body">
+              <div id="pie-4-chart" class="chart-container" style="--height: 314px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scatter Charts Section -->
+      <section id="scatter" class="section">
+        <h2 class="section-title">Scatter Charts</h2>
+        <div class="card">
+          <div class="card-title">Scatter 1</div>
+          <div class="card-body">
+            <div id="scatter-1-chart" class="chart-container" style="--height: 400px"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Scatter 2</div>
+          <div class="card-body">
+            <div id="scatter-2-chart" class="chart-container" style="--height: 400px"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Scatter 3</div>
+          <div class="card-body">
+            <div id="scatter-3-chart" class="chart-container" style="--height: 400px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bar Charts Section -->
+      <section id="bar" class="section">
+        <h2 class="section-title">Bar Charts</h2>
+        <div class="card">
+          <div class="card-title">Bar 1</div>
+          <div class="card-body">
+            <div id="bar-1-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Bar 2</div>
+          <div class="card-body">
+            <div id="bar-2-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Bar 3</div>
+          <div class="card-body">
+            <div id="bar-3-chart" class="chart-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scatter Time Charts Section -->
+      <section id="scatter-time" class="section">
+        <h2 class="section-title">Scatter Time Charts</h2>
+        <div class="card">
+          <div class="card-title">Scatter Time 1</div>
+          <div class="card-body">
+            <div id="scatter-time-1-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Scatter Time 2</div>
+          <div class="card-body">
+            <div id="scatter-time-2-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Scatter Time 3</div>
+          <div class="card-body">
+            <div id="scatter-time-3-chart" class="chart-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Line Charts Section -->
+      <section id="line" class="section">
+        <h2 class="section-title">Line Charts</h2>
+        <div class="card">
+          <div class="card-title">Line 1</div>
+          <div class="card-body">
+            <div id="line-1-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Line 2</div>
+          <div class="card-body">
+            <div id="line-2-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Line 3</div>
+          <div class="card-body">
+            <div id="line-3-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Line 4</div>
+          <div class="card-body">
+            <div id="line-4-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Line 5</div>
+          <div class="card-body">
+            <div id="line-5-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Line 6</div>
+          <div class="card-body">
+            <div id="line-6-chart" class="chart-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Multi-Line Charts Section -->
+      <section id="multi-line" class="section">
+        <h2 class="section-title">Multi-Line Charts</h2>
+        <div class="card">
+          <div class="card-title">Multi-Line 1</div>
+          <div class="card-body">
+            <div id="multi-line-1-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Multi-Line 2</div>
+          <div class="card-body">
+            <div id="multi-line-2-chart" class="chart-container"></div>
+          </div>
+        </div>
+        <div class="card" style="grid-column: span 2">
+          <div class="card-title">Dense Multi-Line Chart with Limited Ticks</div>
+          <div class="card-body">
+            <div 
+              id="dense-multi-line-chart" 
+              class="chart-container" 
+              style="--height: 400px">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bump Charts Section -->
+      <section id="bump" class="section">
+        <h2 class="section-title">Bump Charts</h2>
+        <div class="card" style="grid-column: span 2">
+          <div class="card-title">Bump Chart</div>
+          <div class="card-body">
+            <div id="bump-chart" class="chart-container"></div>
+          </div>
+        </div>
+      </section>
     </main>
     <!-- D3 Peer dependency-->
     <script type="importmap">
@@ -1078,8 +1168,8 @@
           elChart: document.getElementById("multi-line-2-chart"),
           showYAxisTickLabels: true,
           showYAxisTicks: true,
-          yAxisLabel: "Something",
-          xAxisLabel: "Something",
+          yAxisLabel: "Y Axis",
+          xAxisLabel: "X Axis",
           showPoints: true,
           tooltipHtml(ds) {
             const date = ds[0].xValue;

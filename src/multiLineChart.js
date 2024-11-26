@@ -307,7 +307,22 @@ export class MultiLineChart {
           .tickFormat(d3.timeFormat("%b %d")),
       )
       .call((g) => g.select(".domain").remove())
-      .call((g) => g.selectAll(".tick text"));
+      .call((g) => g.selectAll(".tick text"))
+      .call((g) =>
+        g
+          .selectAll(".x-axis-label")
+          .data(this.xAxisLabel !== "" ? [this.xAxisLabel] : [])
+          .join((enter) =>
+            enter
+              .append("text")
+              .attr("class", "x-axis-label axis-title-text")
+              .attr("text-anchor", "middle")
+              .attr("fill", "currentColor"),
+          )
+          .attr("x", (this.width - this.margin.left - this.margin.right) / 2)
+          .attr("y", 38) // Position below the axis
+          .text((d) => d),
+      );
   }
 
   renderYAxis() {
