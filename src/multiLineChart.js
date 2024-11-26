@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { linearRegression } from "./linearRegression.js";
 
 export class MultiLineChart {
   constructor({
@@ -12,8 +13,8 @@ export class MultiLineChart {
     endDate,
     yAxisMin,
     yAxisMax,
-    showYAxisTickLabels = false,
-    showYAxisTicks = false,
+    showYAxisTickLabels = true,
+    showYAxisTicks = true,
     showYAxisInnerTicks = false,
     showYAxisLine = false,
     yAxisTickLabelSpread = 50,
@@ -21,7 +22,11 @@ export class MultiLineChart {
     yAxisLabel = "",
     xAxisLabel = "",
     tooltipHtml,
+    showTrendlines = false,
+    trendlineClass = "trend-line",
+    minTickSpacing = null,
   }) {
+    console.log("🔗 LINKED VERSION OF MULTILINECHART LOADED 🔗", 2); // Add this line
     this.elChart = elChart;
     this.series = series;
     this.values = values;
@@ -41,6 +46,9 @@ export class MultiLineChart {
     this.yAxisLabel = yAxisLabel;
     this.xAxisLabel = xAxisLabel;
     this.tooltipHtml = tooltipHtml;
+    this.showTrendlines = showTrendlines;
+    this.trendlineClass = trendlineClass;
+    this.minTickSpacing = minTickSpacing;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.moved = this.moved.bind(this);
@@ -148,6 +156,27 @@ export class MultiLineChart {
       values: this.dates.map((date) => indexedValue.get(key)?.get(date)),
     }));
 
+    if (this.showTrendlines) {
+      this.lineData = this.lineData.map((series) => {
+        const nonNullIndexes = series.values.reduce((idx, d, i) => {
+          if (d !== undefined) idx.push(i);
+          return idx;
+        }, []);
+
+        let lr = null;
+        if (nonNullIndexes.length >= 2) {
+          const x = nonNullIndexes;
+          const y = nonNullIndexes.map((i) => series.values[i]);
+          lr = linearRegression(x, y);
+        }
+
+        return {
+          ...series,
+          trendline: lr,
+        };
+      });
+    }
+
     if (!this.width) return;
     this.render();
   }
@@ -169,7 +198,7 @@ export class MultiLineChart {
     this.renderXAxis();
     this.renderYAxis();
     this.renderFocusLine();
-    this.renderZeroLine();
+    this.renderTrendlines();
     this.renderSeries();
   }
 
@@ -178,12 +207,12 @@ export class MultiLineChart {
     this.margin.right = 1;
 
     if (this.showYAxisTickLabels) {
-      this.margin.left = 4 + 48;
+      this.margin.left = 4 + 38;
     }
 
     this.showYAxisLabel = this.yAxisLabel !== "";
     if (this.showYAxisLabel) {
-      this.margin.left += 20;
+      this.margin.left += 10;
     }
 
     this.x.range([this.margin.left, this.width - this.margin.right]);
@@ -191,17 +220,80 @@ export class MultiLineChart {
 
   adjustYMargin() {
     this.margin.top = 3;
-    this.margin.bottom = 3;
+    this.margin.bottom = 20;
 
     this.showXAxisLabel = this.xAxisLabel !== "";
     if (this.showXAxisLabel) {
-      this.margin.bottom += 20;
+      this.margin.bottom += 16;
     }
 
     this.y.range([this.height - this.margin.bottom, this.margin.top]);
   }
 
   renderXAxis() {
+    const yRange = this.y.domain();
+    const tickSize = 0;
+
+    // First render temporary ticks to measure their width
+    const tempAxis = this.g
+      .append("g")
+      .attr("class", "temp-axis")
+      .call(
+        d3
+          .axisBottom(this.x)
+          .tickValues([this.dates[0]]) // Just need one tick to measure
+          .tickFormat(d3.timeFormat("%b %d")),
+      );
+
+    // Measure tick label width
+    let tickWidth = 0;
+    tempAxis.selectAll(".tick text").each(function () {
+      tickWidth = Math.max(tickWidth, this.getBoundingClientRect().width);
+    });
+
+    // Remove temporary axis
+    tempAxis.remove();
+
+    // Calculate optimal spacing
+    const padding = 16; // Minimum pixels between tick labels
+    const optimalSpacing = tickWidth + padding;
+
+    // Use the larger of calculated optimal spacing or provided minTickSpacing
+    const effectiveSpacing = Math.max(
+      optimalSpacing,
+      this.minTickSpacing || optimalSpacing,
+    );
+
+    // Select ticks with a greedy approach
+    const selectedTicks = [];
+    let lastX = -Infinity;
+
+    this.dates.forEach((date, i) => {
+      const xPos = this.x(date);
+
+      // Always include first date
+      if (i === 0) {
+        selectedTicks.push(date);
+        lastX = xPos;
+        return;
+      }
+
+      // For last date, only include if it's far enough from the previous tick
+      if (i === this.dates.length - 1) {
+        if (xPos - lastX >= effectiveSpacing) {
+          selectedTicks.push(date);
+        }
+        return;
+      }
+
+      // Include dates that don't overlap with previous tick
+      if (xPos - lastX >= effectiveSpacing) {
+        selectedTicks.push(date);
+        lastX = xPos;
+      }
+    });
+
+    // Render actual axis
     this.g
       .selectAll(".axis--x")
       .data(this.showXAxisTicks ? [0] : [])
@@ -210,30 +302,17 @@ export class MultiLineChart {
       .call(
         d3
           .axisBottom(this.x)
-          .tickValues(this.dates)
-          .tickSize(-this.height + this.margin.top + this.margin.bottom),
+          .tickValues(selectedTicks)
+          .tickSize(tickSize)
+          .tickFormat(d3.timeFormat("%b %d")),
       )
       .call((g) => g.select(".domain").remove())
-      .call((g) => g.selectAll(".tick text").remove())
-      .call((g) =>
-        g
-          .selectAll(".axis-title-text")
-          .data(this.showXAxisLabel ? [this.xAxisLabel] : [])
-          .join((enter) =>
-            enter
-              .append("text")
-              .attr("class", "axis-title-text")
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "middle"),
-          )
-          .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
-          .attr("y", this.margin.bottom - 4)
-          .text((d) => d),
-      );
+      .call((g) => g.selectAll(".tick text"));
   }
 
   renderYAxis() {
-    this.g
+    // Create axis first to measure label widths
+    const yAxis = this.g
       .selectAll(".axis--y")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "axis axis--y"))
@@ -247,11 +326,25 @@ export class MultiLineChart {
           )
           .tickSizeOuter(0)
           .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
-          .tickPadding(10)
+          .tickPadding(16)
           .tickFormat((d) =>
             this.showYAxisTickLabels ? this.yAxisTickLabelFormat(d) : "",
           ),
-      )
+      );
+
+    // Calculate max label width if labels are shown
+    let maxLabelWidth = 0;
+    if (this.showYAxisTickLabels) {
+      yAxis.selectAll(".tick text").each(function () {
+        const bbox = this.getBBox();
+        maxLabelWidth = Math.max(maxLabelWidth, bbox.width);
+      });
+    }
+
+    const labelOffset = maxLabelWidth + 40; // Increased spacing between tick labels and axis label
+
+    // Position y-axis label with proper offset
+    yAxis
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
         g
@@ -279,13 +372,14 @@ export class MultiLineChart {
               .attr("text-anchor", "middle")
               .attr("dy", "0.71em"),
           )
-          .attr("x", -this.margin.left + 4)
+          .attr("x", -labelOffset) // Position to the left of tick labels
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
           .attr(
             "transform",
-            `rotate(-90,${-this.margin.left + 4},${
-              (this.margin.top + this.height - this.margin.bottom) / 2
-            })`,
+            (d) =>
+              `rotate(-90,${-labelOffset},${
+                (this.margin.top + this.height - this.margin.bottom) / 2
+              })`,
           )
           .text((d) => d),
       );
@@ -305,8 +399,53 @@ export class MultiLineChart {
           .attr("class", "zero-line")
           .attr("x1", this.margin.left),
       )
-      .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
+      .attr("transform", `translate(0,${this.y(0)})`)
       .attr("x2", this.width - this.margin.right);
+  }
+
+  renderTrendlines() {
+    if (!this.showTrendlines) return;
+
+    const trendlineG = this.g
+      .selectAll(".trend-lines")
+      .data([0])
+      .join((enter) => enter.append("g").attr("class", "trend-lines"));
+
+    trendlineG
+      .selectAll(".trend-line")
+      .data(this.lineData.filter((d) => d.trendline))
+      .join((enter) =>
+        enter
+          .append("line")
+          .attr("class", (d) => `trend-line ${this.trendlineClass}`),
+      )
+      .attr("stroke", (d) => this.color(d.key))
+      .attr("x1", (d) => {
+        const firstValidIndex = d.values.findIndex((v) => v !== undefined);
+        return this.x(this.dates[firstValidIndex]);
+      })
+      .attr("x2", (d) => {
+        const lastValidIndex =
+          d.values.length -
+          1 -
+          [...d.values].reverse().findIndex((v) => v !== undefined);
+        return this.x(this.dates[lastValidIndex]);
+      })
+      .attr("y1", (d) => {
+        const firstValidIndex = d.values.findIndex((v) => v !== undefined);
+        return this.y(
+          d.trendline.slope * firstValidIndex + d.trendline.intercept,
+        );
+      })
+      .attr("y2", (d) => {
+        const lastValidIndex =
+          d.values.length -
+          1 -
+          [...d.values].reverse().findIndex((v) => v !== undefined);
+        return this.y(
+          d.trendline.slope * lastValidIndex + d.trendline.intercept,
+        );
+      });
   }
 
   renderSeries() {

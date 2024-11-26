@@ -230,6 +230,16 @@
           <div id="bump-chart" class="chart-container"></div>
         </div>
       </div>
+      <div class="card" style="grid-column: span 2">
+        <div class="card-title">Dense Multi-Line Chart with Limited Ticks</div>
+        <div class="card-body">
+          <div 
+            id="dense-multi-line-chart" 
+            class="chart-container" 
+            style="--height: 400px">
+          </div>
+        </div>
+      </div>
     </main>
     <!-- D3 Peer dependency-->
     <script type="importmap">
@@ -305,6 +315,7 @@
             { key: "deletions", color: "#e5e5e5" },
           ],
           maxBarWidth: 48,
+          showTrendline: true,
           enableRoundedCorners: true,
           axis: {
             x: {
@@ -315,7 +326,7 @@
             },
           },
           showXAxisInnerTicks: false,
-          xAxisTickLabelFormat: (d) => `A very long x label ${d}`,
+          xAxisTickLabelFormat: (d) => `${d}`,
           showYAxisTicks: false,
           showYAxisInnerTicks: false,
           yAxisTickLabelFormat: (d) => `${d}%`,
@@ -1035,8 +1046,7 @@
       {
         const multiLine1 = new MultiLineChart({
           elChart: document.getElementById("multi-line-1-chart"),
-          showYAxisTickLabels: true,
-          yAxisLabel: "Something",
+          yAxisTickLabelSpread: 30,
           showPoints: true,
           tooltipHtml(ds) {
             const date = ds[0].xValue;
@@ -1107,6 +1117,78 @@
           });
         });
       }
+
+      // Create sample data with many points
+      const generateData = () => {
+        const startDate = new Date('2024-01-01');
+        const series = ['Series A', 'Series B', 'Series C'];
+        const values = [];
+        
+        // Generate 50 dates (daily) for each series
+        series.forEach(seriesName => {
+          for (let i = 0; i < 50; i++) {
+            const date = new Date(startDate);
+            date.setDate(date.getDate() + i);
+            
+            values.push({
+              xValue: date.toISOString().split('T')[0],
+              series: seriesName,
+              yValue: Math.floor(Math.random() * 100) + 20 // Random value between 20-120
+            });
+          }
+        });
+        
+        return {
+          series: series.map(name => ({
+            key: name,
+            color: name === 'Series A' ? '#6366f1' : 
+                   name === 'Series B' ? '#22c55e' : '#f97316'
+          })),
+          values
+        };
+      };
+
+      // Create chart instance
+      const data = generateData();
+      const multiLineChart = new MultiLineChart({
+        elChart: document.getElementById("dense-multi-line-chart"),
+        series: data.series,
+        values: data.values,
+        
+        // Enable tick limiting with minimum spacing
+        minTickSpacing: 20,
+        
+        // Show points for better visualization
+        showPoints: true,
+        
+        // Configure axes
+        showYAxisTickLabels: true,
+        showYAxisTicks: true,
+        yAxisLabel: "Value",
+        
+        // Add tooltip
+        tooltipHtml(dataPoints) {
+          const date = dataPoints[0].xValue;
+          return `
+            <div>
+              <div style="font-weight: bold">${new Date(date).toLocaleDateString()}</div>
+              <table>
+                <tbody>
+                  ${dataPoints.map(d => `
+                    <tr>
+                      <td style="padding-right: 1rem">${d.series}:</td>
+                      <td style="text-align: right">${d.yValue}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          `;
+        }
+      });
+
+      // Initial render
+      multiLineChart.redraw();
     </script>
   </body>
 </html>

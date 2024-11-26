@@ -1,12 +1,11 @@
 import * as d3 from "d3";
+import { linearRegression } from "./linearRegression.js";
 
 export class StackedBarChart {
   constructor({
     elChart,
     values = [],
     series = [],
-    showXAxisTicks = false,
-    showXAxisInnerTicks = true,
     showXAxisLine = true,
     xAxisTickLabelFormat = (d) => d.toLocaleString(),
     showYAxisTicks = true,
@@ -27,8 +26,10 @@ export class StackedBarChart {
     paddingOuter = 0,
     maxBarWidth = Infinity,
     tooltipHtml,
-    enableRoundedCorners = false,
+    enableRoundedCorners = true,
     leftMargin = null,
+    showTrendline = false,
+    trendlineClass = "trend-line",
   }) {
     this.elChart = elChart;
     this.paddingInner = paddingInner;
@@ -38,8 +39,6 @@ export class StackedBarChart {
     this.values = values;
     this.series = series;
     this.spaceBetweenSeries = spaceBetweenSeries;
-    this.showXAxisTicks = showXAxisTicks;
-    this.showXAxisInnerTicks = showXAxisInnerTicks;
     this.showXAxisLine = showXAxisLine;
     this.xAxisTickLabelFormat = xAxisTickLabelFormat;
     this.showYAxisTicks = showYAxisTicks;
@@ -51,6 +50,8 @@ export class StackedBarChart {
     this.maxBarWidth = maxBarWidth;
     this.leftMargin = leftMargin;
     this.enableRoundedCorners = enableRoundedCorners;
+    this.showTrendline = showTrendline;
+    this.trendlineClass = trendlineClass;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
@@ -148,6 +149,24 @@ export class StackedBarChart {
     ]);
     if (this.axis.y.max === undefined) this.y.nice();
 
+    this.lr = null;
+    if (this.showTrendline) {
+      const totals = Array.from(d3.group(this.values, this.accessor.x)).map(
+        ([_, values]) => d3.sum(values, this.accessor.y),
+      );
+
+      const nonNullIndexes = totals.reduce((idx, d, i) => {
+        if (d !== null) idx.push(i);
+        return idx;
+      }, []);
+
+      if (nonNullIndexes.length >= 2) {
+        const x = nonNullIndexes;
+        const y = nonNullIndexes.map((i) => totals[i]);
+        this.lr = linearRegression(x, y);
+      }
+    }
+
     if (!this.width) return;
     this.render();
   }
@@ -169,6 +188,7 @@ export class StackedBarChart {
     this.adjustYMargin();
     this.renderYAxis();
     this.renderBars();
+    this.renderTrendLine();
   }
 
   adjustXMargin() {
@@ -194,7 +214,7 @@ export class StackedBarChart {
         d3
           .axisBottom(this.x)
           .tickSizeOuter(0)
-          .tickSizeInner(this.showXAxisInnerTicks ? 6 : 0)
+          .tickSizeInner(0)
           .tickFormat((d, i) => this.xAxisTickLabelFormat(d, i)),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
@@ -202,7 +222,21 @@ export class StackedBarChart {
         g
           .selectAll(".tick")
           .selectAll(".grid-line")
-          .data(this.showXAxisTicks ? [0] : [])
+          .data([])
+          .join((enter) => enter.append("line").attr("class", "grid-line"))
+          .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
+      )
+      .call((g) =>
+        g
+          .selectAll(".tick text")
+          .classed("tick-label-text", true)
+          .attr("dy", "1.5em"),
+      )
+      .call((g) =>
+        g
+          .selectAll(".tick")
+          .selectAll(".grid-line")
+          .data([])
           .join((enter) => enter.append("line").attr("class", "grid-line"))
           .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
       )
@@ -249,7 +283,7 @@ export class StackedBarChart {
         .select(".axis--x")
         .selectAll(".tick text")
         .attr("text-anchor", "end")
-        .attr("dy", "0.32em")
+        .attr("dy", "0.71em")
         .attr("transform", `rotate(-45,0,9)`);
     }
   }
@@ -289,6 +323,7 @@ export class StackedBarChart {
           )
           .tickSizeOuter(0)
           .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
+          .tickPadding(12)
           .tickFormat((d) => this.yAxisTickLabelFormat(d)),
       )
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
@@ -332,59 +367,90 @@ export class StackedBarChart {
 
   renderBars() {
     const barWidth = Math.min(this.maxBarWidth, this.x.bandwidth());
-    const cornerRadius = 3;
-
-    this.defs
-      .selectAll("clipPath")
-      .data(this.enableRoundedCorners ? [0] : [])
-      .join((enter) => enter.append("clipPath").attr("id", `${this.id}-clip`))
-      .selectAll("rect")
-      .data(
-        this.x.domain().map((x, i) => ({
-          x,
-          yMin: d3.min(
-            this.stacked.map((s) => s[i]),
-            (d) => d[0],
-          ),
-          yMax: d3.max(
-            this.stacked.map((s) => s[i]),
-            (d) => d[1],
-          ),
-        })),
-      )
-      .join((enter) =>
-        enter.append("rect").attr("class", "bar-clip").attr("rx", cornerRadius),
-      )
-      .attr("x", (d) => this.x(d.x) + this.x.bandwidth() / 2 - barWidth / 2)
-      .attr("y", (d) => this.y(d.yMax))
-      .attr("width", barWidth)
-      .attr("height", (d) => this.y(d.yMin) - this.y(d.yMax));
+    const cornerRadius = this.enableRoundedCorners ? 3 : 0;
 
     this.bars = this.svg
       .selectAll(".bars")
       .data([0])
-      .join((enter) => enter.append("g").attr("class", "bars"))
-      .attr(
-        "clip-path",
-        this.enableRoundedCorners ? `url(#${this.id}-clip)` : undefined,
-      );
+      .join((enter) => enter.append("g").attr("class", "bars"));
 
     this.barSeries = this.bars
       .selectAll(".bar-series")
       .data(this.stacked, (d) => d.key)
       .join((enter) => enter.append("g").attr("class", "bar-series"))
       .attr("fill", (d) => this.color(d.key));
+
+    // Create a map of the highest points for each x value
+    const maxHeightsByX = new Map();
+    this.stacked.forEach((series) => {
+      series.forEach((d) => {
+        const xVal = d.data[0];
+        const yVal = d[1];
+        if (!maxHeightsByX.has(xVal) || maxHeightsByX.get(xVal) < yVal) {
+          maxHeightsByX.set(xVal, yVal);
+        }
+      });
+    });
+
     this.barRect = this.barSeries
       .selectAll(".bar-rect")
       .data((D) => D.map((d) => ((d.key = D.key), d)))
-      .join((enter) => enter.append("rect").attr("class", "bar-rect"))
-      .attr(
-        "x",
-        (d) => this.x(d.data[0]) + this.x.bandwidth() / 2 - barWidth / 2,
-      )
-      .attr("y", (d) => this.y(d[1]))
-      .attr("height", (d) => this.y(d[0]) - this.y(d[1]))
-      .attr("width", barWidth);
+      .join((enter) => enter.append("path").attr("class", "bar-rect"))
+      .attr("d", (d) => {
+        const x = this.x(d.data[0]) + this.x.bandwidth() / 2 - barWidth / 2;
+        const y = this.y(d[1]);
+        const height = this.y(d[0]) - this.y(d[1]);
+        const width = barWidth;
+
+        // Only add top rounded corners for the topmost bar
+        const isTopBar = maxHeightsByX.get(d.data[0]) === d[1];
+        const r = isTopBar ? cornerRadius : 0;
+
+        // Create path with rounded top corners only
+        return `
+          M ${x + r},${y}
+          L ${x + width - r},${y}
+          Q ${x + width},${y} ${x + width},${y + r}
+          L ${x + width},${y + height}
+          L ${x},${y + height}
+          L ${x},${y + r}
+          Q ${x},${y} ${x + r},${y}
+          Z
+        `;
+      })
+      .attr("fill", (d) =>
+        this.barSeries.filter((D) => D.key === d.key).attr("fill"),
+      );
+  }
+
+  renderTrendLine() {
+    const tl = this.svg
+      .selectAll(".trend-line")
+      .data(this.lr ? [0] : [])
+      .join((enter) => enter.append("line").attr("class", this.trendlineClass));
+
+    if (this.lr) {
+      const xScaleDomain = this.x.domain();
+      const yScaleRange = this.y.range();
+
+      const x1 = this.x(xScaleDomain[0]) + this.x.bandwidth() / 2;
+      const x2 =
+        this.x(xScaleDomain[xScaleDomain.length - 1]) + this.x.bandwidth() / 2;
+
+      const y1 = Math.max(
+        yScaleRange[1],
+        Math.min(yScaleRange[0], this.y(this.lr.intercept)),
+      );
+      const y2 = Math.max(
+        yScaleRange[1],
+        Math.min(
+          yScaleRange[0],
+          this.y(this.lr.slope * (xScaleDomain.length - 1) + this.lr.intercept),
+        ),
+      );
+
+      tl.attr("x1", x1).attr("x2", x2).attr("y1", y1).attr("y2", y2);
+    }
   }
 
   entered(event) {
