@@ -29,6 +29,7 @@ To get started —
 
 ```bash
 corepack enable
+corepack prepare yarn@4.1.1 --activate
 ```
 
 1. Setup yarn -
@@ -48,7 +49,7 @@ To test this package locally in another app, use [yalc](https://github.com/wclr/
 Before these steps, install `yalc` -
 
 ```bash
-yarn global add yalc
+yarn dlx yalc
 ```
 
 ### YALC Steps —
@@ -62,16 +63,16 @@ yarn
 1. Build this package and publish —
 
 ```bash
-yarn build && yalc publish
+yarn build && yarn dlx yalc publish
 ```
 
 2. In the app where you want to test this package, add the package with yalc —
 
 ```bash
-yalc add @get-dx/d3-charts
+yarn dlx yalc add @get-dx/d3-charts
 ```
 
-When you make changes to this package, run `yarn build && yalc publish` again, then in your app run `yalc update @get-dx/d3-charts`.
+When you make changes to this package, run `yarn build && yarn dlx yalc publish` again, then in your app run `yarn dlx yalc update @get-dx/d3-charts`.
 
 ## Publishing
 
