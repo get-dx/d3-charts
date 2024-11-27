@@ -232,12 +232,6 @@
               <div id="bar-3-chart" class="chart-container"></div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-title">Bar Chart with Large Values</div>
-            <div class="card-body">
-              <div id="bar-4-chart" class="chart-container"></div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -420,14 +414,8 @@
           ],
           maxBarWidth: 48,
           showTrendline: true,
-          axis: {
-            x: {
-              label: "X Axis Label",
-            },
-            y: {
-              label: "Y Axis Label",
-            },
-          },
+          yAxisLabel: "Y Axis Label",
+          xAxisLabel: "X Axis Label",
           xAxisTickLabelFormat: (d) => `${d}`,
           showYAxisTicks: true,
           yAxisTickLabelFormat: (d) => `${d}%`,
@@ -512,18 +500,12 @@
             return `${d}%`;
           },
           showTrendline: true,
-          axis: {
-            x: {
-              label: "Something",
-              min: 0,
-              max: 100,
-            },
-            y: {
-              label: "Something Else",
-              min: 0,
-              max: 200,
-            },
-          },
+          xAxisLabel: "Something",
+          xAxisMin: 0,
+          xAxisMax: 100,
+          yAxisLabel: "Something Else",
+          yAxisMin: 0,
+          yAxisMax: 200,
           onClick: function (d) {
             alert(d.team);
           },
@@ -573,14 +555,8 @@
           showYAxisLine: false,
           yAxisTickLabelSpread: 40,
           matrix: [18, 50],
-          axis: {
-            x: {
-              label: "Something",
-            },
-            y: {
-              label: "Something Else",
-            },
-          },
+          xAxisLabel: "Something",
+          yAxisLabel: "Something Else",
         });
 
         scatter2.values = [
@@ -611,18 +587,12 @@
           elChart: document.getElementById("scatter-3-chart"),
           matrix: [50, 50],
           highlightedQuadrant: 4,
-          axis: {
-            x: {
-              label: "Impact",
-              min: 0,
-              max: 100,
-            },
-            y: {
-              label: "Performance",
-              min: 0,
-              max: 100,
-            },
-          },
+          xAxisLabel: "Impact",
+          xAxisMin: 0,
+          xAxisMax: 100,
+          yAxisLabel: "Performance",
+          yAxisMin: 0,
+          yAxisMax: 100,
           dotRadius: 5,
           showXAxisTicks: false,
           showXAxisLine: false,
@@ -1151,7 +1121,7 @@
         showYAxisTickLabels: true,
         showYAxisTicks: true,
         yAxisLabel: "Value",
-        
+        xAxisLabel: "Date",
         // Add tooltip
         tooltipHtml: emptyTooltip,
       });
@@ -1213,10 +1183,8 @@
           { xValue: "Nov 11", series: "additions", yValue: 400 },
           { xValue: "Nov 18", series: "additions", yValue: 150 },
         ],
-        axis: {
-          y: { label: "Count" },
-          x: { label: "Week of" }
-        },
+        yAxisLabel: "Count",
+        xAxisLabel: "Week of",
         showTrendline: true,
       });
 
@@ -1246,7 +1214,7 @@
           { xValue: "2024-11-19", series: "files_changed", yValue: 9 }
         ],
         xAxisLabel: "Week of",
-        // yAxisLabel: "Count",
+        yAxisLabel: "Count",
         showPoints: true
       });
 
@@ -1305,10 +1273,8 @@
         series: nameBasedData.series,
         values: nameBasedData.values,
         tooltipHtml: emptyTooltip,
-        axis: {
-          y: { label: "Count" },
-          x: { label: "Developer" }
-        },
+        yAxisLabel: "Count",
+        xAxisLabel: "Developer",
         showTrendline: true,
         maxBarWidth: 48,
       });
@@ -1377,57 +1343,6 @@
         multiLine3.series = data.series;
         multiLine3.values = data.values;
         multiLine3.redraw();
-      }
-
-      {
-        const bar4 = new BarChart({
-          elChart: document.getElementById("bar-4-chart"),
-          tooltipHtml: emptyTooltip,
-          yAxisTickLabelFormat: (value) => {
-            // Format large numbers with M/B suffixes
-            if (value >= 1000000000) {
-              return `${(value / 1000000000).toFixed(1)}B`;
-            }
-            if (value >= 1000000) {
-              return `${(value / 1000000).toFixed(1)}M`;
-            }
-            if (value >= 1000) {
-              return `${(value / 1000).toFixed(1)}K`;
-            }
-            return value;
-          },
-          values: [
-            {
-              date: "2023-01",
-              dateLabel: "Jan",
-              value: 1500000,
-            },
-            {
-              date: "2023-02",
-              dateLabel: "Feb",
-              value: 2800000,
-            },
-            {
-              date: "2023-03",
-              dateLabel: "Mar",
-              value: 4200000,
-            },
-            {
-              date: "2023-04",
-              dateLabel: "Apr",
-              value: 3700000,
-            },
-            {
-              date: "2023-05",
-              dateLabel: "May",
-              value: 5100000,
-            }
-          ],
-          showYAxisTickLabels: true,
-          showYAxisTicks: true,
-          yAxisLabel: "Revenue ($)",
-        });
-        bar4.redraw();
       }
     </script>
   </body>

@@ -14,14 +14,10 @@ export class StackedBarChart {
     yAxisTickLabelSpread = 50,
     yAxisTickLabelFormat = (d) => d.toLocaleString(),
     spaceBetweenSeries = false,
-    axis = {
-      x: {
-        label: "",
-      },
-      y: {
-        label: "",
-      },
-    },
+    yAxisLabel = "",
+    yAxisMin,
+    yAxisMax,
+    xAxisLabel = "",
     paddingInner = 0.4,
     paddingOuter = 0,
     maxBarWidth = Infinity,
@@ -46,7 +42,6 @@ export class StackedBarChart {
     this.showYAxisLine = showYAxisLine;
     this.yAxisTickLabelSpread = yAxisTickLabelSpread;
     this.yAxisTickLabelFormat = yAxisTickLabelFormat;
-    this.axis = axis;
     this.maxBarWidth = maxBarWidth;
     this.leftMargin = leftMargin;
     this.enableRoundedCorners = enableRoundedCorners;
@@ -55,6 +50,10 @@ export class StackedBarChart {
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.left = this.left.bind(this);
+    this.yAxisLabel = yAxisLabel;
+    this.xAxisLabel = xAxisLabel;
+    this.yAxisMin = yAxisMin;
+    this.yAxisMax = yAxisMax;
     this.init();
   }
 
@@ -145,9 +144,9 @@ export class StackedBarChart {
     const maxY = d3.max(this.stacked, (d) => d3.max(d, (d) => d[1]));
     this.y.domain([
       0,
-      this.axis.y.max === undefined ? maxY + maxY * padding : this.axis.y.max,
+      this.yAxisMax === undefined ? maxY + maxY * padding : this.yAxisMax,
     ]);
-    if (this.axis.y.max === undefined) this.y.nice();
+    if (this.yAxisMax === undefined) this.y.nice();
 
     this.lr = null;
     if (this.showTrendline) {
@@ -193,9 +192,9 @@ export class StackedBarChart {
 
   adjustXMargin() {
     this.margin.left = 4 + 48;
-    this.showYAxisLabel = this.axis.y.label !== "";
+    this.showYAxisLabel = this.yAxisLabel !== "";
     if (this.showYAxisLabel) {
-      this.margin.left += 20;
+      this.margin.left += 32;
     }
 
     if (this.leftMargin !== null) {
@@ -243,15 +242,15 @@ export class StackedBarChart {
       .selectAll(".tick text")
       .classed("tick-label-text", true)
       .style("text-anchor", hasOverlap ? "end" : "middle")
-      .attr("dy", hasOverlap ? "0.32em" : "1.5em")
-      .attr("dx", hasOverlap ? "-0.8em" : null)
+      .attr("dy", hasOverlap ? "0.6em" : "1.5em")
+      .attr("dx", hasOverlap ? "-0.2em" : null)
       .attr("transform", hasOverlap ? "rotate(-45)" : null);
 
     // Handle axis label
     axis.call((g) =>
       g
         .selectAll(".axis-title-text")
-        .data(this.axis.x.label !== "" ? [this.axis.x.label] : [])
+        .data(this.xAxisLabel !== "" ? [this.xAxisLabel] : [])
         .join((enter) =>
           enter
             .append("text")
@@ -283,7 +282,7 @@ export class StackedBarChart {
       this.margin.top = Math.max(16, labelHeight / 2);
     }
 
-    this.showXAxisLabel = this.axis.x.label !== "";
+    this.showXAxisLabel = this.xAxisLabel !== "";
     if (this.showXAxisLabel) {
       this.margin.bottom += 20;
     }
@@ -333,7 +332,7 @@ export class StackedBarChart {
       .call((g) =>
         g
           .selectAll(".axis-title-text")
-          .data(this.axis.y.label !== "" ? [this.axis.y.label] : [])
+          .data(this.yAxisLabel !== "" ? [this.yAxisLabel] : [])
           .join((enter) =>
             enter
               .append("text")
