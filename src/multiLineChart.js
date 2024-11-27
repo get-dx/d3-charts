@@ -265,7 +265,7 @@ export class MultiLineChart {
         d3
           .axisBottom(this.x)
           .tickValues([this.dates[0]])
-          .tickFormat(d3.timeFormat("%b %d")),
+          .tickFormat(this.xAxisTickLabelFormat),
       );
 
     // Measure tick label width
@@ -321,7 +321,7 @@ export class MultiLineChart {
           .tickValues(selectedTicks)
           .tickSize(tickSize)
           .tickPadding(14)
-          .tickFormat(d3.timeFormat("%b %d")),
+          .tickFormat(this.xAxisTickLabelFormat),
       )
       .call((g) => g.select(".domain").remove())
       .call((g) => {

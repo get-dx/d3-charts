@@ -383,18 +383,13 @@
       // } from "../dist/main.js";
       } from "/src/main.js";
 
+      const emptyTooltip = () => `<div></div>`;
+
       // Stacked area chart
       {
         const stackedAreaChart = new StackedAreaChart({
           elChart: document.getElementById("stacked-area-chart"),
-          tooltipHtml(date, series) {
-            return `
-              <div>${date.toLocaleDateString()}</div>
-              ${series.map(d => `
-                <div>${d.name}: ${(d.percentage * 100).toFixed(1)}% (${d.count})</div>
-              `).join("")}
-            `
-          }
+          tooltipHtml: emptyTooltip
         });
 
         d3.json("data/stacked_area_dataset.json").then(dataset => {
@@ -407,28 +402,12 @@
       {
         const stackedBar1 = new StackedBarChart({
           elChart: document.getElementById("stacked-bar-1-chart"),
-          tooltipHtml(d) {
-            return `
-              <div>
-                <div class=''>${d.series}</div>
-                <div class=''>${d.xValue}</div>
-                <div class=''>${d.yValue}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         const stackedBar2 = new StackedBarChart({
           elChart: document.getElementById("stacked-bar-2-chart"),
-          tooltipHtml(d) {
-            return `
-              <div>
-                <div class=''>${d.series}</div>
-                <div class=''>${d.xValue}</div>
-                <div class=''>${d.yValue}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
           series: [
             { key: "additions", color: "#6366f1" },
             { key: "deletions", color: "#e5e5e5" },
@@ -461,38 +440,17 @@
       {
         const pie1 = new PieChart({
           elChart: document.getElementById("pie-1-chart"),
-          tooltipHtml: (d) => {
-            return `
-              <div>
-                <div class="">${d.label}</div>
-                <div class="">${d.value}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         const pie2 = new PieChart({
           elChart: document.getElementById("pie-2-chart"),
-          tooltipHtml: (d) => {
-            return `
-              <div>
-                <div class="">${d.label}</div>
-                <div class="">${d.value}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         const pie3 = new PieChart({
           elChart: document.getElementById("pie-3-chart"),
-          tooltipHtml: (d) => {
-            return `
-              <div>
-                <div class="">${d.label}</div>
-                <div class="">${d.value}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         const pie4 = new PieChart({
@@ -566,14 +524,7 @@
           labelTextFormat: function (d) {
             return d.team;
           },
-          tooltipHtml: function (d, axis) {
-            return `
-              <div>
-                <div class=''>${axis.x.label}: ${d.x}</div>
-                <div class=''>${axis.y.label}: ${d.y}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         scatter1.values = [
@@ -676,14 +627,7 @@
           labelTextFormat: function (d) {
             return d.team;
           },
-          tooltipHtml: function (d, axis) {
-            return `
-              <div>
-                <div class=''>${axis.x.label}: ${d.x}</div>
-                <div class=''>${axis.y.label}: ${d.y}</div>
-              </div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         scatter3.values = [
@@ -723,11 +667,7 @@
           onClick: (d) => {
             console.log(d);
           },
-          tooltipHtml: (d) => {
-            return `
-                <div>${d.dateLabel || d.date}</div>
-                <div>${d.value}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
         });
         bar1.values = [
           {
@@ -756,11 +696,7 @@
           onClick: (d) => {
             console.log(d);
           },
-          tooltipHtml: (d) => {
-            return `
-                <div>${d.dateLabel || d.date}</div>
-                <div>${d.value}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
         });
         bar2.values = [
           {
@@ -814,11 +750,7 @@
                 "color": "rgb(192, 132, 252)"
             }
           ],
-          tooltipHtml: (d) => {
-            return `
-                <div>${d.name}</div>
-                <div>${d.value}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
         })
       }
       // Scatter time charts
@@ -826,11 +758,7 @@
         const scatter1 = new ScatterTimeChart({
           elChart: document.getElementById("scatter-time-1-chart"),
           showTrendline: true,
-          tooltipHtml: (d) => {
-            return Array.from(Object.entries(d))
-              .map(([key, value]) => `<div>${key}: ${value}</div>`)
-              .join("");
-          },
+          tooltipHtml: emptyTooltip,
           onClick: (d) => {
             console.log(d);
           },
@@ -839,11 +767,7 @@
         const scatter2 = new ScatterTimeChart({
           elChart: document.getElementById("scatter-time-2-chart"),
           showTrendline: true,
-          tooltipHtml: (d) => {
-            return Array.from(Object.entries(d))
-              .map(([key, value]) => `<div>${key}: ${value}</div>`)
-              .join("");
-          },
+          tooltipHtml: emptyTooltip,
           onClick: (d) => {
             console.log(d);
           },
@@ -991,11 +915,7 @@
         const line1 = new LineChart({
           elChart: document.getElementById("line-1-chart"),
           showXAxisTicks: false,
-          tooltipHtml: (d, cd) => {
-            return `
-            <div>${d.dateLabel || d.date}</div>
-            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
@@ -1017,11 +937,7 @@
 
         const line2 = new LineChart({
           elChart: document.getElementById("line-2-chart"),
-          tooltipHtml: (d, cd) => {
-            return `
-            <div>${d.dateLabel || d.date}</div>
-            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
@@ -1033,11 +949,7 @@
 
         const line3 = new LineChart({
           elChart: document.getElementById("line-3-chart"),
-          tooltipHtml: (d, cd) => {
-            return `
-            <div>${d.dateLabel || d.date}</div>
-            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
@@ -1049,11 +961,7 @@
 
         const line4 = new LineChart({
           elChart: document.getElementById("line-4-chart"),
-          tooltipHtml: (d, cd) => {
-            return `
-            <div>${d.dateLabel || d.date}</div>
-            <div>${d.value} ${cd ? `vs ${cd.value}` : ""}</div>`;
-          },
+          tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
@@ -1078,12 +986,7 @@
               date: "2023-03-04",
             },
           ],
-          tooltipHtml: (d) => {
-            return `
-            <div>${d.date}</div>
-            <div>${d.value}</div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
 
         const line6 = new LineChart({
@@ -1149,12 +1052,7 @@
               date: "2023-01-01",
             },
           ],
-          tooltipHtml: (d) => {
-            return `
-            <div>${d.date}</div>
-            <div>${d.value}</div>
-            `;
-          },
+          tooltipHtml: emptyTooltip,
         });
       }
 
@@ -1164,24 +1062,7 @@
           elChart: document.getElementById("multi-line-1-chart"),
           yAxisTickLabelSpread: 30,
           showPoints: true,
-          tooltipHtml(ds) {
-            const date = ds[0].xValue;
-            return `
-            <div>
-              <div>${date}</div>
-              <table>
-                <tbody>
-                  ${ds.map(d => `
-                    <tr>
-                      <td>${d.series}</td>
-                      <td>${d.yValue}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-            `
-          }
+          tooltipHtml: emptyTooltip,
         });
         d3.json("data/multi_line_chart_dataset.json").then((data) => {
           multiLine1.series = data.series;
@@ -1197,24 +1078,7 @@
           yAxisLabel: "Y Axis",
           xAxisLabel: "X Axis",
           showPoints: true,
-          tooltipHtml(ds) {
-            const date = ds[0].xValue;
-            return `
-            <div>
-              <div>${date}</div>
-              <table>
-                <tbody>
-                  ${ds.map(d => `
-                    <tr>
-                      <td>${d.series}</td>
-                      <td>${d.yValue}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-            `
-          }
+          tooltipHtml: emptyTooltip,
         });
         d3.json("data/multi_line_chart_dataset.json").then((data) => {
           multiLine2.series = data.series;
@@ -1283,24 +1147,7 @@
         yAxisLabel: "Value",
         
         // Add tooltip
-        tooltipHtml(dataPoints) {
-          const date = dataPoints[0].xValue;
-          return `
-            <div>
-              <div style="font-weight: bold">${new Date(date).toLocaleDateString()}</div>
-              <table>
-                <tbody>
-                  ${dataPoints.map(d => `
-                    <tr>
-                      <td style="padding-right: 1rem">${d.series}:</td>
-                      <td style="text-align: right">${d.yValue}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          `;
-        }
+        tooltipHtml: emptyTooltip,
       });
 
       // Initial render
@@ -1308,15 +1155,7 @@
 
       const stackedBar3 = new StackedBarChart({
         elChart: document.getElementById("stacked-bar-3-chart"),
-        tooltipHtml(d) {
-          return `
-            <div>
-              <div class=''>${d.series}</div>
-              <div class=''>${d.xValue}</div>
-              <div class=''>${d.yValue}</div>
-            </div>
-          `;
-        },
+        tooltipHtml: emptyTooltip,
         series: [
           { key: "additions", color: "#6366f1" },
         ],
@@ -1357,15 +1196,7 @@
       // Chart Height Comparison
       const comparisonBar = new StackedBarChart({
         elChart: document.getElementById("comparison-bar-chart"),
-        tooltipHtml(d) {
-          return `
-            <div>
-              <div>${d.series}</div>
-              <div>${d.xValue}</div>
-              <div>${d.yValue}</div>
-            </div>
-          `;
-        },
+        tooltipHtml: emptyTooltip,
         series: [
           { key: "additions", color: "#6366f1" },
         ],
@@ -1385,15 +1216,7 @@
 
       const comparisonLine = new MultiLineChart({
         elChart: document.getElementById("comparison-line-chart"),
-        tooltipHtml(d) {
-          return `
-            <div>
-              <div>${d.series}</div>
-              <div>${d.xValue}</div>
-              <div>${d.yValue}</div>
-            </div>
-          `;
-        },
+        tooltipHtml: emptyTooltip,
         series: [
           { key: "deletions", color: "#f87171" },
           { key: "additions", color: "#60a5fa" },
@@ -1475,15 +1298,7 @@
         elChart: document.getElementById("dense-multi-line-stacked-bar"),
         series: nameBasedData.series,
         values: nameBasedData.values,
-        tooltipHtml(d) {
-          return `
-            <div>
-              <div>${d.series}</div>
-              <div>Developer: ${d.xValue}</div>
-              <div>Count: ${d.yValue}</div>
-            </div>
-          `;
-        },
+        tooltipHtml: emptyTooltip,
         axis: {
           y: { label: "Count" },
           x: { label: "Developer" }
@@ -1499,25 +1314,29 @@
         const multiLine3 = new MultiLineChart({
           elChart: document.getElementById("multi-line-3-chart"),
           showPoints: true,
-          xAxisTickLabelFormat: (value) => `${value} days`,
-          tooltipHtml(ds) {
-            const date = ds[0].xValue;
-            return `
-              <div>
-                <div>${date}</div>
-                <table>
-                  <tbody>
-                    ${ds.map(d => `
-                      <tr>
-                        <td>${d.series}</td>
-                        <td>${d.yValue}</td>
-                      </tr>
-                    `).join("")}
-                  </tbody>
-                </table>
-              </div>
-            `
-          }
+          xAxisTickLabelFormat: (dateStr) => {
+            const date = new Date(dateStr);
+            const startDate = new Date('2024-01-01'); // Reference date
+            const diffDays = Math.round((date - startDate) / (1000 * 60 * 60 * 24));
+            
+            // Format based on duration
+            if (diffDays < 7) {
+              return `Day ${diffDays + 1}`; // +1 for human-friendly counting
+            } else if (diffDays < 30) {
+              const weeks = Math.floor(diffDays / 7);
+              const days = diffDays % 7;
+              return days === 0 
+                ? `Week ${weeks}` 
+                : `Week ${weeks}+${days}d`;
+            } else {
+              const months = Math.floor(diffDays / 30);
+              const days = diffDays % 30;
+              return days === 0 
+                ? `Month ${months}` 
+                : `Month ${months}+${days}d`;
+            }
+          },
+          tooltipHtml: emptyTooltip,
         });
 
         // Generate some sample data
