@@ -151,7 +151,7 @@ export class StackedBarChart {
     this.lr = null;
     if (this.showTrendline) {
       const totals = Array.from(d3.group(this.values, this.accessor.x)).map(
-        ([_, values]) => d3.sum(values, this.accessor.y),
+        ([_i, values]) => d3.sum(values, this.accessor.y),
       );
 
       const nonNullIndexes = totals.reduce((idx, d, i) => {
