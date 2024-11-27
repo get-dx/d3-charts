@@ -72,7 +72,7 @@ export class StackedBarChart {
       "_" + crypto.getRandomValues(new Uint32Array(1)).toString(36);
 
     this.margin = {
-      top: 8,
+      top: 16,
       right: 16,
     };
 
@@ -206,7 +206,8 @@ export class StackedBarChart {
   }
 
   renderXAxis() {
-    this.svg
+    // First render the axis normally
+    const axis = this.svg
       .selectAll(".axis--x")
       .data([0])
       .join((enter) => enter.append("g").attr("class", "axis axis--x"))
@@ -220,84 +221,72 @@ export class StackedBarChart {
       .call((g) => g.selectAll(".tick line").classed("tick-line", true))
       .call((g) =>
         g
-          .selectAll(".tick")
-          .selectAll(".grid-line")
-          .data([])
-          .join((enter) => enter.append("line").attr("class", "grid-line"))
-          .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
-      )
-      .call((g) =>
-        g
-          .selectAll(".tick text")
-          .classed("tick-label-text", true)
-          .attr("dy", "1.5em"),
-      )
-      .call((g) =>
-        g
-          .selectAll(".tick")
-          .selectAll(".grid-line")
-          .data([])
-          .join((enter) => enter.append("line").attr("class", "grid-line"))
-          .attr("y2", -(this.height - this.margin.top - this.margin.bottom)),
-      )
-      .call((g) => g.selectAll(".tick text").classed("tick-label-text", true))
-      .call((g) =>
-        g
           .select(".domain")
           .style("display", this.showXAxisLine ? null : "none"),
-      )
-      .call((g) =>
-        g
-          .selectAll(".axis-title-text")
-          .data(this.axis.x.label !== "" ? [this.axis.x.label] : [])
-          .join((enter) =>
-            enter
-              .append("text")
-              .attr("class", "axis-title-text")
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "middle"),
-          )
-          .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
-          .text(""),
       );
 
-    // Rotate x tick labels if necessary
-    const availableXTickWidth =
-      this.x.bandwidth() +
-      Math.min(
-        this.x.step() * this.paddingOuter + this.margin.right,
-        (this.x.step() * this.paddingInner) / 2,
-      );
-    let maxXTickWidth = availableXTickWidth;
-    this.svg
-      .select(".axis--x")
-      .selectAll(".tick text")
-      .each(function () {
-        maxXTickWidth = Math.max(
-          maxXTickWidth,
-          this.getBoundingClientRect().width,
-        );
-      });
-    if (maxXTickWidth > availableXTickWidth) {
-      this.svg
-        .select(".axis--x")
-        .selectAll(".tick text")
-        .attr("text-anchor", "end")
-        .attr("dy", "0.71em")
-        .attr("transform", `rotate(-45,0,9)`);
+    // Check for label overlap
+    const tickNodes = axis.selectAll(".tick text").nodes();
+    let hasOverlap = false;
+
+    for (let i = 0; i < tickNodes.length - 1; i++) {
+      const bbox1 = tickNodes[i].getBoundingClientRect();
+      const bbox2 = tickNodes[i + 1].getBoundingClientRect();
+      if (bbox1.right > bbox2.left) {
+        hasOverlap = true;
+        break;
+      }
     }
+
+    // Apply appropriate text styling based on overlap
+    axis
+      .selectAll(".tick text")
+      .classed("tick-label-text", true)
+      .style("text-anchor", hasOverlap ? "end" : "middle")
+      .attr("dy", hasOverlap ? "0.32em" : "1.5em")
+      .attr("dx", hasOverlap ? "-0.8em" : null)
+      .attr("transform", hasOverlap ? "rotate(-45)" : null);
+
+    // Handle axis label
+    axis.call((g) =>
+      g
+        .selectAll(".axis-title-text")
+        .data(this.axis.x.label !== "" ? [this.axis.x.label] : [])
+        .join((enter) =>
+          enter
+            .append("text")
+            .attr("class", "axis-title-text")
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "middle"),
+        )
+        .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
+        .text((d) => d),
+    );
+
+    return;
   }
 
   adjustYMargin() {
-    this.margin.bottom =
-      4 +
-      Math.ceil(
-        this.svg.select(".axis--x").node().getBoundingClientRect().height,
+    const xAxisNode = this.svg.select(".axis--x").node();
+    const xAxisHeight = xAxisNode
+      ? Math.ceil(xAxisNode.getBoundingClientRect().height)
+      : 20; // Default height if axis doesn't exist yet
+
+    this.margin.bottom = 4 + xAxisHeight;
+
+    const yAxisLabels = this.svg.select(".axis--y").selectAll(".tick text");
+    if (!yAxisLabels.empty()) {
+      const labelHeight = Math.ceil(
+        yAxisLabels.nodes()[0].getBoundingClientRect().height,
       );
+      this.margin.top = Math.max(16, labelHeight / 2);
+    }
+
     this.showXAxisLabel = this.axis.x.label !== "";
     if (this.showXAxisLabel) {
       this.margin.bottom += 20;
     }
+
     this.svg
       .select(".axis--x")
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
@@ -322,7 +311,6 @@ export class StackedBarChart {
               this.yAxisTickLabelSpread,
           )
           .tickSizeOuter(0)
-          .tickSizeInner(this.showYAxisInnerTicks ? 6 : 0)
           .tickPadding(12)
           .tickFormat((d) => this.yAxisTickLabelFormat(d)),
       )

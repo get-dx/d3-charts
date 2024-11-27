@@ -8,6 +8,7 @@ export class MultiLineChart {
     values = [],
     showXAxisLine = true,
     showXAxisTicks = true,
+    xAxisTickLabelFormat = d3.timeFormat("%b %d"),
     showPoints = false,
     startDate,
     endDate,
@@ -53,6 +54,7 @@ export class MultiLineChart {
     this.entered = this.entered.bind(this);
     this.moved = this.moved.bind(this);
     this.left = this.left.bind(this);
+    this.xAxisTickLabelFormat = xAxisTickLabelFormat;
     this.init();
   }
 
@@ -130,7 +132,9 @@ export class MultiLineChart {
     let [minY, maxY] = d3.extent(this.values, this.accessor.y);
     const gapY = maxY - minY;
     this.y.domain([
-      this.yAxisMin === undefined ? minY - gapY * padding : this.yAxisMin,
+      this.yAxisMin === undefined
+        ? Math.max(0, minY - gapY * padding)
+        : this.yAxisMin,
       this.yAxisMax === undefined ? maxY + gapY * padding : this.yAxisMax,
     ]);
     if (this.yAxisMin === undefined && this.yAxisMax === undefined)
@@ -203,24 +207,43 @@ export class MultiLineChart {
   }
 
   adjustXMargin() {
+    // Start with minimum margins
     this.margin.left = 1;
     this.margin.right = 1;
 
     if (this.showYAxisTickLabels) {
-      this.margin.left = 4 + 38;
+      // Find the maximum width of y-axis tick labels
+      let maxLabelWidth = 0;
+      this.g.selectAll(".axis--y .tick text").each(function () {
+        const bbox = this.getBBox();
+        maxLabelWidth = Math.max(maxLabelWidth, bbox.width);
+      });
+
+      // Add padding to the label width
+      const labelPadding = 16;
+      this.margin.left = maxLabelWidth + labelPadding;
     }
 
+    // Add extra space for y-axis label if present
     this.showYAxisLabel = this.yAxisLabel !== "";
     if (this.showYAxisLabel) {
-      this.margin.left += 10;
+      this.margin.left += 24;
     }
 
+    // Update x scale range with new margins
     this.x.range([this.margin.left, this.width - this.margin.right]);
   }
 
   adjustYMargin() {
     this.margin.top = 3;
-    this.margin.bottom = 20;
+    this.margin.bottom = 4;
+
+    // Calculate height needed for x-axis tick labels
+    const xAxisHeight = Math.ceil(
+      this.g.select(".axis--x").node()?.getBoundingClientRect().height || 20,
+    );
+
+    this.margin.bottom += xAxisHeight;
 
     this.showXAxisLabel = this.xAxisLabel !== "";
     if (this.showXAxisLabel) {
@@ -234,14 +257,14 @@ export class MultiLineChart {
     const yRange = this.y.domain();
     const tickSize = 0;
 
-    // First render temporary ticks to measure their width
+    // Update temporary axis to use format
     const tempAxis = this.g
       .append("g")
       .attr("class", "temp-axis")
       .call(
         d3
           .axisBottom(this.x)
-          .tickValues([this.dates[0]]) // Just need one tick to measure
+          .tickValues([this.dates[0]])
           .tickFormat(d3.timeFormat("%b %d")),
       );
 
@@ -251,49 +274,42 @@ export class MultiLineChart {
       tickWidth = Math.max(tickWidth, this.getBoundingClientRect().width);
     });
 
-    // Remove temporary axis
     tempAxis.remove();
 
-    // Calculate optimal spacing
-    const padding = 16; // Minimum pixels between tick labels
+    // Calculate optimal spacing with padding
+    const padding = 16;
     const optimalSpacing = tickWidth + padding;
-
-    // Use the larger of calculated optimal spacing or provided minTickSpacing
     const effectiveSpacing = Math.max(
       optimalSpacing,
       this.minTickSpacing || optimalSpacing,
     );
 
-    // Select ticks with a greedy approach
-    const selectedTicks = [];
-    let lastX = -Infinity;
+    // Always include first and last dates
+    const selectedTicks = [this.dates[0]];
+    let lastX = this.x(this.dates[0]);
 
-    this.dates.forEach((date, i) => {
+    // Select intermediate ticks
+    this.dates.slice(1, -1).forEach((date) => {
       const xPos = this.x(date);
-
-      // Always include first date
-      if (i === 0) {
-        selectedTicks.push(date);
-        lastX = xPos;
-        return;
-      }
-
-      // For last date, only include if it's far enough from the previous tick
-      if (i === this.dates.length - 1) {
-        if (xPos - lastX >= effectiveSpacing) {
-          selectedTicks.push(date);
-        }
-        return;
-      }
-
-      // Include dates that don't overlap with previous tick
       if (xPos - lastX >= effectiveSpacing) {
         selectedTicks.push(date);
         lastX = xPos;
       }
     });
 
-    // Render actual axis
+    // Add last date if it's not too close to previous tick
+    const lastDate = this.dates[this.dates.length - 1];
+    const lastXPos = this.x(lastDate);
+    if (lastXPos - lastX >= effectiveSpacing * 0.75) {
+      // Allow slightly closer spacing for last tick
+      selectedTicks.push(lastDate);
+    } else {
+      // If too close, remove the previous tick and add the last one
+      selectedTicks.pop();
+      selectedTicks.push(lastDate);
+    }
+
+    // Update main axis to use format
     this.g
       .selectAll(".axis--x")
       .data(this.showXAxisTicks ? [0] : [])
@@ -304,9 +320,66 @@ export class MultiLineChart {
           .axisBottom(this.x)
           .tickValues(selectedTicks)
           .tickSize(tickSize)
+          .tickPadding(14)
           .tickFormat(d3.timeFormat("%b %d")),
       )
       .call((g) => g.select(".domain").remove())
+      .call((g) => {
+        // Always force first label to left align at margin
+        const firstTick = g.select(".tick:first-of-type");
+        firstTick
+          .select("text")
+          .attr("text-anchor", "start")
+          .attr(
+            "transform",
+            `translate(${this.margin.left - this.x(this.dates[0])},0)`,
+          );
+
+        // Always force last label to right align at margin
+        const lastTick = g.select(".tick:last-of-type");
+        lastTick
+          .select("text")
+          .attr("text-anchor", "end")
+          .attr(
+            "transform",
+            `translate(${this.width - this.margin.right - this.x(this.dates[this.dates.length - 1])},0)`,
+          );
+
+        // Adjust intermediate labels if they overlap with first or last
+        const ticks = g.selectAll(".tick").nodes();
+        if (ticks.length > 2) {
+          const firstTickRect = firstTick
+            .select("text")
+            .node()
+            .getBoundingClientRect();
+          const lastTickRect = lastTick
+            .select("text")
+            .node()
+            .getBoundingClientRect();
+
+          // Check and adjust second tick if it overlaps with first
+          const secondTick = g.select(".tick:nth-of-type(2)");
+          const secondTickRect = secondTick
+            .select("text")
+            .node()
+            .getBoundingClientRect();
+          if (firstTickRect.right + 10 > secondTickRect.left) {
+            secondTick.select("text").style("opacity", 0);
+          }
+
+          // Check and adjust second-to-last tick if it overlaps with last
+          if (ticks.length > 3) {
+            const secondLastTick = g.select(`.tick:nth-last-of-type(2)`);
+            const secondLastTickRect = secondLastTick
+              .select("text")
+              .node()
+              .getBoundingClientRect();
+            if (secondLastTickRect.right + 10 > lastTickRect.left) {
+              secondLastTick.select("text").style("opacity", 0);
+            }
+          }
+        }
+      })
       .call((g) => g.selectAll(".tick text"))
       .call((g) =>
         g
@@ -320,7 +393,7 @@ export class MultiLineChart {
               .attr("fill", "currentColor"),
           )
           .attr("x", (this.width - this.margin.left - this.margin.right) / 2)
-          .attr("y", 38) // Position below the axis
+          .attr("y", 42) // Position below the axis
           .text((d) => d),
       );
   }
