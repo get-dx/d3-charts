@@ -253,7 +253,6 @@ export class MultiLineChart {
   }
 
   renderXAxis() {
-    const yRange = this.y.domain();
     const tickSize = 0;
 
     // Update temporary axis to use format
@@ -463,7 +462,7 @@ export class MultiLineChart {
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
           .attr(
             "transform",
-            (d) =>
+            (_d) =>
               `rotate(-90,${-labelOffset},${
                 (this.margin.top + this.height - this.margin.bottom) / 2
               })`,
@@ -504,7 +503,7 @@ export class MultiLineChart {
       .join((enter) =>
         enter
           .append("line")
-          .attr("class", (d) => `trend-line ${this.trendlineClass}`),
+          .attr("class", (_d) => `trend-line ${this.trendlineClass}`),
       )
       .attr("stroke", (d) => this.color(d.key))
       .attr("x1", (d) => {
