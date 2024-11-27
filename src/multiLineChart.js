@@ -27,7 +27,6 @@ export class MultiLineChart {
     trendlineClass = "trend-line",
     minTickSpacing = null,
   }) {
-    console.log("🔗 LINKED VERSION OF MULTILINECHART LOADED 🔗", 2); // Add this line
     this.elChart = elChart;
     this.series = series;
     this.values = values;
