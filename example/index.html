@@ -232,6 +232,12 @@
               <div id="bar-3-chart" class="chart-container"></div>
             </div>
           </div>
+          <div class="card">
+            <div class="card-title">Bar Chart with Large Values</div>
+            <div class="card-body">
+              <div id="bar-4-chart" class="chart-container"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1371,6 +1377,57 @@
         multiLine3.series = data.series;
         multiLine3.values = data.values;
         multiLine3.redraw();
+      }
+
+      {
+        const bar4 = new BarChart({
+          elChart: document.getElementById("bar-4-chart"),
+          tooltipHtml: emptyTooltip,
+          yAxisTickLabelFormat: (value) => {
+            // Format large numbers with M/B suffixes
+            if (value >= 1000000000) {
+              return `${(value / 1000000000).toFixed(1)}B`;
+            }
+            if (value >= 1000000) {
+              return `${(value / 1000000).toFixed(1)}M`;
+            }
+            if (value >= 1000) {
+              return `${(value / 1000).toFixed(1)}K`;
+            }
+            return value;
+          },
+          values: [
+            {
+              date: "2023-01",
+              dateLabel: "Jan",
+              value: 1500000,
+            },
+            {
+              date: "2023-02",
+              dateLabel: "Feb",
+              value: 2800000,
+            },
+            {
+              date: "2023-03",
+              dateLabel: "Mar",
+              value: 4200000,
+            },
+            {
+              date: "2023-04",
+              dateLabel: "Apr",
+              value: 3700000,
+            },
+            {
+              date: "2023-05",
+              dateLabel: "May",
+              value: 5100000,
+            }
+          ],
+          showYAxisTickLabels: true,
+          showYAxisTicks: true,
+          yAxisLabel: "Revenue ($)",
+        });
+        bar4.redraw();
       }
     </script>
   </body>

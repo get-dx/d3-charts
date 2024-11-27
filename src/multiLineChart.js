@@ -392,8 +392,8 @@ export class MultiLineChart {
               .attr("text-anchor", "middle")
               .attr("fill", "currentColor"),
           )
-          .attr("x", (this.width - this.margin.left - this.margin.right) / 2)
-          .attr("y", 42) // Position below the axis
+          .attr("x", (this.x.range()[0] + this.x.range()[1]) / 2)
+          .attr("y", 46)
           .text((d) => d),
       );
   }
