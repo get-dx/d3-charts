@@ -259,7 +259,8 @@ export class StackedBarChart {
             .attr("fill", "currentColor")
             .attr("text-anchor", "middle"),
         )
-        .attr("x", (this.margin.left + this.width - this.margin.right) / 2)
+        .attr("x", (this.x.range()[0] + this.x.range()[1]) / 2)
+        .attr("y", this.margin.bottom - 30)
         .text((d) => d),
     );
 
@@ -291,7 +292,7 @@ export class StackedBarChart {
       .select(".axis--x")
       .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
       .selectAll(".axis-title-text")
-      .attr("y", this.margin.bottom - 4)
+      .attr("y", this.margin.bottom - 10)
       .text((d) => d);
 
     this.y.range([this.height - this.margin.bottom, this.margin.top]);
