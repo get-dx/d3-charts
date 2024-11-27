@@ -7,18 +7,20 @@
     <style>
       body {
         margin: 0;
-        padding: 2rem;
+        padding: 0;
         font-family: system-ui, sans-serif;
         font-size: 1rem;
         line-height: 1.5;
         color: #000000;
         background-color: #fff;
+        display: flex;
       }
 
       main {
-        margin: 2rem auto;
-        max-width: 1200px;
-        padding: 0 1rem;
+        margin-left: 240px;
+        padding: 2rem 4rem;
+        flex: 1;
+        max-width: calc(100vw - 240px);
       }
 
       .section {
@@ -37,22 +39,21 @@
       }
 
       .section-content {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
       }
 
       .card {
-        flex: 1 1 400px; /* Base width of 400px, but can grow and shrink */
-        min-width: 300px; /* Minimum width to prevent too narrow cards */
         background-color: #fff;
         border-radius: 0.25rem;
         padding: 1rem;
+        width: 100%;
+        min-width: 0;
       }
 
-      /* For cards that should span full width */
       .card.full-width {
-        flex: 1 1 100%;
+        grid-column: 1 / -1;
       }
 
       .card-title {
@@ -61,35 +62,22 @@
         margin-bottom: 0.5rem;
       }
 
-      /* Make sure the chart container has a defined height */
       .chart-container {
-        min-height: var(--height, 180px);
-      }
-
-      /* New styles for sections and navigation */
-      .section {
-        border: 1px solid #e5e5e5;
-        border-radius: 0.5rem;
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #e5e5e5;
+        --height: 300px;
+        height: var(--height);
+        width: 100%;
       }
 
       .nav {
-        position: sticky;
+        position: fixed;
+        left: 0;
         top: 0;
+        height: 100vh;
+        width: 240px;
         background: white;
-        padding: 1rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #e5e5e5;
-        z-index: 100;
+        padding: 2rem 1rem;
+        border-right: 1px solid #e5e5e5;
+        overflow-y: auto;
       }
 
       .nav ul {
@@ -97,17 +85,20 @@
         padding: 0;
         margin: 0;
         display: flex;
+        flex-direction: column;
         gap: 1rem;
-        flex-wrap: wrap;
       }
 
       .nav a {
         color: #6366f1;
         text-decoration: none;
+        display: block;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
       }
 
       .nav a:hover {
-        text-decoration: underline;
+        background-color: #f3f4f6;
       }
     </style>
     <link rel="stylesheet" href="css/chart.css" />
@@ -123,6 +114,7 @@
         <li><a href="#line">Line Charts</a></li>
         <li><a href="#multi-line">Multi-Line Charts</a></li>
         <li><a href="#bump">Bump Charts</a></li>
+        <li><a href="#chart-comparison">Chart Comparison</a></li>
       </ul>
     </nav>
 
@@ -132,21 +124,33 @@
         <h2 class="section-title">Stacked Charts</h2>
         <div class="section-content">
           <div class="card full-width">
-            <div class="card-title">Stacked Area Chart</div>
+            <div class="card-title">Basic Stacked Area Chart with Date Tooltip</div>
             <div class="card-body">
               <div id="stacked-area-chart" class="chart-container"></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-title">Stacked Bar 1</div>
+            <div class="card-title">Basic Stacked Bar Chart</div>
             <div class="card-body">
               <div id="stacked-bar-1-chart" class="chart-container" style="--height: 400px"></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-title">Stacked Bar 2</div>
+            <div class="card-title">Stacked Bar with Trendline</div>
             <div class="card-body">
               <div id="stacked-bar-2-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Single Series Bar with Trendline</div>
+            <div class="card-body">
+              <div id="stacked-bar-3-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card full-width">
+            <div class="card-title">Dense Multi-Series Bar Chart</div>
+            <div class="card-body">
+              <div id="dense-multi-line-stacked-bar" class="chart-container" style="--height: 400px"></div>
             </div>
           </div>
         </div>
@@ -157,25 +161,25 @@
         <h2 class="section-title">Pie Charts</h2>
         <div class="section-content">
           <div class="card">
-            <div class="card-title">Pie 1</div>
+            <div class="card-title">Basic Pie Chart with Dataset 1</div>
             <div class="card-body">
               <div id="pie-1-chart" class="chart-container" style="--height: 400px"></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-title">Pie 2</div>
+            <div class="card-title">Basic Pie Chart with Dataset 2</div>
             <div class="card-body">
               <div id="pie-2-chart" class="chart-container" style="--height: 400px"></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-title">Pie 3</div>
+            <div class="card-title">Basic Pie Chart with Dataset 3</div>
             <div class="card-body">
               <div id="pie-3-chart" class="chart-container" style="--height: 314px"></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-title">Pie 4</div>
+            <div class="card-title">Custom Colored Pie Chart (No Value Labels)</div>
             <div class="card-body">
               <div id="pie-4-chart" class="chart-container" style="--height: 314px"></div>
             </div>
@@ -187,19 +191,19 @@
       <section id="scatter" class="section">
         <h2 class="section-title">Scatter Charts</h2>
         <div class="card">
-          <div class="card-title">Scatter 1</div>
+          <div class="card-title">Scatter with Trendline & Click Events</div>
           <div class="card-body">
             <div id="scatter-1-chart" class="chart-container" style="--height: 400px"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Scatter 2</div>
+          <div class="card-title">Matrix Scatter (No Axis)</div>
           <div class="card-body">
             <div id="scatter-2-chart" class="chart-container" style="--height: 400px"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Scatter 3</div>
+          <div class="card-title">Quadrant Scatter with Highlighted Region</div>
           <div class="card-body">
             <div id="scatter-3-chart" class="chart-container" style="--height: 400px"></div>
           </div>
@@ -209,22 +213,24 @@
       <!-- Bar Charts Section -->
       <section id="bar" class="section">
         <h2 class="section-title">Bar Charts</h2>
-        <div class="card">
-          <div class="card-title">Bar 1</div>
-          <div class="card-body">
-            <div id="bar-1-chart" class="chart-container"></div>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Basic Bar with Click Events (No X-Axis)</div>
+            <div class="card-body">
+              <div id="bar-1-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Bar 2</div>
-          <div class="card-body">
-            <div id="bar-2-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Bar with Trendline & Custom Padding</div>
+            <div class="card-body">
+              <div id="bar-2-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Bar 3</div>
-          <div class="card-body">
-            <div id="bar-3-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Fixed Width Bar Chart (40px)</div>
+            <div class="card-body">
+              <div id="bar-3-chart" class="chart-container"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -233,19 +239,19 @@
       <section id="scatter-time" class="section">
         <h2 class="section-title">Scatter Time Charts</h2>
         <div class="card">
-          <div class="card-title">Scatter Time 1</div>
+          <div class="card-title">Time Scatter with Trendline & Custom Y-Axis</div>
           <div class="card-body">
             <div id="scatter-time-1-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Scatter Time 2</div>
+          <div class="card-title">Basic Time Scatter with Click Events</div>
           <div class="card-body">
             <div id="scatter-time-2-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Scatter Time 3</div>
+          <div class="card-title">Time Scatter with Benchmark Line</div>
           <div class="card-body">
             <div id="scatter-time-3-chart" class="chart-container"></div>
           </div>
@@ -256,37 +262,37 @@
       <section id="line" class="section">
         <h2 class="section-title">Line Charts</h2>
         <div class="card">
-          <div class="card-title">Line 1</div>
+          <div class="card-title">Basic Line (No X-Axis Ticks)</div>
           <div class="card-body">
             <div id="line-1-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Line 2</div>
+          <div class="card-title">Basic Line with Click Events</div>
           <div class="card-body">
             <div id="line-2-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Line 3</div>
+          <div class="card-title">Single Point Line Chart</div>
           <div class="card-body">
             <div id="line-3-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Line 4</div>
+          <div class="card-title">Line with Comparison Values</div>
           <div class="card-body">
             <div id="line-4-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Line 5</div>
+          <div class="card-title">Line with Points (Custom Date Range)</div>
           <div class="card-body">
             <div id="line-5-chart" class="chart-container"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Line 6</div>
+          <div class="card-title">Line with Dotted Last Segment</div>
           <div class="card-body">
             <div id="line-6-chart" class="chart-container"></div>
           </div>
@@ -296,25 +302,29 @@
       <!-- Multi-Line Charts Section -->
       <section id="multi-line" class="section">
         <h2 class="section-title">Multi-Line Charts</h2>
-        <div class="card">
-          <div class="card-title">Multi-Line 1</div>
-          <div class="card-body">
-            <div id="multi-line-1-chart" class="chart-container"></div>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Multi-Line with Points & Custom Y-Axis Ticks</div>
+            <div class="card-body">
+              <div id="multi-line-1-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Multi-Line 2</div>
-          <div class="card-body">
-            <div id="multi-line-2-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Multi-Line with Full Axis Labels</div>
+            <div class="card-body">
+              <div id="multi-line-2-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card" style="grid-column: span 2">
-          <div class="card-title">Dense Multi-Line Chart with Limited Ticks</div>
-          <div class="card-body">
-            <div 
-              id="dense-multi-line-chart" 
-              class="chart-container" 
-              style="--height: 400px">
+          <div class="card" style="grid-column: span 2">
+            <div class="card-title">Dense Multi-Line with Limited Ticks & Points</div>
+            <div class="card-body">
+              <div id="dense-multi-line-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Multi-Line with Custom Date Format</div>
+            <div class="card-body">
+              <div id="multi-line-3-chart" class="chart-container"></div>
             </div>
           </div>
         </div>
@@ -324,9 +334,28 @@
       <section id="bump" class="section">
         <h2 class="section-title">Bump Charts</h2>
         <div class="card" style="grid-column: span 2">
-          <div class="card-title">Bump Chart</div>
+          <div class="card-title">Bump Chart with Focus on "Ease of release"</div>
           <div class="card-body">
             <div id="bump-chart" class="chart-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chart Height Comparison Section -->
+      <section id="chart-comparison" class="section">
+        <h2 class="section-title">Chart Height Comparison</h2>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Bar Chart with Trendline (400px Height)</div>
+            <div class="card-body">
+              <div id="comparison-bar-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Multi-Line with Points (400px Height)</div>
+            <div class="card-body">
+              <div id="comparison-line-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -406,19 +435,16 @@
           ],
           maxBarWidth: 48,
           showTrendline: true,
-          enableRoundedCorners: true,
           axis: {
             x: {
-              label: "Something",
+              label: "X Axis Label",
             },
             y: {
-              label: "Something Else",
+              label: "Y Axis Label",
             },
           },
-          showXAxisInnerTicks: false,
           xAxisTickLabelFormat: (d) => `${d}`,
-          showYAxisTicks: false,
-          showYAxisInnerTicks: false,
+          showYAxisTicks: true,
           yAxisTickLabelFormat: (d) => `${d}%`,
         });
 
@@ -1279,6 +1305,254 @@
 
       // Initial render
       multiLineChart.redraw();
+
+      const stackedBar3 = new StackedBarChart({
+        elChart: document.getElementById("stacked-bar-3-chart"),
+        tooltipHtml(d) {
+          return `
+            <div>
+              <div class=''>${d.series}</div>
+              <div class=''>${d.xValue}</div>
+              <div class=''>${d.yValue}</div>
+            </div>
+          `;
+        },
+        series: [
+          { key: "additions", color: "#6366f1" },
+        ],
+        values: [
+          {
+            xValue: "Oct 21",
+            series: "additions",
+            yValue: 1250
+          },
+          {
+            xValue: "Oct 28",
+            series: "additions",
+            yValue: 50
+          },
+          {
+            xValue: "Nov 04",
+            series: "additions",
+            yValue: 100
+          },
+          {
+            xValue: "Nov 11",
+            series: "additions",
+            yValue: 400
+          },
+          {
+            xValue: "Nov 18",
+            series: "additions",
+            yValue: 150
+          },
+        ],
+        yAxisLabel: "Count",
+        xAxisLabel: "during the week of",
+        showTrendline: true,
+      });
+
+      stackedBar3.redraw();
+
+      // Chart Height Comparison
+      const comparisonBar = new StackedBarChart({
+        elChart: document.getElementById("comparison-bar-chart"),
+        tooltipHtml(d) {
+          return `
+            <div>
+              <div>${d.series}</div>
+              <div>${d.xValue}</div>
+              <div>${d.yValue}</div>
+            </div>
+          `;
+        },
+        series: [
+          { key: "additions", color: "#6366f1" },
+        ],
+        values: [
+          { xValue: "Oct 21", series: "additions", yValue: 1250 },
+          { xValue: "Oct 28", series: "additions", yValue: 50 },
+          { xValue: "Nov 04", series: "additions", yValue: 100 },
+          { xValue: "Nov 11", series: "additions", yValue: 400 },
+          { xValue: "Nov 18", series: "additions", yValue: 150 },
+        ],
+        axis: {
+          y: { label: "Count" },
+          x: { label: "Week of" }
+        },
+        showTrendline: true,
+      });
+
+      const comparisonLine = new MultiLineChart({
+        elChart: document.getElementById("comparison-line-chart"),
+        tooltipHtml(d) {
+          return `
+            <div>
+              <div>${d.series}</div>
+              <div>${d.xValue}</div>
+              <div>${d.yValue}</div>
+            </div>
+          `;
+        },
+        series: [
+          { key: "deletions", color: "#f87171" },
+          { key: "additions", color: "#60a5fa" },
+          { key: "files_changed", color: "#fb923c" }
+        ],
+        values: [
+          { xValue: "2024-10-21", series: "deletions", yValue: 1 },
+          { xValue: "2024-10-28", series: "deletions", yValue: 52 },
+          { xValue: "2024-11-05", series: "deletions", yValue: 6 },
+          { xValue: "2024-11-12", series: "deletions", yValue: 12 },
+          { xValue: "2024-11-19", series: "deletions", yValue: 4 },
+          { xValue: "2024-10-21", series: "additions", yValue: 10 },
+          { xValue: "2024-10-28", series: "additions", yValue: 2 },
+          { xValue: "2024-11-05", series: "additions", yValue: 64 },
+          { xValue: "2024-11-12", series: "additions", yValue: 1 },
+          { xValue: "2024-11-19", series: "additions", yValue: 9 },
+          { xValue: "2024-10-21", series: "files_changed", yValue: 88 },
+          { xValue: "2024-10-28", series: "files_changed", yValue: 24 },
+          { xValue: "2024-11-05", series: "files_changed", yValue: 4 },
+          { xValue: "2024-11-12", series: "files_changed", yValue: 42 },
+          { xValue: "2024-11-19", series: "files_changed", yValue: 9 }
+        ],
+        xAxisLabel: "Week of",
+        // yAxisLabel: "Count",
+        showPoints: true
+      });
+
+      comparisonBar.redraw();
+      comparisonLine.redraw();
+
+      // New data generator for name-based data
+      const generateNameData = () => {
+        const firstNames = [
+          'Alice', 'Bob', 'Charlie', 'David', 'Emma', 
+          'Frank', 'Grace', 'Henry', 'Isabel', 'Jack', 
+          'Kyle', 'Liam', 'Mason', 'Noah', 'Olivia', 
+          'Pam', 'Quinn', 'Rachel', 'Sam', 'Tyler', 
+          'Uma', 'Vincent', 'Wendy', 'Xander', 'Yara', 
+          'Zane'
+        ];
+
+        const lastNames = [
+          'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 
+          'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 
+          'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 
+          'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 
+          'Lee', 'Perez', 'Thompson', 'White', 'Harris', 
+          'Sanchez'
+        ];
+
+        const names = firstNames.map((firstName, index) => `${firstName} ${lastNames[index]}`);
+        const series = ['Code Reviews', 'Pull Requests', 'Comments'];
+        const values = [];
+        
+        names.forEach(name => {
+          series.forEach(seriesName => {
+            values.push({
+              xValue: name,
+              series: seriesName,
+              // Random value between 10-50
+              yValue: Math.floor(Math.random() * 40) + 10
+            });
+          });
+        });
+        
+        return {
+          series: series.map(name => ({
+            key: name,
+            color: name === 'Code Reviews' ? '#6366f1' : 
+                   name === 'Pull Requests' ? '#22c55e' : '#f97316'
+          })),
+          values
+        };
+      };
+
+      const nameBasedData = generateNameData();
+      
+      const denseStackedBar = new StackedBarChart({
+        elChart: document.getElementById("dense-multi-line-stacked-bar"),
+        series: nameBasedData.series,
+        values: nameBasedData.values,
+        tooltipHtml(d) {
+          return `
+            <div>
+              <div>${d.series}</div>
+              <div>Developer: ${d.xValue}</div>
+              <div>Count: ${d.yValue}</div>
+            </div>
+          `;
+        },
+        axis: {
+          y: { label: "Count" },
+          x: { label: "Developer" }
+        },
+        showTrendline: true,
+        maxBarWidth: 48,
+      });
+
+      denseStackedBar.redraw();
+
+      // Add this new chart in the Multi-Line Charts section
+      {
+        const multiLine3 = new MultiLineChart({
+          elChart: document.getElementById("multi-line-3-chart"),
+          showPoints: true,
+          xAxisTickLabelFormat: (value) => `${value} days`,
+          tooltipHtml(ds) {
+            const date = ds[0].xValue;
+            return `
+              <div>
+                <div>${date}</div>
+                <table>
+                  <tbody>
+                    ${ds.map(d => `
+                      <tr>
+                        <td>${d.series}</td>
+                        <td>${d.yValue}</td>
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              </div>
+            `
+          }
+        });
+
+        // Generate some sample data
+        const generateSampleData = () => {
+          const startDate = new Date('2024-01-01');
+          const series = ['Series A', 'Series B'];
+          const values = [];
+          
+          series.forEach(seriesName => {
+            for (let i = 0; i < 10; i++) {
+              const date = new Date(startDate);
+              date.setDate(date.getDate() + i * 3); // Every 3 days
+              
+              values.push({
+                xValue: date.toISOString().split('T')[0],
+                series: seriesName,
+                yValue: Math.floor(Math.random() * 50) + 25 // Random value between 25-75
+              });
+            }
+          });
+          
+          return {
+            series: series.map(name => ({
+              key: name,
+              color: name === 'Series A' ? '#6366f1' : '#22c55e'
+            })),
+            values
+          };
+        };
+
+        const data = generateSampleData();
+        multiLine3.series = data.series;
+        multiLine3.values = data.values;
+        multiLine3.redraw();
+      }
     </script>
   </body>
 </html>
