@@ -462,7 +462,7 @@ export class MultiLineChart {
           .attr("y", (this.margin.top + this.height - this.margin.bottom) / 2)
           .attr(
             "transform",
-            (_d) =>
+            () =>
               `rotate(-90,${-labelOffset},${
                 (this.margin.top + this.height - this.margin.bottom) / 2
               })`,
@@ -503,7 +503,7 @@ export class MultiLineChart {
       .join((enter) =>
         enter
           .append("line")
-          .attr("class", (_d) => `trend-line ${this.trendlineClass}`),
+          .attr("class", () => `trend-line ${this.trendlineClass}`),
       )
       .attr("stroke", (d) => this.color(d.key))
       .attr("x1", (d) => {
