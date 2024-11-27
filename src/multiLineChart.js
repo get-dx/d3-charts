@@ -428,7 +428,7 @@ export class MultiLineChart {
       });
     }
 
-    const labelOffset = maxLabelWidth + 40; // Increased spacing between tick labels and axis label
+    const labelOffset = maxLabelWidth + 40;
 
     // Position y-axis label with proper offset
     yAxis
