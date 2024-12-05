@@ -582,10 +582,11 @@ export class MultiLineChart {
             const isPrevUndefined = i === 0 || d.values[i - 1] === undefined;
             const isNextUndefined =
               i === d.values.length - 1 || d.values[i + 1] === undefined;
+            const isFlat = d.values.every((val) => val === d.values[0]);
             const isVisible =
               v !== undefined &&
-              ((isPrevUndefined && isNextUndefined && !d.isFlat) || // Only show single points if not flat
-                (this.showPoints && !d.isFlat)); // Only show all points if not flat
+              ((isPrevUndefined && isNextUndefined && !isFlat) || // Only show single points if not flat
+                (this.showPoints && !isFlat)); // Only show all points if not flat
             return {
               date,
               value: v,
