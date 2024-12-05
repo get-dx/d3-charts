@@ -167,20 +167,35 @@ export class MultiLineChart {
         }, []);
 
         let lr = null;
+        let isFlat = false;
+
         if (nonNullIndexes.length >= 2) {
           const x = nonNullIndexes;
           const y = nonNullIndexes.map((i) => series.values[i]);
-          lr = linearRegression(x, y);
+
+          // Check if all y-values are the same
+          isFlat = y.every((val) => val === y[0]);
+
+          if (!isFlat) {
+            lr = linearRegression(x, y);
+
+            // Check for NaN in slope or intercept
+            if (isNaN(lr.slope) || isNaN(lr.intercept)) {
+              lr = null;
+            }
+          }
         }
 
         return {
           ...series,
           trendline: lr,
+          isFlat,
         };
       });
     }
 
     if (!this.width) return;
+
     this.render();
   }
 
@@ -569,7 +584,8 @@ export class MultiLineChart {
               i === d.values.length - 1 || d.values[i + 1] === undefined;
             const isVisible =
               v !== undefined &&
-              ((isPrevUndefined && isNextUndefined) || this.showPoints);
+              ((isPrevUndefined && isNextUndefined && !d.isFlat) || // Only show single points if not flat
+                (this.showPoints && !d.isFlat)); // Only show all points if not flat
             return {
               date,
               value: v,
