@@ -79,7 +79,8 @@ When you make changes to this package, run `yarn build && yarn dlx yalc publish`
 To release a new version —
 
 1. Ensure you've incremented the `version` in `package.json` according to [semantic versioning standards](https://semver.org/)
-1. Create a [new release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) in Github to publish the new version.
+2. Merge your changes into `main`
+3. Create a [new release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) in Github to publish the new version.
    - Ensure your release has a new tag and name matching the `version` in `package.json`. i.e. `v1.0.0`.
    - Creating a release will kickoff a github action to publish to NPM.
-1. View the new version in NPM - https://www.npmjs.com/package/@get-dx/d3-charts
+4. View the new version in NPM - https://www.npmjs.com/package/@get-dx/d3-charts
