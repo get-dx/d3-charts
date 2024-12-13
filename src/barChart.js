@@ -393,15 +393,16 @@ export class BarChart {
       this.barRect.style("cursor", "pointer");
     }
 
-    if (this.hoverColor) {
-      this.barRect
-        .on("mouseover", (event) => {
-          d3.select(event.currentTarget).style("fill", this.hoverColor);
-        })
-        .on("mouseout", (event, d) => {
-          d3.select(event.currentTarget).style("fill", this.accessor.color(d));
-        });
-    }
+    this.barRect
+      .on("mouseover", (event, d) => {
+        const hoverColor = d.hoverColor || this.hoverColor;
+
+        if (hoverColor)
+          d3.select(event.currentTarget).style("fill", hoverColor);
+      })
+      .on("mouseout", (event, d) => {
+        d3.select(event.currentTarget).style("fill", this.accessor.color(d));
+      });
   }
 
   renderTrendLine() {
