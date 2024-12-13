@@ -127,6 +127,7 @@ const barchart = new BarChart({
       "name": "Bugs",
       "value": 25.241758241758241758,
       "color": "rgb(129, 140, 248)"
+      "hoverColor": "rgb(129, 140, 248)" // Optional — will override the hoverColor value set at the chart level
     }
   ]
 });
