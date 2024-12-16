@@ -277,3 +277,44 @@ const denseStackedBar = new StackedBarChart({
 });
 
 denseStackedBar.redraw();
+
+// Zero Values Example
+const zeroValuesData = [
+  { xValue: "Jan", series: "A", yValue: 10 },
+  { xValue: "Jan", series: "B", yValue: 20 },
+  { xValue: "Feb", series: "A", yValue: 0 }, // Zero value
+  { xValue: "Feb", series: "B", yValue: 15 },
+  { xValue: "Mar", series: "A", yValue: 5 },
+  { xValue: "Mar", series: "B", yValue: 0 }, // Zero value
+  { xValue: "Apr", series: "A", yValue: 0 }, // Both series are zero
+  { xValue: "Apr", series: "B", yValue: 0 }, // Both series are zero
+];
+
+const zeroValuesChart = new StackedBarChart({
+  elChart: document.getElementById("stacked-bar-zero-values-chart"),
+  values: zeroValuesData,
+  series: [
+    { key: "A", color: "#6baed6" },
+    { key: "B", color: "#3182bd" },
+  ],
+  yAxisLabel: "Value",
+  xAxisLabel: "Month",
+  tooltipHtml: (data) => {
+    return `
+      <div style="padding: 8px; background: white; border: 1px solid #eee; border-radius: 4px;">
+        <div style="font-weight: 500; margin-bottom: 4px;">Values</div>
+        ${data
+          .map(
+            (d) => `
+          <div style="color: ${d.series === "A" ? "#6baed6" : "#3182bd"}">
+            ${d.series}: ${d.yValue}
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    `;
+  },
+});
+
+zeroValuesChart.redraw();
