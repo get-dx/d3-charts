@@ -148,6 +148,12 @@
             </div>
           </div>
           <div class="card full-width">
+            <div class="card-title">Stacked Bar Chart with Goal Line</div>
+            <div class="card-body">
+              <div id="stacked-bar-goal-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card full-width">
             <div class="card-title">Dense Multi-Series Bar Chart</div>
             <div class="card-body">
               <div id="dense-multi-line-stacked-bar" class="chart-container" style="--height: 400px"></div>
@@ -333,6 +339,12 @@
               <div id="multi-line-4-chart" class="chart-container"></div>
             </div>
           </div>
+          <div class="card full-width">
+            <div class="card-title">Multi-Line Chart with Goal Line</div>
+            <div class="card-body">
+              <div id="multi-line-goal-chart" class="chart-container"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -402,38 +414,6 @@
           stackedAreaChart.values = dataset;
           stackedAreaChart.redraw();
         })
-      }
-
-      // Stacked bar charts
-      {
-        const stackedBar1 = new StackedBarChart({
-          elChart: document.getElementById("stacked-bar-1-chart"),
-          tooltipHtml: emptyTooltip,
-        });
-
-        const stackedBar2 = new StackedBarChart({
-          elChart: document.getElementById("stacked-bar-2-chart"),
-          tooltipHtml: emptyTooltip,
-          series: [
-            { key: "additions", color: "#6366f1" },
-            { key: "deletions", color: "#e5e5e5" },
-          ],
-          maxBarWidth: 48,
-          showTrendline: true,
-          yAxisLabel: "Y Axis Label",
-          xAxisLabel: "X Axis Label",
-          xAxisTickLabelFormat: (d) => `${d}`,
-          showYAxisTicks: true,
-          yAxisTickLabelFormat: (d) => `${d}%`,
-        });
-
-        d3.json("data/stacked_bar_dataset.json").then((dataset) => {
-          stackedBar1.values = dataset;
-          stackedBar1.redraw();
-
-          stackedBar2.values = dataset;
-          stackedBar2.redraw();
-        });
       }
 
       // Pie charts
@@ -1038,37 +1018,6 @@
         });
       }
 
-      // Multi-Line Chart
-      {
-        const multiLine1 = new MultiLineChart({
-          elChart: document.getElementById("multi-line-1-chart"),
-          yAxisTickLabelSpread: 30,
-          showPoints: true,
-          tooltipHtml: emptyTooltip,
-        });
-        d3.json("data/multi_line_chart_dataset.json").then((data) => {
-          multiLine1.series = data.series;
-          multiLine1.values = data.values;
-          multiLine1.redraw();
-        })
-      }
-      {
-        const multiLine2 = new MultiLineChart({
-          elChart: document.getElementById("multi-line-2-chart"),
-          showYAxisTickLabels: true,
-          showYAxisTicks: true,
-          yAxisLabel: "Y Axis",
-          xAxisLabel: "X Axis",
-          showPoints: true,
-          tooltipHtml: emptyTooltip,
-        });
-        d3.json("data/multi_line_chart_dataset.json").then((data) => {
-          multiLine2.series = data.series;
-          multiLine2.values = data.values;
-          multiLine2.redraw();
-        })
-      }
-
       // Bump Chart
       {
         d3.json("data/bump_dataset.json").then((data) => {
@@ -1079,101 +1028,6 @@
           });
         });
       }
-
-      // Create sample data with many points
-      const generateData = () => {
-        const startDate = new Date('2024-01-01');
-        const series = ['Series A', 'Series B', 'Series C'];
-        const values = [];
-        
-        // Generate 50 dates (daily) for each series
-        series.forEach(seriesName => {
-          for (let i = 0; i < 50; i++) {
-            const date = new Date(startDate);
-            date.setDate(date.getDate() + i);
-            
-            values.push({
-              xValue: date.toISOString().split('T')[0],
-              series: seriesName,
-              yValue: Math.floor(Math.random() * 100) + 20 // Random value between 20-120
-            });
-          }
-        });
-        
-        return {
-          series: series.map(name => ({
-            key: name,
-            color: name === 'Series A' ? '#6366f1' : 
-                   name === 'Series B' ? '#22c55e' : '#f97316'
-          })),
-          values
-        };
-      };
-
-      // Create chart instance
-      const data = generateData();
-      const multiLineChart = new MultiLineChart({
-        elChart: document.getElementById("dense-multi-line-chart"),
-        series: data.series,
-        values: data.values,
-        
-        // Enable tick limiting with minimum spacing
-        minTickSpacing: 20,
-        
-        // Show points for better visualization
-        showPoints: true,
-        
-        // Configure axes
-        showYAxisTickLabels: true,
-        showYAxisTicks: true,
-        yAxisLabel: "Value",
-        xAxisLabel: "Date",
-        // Add tooltip
-        tooltipHtml: emptyTooltip,
-      });
-
-      // Initial render
-      multiLineChart.redraw();
-
-      const stackedBar3 = new StackedBarChart({
-        elChart: document.getElementById("stacked-bar-3-chart"),
-        tooltipHtml: emptyTooltip,
-        series: [
-          { key: "additions", color: "#6366f1" },
-        ],
-        values: [
-          {
-            xValue: "Oct 21",
-            series: "additions",
-            yValue: 1250
-          },
-          {
-            xValue: "Oct 28",
-            series: "additions",
-            yValue: 50
-          },
-          {
-            xValue: "Nov 04",
-            series: "additions",
-            yValue: 100
-          },
-          {
-            xValue: "Nov 11",
-            series: "additions",
-            yValue: 400
-          },
-          {
-            xValue: "Nov 18",
-            series: "additions",
-            yValue: 150
-          },
-        ],
-        yAxisLabel: "Count",
-        xAxisLabel: "during the week of",
-        showTrendline: true,
-      });
-
-      stackedBar3.redraw();
 
       // Chart Height Comparison
       const comparisonBar = new StackedBarChart({
@@ -1226,192 +1080,8 @@
 
       comparisonBar.redraw();
       comparisonLine.redraw();
-
-      // New data generator for name-based data
-      const generateNameData = () => {
-        const firstNames = [
-          'Alice', 'Bob', 'Charlie', 'David', 'Emma', 
-          'Frank', 'Grace', 'Henry', 'Isabel', 'Jack', 
-          'Kyle', 'Liam', 'Mason', 'Noah', 'Olivia', 
-          'Pam', 'Quinn', 'Rachel', 'Sam', 'Tyler', 
-          'Uma', 'Vincent', 'Wendy', 'Xander', 'Yara', 
-          'Zane'
-        ];
-
-        const lastNames = [
-          'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 
-          'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 
-          'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 
-          'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 
-          'Lee', 'Perez', 'Thompson', 'White', 'Harris', 
-          'Sanchez'
-        ];
-
-        const names = firstNames.map((firstName, index) => `${firstName} ${lastNames[index]}`);
-        const series = ['Code Reviews', 'Pull Requests', 'Comments'];
-        const values = [];
-        
-        names.forEach(name => {
-          series.forEach(seriesName => {
-            values.push({
-              xValue: name,
-              series: seriesName,
-              // Random value between 10-50
-              yValue: Math.floor(Math.random() * 40) + 10
-            });
-          });
-        });
-        
-        return {
-          series: series.map(name => ({
-            key: name,
-            color: name === 'Code Reviews' ? '#6366f1' : 
-                   name === 'Pull Requests' ? '#22c55e' : '#f97316'
-          })),
-          values
-        };
-      };
-
-      const nameBasedData = generateNameData();
-      
-      const denseStackedBar = new StackedBarChart({
-        elChart: document.getElementById("dense-multi-line-stacked-bar"),
-        series: nameBasedData.series,
-        values: nameBasedData.values,
-        tooltipHtml: emptyTooltip,
-        yAxisLabel: "Count",
-        xAxisLabel: "Developer",
-        showTrendline: true,
-        maxBarWidth: 48,
-      });
-
-      denseStackedBar.redraw();
-
-      // Add this new chart in the Multi-Line Charts section
-      {
-        const multiLine3 = new MultiLineChart({
-          elChart: document.getElementById("multi-line-3-chart"),
-          showPoints: true,
-          xAxisTickLabelFormat: (dateStr) => {
-            const date = new Date(dateStr);
-            const startDate = new Date('2024-01-01'); // Reference date
-            const diffDays = Math.round((date - startDate) / (1000 * 60 * 60 * 24));
-            
-            // Format based on duration
-            if (diffDays < 7) {
-              return `Day ${diffDays + 1}`; // +1 for human-friendly counting
-            } else if (diffDays < 30) {
-              const weeks = Math.floor(diffDays / 7);
-              const days = diffDays % 7;
-              return days === 0 
-                ? `Week ${weeks}` 
-                : `Week ${weeks}+${days}d`;
-            } else {
-              const months = Math.floor(diffDays / 30);
-              const days = diffDays % 30;
-              return days === 0 
-                ? `Month ${months}` 
-                : `Month ${months}+${days}d`;
-            }
-          },
-          tooltipHtml: emptyTooltip,
-        });
-
-        // Generate some sample data
-        const generateSampleData = () => {
-          const startDate = new Date('2024-01-01');
-          const series = ['Series A', 'Series B'];
-          const values = [];
-          
-          series.forEach(seriesName => {
-            for (let i = 0; i < 10; i++) {
-              const date = new Date(startDate);
-              date.setDate(date.getDate() + i * 3); // Every 3 days
-              
-              values.push({
-                xValue: date.toISOString().split('T')[0],
-                series: seriesName,
-                yValue: Math.floor(Math.random() * 50) + 25 // Random value between 25-75
-              });
-            }
-          });
-          
-          return {
-            series: series.map(name => ({
-              key: name,
-              color: name === 'Series A' ? '#6366f1' : '#22c55e'
-            })),
-            values
-          };
-        };
-
-        const data = generateSampleData();
-        multiLine3.series = data.series;
-        multiLine3.values = data.values;
-        multiLine3.redraw();
-      }
-
-      {
-        const multiLine4 = new MultiLineChart({
-          elChart: document.getElementById("multi-line-4-chart"),
-          showPoints: true,
-          showTrendlines: true,
-          tooltipHtml: emptyTooltip,
-          series: [
-            { key: "target", color: "#60a5fa" },  // Blue line
-            { key: "prs_per_developer", color: "#ef4444" }   // Red line
-          ],
-
-          values: [
-    {
-        "xValue": "2024-01-01",
-        "yValue": 1,
-        "series": "prs_per_developer"
-    },
-    {
-        "xValue": "2024-01-01",
-        "yValue": 4,
-        "series": "target"
-    },
-    {
-        "xValue": "2024-01-08",
-        "yValue": 3,
-        "series": "prs_per_developer"
-    },
-    {
-        "xValue": "2024-01-08",
-        "yValue": 4,
-        "series": "target"
-    },
-    {
-        "xValue": "2024-01-15",
-        "yValue": 1.5,
-        "series": "prs_per_developer"
-    },
-    {
-        "xValue": "2024-01-15",
-        "yValue": 4,
-        "series": "target"
-    },
-    {
-        "xValue": "2024-01-22",
-        "yValue": 1.17,
-        "series": "prs_per_developer"
-    },
-    {
-        "xValue": "2024-01-22",
-        "yValue": 4,
-        "series": "target"
-    },
-],
-          yAxisLabel: "Value",
-          xAxisLabel: "Date",
-          yAxisMin: 0,
-          yAxisMax: 5,
-        });
-
-        multiLine4.redraw();
-      }
     </script>
+    <script type="module" src="js/multi-line-example.js"></script>
+    <script type="module" src="js/stacked-bar-example.js"></script>
   </body>
 </html>

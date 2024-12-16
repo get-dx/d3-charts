@@ -26,6 +26,8 @@ export class MultiLineChart {
     showTrendlines = false,
     trendlineClass = "trend-line",
     minTickSpacing = null,
+    goalLines = [],
+    goalLineClass = "goal-line",
   }) {
     this.elChart = elChart;
     this.series = series;
@@ -49,6 +51,8 @@ export class MultiLineChart {
     this.showTrendlines = showTrendlines;
     this.trendlineClass = trendlineClass;
     this.minTickSpacing = minTickSpacing;
+    this.goalLines = goalLines;
+    this.goalLineClass = goalLineClass;
     this.resize = this.resize.bind(this);
     this.entered = this.entered.bind(this);
     this.moved = this.moved.bind(this);
@@ -559,7 +563,11 @@ export class MultiLineChart {
       .join((enter) =>
         enter
           .append("g")
-          .attr("class", "series")
+          .attr(
+            "class",
+            (d) =>
+              `series ${this.goalLines.includes(d.key) ? this.goalLineClass : ""}`,
+          )
           .call((g) =>
             g.append("path").attr("class", "line").attr("fill", "none"),
           )
@@ -576,24 +584,28 @@ export class MultiLineChart {
       .attr("fill", (d) => this.color(d.key))
       .selectAll(".dot-circle")
       .data((d) =>
-        d.values
-          .map((v, i) => {
-            const date = this.dates[i];
-            const isPrevUndefined = i === 0 || d.values[i - 1] === undefined;
-            const isNextUndefined =
-              i === d.values.length - 1 || d.values[i + 1] === undefined;
-            const isFlat = d.values.every((val) => val === d.values[0]);
-            const isVisible =
-              v !== undefined &&
-              ((isPrevUndefined && isNextUndefined && !isFlat) || // Only show single points if not flat
-                (this.showPoints && !isFlat)); // Only show all points if not flat
-            return {
-              date,
-              value: v,
-              isVisible,
-            };
-          })
-          .filter((d) => d.isVisible),
+        // Don't show dots for goal lines
+        this.goalLines.includes(d.key)
+          ? []
+          : d.values
+              .map((v, i) => {
+                const date = this.dates[i];
+                const isPrevUndefined =
+                  i === 0 || d.values[i - 1] === undefined;
+                const isNextUndefined =
+                  i === d.values.length - 1 || d.values[i + 1] === undefined;
+                const isFlat = d.values.every((val) => val === d.values[0]);
+                const isVisible =
+                  v !== undefined &&
+                  ((isPrevUndefined && isNextUndefined && !isFlat) || // Only show single points if not flat
+                    (this.showPoints && !isFlat)); // Only show all points if not flat
+                return {
+                  date,
+                  value: v,
+                  isVisible,
+                };
+              })
+              .filter((d) => d.isVisible),
       )
       .join((enter) =>
         enter
