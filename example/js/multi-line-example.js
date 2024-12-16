@@ -292,3 +292,4 @@ const multiLineGoalProps = {
 };
 const multiLineGoal = new MultiLineChart(multiLineGoalProps);
 window.chartProps["multi-line-goal-chart"] = multiLineGoalProps;
+multiLineGoal.redraw();

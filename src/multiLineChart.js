@@ -125,14 +125,6 @@ export class MultiLineChart {
       z: (d) => d.series,
     };
 
-    // Separate goal line data from regular data
-    const regularData = this.values.filter(
-      (d) => !this.goalLines.includes(this.accessor.z(d)),
-    );
-    const goalLineData = this.values.filter((d) =>
-      this.goalLines.includes(this.accessor.z(d)),
-    );
-
     let [minX, maxX] = d3.extent(this.values, this.accessor.x);
     this.x.domain([
       this.startDate === undefined ? minX : this.parseDate(this.startDate),

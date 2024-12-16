@@ -104,6 +104,7 @@ const stackedBarGoalProps = {
 };
 const stackedBarGoal = new StackedBarChart(stackedBarGoalProps);
 window.chartProps["stacked-bar-goal-chart"] = stackedBarGoalProps;
+stackedBarGoal.redraw();
 
 // Basic Stacked Bar Chart
 const stackedBar1Props = {
