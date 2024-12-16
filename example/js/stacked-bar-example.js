@@ -75,7 +75,7 @@ const data = {
 };
 
 // Initialize goal line chart
-new StackedBarChart({
+const stackedBarGoalProps = {
   elChart: document.getElementById("stacked-bar-goal-chart"),
   series: data.series,
   values: data.values,
@@ -101,20 +101,27 @@ new StackedBarChart({
       </div>
     `;
   },
-});
+};
+const stackedBarGoal = new StackedBarChart(stackedBarGoalProps);
+window.chartProps["stacked-bar-goal-chart"] = stackedBarGoalProps;
 
 // Basic Stacked Bar Chart
-const stackedBar1 = new StackedBarChart({
+const stackedBar1Props = {
   elChart: document.getElementById("stacked-bar-1-chart"),
-});
+  values: [],
+  series: [],
+};
+const stackedBar1 = new StackedBarChart(stackedBar1Props);
+window.chartProps["stacked-bar-1-chart"] = stackedBar1Props;
 
 // Stacked Bar with Trendline
-const stackedBar2 = new StackedBarChart({
+const stackedBar2Props = {
   elChart: document.getElementById("stacked-bar-2-chart"),
   series: [
     { key: "additions", color: "#6366f1" },
     { key: "deletions", color: "#e5e5e5" },
   ],
+  values: [],
   maxBarWidth: 48,
   showTrendline: true,
   yAxisLabel: "Y Axis Label",
@@ -122,21 +129,28 @@ const stackedBar2 = new StackedBarChart({
   xAxisTickLabelFormat: (d) => `${d}`,
   showYAxisTicks: true,
   yAxisTickLabelFormat: (d) => `${d}%`,
-});
+};
+const stackedBar2 = new StackedBarChart(stackedBar2Props);
+window.chartProps["stacked-bar-2-chart"] = stackedBar2Props;
 
 // Load data for basic and trendline examples
 fetch("data/stacked_bar_dataset.json")
   .then((response) => response.json())
   .then((dataset) => {
+    stackedBar1Props.values = dataset;
+    stackedBar1Props.series = Array.from(
+      new Set(dataset.map((d) => d.series)),
+    ).map((key) => ({ key }));
     stackedBar1.values = dataset;
     stackedBar1.redraw();
 
+    stackedBar2Props.values = dataset;
     stackedBar2.values = dataset;
     stackedBar2.redraw();
   });
 
 // Single Series Bar with Trendline
-const stackedBar3 = new StackedBarChart({
+const stackedBar3Props = {
   elChart: document.getElementById("stacked-bar-3-chart"),
   series: [{ key: "additions", color: "#6366f1" }],
   values: [
@@ -169,7 +183,9 @@ const stackedBar3 = new StackedBarChart({
   yAxisLabel: "Count",
   xAxisLabel: "during the week of",
   showTrendline: true,
-});
+};
+const stackedBar3 = new StackedBarChart(stackedBar3Props);
+window.chartProps["stacked-bar-3-chart"] = stackedBar3Props;
 
 stackedBar3.redraw();
 
@@ -264,16 +280,118 @@ const generateNameData = () => {
   };
 };
 
-const nameBasedData = generateNameData();
-
-const denseStackedBar = new StackedBarChart({
+const denseData = generateNameData();
+const denseMultiLineStackedBarProps = {
   elChart: document.getElementById("dense-multi-line-stacked-bar"),
-  series: nameBasedData.series,
-  values: nameBasedData.values,
+  series: [
+    { key: "Code Reviews", color: "#6366f1" },
+    { key: "Pull Requests", color: "#f97316" },
+    { key: "Comments", color: "#22c55e" },
+  ],
+  values: denseData.values,
   yAxisLabel: "Count",
   xAxisLabel: "Developer",
-  showTrendline: true,
-  maxBarWidth: 48,
-});
+  maxBarWidth: 24,
+  paddingInner: 0.2,
+  paddingOuter: 0.1,
+};
+const denseMultiLineStackedBar = new StackedBarChart(
+  denseMultiLineStackedBarProps,
+);
+window.chartProps["dense-multi-line-stacked-bar"] =
+  denseMultiLineStackedBarProps;
 
-denseStackedBar.redraw();
+denseMultiLineStackedBar.redraw();
+
+// Stacked Bar with Zero Values
+const stackedBarZeroValuesProps = {
+  elChart: document.getElementById("stacked-bar-zero-values-chart"),
+  series: [
+    { key: "completed", color: "#60a5fa" },
+    { key: "in_progress", color: "#f97316" },
+  ],
+  values: [
+    // Completed tasks
+    {
+      xValue: "Week 1",
+      series: "completed",
+      yValue: 15,
+    },
+    {
+      xValue: "Week 2",
+      series: "completed",
+      yValue: 0,
+    },
+    {
+      xValue: "Week 3",
+      series: "completed",
+      yValue: 25,
+    },
+    {
+      xValue: "Week 4",
+      series: "completed",
+      yValue: 0,
+    },
+    // In-progress tasks
+    {
+      xValue: "Week 1",
+      series: "in_progress",
+      yValue: 8,
+    },
+    {
+      xValue: "Week 2",
+      series: "in_progress",
+      yValue: 0,
+    },
+    {
+      xValue: "Week 3",
+      series: "in_progress",
+      yValue: 12,
+    },
+    {
+      xValue: "Week 4",
+      series: "in_progress",
+      yValue: 0,
+    },
+  ],
+  yAxisLabel: "Tasks",
+  xAxisLabel: "Time Period",
+};
+const stackedBarZeroValues = new StackedBarChart(stackedBarZeroValuesProps);
+window.chartProps["stacked-bar-zero-values-chart"] = stackedBarZeroValuesProps;
+
+stackedBarZeroValues.redraw();
+
+// Stacked Bar with Goal Line and Trend Line
+const stackedBarGoalTrendProps = {
+  elChart: document.getElementById("stacked-bar-goal-trend-chart"),
+  series: data.series,
+  values: data.values,
+  goalLines: ["target"],
+  showTrendline: true,
+  yAxisLabel: "Tasks",
+  xAxisLabel: "Time Period",
+  tooltipHtml: (values) => {
+    const completed = values.find((d) => d.series === "completed")?.yValue || 0;
+    const inProgress =
+      values.find((d) => d.series === "in_progress")?.yValue || 0;
+    const target = values.find((d) => d.series === "target")?.yValue || 0;
+    const total = completed + inProgress;
+
+    return `
+      <div style="padding: 8px; background: white; border: 1px solid #eee; border-radius: 4px;">
+        <div style="font-weight: 500; margin-bottom: 4px;">Task Summary</div>
+        <div style="color: #60a5fa;">Completed: ${completed}</div>
+        <div style="color: #f97316;">In Progress: ${inProgress}</div>
+        <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid #eee;">
+          <div>Total: ${total}</div>
+          <div style="color: #f87171;">Target: ${target}</div>
+        </div>
+      </div>
+    `;
+  },
+};
+const stackedBarGoalTrend = new StackedBarChart(stackedBarGoalTrendProps);
+window.chartProps["stacked-bar-goal-trend-chart"] = stackedBarGoalTrendProps;
+
+stackedBarGoalTrend.redraw();

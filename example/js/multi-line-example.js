@@ -2,15 +2,17 @@ import { MultiLineChart } from "../../src/multiLineChart.js";
 import * as d3 from "d3";
 
 // Example 1: Multi-Line with Points & Custom Y-Axis Ticks
-const multiLine1 = new MultiLineChart({
+const multiLine1Props = {
   elChart: document.getElementById("multi-line-1-chart"),
   yAxisTickLabelSpread: 30,
   showPoints: true,
   tooltipHtml: () => `<div></div>`,
-});
+};
+const multiLine1 = new MultiLineChart(multiLine1Props);
+window.chartProps["multi-line-1-chart"] = multiLine1Props;
 
 // Example 2: Multi-Line with Full Axis Labels
-const multiLine2 = new MultiLineChart({
+const multiLine2Props = {
   elChart: document.getElementById("multi-line-2-chart"),
   showYAxisTickLabels: true,
   showYAxisTicks: true,
@@ -18,7 +20,9 @@ const multiLine2 = new MultiLineChart({
   xAxisLabel: "X Axis",
   showPoints: true,
   tooltipHtml: () => `<div></div>`,
-});
+};
+const multiLine2 = new MultiLineChart(multiLine2Props);
+window.chartProps["multi-line-2-chart"] = multiLine2Props;
 
 // Load data for examples 1 and 2
 d3.json("data/multi_line_chart_dataset.json").then((data) => {
@@ -67,7 +71,7 @@ const generateData = () => {
 };
 
 const denseData = generateData();
-const denseMultiLine = new MultiLineChart({
+const denseMultiLineProps = {
   elChart: document.getElementById("dense-multi-line-chart"),
   series: denseData.series,
   values: denseData.values,
@@ -78,12 +82,14 @@ const denseMultiLine = new MultiLineChart({
   yAxisLabel: "Value",
   xAxisLabel: "Date",
   tooltipHtml: () => `<div></div>`,
-});
+};
+const denseMultiLine = new MultiLineChart(denseMultiLineProps);
+window.chartProps["dense-multi-line-chart"] = denseMultiLineProps;
 
 denseMultiLine.redraw();
 
 // Example 4: Multi-Line with Custom Date Format
-const multiLine3 = new MultiLineChart({
+const multiLine3Props = {
   elChart: document.getElementById("multi-line-3-chart"),
   showPoints: true,
   xAxisTickLabelFormat: (dateStr) => {
@@ -105,7 +111,9 @@ const multiLine3 = new MultiLineChart({
     }
   },
   tooltipHtml: () => `<div></div>`,
-});
+};
+const multiLine3 = new MultiLineChart(multiLine3Props);
+window.chartProps["multi-line-3-chart"] = multiLine3Props;
 
 // Generate sample data for custom date format example
 const generateSampleData = () => {
@@ -141,11 +149,10 @@ multiLine3.values = customDateData.values;
 multiLine3.redraw();
 
 // Example 5: Multi-Line with Trendline
-const multiLine4 = new MultiLineChart({
+const multiLine4Props = {
   elChart: document.getElementById("multi-line-4-chart"),
   showPoints: true,
   showTrendlines: true,
-  tooltipHtml: () => `<div></div>`,
   series: [
     { key: "target", color: "#60a5fa" },
     { key: "prs_per_developer", color: "#ef4444" },
@@ -196,7 +203,9 @@ const multiLine4 = new MultiLineChart({
   xAxisLabel: "Date",
   yAxisMin: 0,
   yAxisMax: 5,
-});
+};
+const multiLine4 = new MultiLineChart(multiLine4Props);
+window.chartProps["multi-line-4-chart"] = multiLine4Props;
 
 multiLine4.redraw();
 
@@ -261,13 +270,23 @@ const goalLineData = {
   ],
 };
 
-new MultiLineChart({
+const multiLineGoalProps = {
   elChart: document.getElementById("multi-line-goal-chart"),
   series: goalLineData.series,
   values: goalLineData.values,
-  goalLines: ["target"], // Specify which series should be rendered as goal lines
-  showPoints: true, // Show points on the actual line
-  yAxisMin: 75,
-  yAxisMax: 120,
-  tooltipHtml: () => `<div></div>`,
-});
+  goalLines: ["target"],
+  yAxisLabel: "Percentage",
+  xAxisLabel: "Month",
+  tooltipHtml: (values) => {
+    const actual = values.find((d) => d.series === "actual")?.yValue || 0;
+    const target = values.find((d) => d.series === "target")?.yValue || 0;
+    return `
+      <div style="padding: 8px; background: white; border: 1px solid #eee; border-radius: 4px;">
+        <div style="color: #60a5fa;">Actual: ${actual}%</div>
+        <div style="color: #f87171;">Target: ${target}%</div>
+      </div>
+    `;
+  },
+};
+const multiLineGoal = new MultiLineChart(multiLineGoalProps);
+window.chartProps["multi-line-goal-chart"] = multiLineGoalProps;

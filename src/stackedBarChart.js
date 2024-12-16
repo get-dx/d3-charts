@@ -197,7 +197,7 @@ export class StackedBarChart {
 
     this.lr = null;
     if (this.showTrendline) {
-      const totals = Array.from(d3.group(this.values, this.accessor.x)).map(
+      const totals = Array.from(d3.group(this.barData, this.accessor.x)).map(
         ([, values]) => d3.sum(values, this.accessor.y),
       );
 
@@ -307,7 +307,7 @@ export class StackedBarChart {
             .attr("text-anchor", "middle"),
         )
         .attr("x", (this.x.range()[0] + this.x.range()[1]) / 2)
-        .attr("y", this.margin.bottom - 30)
+        .attr("y", this.margin.bottom ? this.margin.bottom - 30 : 30)
         .text((d) => d),
     );
 
@@ -497,18 +497,22 @@ export class StackedBarChart {
 
       // Add extension points at the start and end
       if (lineData.length > 0) {
+        // Add points that extend to the edges of the chart
         const leftPoint = {
           x: this.x.domain()[0],
+          xOffset: 0,
           y: lineData[0].y,
           key: key,
           isExtension: true,
         };
         const rightPoint = {
           x: this.x.domain()[this.x.domain().length - 1],
+          xOffset: this.x.bandwidth(),
           y: lineData[lineData.length - 1].y,
           key: key,
           isExtension: true,
         };
+
         return {
           key: key,
           values: [leftPoint, ...lineData, rightPoint],
@@ -519,7 +523,7 @@ export class StackedBarChart {
 
     const line = d3
       .line()
-      .x((d) => this.x(d.x))
+      .x((d) => this.x(d.x) + (d.xOffset || 0))
       .y((d) => this.y(d.y));
 
     this.svg

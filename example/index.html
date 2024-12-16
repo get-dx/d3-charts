@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/x-icon;base64," />
     <title></title>
     <style>
       body {
@@ -11,31 +12,31 @@
         font-family: system-ui, sans-serif;
         font-size: 1rem;
         line-height: 1.5;
-        color: #000000;
-        background-color: #fff;
+        color: #1e293b;
+        background-color: #f1f5f9;
         display: flex;
       }
 
       main {
         margin-left: 240px;
-        padding: 2rem 4rem;
+        padding: 2rem 2rem;
+        padding-top: 0rem;
+        padding-bottom: 25rem;
         flex: 1;
         max-width: calc(100vw - 240px);
       }
 
       .section {
-        border: 1px solid #e5e5e5;
-        border-radius: 0.5rem;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
       }
 
       .section-title {
-        font-size: 1.5rem;
-        font-weight: bold;
+        font-size: 1.75rem;
+        font-weight: 700;
         margin-bottom: 2rem;
         padding-bottom: 1rem;
-        border-bottom: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e2e8f0;
+        color: #0f172a;
       }
 
       .section-content {
@@ -46,20 +47,30 @@
 
       .card {
         background-color: #fff;
-        border-radius: 0.25rem;
-        padding: 1rem;
-        width: 100%;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
         min-width: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.2s ease;
+        position: relative;
       }
 
-      .card.full-width {
+      .card:hover {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        border-color: #e2e8f0;
+      }
+
+      .card.full-width,
+      .card[style*="grid-column: span 2"] {
         grid-column: 1 / -1;
       }
 
       .card-title {
-        font-weight: bold;
-        height: 3rem;
-        margin-bottom: 0.5rem;
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 1.25rem;
+        color: #0f172a;
       }
 
       .chart-container {
@@ -74,61 +85,306 @@
         top: 0;
         height: 100vh;
         width: 240px;
-        background: white;
-        padding: 2rem 1rem;
-        border-right: 1px solid #e5e5e5;
+        background: #fff;
+        padding: 1.5rem 0;
+        border-right: 1px solid #e2e8f0;
         overflow-y: auto;
+      }
+
+      .nav-header {
+        margin-bottom: 1rem;
+        padding: 0.5rem 1.5rem;
       }
 
       .nav ul {
         list-style: none;
-        padding: 0;
+        padding: 0 0.75rem;
         margin: 0;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.25rem;
       }
 
       .nav a {
-        color: #6366f1;
+        color: #475569;
         text-decoration: none;
         display: block;
-        padding: 0.5rem;
-        border-radius: 0.25rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.15s ease;
       }
 
       .nav a:hover {
-        background-color: #f3f4f6;
+        background-color: #f1f5f9;
+        color: #0f172a;
+      }
+
+      .nav a.active {
+        background-color: #e2e8f0;
+        color: #0f172a;
+      }
+
+      @media (min-width: 1536px) {
+        .section-content {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .card-code-icon {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        color: #64748b;
+        cursor: pointer;
+        transition: color 0.15s ease;
+      }
+
+      .card-code-icon:hover {
+        color: #0f172a;
+      }
+
+      .props-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .props-modal.is-visible {
+        display: flex;
+      }
+
+      .props-modal-content {
+        background-color: #fff;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .props-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        color: #64748b;
+        cursor: pointer;
+        transition: color 0.15s ease;
+      }
+
+      .props-modal-close:hover {
+        color: #0f172a;
+      }
+
+      .props-modal pre {
+        background-color: #f8fafc;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .props-modal-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        padding-right: 2rem;
       }
     </style>
     <link rel="stylesheet" href="css/chart.css" />
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Get all sections and nav links
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav a');
+
+        // Add code icon to all cards
+        document.querySelectorAll('.card').forEach(card => {
+          const codeIcon = document.createElement('div');
+          codeIcon.className = 'card-code-icon';
+          codeIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>`;
+          card.appendChild(codeIcon);
+        });
+
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'props-modal';
+        modal.innerHTML = `
+          <div class="props-modal-content">
+            <div class="props-modal-close">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </div>
+            <div class="props-modal-title"></div>
+            <pre><code></code></pre>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Handle code icon clicks
+        document.querySelectorAll('.card-code-icon').forEach(icon => {
+          icon.addEventListener('click', () => {
+            const card = icon.closest('.card');
+            const chartContainer = card.querySelector('.chart-container');
+            const chartId = chartContainer.id;
+            const title = card.querySelector('.card-title').textContent;
+            
+            // Find the chart instance and its props
+            const props = window.chartProps?.[chartId];
+            if (props) {
+              modal.querySelector('.props-modal-title').textContent = title;
+              modal.querySelector('code').textContent = JSON.stringify(props, null, 2);
+              modal.classList.add('is-visible');
+            }
+          });
+        });
+
+        // Close modal
+        const closeModal = () => {
+          modal.classList.remove('is-visible');
+        };
+
+        modal.querySelector('.props-modal-close').addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('is-visible')) {
+            closeModal();
+          }
+        });
+
+        // Smooth scroll to section when clicking nav links
+        navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').slice(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+              const padding = 32;
+              const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - padding;
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+
+        // Update active link on scroll
+        const updateActiveLink = () => {
+          let currentSection = '';
+          
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 100) {
+              currentSection = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === currentSection) {
+              link.classList.add('active');
+            }
+          });
+        };
+
+        // Initial call and add scroll listener
+        updateActiveLink();
+        window.addEventListener('scroll', updateActiveLink);
+      });
+    </script>
   </head>
   <body>
     <nav class="nav">
+      <div class="nav-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 27 16" fill="none">
+          <g clip-path="url(#clip0_4468_5309)">
+            <path d="M21.7836 10.063L25.5699 15.4999H21.8806C21.4808 15.053 21.0924 14.5149 20.7485 14.0182C20.2207 13.2561 20.222 12.2101 20.7673 11.4604L21.7836 10.063Z" fill="#030712"/>
+            <path d="M16.1526 5.93689L12.3662 0.5L16.0555 0.5C16.4553 0.946889 16.8438 1.48495 17.1877 1.98165C17.7154 2.74377 17.7141 3.78979 17.1689 4.53947L16.1526 5.93689Z" fill="#030712"/>
+            <path d="M21.5415 1.42233C21.9299 0.791262 22.3667 0.548544 23.0463 0.548544L26.0561 0.5L16.2651 14.9505C16.0528 15.2639 15.7003 15.4514 15.3234 15.4514H12.0391C15.1793 10.7645 18.504 6.1744 21.5415 1.42233Z" fill="#030712"/>
+            <path d="M0 15.4514H5.32299C10.0824 15.4514 12.984 12.5447 12.984 7.99768C12.984 3.45069 10.0824 0.543945 5.32299 0.543945H0L3.30097 3.47145H1.94175C0.869353 3.47145 0 4.34081 0 5.4132V12.5239V15.4514ZM3.40254 12.5239V3.47145H5.30212C8.0158 3.47145 9.53966 5.25703 9.53966 7.99768C9.53966 10.7384 8.0158 12.5239 5.32299 12.5239H3.40254Z" fill="#030712"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_4468_5309">
+              <rect width="26.0796" height="15" fill="white" transform="translate(0 0.5)"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
       <ul>
-        <li><a href="#stacked">Stacked Charts</a></li>
-        <li><a href="#pie">Pie Charts</a></li>
-        <li><a href="#scatter">Scatter Charts</a></li>
         <li><a href="#bar">Bar Charts</a></li>
-        <li><a href="#scatter-time">Scatter Time Charts</a></li>
+        <li><a href="#stacked">Stacked Bar Charts</a></li>
         <li><a href="#line">Line Charts</a></li>
         <li><a href="#multi-line">Multi-Line Charts</a></li>
-        <li><a href="#bump">Bump Charts</a></li>
+        <li><a href="#pie">Pie Charts</a></li>
+        <li><a href="#scatter">Scatter Charts</a></li>
+        <li><a href="#scatter-time">Scatter Time Charts</a></li>
         <li><a href="#chart-comparison">Chart Comparison</a></li>
+        <li><a href="#stacked-area">Stacked Area Charts</a></li>
+        <li><a href="#bump">Bump Charts</a></li>
       </ul>
     </nav>
 
     <main>
-      <!-- Stacked Charts Section -->
-      <section id="stacked" class="section">
-        <h2 class="section-title">Stacked Charts</h2>
+      <!-- Bar Charts Section -->
+      <section id="bar" class="section">
+        <h2 class="section-title">Bar Charts</h2>
         <div class="section-content">
-          <div class="card full-width">
-            <div class="card-title">Basic Stacked Area Chart with Date Tooltip</div>
+          <div class="card">
+            <div class="card-title">Basic Bar with Click Events (No X-Axis)</div>
             <div class="card-body">
-              <div id="stacked-area-chart" class="chart-container"></div>
+              <div id="bar-1-chart" class="chart-container"></div>
             </div>
           </div>
+          <div class="card">
+            <div class="card-title">Bar with Trendline & Custom Padding</div>
+            <div class="card-body">
+              <div id="bar-2-chart" class="chart-container"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Fixed Width Bar Chart (40px)</div>
+            <div class="card-body">
+              <div id="bar-3-chart" class="chart-container"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stacked Bar Charts Section -->
+      <section id="stacked" class="section">
+        <h2 class="section-title">Stacked Bar Charts</h2>
+        <div class="section-content">
           <div class="card">
             <div class="card-title">Basic Stacked Bar Chart</div>
             <div class="card-body">
@@ -159,107 +415,17 @@
               <div id="dense-multi-line-stacked-bar" class="chart-container" style="--height: 400px"></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Pie Charts Section -->
-      <section id="pie" class="section">
-        <h2 class="section-title">Pie Charts</h2>
-        <div class="section-content">
           <div class="card">
-            <div class="card-title">Basic Pie Chart with Dataset 1</div>
+            <div class="card-title">Stacked Bar with Zero Values</div>
             <div class="card-body">
-              <div id="pie-1-chart" class="chart-container" style="--height: 400px"></div>
+              <div id="stacked-bar-zero-values-chart" class="chart-container" style="--height: 400px"></div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-title">Basic Pie Chart with Dataset 2</div>
+          <div class="card full-width">
+            <div class="card-title">Stacked Bar with Goal Line and Trend Line</div>
             <div class="card-body">
-              <div id="pie-2-chart" class="chart-container" style="--height: 400px"></div>
+              <div id="stacked-bar-goal-trend-chart" class="chart-container" style="--height: 400px"></div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Basic Pie Chart with Dataset 3</div>
-            <div class="card-body">
-              <div id="pie-3-chart" class="chart-container" style="--height: 314px"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Custom Colored Pie Chart (No Value Labels)</div>
-            <div class="card-body">
-              <div id="pie-4-chart" class="chart-container" style="--height: 314px"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Scatter Charts Section -->
-      <section id="scatter" class="section">
-        <h2 class="section-title">Scatter Charts</h2>
-        <div class="card">
-          <div class="card-title">Scatter with Trendline & Click Events</div>
-          <div class="card-body">
-            <div id="scatter-1-chart" class="chart-container" style="--height: 400px"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Matrix Scatter (No Axis)</div>
-          <div class="card-body">
-            <div id="scatter-2-chart" class="chart-container" style="--height: 400px"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Quadrant Scatter with Highlighted Region</div>
-          <div class="card-body">
-            <div id="scatter-3-chart" class="chart-container" style="--height: 400px"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Bar Charts Section -->
-      <section id="bar" class="section">
-        <h2 class="section-title">Bar Charts</h2>
-        <div class="section-content">
-          <div class="card">
-            <div class="card-title">Basic Bar with Click Events (No X-Axis)</div>
-            <div class="card-body">
-              <div id="bar-1-chart" class="chart-container"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Bar with Trendline & Custom Padding</div>
-            <div class="card-body">
-              <div id="bar-2-chart" class="chart-container"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Fixed Width Bar Chart (40px)</div>
-            <div class="card-body">
-              <div id="bar-3-chart" class="chart-container"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Scatter Time Charts Section -->
-      <section id="scatter-time" class="section">
-        <h2 class="section-title">Scatter Time Charts</h2>
-        <div class="card">
-          <div class="card-title">Time Scatter with Trendline & Custom Y-Axis</div>
-          <div class="card-body">
-            <div id="scatter-time-1-chart" class="chart-container"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Basic Time Scatter with Click Events</div>
-          <div class="card-body">
-            <div id="scatter-time-2-chart" class="chart-container"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Time Scatter with Benchmark Line</div>
-          <div class="card-body">
-            <div id="scatter-time-3-chart" class="chart-container"></div>
           </div>
         </div>
       </section>
@@ -267,40 +433,42 @@
       <!-- Line Charts Section -->
       <section id="line" class="section">
         <h2 class="section-title">Line Charts</h2>
-        <div class="card">
-          <div class="card-title">Basic Line (No X-Axis Ticks)</div>
-          <div class="card-body">
-            <div id="line-1-chart" class="chart-container"></div>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Basic Line (No X-Axis Ticks)</div>
+            <div class="card-body">
+              <div id="line-1-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Basic Line with Click Events</div>
-          <div class="card-body">
-            <div id="line-2-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Basic Line with Click Events</div>
+            <div class="card-body">
+              <div id="line-2-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Single Point Line Chart</div>
-          <div class="card-body">
-            <div id="line-3-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Single Point Line Chart</div>
+            <div class="card-body">
+              <div id="line-3-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Line with Comparison Values</div>
-          <div class="card-body">
-            <div id="line-4-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Line with Comparison Values</div>
+            <div class="card-body">
+              <div id="line-4-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Line with Points (Custom Date Range)</div>
-          <div class="card-body">
-            <div id="line-5-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Line with Points (Custom Date Range)</div>
+            <div class="card-body">
+              <div id="line-5-chart" class="chart-container"></div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Line with Dotted Last Segment</div>
-          <div class="card-body">
-            <div id="line-6-chart" class="chart-container"></div>
+          <div class="card">
+            <div class="card-title">Line with Dotted Last Segment</div>
+            <div class="card-body">
+              <div id="line-6-chart" class="chart-container"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -348,13 +516,83 @@
         </div>
       </section>
 
-      <!-- Bump Charts Section -->
-      <section id="bump" class="section">
-        <h2 class="section-title">Bump Charts</h2>
-        <div class="card" style="grid-column: span 2">
-          <div class="card-title">Bump Chart with Focus on "Ease of release"</div>
-          <div class="card-body">
-            <div id="bump-chart" class="chart-container"></div>
+      <!-- Pie Charts Section -->
+      <section id="pie" class="section">
+        <h2 class="section-title">Pie Charts</h2>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Basic Pie Chart with Dataset 1</div>
+            <div class="card-body">
+              <div id="pie-1-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Basic Pie Chart with Dataset 2</div>
+            <div class="card-body">
+              <div id="pie-2-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Basic Pie Chart with Dataset 3</div>
+            <div class="card-body">
+              <div id="pie-3-chart" class="chart-container" style="--height: 314px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Custom Colored Pie Chart (No Value Labels)</div>
+            <div class="card-body">
+              <div id="pie-4-chart" class="chart-container" style="--height: 314px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scatter Charts Section -->
+      <section id="scatter" class="section">
+        <h2 class="section-title">Scatter Charts</h2>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Scatter with Trendline & Click Events</div>
+            <div class="card-body">
+              <div id="scatter-1-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Matrix Scatter (No Axis)</div>
+            <div class="card-body">
+              <div id="scatter-2-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Quadrant Scatter with Highlighted Region</div>
+            <div class="card-body">
+              <div id="scatter-3-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scatter Time Charts Section -->
+      <section id="scatter-time" class="section">
+        <h2 class="section-title">Scatter Time Charts</h2>
+        <div class="section-content">
+          <div class="card">
+            <div class="card-title">Time Scatter with Trendline & Custom Y-Axis</div>
+            <div class="card-body">
+              <div id="scatter-time-1-chart" class="chart-container"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Basic Time Scatter with Click Events</div>
+            <div class="card-body">
+              <div id="scatter-time-2-chart" class="chart-container"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Time Scatter with Benchmark Line</div>
+            <div class="card-body">
+              <div id="scatter-time-3-chart" class="chart-container"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -373,6 +611,32 @@
             <div class="card-title">Multi-Line with Points (400px Height)</div>
             <div class="card-body">
               <div id="comparison-line-chart" class="chart-container" style="--height: 400px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stacked Area Charts Section -->
+      <section id="stacked-area" class="section">
+        <h2 class="section-title">Stacked Area Charts</h2>
+        <div class="section-content">
+          <div class="card full-width">
+            <div class="card-title">Basic Stacked Area Chart with Date Tooltip</div>
+            <div class="card-body">
+              <div id="stacked-area-chart" class="chart-container"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bump Charts Section -->
+      <section id="bump" class="section">
+        <h2 class="section-title">Bump Charts</h2>
+        <div class="section-content">
+          <div class="card" style="grid-column: span 2">
+            <div class="card-title">Bump Chart with Focus on "Ease of release"</div>
+            <div class="card-body">
+              <div id="bump-chart" class="chart-container"></div>
             </div>
           </div>
         </div>
@@ -398,17 +662,26 @@
         ScatterTimeChart,
         StackedBarChart,
         StackedAreaChart
-      // } from "../dist/main.js";
       } from "/src/main.js";
+
+      // Store chart props globally
+      window.chartProps = {};
 
       const emptyTooltip = () => `<div></div>`;
 
+      // Helper to store chart props
+      const storeChartProps = (chartId, props) => {
+        window.chartProps[chartId] = props;
+      };
+
       // Stacked area chart
       {
-        const stackedAreaChart = new StackedAreaChart({
+        const props = {
           elChart: document.getElementById("stacked-area-chart"),
           tooltipHtml: emptyTooltip
-        });
+        };
+        const stackedAreaChart = new StackedAreaChart(props);
+        storeChartProps("stacked-area-chart", props);
 
         d3.json("data/stacked_area_dataset.json").then(dataset => {
           stackedAreaChart.values = dataset;
@@ -418,22 +691,28 @@
 
       // Pie charts
       {
-        const pie1 = new PieChart({
+        const pie1Props = {
           elChart: document.getElementById("pie-1-chart"),
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const pie1 = new PieChart(pie1Props);
+        storeChartProps("pie-1-chart", pie1Props);
 
-        const pie2 = new PieChart({
+        const pie2Props = {
           elChart: document.getElementById("pie-2-chart"),
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const pie2 = new PieChart(pie2Props);
+        storeChartProps("pie-2-chart", pie2Props);
 
-        const pie3 = new PieChart({
+        const pie3Props = {
           elChart: document.getElementById("pie-3-chart"),
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const pie3 = new PieChart(pie3Props);
+        storeChartProps("pie-3-chart", pie3Props);
 
-        const pie4 = new PieChart({
+        const pie4Props = {
           elChart: document.getElementById("pie-4-chart"),
           values: [
             {
@@ -458,7 +737,9 @@
             },
           ],
           minAngleForValueLabel: 360,
-        });
+        };
+        const pie4 = new PieChart(pie4Props);
+        storeChartProps("pie-4-chart", pie4Props);
 
         Promise.all([
           d3.json("data/pie_dataset_1.json"),
@@ -477,7 +758,7 @@
       }
       // Scatter charts
       {
-        const scatter1 = new ScatterChart({
+        const scatter1Props = {
           elChart: document.getElementById("scatter-1-chart"),
           xAxisTickLabelFormat: function (d) {
             return `${d}%`;
@@ -499,7 +780,9 @@
             return d.team;
           },
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const scatter1 = new ScatterChart(scatter1Props);
+        storeChartProps("scatter-1-chart", scatter1Props);
 
         scatter1.values = [
           {
@@ -530,7 +813,7 @@
         ];
         scatter1.redraw();
 
-        const scatter2 = new ScatterChart({
+        const scatter2Props = {
           elChart: document.getElementById("scatter-2-chart"),
           showXAxisTicks: false,
           showXAxisLabel: false,
@@ -543,7 +826,9 @@
           matrix: [18, 50],
           xAxisLabel: "Something",
           yAxisLabel: "Something Else",
-        });
+        };
+        const scatter2 = new ScatterChart(scatter2Props);
+        storeChartProps("scatter-2-chart", scatter2Props);
 
         scatter2.values = [
           {
@@ -569,7 +854,7 @@
         ];
         scatter2.redraw();
 
-        const scatter3 = new ScatterChart({
+        const scatter3Props = {
           elChart: document.getElementById("scatter-3-chart"),
           matrix: [50, 50],
           highlightedQuadrant: 4,
@@ -590,7 +875,9 @@
             return d.team;
           },
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const scatter3 = new ScatterChart(scatter3Props);
+        storeChartProps("scatter-3-chart", scatter3Props);
 
         scatter3.values = [
           {
@@ -623,14 +910,17 @@
       }
       // Bar charts
       {
-        const bar1 = new BarChart({
+        const bar1Props = {
           elChart: document.getElementById("bar-1-chart"),
           showXAxisLine: false,
           onClick: (d) => {
             console.log(d);
           },
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const bar1 = new BarChart(bar1Props);
+        storeChartProps("bar-1-chart", bar1Props);
+
         bar1.values = [
           {
             date: "2022-07-27",
@@ -650,7 +940,7 @@
         ];
         bar1.redraw();
 
-        const bar2 = new BarChart({
+        const bar2Props = {
           elChart: document.getElementById("bar-2-chart"),
           showTrendline: true,
           paddingOuter: 0.2,
@@ -659,7 +949,10 @@
             console.log(d);
           },
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const bar2 = new BarChart(bar2Props);
+        storeChartProps("bar-2-chart", bar2Props);
+
         bar2.values = [
           {
             date: "2022-07-27",
@@ -679,7 +972,7 @@
         ];
         bar2.redraw();
 
-        const bar3 = new BarChart({
+        const bar3Props = {
           elChart: document.getElementById("bar-3-chart"),
           maxBarWidth: 40,
           paddingOuter: 0.2,
@@ -713,29 +1006,35 @@
             }
           ],
           tooltipHtml: emptyTooltip,
-        })
+        };
+        const bar3 = new BarChart(bar3Props);
+        storeChartProps("bar-3-chart", bar3Props);
       }
       // Scatter time charts
       {
-        const scatter1 = new ScatterTimeChart({
+        const scatter1Props = {
           elChart: document.getElementById("scatter-time-1-chart"),
           showTrendline: true,
           tooltipHtml: emptyTooltip,
           onClick: (d) => {
             console.log(d);
           },
-        });
+        };
+        const scatter1 = new ScatterTimeChart(scatter1Props);
+        storeChartProps("scatter-time-1-chart", scatter1Props);
 
-        const scatter2 = new ScatterTimeChart({
+        const scatter2Props = {
           elChart: document.getElementById("scatter-time-2-chart"),
           showTrendline: true,
           tooltipHtml: emptyTooltip,
           onClick: (d) => {
             console.log(d);
           },
-        });
+        };
+        const scatter2 = new ScatterTimeChart(scatter2Props);
+        storeChartProps("scatter-time-2-chart", scatter2Props);
 
-        const scatter3 = new ScatterTimeChart({
+        const scatter3Props = {
           elChart: document.getElementById("scatter-time-3-chart"),
           startDate: "2022-12-01",
           endDate: "2023-06-01",
@@ -751,7 +1050,9 @@
           ],
           showTrendline: true,
           benchmarkValue: 90,
-        });
+        };
+        const scatter3 = new ScatterTimeChart(scatter3Props);
+        storeChartProps("scatter-time-3-chart", scatter3Props);
 
         Promise.all([
           d3.json("./data/dataset_1.json"),
@@ -874,7 +1175,7 @@
         const startDate = "2021-01-01";
         const endDate = "2021-12-31";
 
-        const line1 = new LineChart({
+        const line1Props = {
           elChart: document.getElementById("line-1-chart"),
           showXAxisTicks: false,
           tooltipHtml: emptyTooltip,
@@ -883,56 +1184,59 @@
           },
           showYAxisTickLabels: true,
           showYAxisTicks: true,
-          startDate,
-          endDate,
+          startDate: "2021-01-01",
+          endDate: "2021-12-31",
           yAxisLabel: "Y Axis",
-        });
-        line1.yAxisMin = 0;
-        line1.yAxisMax = 100;
-        line1.values = data1.values;
+          yAxisMin: 0,
+          yAxisMax: 100,
+          values: data1.values,
+        };
+        const line1 = new LineChart(line1Props);
+        storeChartProps("line-1-chart", line1Props);
         line1.redraw();
 
-        // document.addEventListener("click", function () {
-        //   line1.comparisonValues = data1.comparisonValues;
-        //   line1.redraw();
-        // });
-
-        const line2 = new LineChart({
+        const line2Props = {
           elChart: document.getElementById("line-2-chart"),
           tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
-        });
-        line2.startDate = startDate;
-        line2.endDate = endDate;
-        line2.values = data2.values;
+          startDate: "2021-01-01",
+          endDate: "2021-12-31",
+          values: data2.values,
+        };
+        const line2 = new LineChart(line2Props);
+        storeChartProps("line-2-chart", line2Props);
         line2.redraw();
 
-        const line3 = new LineChart({
+        const line3Props = {
           elChart: document.getElementById("line-3-chart"),
           tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
-        });
-        line3.startDate = startDate;
-        line3.endDate = endDate;
-        line3.values = data3.values;
+          startDate: "2021-01-01",
+          endDate: "2021-12-31",
+          values: data3.values,
+        };
+        const line3 = new LineChart(line3Props);
+        storeChartProps("line-3-chart", line3Props);
         line3.redraw();
 
-        const line4 = new LineChart({
+        const line4Props = {
           elChart: document.getElementById("line-4-chart"),
           tooltipHtml: emptyTooltip,
           onClick: (d, cd) => {
             console.log(d, cd);
           },
-        });
-        line4.values = data4.values;
-        line4.comparisonValues = data4.comparisonValues;
+          values: data4.values,
+          comparisonValues: data4.comparisonValues,
+        };
+        const line4 = new LineChart(line4Props);
+        storeChartProps("line-4-chart", line4Props);
         line4.redraw();
 
-        const line5 = new LineChart({
+        const line5Props = {
           elChart: document.getElementById("line-5-chart"),
           startDate: "2022-12-01",
           endDate: "2023-06-01",
@@ -949,9 +1253,12 @@
             },
           ],
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const line5 = new LineChart(line5Props);
+        storeChartProps("line-5-chart", line5Props);
+        line5.redraw();
 
-        const line6 = new LineChart({
+        const line6Props = {
           elChart: document.getElementById("line-6-chart"),
           startDate: "2022-01-01",
           endDate: "2023-01-01",
@@ -1015,22 +1322,27 @@
             },
           ],
           tooltipHtml: emptyTooltip,
-        });
+        };
+        const line6 = new LineChart(line6Props);
+        storeChartProps("line-6-chart", line6Props);
+        line6.redraw();
       }
 
       // Bump Chart
       {
         d3.json("data/bump_dataset.json").then((data) => {
-          const bumpChart = new BumpChart({
+          const bumpProps = {
             elChart: document.getElementById("bump-chart"),
             data,
             focusedOn: "Ease of release"
-          });
+          };
+          const bumpChart = new BumpChart(bumpProps);
+          storeChartProps("bump-chart", bumpProps);
         });
       }
 
       // Chart Height Comparison
-      const comparisonBar = new StackedBarChart({
+      const comparisonBarProps = {
         elChart: document.getElementById("comparison-bar-chart"),
         tooltipHtml: emptyTooltip,
         series: [
@@ -1046,9 +1358,11 @@
         yAxisLabel: "Count",
         xAxisLabel: "Week of",
         showTrendline: true,
-      });
+      };
+      const comparisonBar = new StackedBarChart(comparisonBarProps);
+      storeChartProps("comparison-bar-chart", comparisonBarProps);
 
-      const comparisonLine = new MultiLineChart({
+      const comparisonLineProps = {
         elChart: document.getElementById("comparison-line-chart"),
         tooltipHtml: emptyTooltip,
         series: [
@@ -1076,7 +1390,9 @@
         xAxisLabel: "Week of",
         yAxisLabel: "Count",
         showPoints: true
-      });
+      };
+      const comparisonLine = new MultiLineChart(comparisonLineProps);
+      storeChartProps("comparison-line-chart", comparisonLineProps);
 
       comparisonBar.redraw();
       comparisonLine.redraw();

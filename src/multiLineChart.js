@@ -125,6 +125,14 @@ export class MultiLineChart {
       z: (d) => d.series,
     };
 
+    // Separate goal line data from regular data
+    const regularData = this.values.filter(
+      (d) => !this.goalLines.includes(this.accessor.z(d)),
+    );
+    const goalLineData = this.values.filter((d) =>
+      this.goalLines.includes(this.accessor.z(d)),
+    );
+
     let [minX, maxX] = d3.extent(this.values, this.accessor.x);
     this.x.domain([
       this.startDate === undefined ? minX : this.parseDate(this.startDate),
@@ -158,13 +166,44 @@ export class MultiLineChart {
       .map(this.parseDate)
       .sort(d3.ascending);
 
-    this.lineData = this.color.domain().map((key) => ({
-      key,
-      values: this.dates.map((date) => indexedValue.get(key)?.get(date)),
-    }));
+    this.lineData = this.color.domain().map((key) => {
+      const isGoalLine = this.goalLines.includes(key);
+      const values = this.dates.map((date) => indexedValue.get(key)?.get(date));
+
+      // For goal lines, add extra points at the edges
+      if (isGoalLine && values.some((v) => v !== undefined)) {
+        const firstValue = values.find((v) => v !== undefined);
+        const lastValue = [...values].reverse().find((v) => v !== undefined);
+
+        // Add points at the domain edges
+        const extendedValues = [...values];
+        if (this.startDate) {
+          const startDate = this.parseDate(this.startDate);
+          if (startDate < this.dates[0]) {
+            this.dates.unshift(startDate);
+            extendedValues.unshift(firstValue);
+          }
+        }
+        if (this.endDate) {
+          const endDate = this.parseDate(this.endDate);
+          if (endDate > this.dates[this.dates.length - 1]) {
+            this.dates.push(endDate);
+            extendedValues.push(lastValue);
+          }
+        }
+        return { key, values: extendedValues };
+      }
+
+      return { key, values };
+    });
 
     if (this.showTrendlines) {
       this.lineData = this.lineData.map((series) => {
+        // Skip trend lines for goal lines
+        if (this.goalLines.includes(series.key)) {
+          return series;
+        }
+
         const nonNullIndexes = series.values.reduce((idx, d, i) => {
           if (d !== undefined) idx.push(i);
           return idx;
