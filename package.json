@@ -1,6 +1,6 @@
 {
   "name": "@get-dx/d3-charts",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "DX d3 charts",
   "main": "dist/main.js",
   "module": "dist/main.js",

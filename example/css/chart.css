@@ -102,6 +102,12 @@
   opacity: 0.7;
 }
 
+.stacked-bar-chart .goal-line {
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* Scatter Time */
 .scatter-time-chart .benchmark-line {
   stroke: #c0c9d3;
