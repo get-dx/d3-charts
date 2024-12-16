@@ -438,9 +438,12 @@ export class StackedBarChart {
         const height = this.y(d[0]) - this.y(d[1]);
         const width = barWidth;
 
-        // Only add top rounded corners for the topmost bar
+        // Skip rendering if height is 0
+        if (height === 0) return "";
+
+        // Only add top rounded corners for the topmost bar and if the height is non-zero
         const isTopBar = maxHeightsByX.get(d.data[0]) === d[1];
-        const r = isTopBar ? cornerRadius : 0;
+        const r = isTopBar && height > 0 ? cornerRadius : 0;
 
         // Create path with rounded top corners only
         return `
