@@ -275,6 +275,8 @@ const multiLineGoalProps = {
   series: goalLineData.series,
   values: goalLineData.values,
   goalLines: ["target"],
+  showPoints: true,
+  showTrendlines: true,
   yAxisLabel: "Percentage",
   xAxisLabel: "Month",
   tooltipHtml: (values) => {
